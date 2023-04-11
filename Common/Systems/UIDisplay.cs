@@ -99,9 +99,18 @@ namespace WeaponOutLite.Common.Systems
                 if (Main.mouseRight && Main.mouseRightRelease) {
                     /*
                      * Function for changing the custom hold style for the currently held objects...
-                     * But until there is a method of saving pending config changes outside of the config classes,
+                     * But until there is a method of saving pending config changes to file outside of internal ConfigManager.Save....
                      * this function will remain unused.
-                     */
+                     * TODO: see if this has changed in tmodloader for 1.4.4, or just implement a copy of the code thusly:
+                     
+                            Terraria.ModLoader.Config.ModConfig config = ModContent.GetInstance<WeaponOutClientConfig>();
+                            System.IO.Directory.CreateDirectory(Terraria.ModLoader.Config.ConfigManager.ModConfigPath);
+                            string filename = config.Mod.Name + "_" + config.Name + ".json";
+                            string path = System.IO.Path.Combine(Terraria.ModLoader.Config.ConfigManager.ModConfigPath, filename);
+                            string json = Newtonsoft.Json.JsonConvert.SerializeObject((object)config, Terraria.ModLoader.Config.ConfigManager.serializerSettings);
+                            System.IO.File.WriteAllText(path, json);
+                    */
+
                     Main.NewText(
                         Language.GetTextValue("Mods.WeaponOut.Config.Instructions") +
                         Language.GetTextValue("LegacyMenu.14") +

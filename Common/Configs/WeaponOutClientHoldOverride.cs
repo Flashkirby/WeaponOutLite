@@ -94,6 +94,7 @@ namespace WeaponOutLite.Common.Configs
             // Set the default style datas
             styleOverrideList = new List<ItemDrawOverrideData>();
 
+            // Example custom override for Terragrim
             styleOverrideList.Add(new ItemDrawOverrideData()
             {
                 Item = ItemDefinition.FromString("EmpressBlade"),
