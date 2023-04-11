@@ -23,14 +23,14 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool ShowHeldItem { get; set; } // This is controlled by WeaponOutPlayerRenderer.cs, but the option is here for people who historically may have issues with that button for whatever reason. See OnChanged for link to class.
 
-		[Label("Combat mode duration (seconds)")]
+		[Label("$Mods.WeaponOut.Config.CombatDelayTimerMax.Label")]
 		[Increment(0.5f)]
 		[Range(0, 10f)]
 		[DefaultValue(3f)]
 		[Slider]
 		public float CombatDelayTimerMax { get; set; }
 
-		[Label("Combat mode always on")]
+		[Label("$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Label")]
 		[DefaultValue(false)]
 		public bool CombatStanceAlwaysOn { get; set; }
 
@@ -67,7 +67,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Melee Weapons")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.SmallMeleePoseID.Hold_Stance)]
+		[DefaultValue(PoseStyleID.SmallMeleePoseID.Combat_Hold)]
 		public PoseStyleID.SmallMeleePoseID SmallMeleePose { get; set; }
 
 		[JsonIgnore]
@@ -78,7 +78,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Large Melee Weapons")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.LargeMeleePoseID.Two_Hand_Stance)]
+		[DefaultValue(PoseStyleID.LargeMeleePoseID.Combat_Two_Hand)]
 		public PoseStyleID.LargeMeleePoseID LargeMeleePose { get; set; }
 
 		[JsonIgnore]
@@ -89,7 +89,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Shortswords and Rapiers")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.RapierPoseID.Hold_Stance)]
+		[DefaultValue(PoseStyleID.RapierPoseID.Combat_Hold)]
 		public PoseStyleID.RapierPoseID RapierPose { get; set; }
 
 		[JsonIgnore]
@@ -100,7 +100,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Spears")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.SpearPoseID.Pole_Ready_Stance)]
+		[DefaultValue(PoseStyleID.SpearPoseID.Combat_Pole_Ready)]
 		public PoseStyleID.SpearPoseID SpearPose { get; set; }
 
 		[JsonIgnore]
@@ -126,7 +126,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Flails")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.FlailPoseID.Ready_Stance)]
+		[DefaultValue(PoseStyleID.FlailPoseID.Combat_Ready)]
 		public PoseStyleID.FlailPoseID FlailPose { get; set; }
 
 		[JsonIgnore]
@@ -148,7 +148,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Throwing Weapons")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.ThrownPoseID.Upright_Stance)]
+		[DefaultValue(PoseStyleID.ThrownPoseID.Combat_Upright)]
 		public PoseStyleID.ThrownPoseID ThrownPose { get; set; }
 
 		[JsonIgnore]
@@ -170,7 +170,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Powertools")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.PowerToolPoseID.Power_Tool_Stance)]
+		[DefaultValue(PoseStyleID.PowerToolPoseID.Combat_Power_Tool)]
 		public PoseStyleID.PowerToolPoseID PowerToolPose { get; set; }
 
 		[JsonIgnore]
@@ -181,7 +181,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Bows")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.BowPoseID.Hunter_Stance)]
+		[DefaultValue(PoseStyleID.BowPoseID.Combat_Hunter)]
 		public PoseStyleID.BowPoseID BowPose { get; set; }
 
 		[JsonIgnore]
@@ -192,7 +192,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Repeaters")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Ready_Stance)]
+		[DefaultValue(PoseStyleID.GunPoseID.Combat_Ready)]
 		public PoseStyleID.GunPoseID RepeaterPose { get; set; }
 
 		[JsonIgnore]
@@ -218,7 +218,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Automatic Guns")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Hip_Ready_Stance)]
+		[DefaultValue(PoseStyleID.GunPoseID.Combat_Hip_Ready)]
 		public PoseStyleID.GunPoseID GunPose { get; set; }
 
 		[JsonIgnore]
@@ -229,7 +229,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Semi-automatic Guns")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Bolt_Action_Stance)]
+		[DefaultValue(PoseStyleID.GunPoseID.Combat_Bolt_Action)]
 		public PoseStyleID.GunPoseID GunManualPose { get; set; }
 
 		[JsonIgnore]
@@ -346,7 +346,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Giant Melee Weapons")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)] // and summon weapons!
-		[DefaultValue(PoseStyleID.GiantMeleePoseID.Two_Hand_Berserk_Stance)]
+		[DefaultValue(PoseStyleID.GiantMeleePoseID.Combat_Two_Hand_Berserk)]
 		public PoseStyleID.GiantMeleePoseID GiantWeaponPose { get; set; }
 
 		[JsonIgnore]
@@ -357,7 +357,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Giant Bow")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GiantBowPoseID.Hunter_Stance)]
+		[DefaultValue(PoseStyleID.GiantBowPoseID.Combat_Hunter)]
 		public PoseStyleID.GiantBowPoseID GiantBowPose { get; set; }
 
 		[JsonIgnore]
