@@ -24,6 +24,7 @@ namespace WeaponOutLite.Common.Configs
 		public bool ShowHeldItem { get; set; } // This is controlled by WeaponOutPlayerRenderer.cs, but the option is here for people who historically may have issues with that button for whatever reason. See OnChanged for link to class.
 
 		[Label("$Mods.WeaponOut.Config.CombatDelayTimerMax.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.CombatDelayTimerMax.Tooltip")]
 		[Increment(0.5f)]
 		[Range(0, 10f)]
 		[DefaultValue(3f)]
@@ -75,7 +76,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewSmallMelee))]
 		public int SmallMeleePV => (int)SmallMeleePose;
 
-		[Label("Large Melee Weapons")]
+		[Label("$Mods.WeaponOut.Config.LargeMeleePose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.LargeMeleePoseID.Combat_Two_Hand)]
@@ -86,7 +87,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLargeMelee))]
 		public int LargeMeleePV => (int)LargeMeleePose;
 
-		[Label("Shortswords and Rapiers")]
+		[Label("$Mods.WeaponOut.Config.RapierPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.RapierPoseID.Combat_Hold)]
@@ -97,7 +98,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewRapier))]
 		public int RapierPV => (int)RapierPose;
 
-		[Label("Spears")]
+		[Label("$Mods.WeaponOut.Config.SpearPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.SpearPoseID.Combat_Pole_Ready)]
@@ -108,7 +109,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewSpear))]
 		public int SpearPV => (int)SpearPose;
 
-		[Label("Yoyos")]
+		[Label("$Mods.WeaponOut.Config.YoyoPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.YoyoPoseID.Hold)]
@@ -119,11 +120,11 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewYoyo))]
 		public int YoyoPV => (int)YoyoPose;
 
-		[Label("Yoyo: Reduce item size")]
+		[Label("$Mods.WeaponOut.Config.YoyoHalfScale")]
 		[DefaultValue(true)]
 		public bool YoyoHalfScale { get; set; }
 
-		[Label("Flails")]
+		[Label("$Mods.WeaponOut.Config.FlailPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.FlailPoseID.Combat_Ready)]
@@ -134,7 +135,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewFlail))]
 		public int FlailPV => (int)FlailPose;
 
-		[Label("Whips")]
+		[Label("$Mods.WeaponOut.Config.WhipPose")]
 		[DrawTicks]
 		[SliderColor(104, 214, 255)]
 		[DefaultValue(PoseStyleID.WhipPoseID.Hold)]
@@ -145,7 +146,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewWhip))]
 		public int WhipPV => (int)WhipPose;
 
-		[Label("Throwing Weapons")]
+		[Label("$Mods.WeaponOut.Config.ThrownPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.ThrownPoseID.Combat_Upright)]
@@ -156,7 +157,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewThrown))]
 		public int ThrownPV => (int)ThrownPose;
 
-		[Label("Throwing Knives")]
+		[Label("$Mods.WeaponOut.Config.ThrownThinPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.ThrownPoseID.Hold)]
@@ -167,7 +168,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewThrownThin))]
 		public int ThrownThinPV => (int)ThrownThinPose;
 
-		[Label("Powertools")]
+		[Label("$Mods.WeaponOut.Config.PowerToolPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(PoseStyleID.PowerToolPoseID.Combat_Power_Tool)]
@@ -178,7 +179,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewPowerTool))]
 		public int PowerToolPV => (int)PowerToolPose;
 
-		[Label("Bows")]
+		[Label("$Mods.WeaponOut.Config.BowPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.BowPoseID.Combat_Hunter)]
@@ -189,7 +190,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewBow))]
 		public int BowPV => (int)BowPose;
 
-		[Label("Repeaters")]
+		[Label("$Mods.WeaponOut.Config.RepeaterPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Ready)]
@@ -200,11 +201,11 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewRepeater))]
 		public int RepeaterPV => (int)RepeaterPose;
 
-		[Label("Bows & Repeaters: Draw Ammo")]
+		[Label("$Mods.WeaponOut.Config.BowDrawAmmo")]
 		[DefaultValue(true)]
 		public bool BowDrawAmmo { get; set; }
 
-		[Label("Pistols")]
+		[Label("$Mods.WeaponOut.Config.PistolPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.PistolPoseID.Hold)]
@@ -215,7 +216,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewPistol))]
 		public int PistolPV => (int)PistolPose;
 
-		[Label("Automatic Guns")]
+		[Label("$Mods.WeaponOut.Config.GunPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Hip_Ready)]
@@ -226,7 +227,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGun))]
 		public int GunPV => (int)GunPose;
 
-		[Label("Semi-automatic Guns")]
+		[Label("$Mods.WeaponOut.Config.GunManualPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Bolt_Action)]
@@ -237,7 +238,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGunManual))]
 		public int GunManualPV => (int)GunManualPose;
 
-		[Label("Rocket Launchers")]
+		[Label("$Mods.WeaponOut.Config.LauncherPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.LauncherPoseID.OffHand_Shoulder)]
@@ -248,7 +249,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLauncher))]
 		public int LauncherPV => (int)LauncherPose;
 
-		[Label("Magic Staves")]
+		[Label("$Mods.WeaponOut.Config.StaffPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(PoseStyleID.StaffPoseID.PoleOffHand)]
@@ -259,7 +260,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewStaff))]
 		public int StaffPV => (int)StaffPose;
 
-		[Label("Magic Books")]
+		[Label("$Mods.WeaponOut.Config.MagicBookPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(PoseStyleID.MagicBookPoseID.Hold)]
@@ -270,7 +271,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewMagicBook))]
 		public int MagicBookPV => (int)MagicBookPose;
 
-		[Label("Magic Foci")]
+		[Label("$Mods.WeaponOut.Config.MagicItemPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(PoseStyleID.MagicItemPoseID.Levitate_OffHand)]
@@ -333,7 +334,7 @@ namespace WeaponOutLite.Common.Configs
 		[Slider]
 		public float GiantItemScalePercent { get; set; } // If still over the threshold, use the GIANT pose sets
 
-		[Label("Giant Item")]
+		[Label("$Mods.WeaponOut.Config.GiantItemPose")]
 		[DrawTicks]
 		[DefaultValue(PoseStyleID.GiantItemPoseID.Carry)]
 		public PoseStyleID.GiantItemPoseID GiantItemPose { get; set; }
@@ -343,7 +344,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantItem))]
 		public int GiantItemPV => (int)GiantItemPose;
 
-		[Label("Giant Melee Weapons")]
+		[Label("$Mods.WeaponOut.Config.GiantWeaponPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)] // and summon weapons!
 		[DefaultValue(PoseStyleID.GiantMeleePoseID.Combat_Two_Hand_Berserk)]
@@ -354,7 +355,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantMelee))]
 		public int GiantMeleePV => (int)GiantWeaponPose;
 
-		[Label("Giant Bow")]
+		[Label("$Mods.WeaponOut.Config.GiantBowPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.GiantBowPoseID.Combat_Hunter)]
@@ -365,7 +366,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantBow))]
 		public int GiantBowPV => (int)GiantBowPose;
 
-		[Label("Giant Guns")]
+		[Label("$Mods.WeaponOut.Config.GiantGunPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(PoseStyleID.GiantGunPoseID.OffHand_Shoulder)]
@@ -376,7 +377,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantGun))]
 		public int GiantGunPV => (int)GiantGunPose;
 
-		[Label("Giant Magic Weapons")] // and summon items!
+		[Label("$Mods.WeaponOut.Config.GiantMagicPose")] // and summon items!
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(PoseStyleID.GiantMagicPoseID.Levitate_Aimed)]

@@ -1,4 +1,5 @@
 Mods: {
+	# TIL hjson supports comments
 	WeaponOut: {
 		Config: {
 			Instructions: To customise item hold styles: 
@@ -13,11 +14,11 @@ Mods: {
 			
 			EnableWeaponOutVisuals: {
 				Label: Enable WeaponOut Visuals
-				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will basically disable WeaponOut Lite.
+				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody.
 			}
 			EnableForcedWeaponOutVisuals: {
 				Label: Enable Forced Visuals
-				Tooltip: Forces all players to show held items, preventing them from hiding what they're holding.
+				Tooltip: Forces all players to show held items, regardless of clientside settings.
 			}
 			EnableWeaponPhysics: {
 				Label: Enable Item Physics
@@ -25,7 +26,7 @@ Mods: {
 			}
 			EnableSheathingAnim: {
 				Label: Enable Sheathing Animations
-				Tooltip: Allows some stances to play transitional animations out of combat. Disable to additional animations. (Local Only)
+				Tooltip: Allows some combat poses to play transitional animations out of combat. (Local Only)
 			}
 			EnableItemScaling: {
 				Label: Enable Extreme Item scaling
@@ -41,16 +42,25 @@ Mods: {
 			}
 			GiantItemThreshold: {
 				Label: Giant Item Threshold (Pixels)
-				Tooltip: Maximum width/height before attempting to scale down. (Local Only)
+				Tooltip: Maximum width or height before attempting to scale down. (Local Only)
 			}
 			GiantItemScalePercent: {
 				Label: Giant Item Scaling (%):
-				Tooltip: The scale to apply to a 'giant' item. If still over the limit, will use a different set of poses. (Local Only)
+				Tooltip: The scale to apply to a 'giant' item. If the item is still over the limit, it will use a different set of poses. (Local Only)
 			}
 
 			ShowHeldItem: {
 				Label: Show Held Item
 				Tooltip: Shows the item you are holding.
+			}
+			
+			CombatDelayTimerMax {
+				Label: Combat mode duration (Seconds)
+				Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'
+			}
+			
+			CombatStanceAlwaysOn {
+				Label: Combat mode always active
 			}
 
 			SmallItemPose: {
@@ -65,7 +75,33 @@ Mods: {
 				Label: Potions
 			}
 
-			Preview: "Item Preview"
+			Preview: Item Preview
+			BowDramAmmo: "Bows & Repeaters: Render currently equipped arrows"
+			YoyoHalfScale: "Yoyos: Reduce yoyo size"
+
+			LargeMeleePose: Large Melee Weapons
+			RapierPose: Shortswords & Rapiers
+			SpearPose: Spears
+			YoyoPose: Yoyos
+			FlailPose: Flails
+			WhipPose: Whips
+			ThrownPose: Throwing Weapons
+			ThrownThinPose: Throwing Knives
+			PowerToolPose: Power Tools
+			BowPose: Bows
+			RepeaterPose: Crossbows & Repeaters
+			PistolPose: Handguns
+			GunPose: Automatic Guns
+			GunManualPose: Semi-automatic Guns
+			LauncherPose: Rocket Launchers
+			StaffPose: Magic Staves
+			MagicBookPose: Spell Tomes
+			MagicItemPose: Magical Foci
+			GiantItemPose: Giant Items
+			GiantWeaponPose: Giant Melee Weapons
+			GiantBowPose: Giant Bows
+			GiantGunPose: Giant Ranged Weapons
+			GiantMagicPose: Giant Magic Weapons
 
 			ForcePoseGroup: {
 				Label: Item Pose Group
