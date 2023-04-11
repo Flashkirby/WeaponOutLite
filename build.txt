@@ -1,0 +1,5 @@
+author = Flashkirby99
+version = 0.2
+displayName = WeaponOut Lite
+homepage = https://github.com/Flashkirby/WeaponOutLite/
+includeSource = true
