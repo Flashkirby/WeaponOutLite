@@ -32,6 +32,10 @@ Mods: {
 				Label: Enable Extreme Item scaling
 				Tooltip: Allows items to show their size modifiers (if greater than +-10%). Disable to keep all item sizes pixel perfect. (Local Only)
 			}
+			EnableMeleeEffects: {
+				Label: Enable Melee Effects
+				Tooltip: Allows weapons to show their melee effects at a reduced intensity. (Local Only)
+			}
 			SmallSwordThreshold: {
 				Label: One Handed Sword Threshold (Pixels)
 				Tooltip: Maximum average of width/height to classify a Sword as one handed. (Local Only)
@@ -110,6 +114,12 @@ Mods: {
 			ForceDrawItemPose: {
 				Label: Forced Item Pose
 				Tooltip: Override and force the item to use this specific pose, if not set to Default.
+			}
+
+			ModIntegrationHeader: Mod Integrations
+			ModIntegrationTerrariaOverhaul: { 
+				Label: Terraria Overhaul
+				Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons
 			}
 
 		}

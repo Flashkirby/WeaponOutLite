@@ -16,7 +16,7 @@ namespace WeaponOutLite.Common.Configs
 		public override ConfigScope Mode => ConfigScope.ClientSide;
 
 		[Header("$Mods.WeaponOut.Config.ClientSidePlayerHeader")]
-
+		#region ClientSidePlayerHeader
 
 		[Label("$Mods.WeaponOut.Config.ShowHeldItem.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.ShowHeldItem.Tooltip")]
@@ -282,8 +282,11 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewMagicItem))]
 		public int MagicItemPV => (int)MagicItemPose;
 
+		#endregion
+
 
 		[Header("$Mods.WeaponOut.Config.ClientSideGraphicHeader")]
+		#region ClientSideGraphicHeader
 
 		[Label("$Mods.WeaponOut.Config.EnableWeaponPhysics.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableWeaponPhysics.Tooltip")]
@@ -299,6 +302,11 @@ namespace WeaponOutLite.Common.Configs
 		[Tooltip("$Mods.WeaponOut.Config.EnableItemScaling.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableItemScaling { get; set; }
+
+		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
+		[DefaultValue(true)]
+		public bool EnableMeleeEffects { get; set; }
 
 		[Label("$Mods.WeaponOut.Config.SmallSwordThreshold.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.SmallSwordThreshold.Tooltip")]
@@ -388,6 +396,19 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;
 
+		#endregion
+
+
+		#region ModIntegrations
+
+		[Header("$Mods.WeaponOut.Config.ModIntegrationHeader")]
+		[Label("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip")]
+		[DefaultValue(true)]
+
+        public bool ModIntegrationTerrariaOverhaul { get; set; }
+
+		#endregion
 
 		public override void OnChanged() {
 			// In the main menu, the local player is a default object with a blank name which cannot be made in-game

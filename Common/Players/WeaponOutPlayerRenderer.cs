@@ -1,13 +1,10 @@
 ﻿using System;
-
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 using Terraria.ModLoader.IO;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.Common.GlobalDrawItemPose;
-using WeaponOutLite.ID;
 
 namespace WeaponOutLite.Common.Players
 {
@@ -17,6 +14,8 @@ namespace WeaponOutLite.Common.Players
 		/// Value for player showing an item held
 		/// </summary>
 		public bool isShowingHeldItem = true;
+
+		public bool showHeldItemThisFrame = true;
 
 		/// <summary>
 		/// Draw style of the currently held item. If null, the layer renderer won't run.
@@ -63,7 +62,7 @@ namespace WeaponOutLite.Common.Players
 		public bool DrawHeldItem
 		{
 			get {
-				return IsShowingHeldItem &&
+				return IsShowingHeldItem && showHeldItemThisFrame &&
 					!Main.gameMenu && // Not in game menu ie. select screen
 					Player.active && // active player slot
 					!Player.dead && // alive
@@ -81,7 +80,18 @@ namespace WeaponOutLite.Common.Players
 			set { Player.bodyFrame.Y = value * Player.bodyFrame.Height; }
 		}
 
-		public override void PostUpdate() {
+        public override void ResetEffects() {
+			showHeldItemThisFrame = true;
+
+			// Terraria Overhaul Integration
+			if (WeaponOutLite.GetMod().TerrariaOverhaulModLoaded) {
+				if(Player.HeldItem.useStyle == ItemUseStyleID.Shoot && Player.HeldItem.DamageType != DamageClass.Melee) {
+					showHeldItemThisFrame = !ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul;
+				}
+			}
+		}
+
+        public override void PostUpdate() {
 			if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
 
 				manageCombatTimer();

@@ -35,6 +35,8 @@ namespace WeaponOutLite
 
         private static WeaponOutLite instance;
 
+        public bool TerrariaOverhaulModLoaded = false;
+
         /// <summary>
         /// Hook for mods to handle predraw for the default style. Return false to override the normal draw code (replace with custom style)
         /// </summary>
