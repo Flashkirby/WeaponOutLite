@@ -1,20 +1,9 @@
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using WeaponOutLite.ID;
-using WeaponOutLite.Common.GlobalDrawItemPose;
-using WeaponOutLite.Content.DrawItemPose;
-using Microsoft.Xna.Framework;
-using WeaponOutLite.Common.Players;
-using Terraria.ID;
-using Terraria.Audio;
-using Terraria.GameContent;
-using ReLogic.Graphics;
-using WeaponOutLite.Common.Configs;
-using WeaponOutLite.ID;
 using System;
 using Terraria.DataStructures;
-using System.Collections.Specialized;
+using WeaponOutLite.Common.Players;
 
 namespace WeaponOutLite
 {
@@ -35,6 +24,14 @@ namespace WeaponOutLite
                 bool arg1IsInt = int.TryParse(args[1].ToString(), out int arg1Int);
 
                 switch (method) {
+                    case "HidePlayerHeldItem":
+                        if (args[1] is int) {
+                            int whoAmI = (int)args[1];
+                            if (whoAmI >= 0 && whoAmI < Main.player.Length) {
+                                Main.player[whoAmI].GetModPlayer<WeaponOutPlayerRenderer>().showHeldItemThisFrame = false;
+                            }
+                        }
+                        return false;
                     case "RegisterCustomItemStyle":
                         if (arg1IsInt) {
                             RegisterCustomItemStyle(arg1Int);
