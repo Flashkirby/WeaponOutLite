@@ -1,1 +1,19 @@
-WeaponOut Lite is based on the original purpose of WeaponOut before it ballooned into extra content. This version is just for the vanity effect without any content provided in the main mod. 
+[g:5] [c/FFFF00:Summary] [g:4] 
+[i/s1:184] Displays items you are holding
+[i/s1:184] Customise poses available via the Mod Configuration menu
+
+[g:5] [c/00FF88:Details] [g:4] 
+WeaponOut Lite is based on the original feature of the WeaponOut mod, without the additional content.
+
+[i/s1:1344] [c/00FFFF:Mod Integrations and Conflicts] [i/s1:1344] 
+
+Head rotates to cursor - No issues!
+Improved Movement Visuals - No issues!
+CoolerItemVisualEffect - Visual conflicts, see Other Settings -> Weapon display switch
+ArmamentDisplay - Visual conflicts, see Weapon Display -> Weapon Display Switch
+
+[i/s1:58] [c/FF0000:Credits] [i/s1:58]
+Developer: Flashkirby
+
+Join the discord? https://discord.gg/4Sj4T344bE
+Where's the sauce? https://github.com/Flashkirby/WeaponOutLite

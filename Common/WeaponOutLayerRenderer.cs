@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -141,6 +142,46 @@ namespace WeaponOutLite.Common
 						}
 					}
 				}
+			}
+
+			// Draw weapon effects
+			if (ModContent.GetInstance<WeaponOutClientConfig>().EnableMeleeEffects) {
+				try {
+					if (modPlayer != null && heldItem != null && modPlayer.Player != null && modPlayer.CombatDelayTimer > 0) {
+						const int MAX_STEPS = 4;
+						const int INVERSE_FREQUENCY = 4;
+
+						bool runThisFrame = Main.rand.NextBool(INVERSE_FREQUENCY);
+
+						if (runThisFrame) {
+							// so if 4, start at -2, up to 1
+							// the idea is at each step, use (step and step + 1), to cover 4 rects over 5 points
+							int step = (int)((long)Main.timeForVisualEffects % MAX_STEPS) - MAX_STEPS / 2;
+
+							Vector2 corner = itemData.position - (itemData.origin * itemData.scale).RotatedBy(itemData.rotation);
+							Vector2 centre = corner + new Vector2(width, height).RotatedBy(itemData.rotation) / 2f;
+							float realRotation = itemData.rotation
+								+ (itemData.effect.HasFlag(SpriteEffects.FlipVertically) ? MathHelper.Pi : MathHelper.PiOver2)
+								+ (itemData.effect.HasFlag(SpriteEffects.FlipHorizontally) ? MathHelper.PiOver2 : 0);
+
+							Vector2 quarterStep = new Vector2(width, height).RotatedBy(realRotation) / MAX_STEPS;
+
+							Vector2 point1 = centre + Main.screenPosition + quarterStep * step;
+							Vector2 point2 = centre + Main.screenPosition + quarterStep * (step + 1);
+
+							Point rectTopLeft = new Point((int)Math.Min(point1.X, point2.X), (int)Math.Min(point1.Y, point2.Y));
+							Point bounds = (point1 - point2).ToPoint();
+							bounds = new Point(Math.Abs(bounds.X), Math.Abs(bounds.Y));
+
+							Rectangle drawRectangle = new Rectangle(rectTopLeft.X, rectTopLeft.Y, bounds.X, bounds.Y);
+
+							// uh ohhhh scary reflection ew
+							MethodInfo method = modPlayer.Player.GetType().GetMethod("ItemCheck_EmitUseVisuals", BindingFlags.NonPublic | BindingFlags.Instance);
+							method.Invoke(modPlayer.Player, new object[] { heldItem, drawRectangle });
+						}
+                    }
+				}
+				catch (Exception e) { }
 			}
 		}
 

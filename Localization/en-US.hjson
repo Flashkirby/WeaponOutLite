@@ -33,8 +33,8 @@ Mods: {
 				Tooltip: Allows items to show their size modifiers (if greater than +-10%). Disable to keep all item sizes pixel perfect. (Local Only)
 			}
 			EnableMeleeEffects: {
-				Label: Enable Melee Effects
-				Tooltip: Allows weapons to show their melee effects at a reduced intensity. (Local Only)
+				Label: Enable Melee Effects (Experimental)
+				Tooltip: Allows weapons to continue showing melee effects after being swung. (Local Only)
 			}
 			SmallSwordThreshold: {
 				Label: One Handed Sword Threshold (Pixels)
