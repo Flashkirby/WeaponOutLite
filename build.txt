@@ -1,5 +1,8 @@
-author = Flashkirby99
-version = 0.2
 displayName = WeaponOut Lite
+author = Flashkirby
+version = 0.2
+
 homepage = https://github.com/Flashkirby/WeaponOutLite/
+
 includeSource = true
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP, *.ase, *.aseprite
