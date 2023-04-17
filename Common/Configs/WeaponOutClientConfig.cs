@@ -305,7 +305,7 @@ namespace WeaponOutLite.Common.Configs
 
 		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
-		[DefaultValue(true)]
+		[DefaultValue(false)]
 		public bool EnableMeleeEffects { get; set; }
 
 		[Label("$Mods.WeaponOut.Config.SmallSwordThreshold.Label")]
@@ -399,9 +399,9 @@ namespace WeaponOutLite.Common.Configs
 		#endregion
 
 
+		[Header("$Mods.WeaponOut.Config.ModIntegrationHeader")]
 		#region ModIntegrations
 
-		[Header("$Mods.WeaponOut.Config.ModIntegrationHeader")]
 		[Label("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip")]
 		[DefaultValue(true)]
