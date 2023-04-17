@@ -68,7 +68,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("Melee Weapons")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.SmallMeleePoseID.Combat_Hold)]
+		[DefaultValue(PoseStyleID.SmallMeleePoseID.Combat_Ready)]
 		public PoseStyleID.SmallMeleePoseID SmallMeleePose { get; set; }
 
 		[JsonIgnore]
