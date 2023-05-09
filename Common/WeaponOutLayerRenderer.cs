@@ -268,7 +268,16 @@ namespace WeaponOutLite.Common
 				// -3 is to help with centering later (see + 6 from gravity flip)
 
 				var playerTile = drawPlayer.Center.ToTileCoordinates();
-				if (drawPlayer.sitting.isSitting && PlayerSittingHelper.GetSittingTargetInfo(drawPlayer, playerTile.X, playerTile.Y, out int targetSeatDirection, out Vector2 playerSittingPosition, out Vector2 seatDownOffset)) {
+				if (drawPlayer.sitting.isSitting && PlayerSittingHelper.GetSittingTargetInfo(
+					drawPlayer,
+					playerTile.X, 
+					playerTile.Y, 
+					out int targetSeatDirection, 
+					out Vector2 playerSittingPosition, 
+					out Vector2 seatDownOffset, 
+					out ExtraSeatInfo extraSeatInfo
+					)) {
+
 					drawX += (int)(seatDownOffset.X * targetSeatDirection);
 					drawY += (int)(seatDownOffset.Y * 2 + GravityOffset);
 
