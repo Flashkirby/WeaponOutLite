@@ -27,37 +27,37 @@ namespace WeaponOutLite
                 ItemID.JoustingLance,
                 ItemID.ShadowJoustingLance,
                 ItemID.HallowJoustingLance,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterSpear ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterFlail", new int[] {
                 ItemID.Flairon,
                 ItemID.ChainGuillotines,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterFlail ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterSmallMelee", new int[] {
                 ItemID.Terragrim,
                 ItemID.Arkhalis,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterSmallMelee ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterLargeMelee", new int[] {
                 ItemID.BrokenHeroSword,
                 ItemID.Zenith,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterLargeMelee ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterPistol", new int[] {
                 ItemID.ConfettiGun,
                 ItemID.Revolver,
                 ItemID.VenusMagnum,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterPistol ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterGun", new int[] {
                 ItemID.CoinGun,
                 ItemID.PortalGun,
                 ItemID.VenusMagnum,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterGun ModCall Failed"); }
 
-            if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("ModCall Failed"); }
-            if (!(bool)weaponOutLite.Call("RegisterItem", ItemID.BladedGlove)) { throw new ArgumentException("ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterItem", ItemID.BladedGlove)) { throw new ArgumentException("RegisterItem ModCall Failed"); }
 
 
             // Register these items to use Custom Holdstyles. The other functions will not call for an item unless it is specified here first.
@@ -67,7 +67,7 @@ namespace WeaponOutLite
                 ItemID.TheAxe,
                 ItemID.ChargedBlasterCannon,
                 ItemID.AleThrowingGlove,
-            })) { throw new ArgumentException("ModCall Failed"); }
+            })) { throw new ArgumentException("RegisterCustomItemStyle ModCall Failed"); }
 
             // Draw data, called after the item has been centred on the player in the draw layer
             Func<Player, Item, DrawData, float, float, int, int, DrawData> weaponOutLiteCustomDrawData = (Player p, Item i, DrawData data, float h, float w, int bodyFrame, int timer) => {
@@ -151,9 +151,9 @@ namespace WeaponOutLite
             };
 
             // Add the custom style calls. This will call on all items where the draw style has been set as a Custom Holdstyle
-            if (!(bool)weaponOutLite.Call("RegisterCustomUpdateIdleBodyFrame", weaponOutLiteCustomIdleBodyFrame)) { throw new ArgumentException("ModCall Failed"); }
-            if (!(bool)weaponOutLite.Call("RegisterCustomDrawDepth", weaponOutLiteCustomDrawDepth)) { throw new ArgumentException("ModCall Failed"); }
-            if (!(bool)weaponOutLite.Call("RegisterCustomPreDrawData", weaponOutLiteCustomDrawData)) { throw new ArgumentException("ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterCustomUpdateIdleBodyFrame", weaponOutLiteCustomIdleBodyFrame)) { throw new ArgumentException("RegisterCustomUpdateIdleBodyFrame ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterCustomDrawDepth", weaponOutLiteCustomDrawDepth)) { throw new ArgumentException("RegisterCustomDrawDepth ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterCustomPreDrawData", weaponOutLiteCustomDrawData)) { throw new ArgumentException("RegisterCustomPreDrawData ModCall Failed"); }
         }
     }
 }
