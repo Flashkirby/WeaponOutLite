@@ -50,7 +50,12 @@ namespace WeaponOutLite
                 ItemID.VenusMagnum,
             })) { throw new ArgumentException("ModCall Failed"); }
 
-            if (!(bool)weaponOutLite.Call("RegisterGun", ItemID.CoinGun)) { throw new ArgumentException("ModCall Failed"); }
+            if (!(bool)weaponOutLite.Call("RegisterGun", new int[] {
+                ItemID.CoinGun,
+                ItemID.PortalGun,
+                ItemID.VenusMagnum,
+            })) { throw new ArgumentException("ModCall Failed"); }
+
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterItem", ItemID.BladedGlove)) { throw new ArgumentException("ModCall Failed"); }
 
