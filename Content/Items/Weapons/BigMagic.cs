@@ -10,7 +10,7 @@ namespace WeaponOutLite.Content.Items.Weapons
         public override bool IsLoadingEnabled(Mod mod) => WeaponOutLite.DEBUG_TEST_ITEMS;
 
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("Giant's Staff");
+			// DisplayName.SetDefault("Giant's Staff");
 			Item.staff[Type] = true;
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
