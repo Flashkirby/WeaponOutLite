@@ -2,52 +2,59 @@ Mods: {
 	# TIL hjson supports comments
 	WeaponOut: {
 		Config: {
-			Instructions: To customise item hold styles: 
-
+			Instructions: To customise item hold styles:
 			ClientSideConfigLabel: Personal Preferences
 			OverrideConfigLabel: Item Manual Override
 			ServerSideConfigLabel: Global/Server
-
 			ClientSidePlayerHeader: Display & Poses
 			ServerSideHeader: Feature Toggles
 			ClientSideGraphicHeader: Local Graphics
-			
+
 			EnableWeaponOutVisuals: {
 				Label: Enable WeaponOut Visuals
 				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody.
 			}
+
 			EnableForcedWeaponOutVisuals: {
 				Label: Enable Forced Visuals
 				Tooltip: Forces all players to show held items, regardless of clientside settings.
 			}
+
 			EnableWeaponPhysics: {
 				Label: Enable Item Physics
 				Tooltip: Allows some held items to react to motion. Disable to prevent motion based item movement. (Local Only)
 			}
+
 			EnableSheathingAnim: {
 				Label: Enable Sheathing Animations
 				Tooltip: Allows some combat poses to play transitional animations out of combat. (Local Only)
 			}
+
 			EnableItemScaling: {
 				Label: Enable Extreme Item scaling
 				Tooltip: Allows items to show their size modifiers (if greater than +-10%). Disable to keep all item sizes pixel perfect. (Local Only)
 			}
+
 			EnableMeleeEffects: {
 				Label: Enable Melee Effects (Experimental)
 				Tooltip: Allows weapons to continue showing melee effects after being swung. (Local Only)
 			}
+
 			SmallSwordThreshold: {
 				Label: One Handed Sword Threshold (Pixels)
 				Tooltip: Maximum average of width/height to classify a Sword as one handed. (Local Only)
 			}
-			SmallGunThreshold: { 
+
+			SmallGunThreshold: {
 				Label: One Handed Gun Threshold (Pixels)
 				Tooltip: Maximum width to classify a Gun as one handed. (Local Only)
 			}
+
 			GiantItemThreshold: {
 				Label: Giant Item Threshold (Pixels)
 				Tooltip: Maximum width or height before attempting to scale down. (Local Only)
 			}
+
 			GiantItemScalePercent: {
 				Label: Giant Item Scaling (%):
 				Tooltip: The scale to apply to a 'giant' item. If the item is still over the limit, it will use a different set of poses. (Local Only)
@@ -57,32 +64,19 @@ Mods: {
 				Label: Show Held Item
 				Tooltip: Shows the item you are holding.
 			}
-			
+
 			CombatDelayTimerMax: {
 				Label: Combat mode duration (Seconds)
 				Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'
 			}
-			
-			CombatStanceAlwaysOn: {
-				Label: Combat mode always active
-			}
 
-			SmallItemPose: {
-				Label: Normal Items
-			}
-
-			LargeItemPose: {
-				Label: Large Items
-			}
-
-			PotionPose: {
-				Label: Potions
-			}
-
+			CombatStanceAlwaysOn.Label: Combat mode always active
+			SmallItemPose.Label: Normal Items
+			LargeItemPose.Label: Large Items
+			PotionPose.Label: Potions
 			Preview: Item Preview
-			BowDramAmmo: "Bows & Repeaters: Render currently equipped arrows"
-			YoyoHalfScale: "Yoyos: Reduce yoyo size"
-
+			BowDramAmmo: Bows & Repeaters: Render currently equipped arrows
+			YoyoHalfScale: Yoyos: Reduce yoyo size
 			LargeMeleePose: Large Melee Weapons
 			RapierPose: Shortswords & Rapiers
 			SpearPose: Spears
@@ -111,17 +105,18 @@ Mods: {
 				Label: Item Pose Group
 				Tooltip: Manually assign the item to a pose group.
 			}
+
 			ForceDrawItemPose: {
 				Label: Forced Item Pose
 				Tooltip: Override and force the item to use this specific pose, if not set to Default.
 			}
 
 			ModIntegrationHeader: Mod Integrations
-			ModIntegrationTerrariaOverhaul: { 
+
+			ModIntegrationTerrariaOverhaul: {
 				Label: Terraria Overhaul
 				Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons
 			}
-
 		}
 	}
 }
