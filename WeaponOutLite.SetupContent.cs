@@ -53,7 +53,6 @@ namespace WeaponOutLite
             if (!(bool)weaponOutLite.Call("RegisterGun", new int[] {
                 ItemID.CoinGun,
                 ItemID.PortalGun,
-                ItemID.VenusMagnum,
             })) { throw new ArgumentException("RegisterGun ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
