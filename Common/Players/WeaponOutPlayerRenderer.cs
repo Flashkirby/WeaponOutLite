@@ -153,7 +153,7 @@ namespace WeaponOutLite.Common.Players
 			}
 
 			// Always tick down to 0
-			if (!Player.ItemAnimationActive) {
+			if (!Player.ItemAnimationActive && !Player.CCed) {
 				// Count down the combat timer before returning to "relaxed" state
 				CombatDelayTimer = Math.Max(0, CombatDelayTimer - 1);
 

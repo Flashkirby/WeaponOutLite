@@ -164,7 +164,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 var at = DrawHelper.AnimLinearNormal(40, animationTime); // from 1 to 0
 
                 // if animations enabled, do this cool effect
-                if (at > 0 && animationTime == 10) {
+                if (at > 0 && animationTime == 10 && !p.CCed) {
                     //SoundEngine.PlaySound(SoundID.Camera.WithPitchOffset(-0.25f).WithVolumeScale(0.375f), p.MountedCenter);
                     // ammo box noise
                     SoundEngine.PlaySound(SoundID.Item149.WithPitchOffset(0.5f).WithVolumeScale(0.375f), p.MountedCenter);
