@@ -27,6 +27,7 @@ namespace WeaponOutLite
                 ItemID.BladedGlove,
                 ItemID.ChainKnife,
                 ItemID.Ruler,
+                ItemID.PortalGun,
             })) { throw new ArgumentException("RegisterItem ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterSpear", new int[] {
                 ItemID.JoustingLance,
@@ -55,11 +56,7 @@ namespace WeaponOutLite
                 ItemID.VenusMagnum,
             })) { throw new ArgumentException("RegisterPistol ModCall Failed"); }
 
-            if (!(bool)weaponOutLite.Call("RegisterGun", new int[] {
-                ItemID.CoinGun,
-                ItemID.PortalGun,
-            })) { throw new ArgumentException("RegisterGun ModCall Failed"); }
-
+            if (!(bool)weaponOutLite.Call("RegisterGun", ItemID.CoinGun )) { throw new ArgumentException("RegisterGun ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
 
 
