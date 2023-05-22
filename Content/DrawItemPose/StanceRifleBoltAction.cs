@@ -79,7 +79,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     }
                 }
 
-                p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * -0.4f * p.direction);
+                p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * -0.3f * p.direction);
                 p.SetCompositeArmFront(enabled: true, frontArm, (float)Math.PI * frontArmRotMod * p.direction);
             }
 
@@ -114,6 +114,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 return idleData;
             }
 
+            // Sheathing calculation
+            float t = DrawHelper.AnimEaseInEaseOutNormal(30, timer);
+            float delay = 10f;
+            float animationTime = Math.Max(0, -(timer - ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f) - delay);
+            bool inBoltAnimation = t == 0 && animationTime <= 40;
+
             data = data.SetOrigin(0.25f, 1f / 3f, p);
 
             if (bodyFrame == 3) {
@@ -127,7 +133,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                     data.position += new Vector2(-1, 2);
                     data.rotation += 0.175f;
                 }
-                data = data.WithHandOffset(p);
+                if (inBoltAnimation) {
+                    data = data.WithWaistOffset(p);
+                }
+                else {
+                    data = data.WithHandOffset(p);
+                }
                 float rot = 0;
                 switch (bodyFrame) {
                     case 06: rot = -0.75f; break;
@@ -153,14 +164,11 @@ namespace WeaponOutLite.Content.DrawItemPose
             }
 
             // Sheathing
-            float t = DrawHelper.AnimEaseInEaseOutNormal(30, timer);
             data.position.X += 8f * (float)Math.Sin(t * Math.PI);
             data = DrawHelper.LerpData(data, idleData, t);
 
             // If not sheathihng, moving to rest pose
-            float delay = 10f;
-            float animationTime = Math.Max(0, -(timer - ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f) - delay);
-            if (t == 0 && animationTime <= 40) {
+            if (inBoltAnimation) {
                 var at = DrawHelper.AnimLinearNormal(40, animationTime); // from 1 to 0
 
                 // if animations enabled, do this cool effect
