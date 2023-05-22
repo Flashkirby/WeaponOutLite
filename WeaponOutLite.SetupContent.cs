@@ -23,6 +23,11 @@ namespace WeaponOutLite
             Mod weaponOutLite = ModLoader.GetMod("WeaponOutLite");
 
             // Register these items to prioritise a specific hold style
+            if (!(bool)weaponOutLite.Call("RegisterItem", new int[] {
+                ItemID.BladedGlove,
+                ItemID.ChainKnife,
+                ItemID.Ruler,
+            })) { throw new ArgumentException("RegisterItem ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterSpear", new int[] {
                 ItemID.JoustingLance,
                 ItemID.ShadowJoustingLance,
@@ -56,7 +61,6 @@ namespace WeaponOutLite
             })) { throw new ArgumentException("RegisterGun ModCall Failed"); }
 
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
-            if (!(bool)weaponOutLite.Call("RegisterItem", ItemID.BladedGlove)) { throw new ArgumentException("RegisterItem ModCall Failed"); }
 
 
             // Register these items to use Custom Holdstyles. The other functions will not call for an item unless it is specified here first.
