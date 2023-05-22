@@ -129,6 +129,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 case PoseGroup.GunManual:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.GunManualPose];
                     break;
+                case PoseGroup.Shotgun:
+                    drawItemPose = mod.DrawStyle[(int)clientConfig.ShotgunPose];
+                    break;
                 case PoseGroup.Launcher:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.LauncherPose];
                     break;
@@ -254,6 +257,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                         }
                         // 🔫 Special graphic guns are wider than thrown weapons (eg. Celebration Mk2)
                         if (w > h && w > ModContent.GetInstance<WeaponOutClientConfig>().SmallGunThreshold) {
+                            // quickfix for detecting shotguns, since they use this sound
+                            if(item.UseSound == SoundID.Item36) {
+                                return PoseGroup.Shotgun;
+                            }
                             return item.autoReuse ? PoseGroup.Gun : PoseGroup.GunManual;
                         }
                         // ✨ Weird (usually magical) weapons, blaster, prism
@@ -332,6 +339,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             return PoseGroup.Launcher;
                         }
                         else {
+                            // quickfix for detecting shotguns, since they use this sound
+                            if (item.UseSound == SoundID.Item36) {
+                                return PoseGroup.Shotgun;
+                            }
                             return item.autoReuse ? PoseGroup.Gun : PoseGroup.GunManual;
                         }
                     }

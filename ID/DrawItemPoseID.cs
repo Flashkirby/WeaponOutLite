@@ -94,6 +94,7 @@ namespace WeaponOutLite.ID
             StanceRiflePointDown2 = DrawItemPoseID.StanceRiflePointDown2,
             StanceRifleHoldUp = DrawItemPoseID.StanceRifleHoldUp,
             StanceRifleBoltAction = DrawItemPoseID.StanceRifleBoltAction,
+            StanceRiflePumpAction = DrawItemPoseID.StanceRiflePumpAction,
             BackGunShoulder = DrawItemPoseID.BackGunShoulder,
             StanceLauncherShoulder = DrawItemPoseID.StanceLauncherShoulder,
             FloatingBack = DrawItemPoseID.FloatingBack,
@@ -159,6 +160,7 @@ namespace WeaponOutLite.ID
         public const int StanceRiflePointDown2      = 21150;
         public const int StanceRifleHoldUp          = 21160;
         public const int StanceRifleBoltAction      = 21170;
+        public const int StanceRiflePumpAction      = 21180;
         public const int BackGunShoulder            = 22000;
         public const int StanceLauncherShoulder     = 22010;
 

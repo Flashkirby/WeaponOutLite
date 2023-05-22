@@ -91,6 +91,7 @@ Mods: {
 			PistolPose: Handguns
 			GunPose: Automatic Guns
 			GunManualPose: Semi-automatic Guns
+			ShotgunPose: Shotguns
 			LauncherPose: Rocket Launchers
 			StaffPose: Magic Staves
 			MagicBookPose: Spell Tomes

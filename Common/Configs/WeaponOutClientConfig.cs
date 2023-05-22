@@ -238,6 +238,17 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGunManual))]
 		public int GunManualPV => (int)GunManualPose;
 
+		[Label("$Mods.WeaponOut.Config.ShotgunPose")]
+		[DrawTicks]
+		[SliderColor(0, 242, 171)]
+		[DefaultValue(PoseStyleID.GunPoseID.Combat_Pump_Action)]
+		public PoseStyleID.GunPoseID ShotgunPose { get; set; }
+
+		[JsonIgnore]
+		[Label("$Mods.WeaponOut.Config.Preview")]
+		[CustomModConfigItem(typeof(PreviewShotgun))]
+		public int ShotgunPosePV => (int)ShotgunPose;
+
 		[Label("$Mods.WeaponOut.Config.LauncherPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]

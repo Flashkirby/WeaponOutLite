@@ -251,8 +251,10 @@ namespace WeaponOutLite.Common.Configs
 	public class PreviewPistol : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.FlintlockPistol; }
 	public class PreviewGun : HoldStylePreviewElement
-	{ public override int PreviewItemType() => ItemID.Musket; }
+	{ public override int PreviewItemType() => ItemID.Minishark; }
 	public class PreviewGunManual : HoldStylePreviewElement
+	{ public override int PreviewItemType() => ItemID.Musket; }
+	public class PreviewShotgun: HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Boomstick; }
 	public class PreviewLauncher : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.RocketLauncher; }

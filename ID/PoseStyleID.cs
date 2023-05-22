@@ -21,9 +21,10 @@
             Bow = 200,
             Pistol = 220,
             Gun = 240,
-            GunManual = 242,
-            Repeater = 244,
-            Launcher = 250,
+            GunManual = 250,
+            Shotgun = 255,
+            Repeater = 260,
+            Launcher = 280,
             Staff = 300,
             MagicBook = 310,
             MagicItem = 320,
@@ -309,6 +310,7 @@
             Combat_ReadyAlt = DrawItemPoseID.StanceRiflePointDown2,
             Combat_Offhand = DrawItemPoseID.StanceRifleHoldUp,
             Combat_Bolt_Action = DrawItemPoseID.StanceRifleBoltAction,
+            Combat_Pump_Action = DrawItemPoseID.StanceRiflePumpAction,
             Combat_Cowboy = DrawItemPoseID.StancePistolCowboy,
             Combat_Power_Tool = DrawItemPoseID.StanceMachineTool,
         }
@@ -329,6 +331,7 @@
             Combat_ReadyAlt = DrawItemPoseID.StanceRiflePointDown2,
             Combat_Offhand = DrawItemPoseID.StanceRifleHoldUp,
             Combat_Bolt_Action = DrawItemPoseID.StanceRifleBoltAction,
+            Combat_Pump_Action = DrawItemPoseID.StanceRiflePumpAction,
             Combat_Cowboy = DrawItemPoseID.StancePistolCowboy,
             Combat_Power_Tool = DrawItemPoseID.StanceMachineTool,
         }
@@ -462,6 +465,7 @@
             Combat_ReadyAlt = DrawItemPoseID.StanceRiflePointDown2,
             Combat_Offhand = DrawItemPoseID.StanceRifleHoldUp,
             Combat_Bolt_Action = DrawItemPoseID.StanceRifleBoltAction,
+            Combat_Pump_Action = DrawItemPoseID.StanceRiflePumpAction,
             Combat_Power_Tool = DrawItemPoseID.StanceMachineTool,
         }
 
