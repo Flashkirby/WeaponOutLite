@@ -27,7 +27,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
             float t = DrawHelper.AnimLinearNormal(30, timer);
             if (t > 0 && bodyFrame != 5) {
-                float sheatheRotation = DrawHelper.AnimArmRaiseLower(t, 3f) * -1f;
+                float sheatheRotation = DrawHelper.AnimArmRaiseLower(t, 1.5f) * -0.75f;
 
                 Player.CompositeArmStretchAmount frontArm = Player.CompositeArmStretchAmount.ThreeQuarters;
                 if (t > 0.2 && t < 0.8) frontArm = Player.CompositeArmStretchAmount.None;
