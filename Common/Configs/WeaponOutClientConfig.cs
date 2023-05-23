@@ -406,6 +406,11 @@ namespace WeaponOutLite.Common.Configs
 
 		#region ClientSideExperimental
 
+		[Label("$Mods.WeaponOut.Config.EnableMenuDisplay.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.EnableMenuDisplay.Tooltip")]
+		[DefaultValue(true)]
+		public bool EnableMenuDisplay { get; set; }
+
 		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
 		[DefaultValue(false)]
@@ -413,7 +418,7 @@ namespace WeaponOutLite.Common.Configs
 
 		[Label("$Mods.WeaponOut.Config.EnableProjSpears.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableProjSpears.Tooltip")]
-		[DefaultValue(false)]
+		[DefaultValue(true)]
 		public bool EnableProjSpears { get; set; }
 
 		#endregion

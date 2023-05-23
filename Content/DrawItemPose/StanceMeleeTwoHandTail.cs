@@ -120,12 +120,15 @@ namespace WeaponOutLite.Content.DrawItemPose
                         for (int i = 0; i < length / 32; i++) {
                             int nextX = tilePos.X + i * p.direction;
                             int nextY = tilePos.Y + i * (int)p.gravDir;
-                            tile = Main.tile[nextX, nextY];
-                            weaponDropHeight = i;
-                            if (Collision.SolidTiles(nextX, nextX, nextY, nextY)) {
-                                tilePos = new Point16(nextX, nextY);
-                                break;
+                            try {
+                                tile = Main.tile[nextX, nextY];
+                                weaponDropHeight = i;
+                                if (Collision.SolidTiles(nextX, nextX, nextY, nextY)) {
+                                    tilePos = new Point16(nextX, nextY);
+                                    break;
+                                }
                             }
+                            catch { } // in case this gets run in gameMenu
                         }
                         //var d = Dust.NewDustDirect(tilePos.ToWorldCoordinates() + new Vector2(-2, -4), 0, 0, DustID.TreasureSparkle, p.velocity.X, p.velocity.Y);
                         if (weaponDropHeight > 0) {

@@ -232,10 +232,10 @@ namespace WeaponOutLite.Common
 			itemTexture = null;
 
 			// Don't draw when player doesn't meet standard draw conditions
-			if (!modPlayer.DrawHeldItem || holdStyle == null) return false;
+			if ((!modPlayer.DrawHeldItem && !(Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay)) || holdStyle == null) return false;
 
 			// Player player's held item
-			heldItem = drawPlayer.inventory[drawPlayer.selectedItem];
+			heldItem = modPlayer.HeldItem;
 			// no item so nothing to show, and items with predefined hold styles already have draw code/layers
 			if (heldItem == null || heldItem.type == ItemID.None || heldItem.holdStyle != 0) return false;
 
@@ -243,10 +243,16 @@ namespace WeaponOutLite.Common
 
 			// Experimental projectile spear code
             if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears && heldItem.shoot != 0) {
-				bool isSpear = PoseSetClassifier.CalculateDrawStyleType(heldItem) == PoseStyleID.PoseGroup.Spear;
-				if(isSpear && Main.IsGraphicsDeviceAvailable) {
+
+				// Check if this is a spear
+				PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
+				bool isSpear = poseGroup == PoseStyleID.PoseGroup.Spear;
+
+				// Don't actually load this texture until the game has done so - default to the item texture
+				if(isSpear && Main.IsGraphicsDeviceAvailable && TextureAssets.Projectile[heldItem.shoot].IsLoaded) {
 					itemTexture = TextureAssets.Projectile[heldItem.shoot].Value;
 
+					// Flip projectile texture horizontally to match item rotation
 					try {
 						Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, itemTexture.Height, itemTexture.Width);
 						Color[] data = new Color[itemTexture.Width * itemTexture.Height];
@@ -303,7 +309,13 @@ namespace WeaponOutLite.Common
 				//get draw location of player
 				int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
 				int drawY = (int)(drawPlayer.MountedCenter.Y - Main.screenPosition.Y + drawPlayer.gfxOffY) + GravityOffset;
-				// -3 is to help with centering later (see + 6 from gravity flip)
+                // -3 is to help with centering later (see + 6 from gravity flip)
+
+				// Game menu cannot use the player center, use this position instead.
+                if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+					drawX = (int)(drawInfo.Position.X - Main.screenPosition.X) + 10;
+					drawY = (int)(drawInfo.Position.Y - Main.screenPosition.Y) + 18;
+				}
 
 				var playerTile = drawPlayer.Center.ToTileCoordinates();
 				if (drawPlayer.sitting.isSitting && PlayerSittingHelper.GetSittingTargetInfo(
@@ -414,7 +426,8 @@ namespace WeaponOutLite.Common
 		/// <param name="data">Finished draw data</param>
 		/// <param name="drawPlayer">The drawPlayer from drawInfo</param>
 		internal static bool tryCreateGlowLayerDrawData(Player drawPlayer, Item item, DrawData data, out DrawData glowData) {
-			if (item.glowMask != -1) {
+			// Technically glowmasks start at 0, but 0 is used for a projectile, and item.glowMask = -1 isn't set during the gameMenu
+			if (item.glowMask > 0) {
 				Color glowLighting = new Color(250, 250, 250, item.alpha);
 				glowLighting = drawPlayer.GetImmuneAlpha(item.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
 				glowData = new DrawData(

@@ -45,6 +45,11 @@ Mods: {
 				Tooltip: Use actual spear sizes, rather than shrunken item version. (Local Only)
 			}
 
+			EnableMenuDisplay: {
+				Label: Enable Menu Display (Experimental)
+				Tooltip: Enable showing player preview with first item in the Player Select screen. (Local Only)
+			}
+
 			SmallSwordThreshold: {
 				Label: One Handed Sword Threshold (Pixels)
 				Tooltip: Maximum average of width/height to classify a Sword as one handed. (Local Only)

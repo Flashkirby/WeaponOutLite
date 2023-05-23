@@ -18,60 +18,11 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// Select an drawitempose to use from a pose style.
         /// </summary>
         public static IDrawItemPose SelectItemPose(Player p, Item item) {
+
+            GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose);
+
             WeaponOutLite mod = WeaponOutLite.GetMod();
             var clientConfig = ModContent.GetInstance<WeaponOutClientConfig>();
-            var clientOverride = ModContent.GetInstance<WeaponOutClientHoldOverride>();
-
-            // Set initial pose style and item pose object
-            PoseGroup poseGroup = PoseGroup.Unassigned;
-            IDrawItemPose drawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
-
-            // Read custom config for forced pose override
-            ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
-            if (itemOverride != null) {
-                // Found a forced pose in the config, so use this.
-                drawItemPose = mod.DrawStyle[(int)itemOverride.ForceDrawItemPose];
-                if (drawItemPose.GetID() == DrawItemPoseID.Unassigned) {
-                    poseGroup = itemOverride.ForcePoseGroup;
-                }
-            }
-
-            // If the pose wasn't overwritten, and the style is not set, then figure out which one to use
-            if (drawItemPose.GetID() == DrawItemPoseID.Unassigned
-                && poseGroup == PoseGroup.Unassigned) {
-
-                // If the item has been modded to use a custom pose, use that
-                if (mod.customItemHoldStyles.Contains(item.type)) {
-                    drawItemPose = mod.DrawStyle[DrawItemPoseID.Custom];
-                }
-                else {
-                    // Otherwise, figure out which one to use
-                    if (mod.customItemHoldGroups.Contains(item.type)) {
-                        poseGroup = (PoseGroup)mod.customItemHoldGroups[item.type];
-                    }
-                    else {
-                        poseGroup = CalculateDrawStyleType(item);
-                    }
-                    //WeaponOutLite.TEXT_DEBUG += "\nclassifier " + item.useStyle + " = " + poseGroup;
-                }
-            }
-
-            ////////////////////////////////////////////////////////////////////////
-            //                                                                    //
-            // debugging override                                                 //
-            //                                                                    //
-            ////////////////////////////////////////////////////////////////////////
-            /*
-            if (Main.SmartCursorIsUsed) {
-                poseGroup = PoseGroup.Unassigned;
-                drawItemPose = mod.DrawStyle[DrawItemPoseID.HoldInHand];
-            }
-            */
-            //poseGroup = PoseGroup.Unassigned;
-            //drawItemPose = mod.DrawStyle[DrawItemPoseID.BackFlail];
-            ////////////////////////////////////////////////////////////////////////
-            //                                                                    //
-            ////////////////////////////////////////////////////////////////////////
 
             // Select the pose based on the client configured pose styles
             switch (poseGroup) {
@@ -164,9 +115,71 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         }
 
         /// <summary>
-        /// Given the player and item's state, what should they use
+        /// Fetch the posegrou pto use for the item, taking into account any additional configuration options
         /// </summary>
-        public static PoseGroup CalculateDrawStyleType(Item item) {
+        /// <returns></returns>
+        public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
+        {
+            WeaponOutLite mod = WeaponOutLite.GetMod();
+            var clientOverride = ModContent.GetInstance<WeaponOutClientHoldOverride>();
+
+            // Set initial pose style and item pose object
+            poseGroup = PoseGroup.Unassigned;
+            drawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+
+            // Read custom config for forced pose override
+            ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
+            if (itemOverride != null) {
+                // Found a forced pose in the config, so use this.
+                drawItemPose = mod.DrawStyle[(int)itemOverride.ForceDrawItemPose];
+                if (drawItemPose.GetID() == DrawItemPoseID.Unassigned) {
+                    poseGroup = itemOverride.ForcePoseGroup;
+                }
+            }
+
+            // If the pose wasn't overwritten, and the style is not set, then figure out which one to use
+            if (drawItemPose.GetID() == DrawItemPoseID.Unassigned
+                && poseGroup == PoseGroup.Unassigned) {
+
+                // If the item has been modded to use a custom pose, use that
+                if (mod.customItemHoldStyles.Contains(item.type)) {
+                    drawItemPose = mod.DrawStyle[DrawItemPoseID.Custom];
+                }
+                else {
+                    // Otherwise, figure out which one to use
+                    if (mod.customItemHoldGroups.Contains(item.type)) {
+                        poseGroup = (PoseGroup)mod.customItemHoldGroups[item.type];
+                    }
+                    else {
+                        poseGroup = CalculateDrawStyleType(item);
+                    }
+                    //WeaponOutLite.TEXT_DEBUG += "\nclassifier " + item.useStyle + " = " + poseGroup;
+                }
+            }
+
+            ////////////////////////////////////////////////////////////////////////
+            //                                                                    //
+            // debugging override                                                 //
+            //                                                                    //
+            ////////////////////////////////////////////////////////////////////////
+            /*
+            if (Main.SmartCursorIsUsed) {
+                poseGroup = PoseGroup.Unassigned;
+                drawItemPose = mod.DrawStyle[DrawItemPoseID.HoldInHand];
+            }
+            */
+            //poseGroup = PoseGroup.Unassigned;
+            //drawItemPose = mod.DrawStyle[DrawItemPoseID.BackFlail];
+            ////////////////////////////////////////////////////////////////////////
+            //                                                                    //
+            ////////////////////////////////////////////////////////////////////////
+            return;
+        }
+
+        /// <summary>
+        /// Given the player and item's state, what should they use (Defaults)
+        /// </summary>
+        private static PoseGroup CalculateDrawStyleType(Item item) {
 
             var itemTexture = TextureAssets.Item[item.type].Value;
             var itemFrames = 1;

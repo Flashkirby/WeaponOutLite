@@ -80,6 +80,13 @@ namespace WeaponOutLite.Common.Players
 			set { Player.bodyFrame.Y = value * Player.bodyFrame.Height; }
 		}
 
+		public Item HeldItem => Main.gameMenu && gameMenuItem != null ? gameMenuItem : Player.inventory[Player.selectedItem];
+
+		/// <summary>
+		/// Item is not fully loaded during game menu draw
+		/// </summary>
+		internal Item gameMenuItem;
+
 		public override void ResetEffects() {
 			showHeldItemThisFrame = true;
 
@@ -113,9 +120,24 @@ namespace WeaponOutLite.Common.Players
 			}
 		}
 
-		// Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
-		// Server receives toWho=-1, fromWho=0
-		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
+        public override void FrameEffects()
+        {
+            if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+				if (gameMenuItem == null) {
+					gameMenuItem = Player.HeldItem;
+				}
+
+				CombatDelayTimer = 0;
+
+				CurrentDrawItemPose = PoseSetClassifier.SelectItemPose(Player, Player.HeldItem);
+				manageBodyFrame();
+			}
+            else { gameMenuItem = null; }
+        }
+
+        // Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
+        // Server receives toWho=-1, fromWho=0
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
 			// Send a message out to the server if the player just synced
 			if (fromWho == -1) {
 				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
