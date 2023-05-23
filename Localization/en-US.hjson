@@ -40,6 +40,11 @@ Mods: {
 				Tooltip: Allows weapons to continue showing melee effects after being swung. (Local Only)
 			}
 
+			EnableProjSpears: {
+				Label: Enable Full Spears (Experimental)
+				Tooltip: Use actual spear sizes, rather than shrunken item version. (Local Only)
+			}
+
 			SmallSwordThreshold: {
 				Label: One Handed Sword Threshold (Pixels)
 				Tooltip: Maximum average of width/height to classify a Sword as one handed. (Local Only)

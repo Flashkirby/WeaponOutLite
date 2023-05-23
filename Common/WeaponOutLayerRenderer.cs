@@ -181,7 +181,11 @@ namespace WeaponOutLite.Common
 						}
                     }
 				}
-				catch (Exception e) { }
+				catch (Exception e) {
+					Main.NewText("WeaponOutLite: Experimental feature failure, melee effects disabled");
+					ModContent.GetInstance<WeaponOutClientConfig>().EnableMeleeEffects = false;
+					new Exception("Something happened when trying to generate melee effects", e);
+				}
 			}
 		}
 
@@ -236,6 +240,40 @@ namespace WeaponOutLite.Common
 			if (heldItem == null || heldItem.type == ItemID.None || heldItem.holdStyle != 0) return false;
 
 			itemTexture = TextureAssets.Item[heldItem.type].Value;
+
+			// Experimental projectile spear code
+            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears && heldItem.shoot != 0) {
+				bool isSpear = PoseSetClassifier.CalculateDrawStyleType(heldItem) == PoseStyleID.PoseGroup.Spear;
+				if(isSpear && Main.IsGraphicsDeviceAvailable) {
+					itemTexture = TextureAssets.Projectile[heldItem.shoot].Value;
+
+					try {
+						Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, itemTexture.Height, itemTexture.Width);
+						Color[] data = new Color[itemTexture.Width * itemTexture.Height];
+						Color[] rotatedData = new Color[data.Length];
+						itemTexture.GetData(data);
+						var x = itemTexture.Width - 1;
+						var y = 0;
+						for (int i = 0; i < data.Length; i++) {
+							rotatedData[i] = data[x + y * itemTexture.Width];
+							x -= 1;
+							if (x < 0) {
+								x = itemTexture.Width - 1;
+								y += 1;
+							}
+						}
+						rotatedItemTexture.SetData<Color>(rotatedData);
+
+						itemTexture = rotatedItemTexture;
+					}
+					catch (Exception e) {
+						Main.NewText("WeaponOutLite: Experimental feature failure, proj spears disabled");
+						ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
+						new Exception("Something happened when trying to rotate spear texture", e);
+					}
+				}
+			}
+
 			// if no texture to item then can't render anything  ¯\_(ツ)_/¯
 			if (itemTexture == null) return false;
 			

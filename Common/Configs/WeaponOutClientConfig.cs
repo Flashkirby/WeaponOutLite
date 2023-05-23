@@ -314,11 +314,6 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool EnableItemScaling { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
-		[DefaultValue(false)]
-		public bool EnableMeleeEffects { get; set; }
-
 		[Label("$Mods.WeaponOut.Config.SmallSwordThreshold.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.SmallSwordThreshold.Tooltip")]
 		[Increment(2)]
@@ -406,6 +401,20 @@ namespace WeaponOutLite.Common.Configs
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;
+
+		#endregion
+
+		#region ClientSideExperimental
+
+		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
+		[DefaultValue(false)]
+		public bool EnableMeleeEffects { get; set; }
+
+		[Label("$Mods.WeaponOut.Config.EnableProjSpears.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.EnableProjSpears.Tooltip")]
+		[DefaultValue(false)]
+		public bool EnableProjSpears { get; set; }
 
 		#endregion
 
