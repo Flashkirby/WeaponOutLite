@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +24,11 @@ namespace WeaponOutLite.Common
 	/// </summary>
     public static class WeaponOutLayerRenderer
 	{
+		/// <summary>
+		/// Cache for special proj textures. DO NOT access before calling CreateItemProjectileSpearTexture. Initialised/reset in Mod Load/Unload.
+		/// </summary>
+		public static List<Texture2D> ItemProjTextureCache { get; set; }
+
 		/// <summary>
 		/// Offset to place the item at a different Y centre, so that when *-2, the position will be consistent when the player is upside down.
 		/// While this technically means the weapon is not placed directly in the centre,
@@ -249,33 +255,10 @@ namespace WeaponOutLite.Common
 				bool isSpear = poseGroup == PoseStyleID.PoseGroup.Spear;
 
 				// Don't actually load this texture until the game has done so - default to the item texture
-				if(isSpear && Main.IsGraphicsDeviceAvailable && TextureAssets.Projectile[heldItem.shoot].IsLoaded) {
-					itemTexture = TextureAssets.Projectile[heldItem.shoot].Value;
-
-					// Flip projectile texture horizontally to match item rotation
-					try {
-						Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, itemTexture.Height, itemTexture.Width);
-						Color[] data = new Color[itemTexture.Width * itemTexture.Height];
-						Color[] rotatedData = new Color[data.Length];
-						itemTexture.GetData(data);
-						var x = itemTexture.Width - 1;
-						var y = 0;
-						for (int i = 0; i < data.Length; i++) {
-							rotatedData[i] = data[x + y * itemTexture.Width];
-							x -= 1;
-							if (x < 0) {
-								x = itemTexture.Width - 1;
-								y += 1;
-							}
-						}
-						rotatedItemTexture.SetData<Color>(rotatedData);
-
-						itemTexture = rotatedItemTexture;
-					}
-					catch (Exception e) {
-						Main.NewText("WeaponOutLite: Experimental feature failure, proj spears disabled");
-						ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
-						new Exception("Something happened when trying to rotate spear texture", e);
+				if(isSpear) {
+					CreateItemProjectileSpearTexture(heldItem.type, heldItem.shoot);
+					if(ItemProjTextureCache[heldItem.type] != null) {
+						itemTexture = ItemProjTextureCache[heldItem.type];
 					}
 				}
 			}
@@ -528,6 +511,53 @@ namespace WeaponOutLite.Common
 
 
 			return true;
+		}
+
+		internal static void CreateItemProjectileSpearTexture(int itemType, int projectileType)
+		{
+			// First check if the appropriate cached texture already exists
+			// Populate inbetween space with empty textures
+			if(ItemProjTextureCache.Capacity <= itemType) {
+				ItemProjTextureCache.Capacity = itemType + 1;
+				ItemProjTextureCache.AddRange(new Texture2D[ItemProjTextureCache.Capacity - ItemProjTextureCache.Count]);
+            }
+
+			if(ItemProjTextureCache[itemType] != null) {
+				return;
+			}
+
+			// Don't actually load this texture until the game has done so - default to the item texture
+			if (Main.IsGraphicsDeviceAvailable && TextureAssets.Projectile[projectileType].IsLoaded) {
+				Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
+
+				// Flip projectile texture horizontally to match item rotation
+				// This operation is somewhat expensive, so we only want to run it once and then cache the result
+				// It may also have odd interations if multiple frames are present
+				try {
+					Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Height, baseTexture.Width);
+					Color[] data = new Color[baseTexture.Width * baseTexture.Height];
+					Color[] rotatedData = new Color[data.Length];
+					baseTexture.GetData(data);
+					var x = baseTexture.Width - 1;
+					var y = 0;
+					for (int i = 0; i < data.Length; i++) {
+						rotatedData[i] = data[x + y * baseTexture.Width];
+						x -= 1;
+						if (x < 0) {
+							x = baseTexture.Width - 1;
+							y += 1;
+						}
+					}
+					rotatedItemTexture.SetData(rotatedData);
+
+					ItemProjTextureCache[itemType] = rotatedItemTexture;
+				}
+				catch (Exception e) {
+					Main.NewText("WeaponOutLite: Experimental feature failure, proj spears disabled");
+					ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
+					new Exception("Something happened when trying to rotate spear texture", e);
+				}
+			}
 		}
 	}
 }
