@@ -1,4 +1,4 @@
-displayName = WeaponOut Lite
+displayName = WeaponOut Lite [1.4.4-preview]
 author = Flashkirby
 version = 0.0.144
 
