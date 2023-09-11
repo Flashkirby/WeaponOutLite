@@ -1,4 +1,8 @@
-﻿portal gun 
+﻿
+lances
+skydragon's fury
+scourge of the corrupter
+
 
 Known Bugs:
 
