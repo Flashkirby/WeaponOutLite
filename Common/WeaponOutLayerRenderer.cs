@@ -105,6 +105,11 @@ namespace WeaponOutLite.Common
 				}
 			}
 
+			if (itemData.texture == null) {
+				// Exit out without adding to the render list, if the texture is not set (aka, why bother)
+				return;
+            }
+
 			// Flip position from player centre based on direction and gravity
 			itemData.position = (itemData.position - playerCentrePosition)
 				* drawInfo.drawPlayer.Directions + playerCentrePosition;
