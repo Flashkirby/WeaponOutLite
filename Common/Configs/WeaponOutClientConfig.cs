@@ -9,7 +9,7 @@ using WeaponOutLite.ID;
 namespace WeaponOutLite.Common.Configs
 {
     // Unless set as an auto property, mod config will always place public fields at the top.
-    // This causes order issues as other write options, such as getters and [JsonIgnore], will get pushed to the bottom.
+    // This causes order issues as other write options, such as getters and [JsonIgnore][ShowDespiteJsonIgnore], will get pushed to the bottom.
     [Label("$Mods.WeaponOut.Config.ClientSideConfigLabel")]
 	public class WeaponOutClientConfig : ModConfig
 	{
@@ -40,7 +40,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.ItemPoseID.Hold)]
 		public PoseStyleID.ItemPoseID SmallItemPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewSmallItem))]
 		public int SmallItemPosePV => (int)SmallItemPose;
@@ -50,7 +50,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.LargeItemPoseID.Carry)]
 		public PoseStyleID.LargeItemPoseID LargeItemPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewLargeItem))]
 		public int LargeItemPosePV => (int)LargeItemPose;
@@ -60,7 +60,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.PotionPoseID.HoldForward)]
 		public PoseStyleID.PotionPoseID PotionPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewPotionItem))]
 		public int PotionPosePV => (int)PotionPose;
@@ -71,7 +71,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.SmallMeleePoseID.Combat_Ready)]
 		public PoseStyleID.SmallMeleePoseID SmallMeleePose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewSmallMelee))]
 		public int SmallMeleePV => (int)SmallMeleePose;
@@ -82,7 +82,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.LargeMeleePoseID.Combat_Two_Hand)]
 		public PoseStyleID.LargeMeleePoseID LargeMeleePose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewLargeMelee))]
 		public int LargeMeleePV => (int)LargeMeleePose;
@@ -93,7 +93,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.RapierPoseID.Combat_Hold)]
 		public PoseStyleID.RapierPoseID RapierPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewRapier))]
 		public int RapierPV => (int)RapierPose;
@@ -104,7 +104,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.SpearPoseID.Combat_Pole_Ready)]
 		public PoseStyleID.SpearPoseID SpearPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewSpear))]
 		public int SpearPV => (int)SpearPose;
@@ -115,7 +115,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.YoyoPoseID.Hold)]
 		public PoseStyleID.YoyoPoseID YoyoPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewYoyo))]
 		public int YoyoPV => (int)YoyoPose;
@@ -130,7 +130,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.FlailPoseID.Combat_Ready)]
 		public PoseStyleID.FlailPoseID FlailPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewFlail))]
 		public int FlailPV => (int)FlailPose;
@@ -141,7 +141,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.WhipPoseID.Hold)]
 		public PoseStyleID.WhipPoseID WhipPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewWhip))]
 		public int WhipPV => (int)WhipPose;
@@ -152,7 +152,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.ThrownPoseID.Combat_Upright)]
 		public PoseStyleID.ThrownPoseID ThrownPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewThrown))]
 		public int ThrownPV => (int)ThrownPose;
@@ -163,7 +163,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.ThrownPoseID.Hold)]
 		public PoseStyleID.ThrownPoseID ThrownThinPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewThrownThin))]
 		public int ThrownThinPV => (int)ThrownThinPose;
@@ -174,7 +174,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.PowerToolPoseID.Combat_Power_Tool)]
 		public PoseStyleID.PowerToolPoseID PowerToolPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewPowerTool))]
 		public int PowerToolPV => (int)PowerToolPose;
@@ -185,7 +185,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.BowPoseID.Combat_Hunter)]
 		public PoseStyleID.BowPoseID BowPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewBow))]
 		public int BowPV => (int)BowPose;
@@ -196,7 +196,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Ready)]
 		public PoseStyleID.GunPoseID RepeaterPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewRepeater))]
 		public int RepeaterPV => (int)RepeaterPose;
@@ -211,7 +211,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.PistolPoseID.Hold)]
 		public PoseStyleID.PistolPoseID PistolPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewPistol))]
 		public int PistolPV => (int)PistolPose;
@@ -222,7 +222,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Hip_Ready)]
 		public PoseStyleID.GunPoseID GunPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGun))]
 		public int GunPV => (int)GunPose;
@@ -233,7 +233,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Bolt_Action)]
 		public PoseStyleID.GunPoseID GunManualPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGunManual))]
 		public int GunManualPV => (int)GunManualPose;
@@ -244,7 +244,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GunPoseID.Combat_Pump_Action)]
 		public PoseStyleID.GunPoseID ShotgunPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewShotgun))]
 		public int ShotgunPosePV => (int)ShotgunPose;
@@ -255,7 +255,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.LauncherPoseID.OffHand_Shoulder)]
 		public PoseStyleID.LauncherPoseID LauncherPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewLauncher))]
 		public int LauncherPV => (int)LauncherPose;
@@ -266,7 +266,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.StaffPoseID.PoleOffHand)]
 		public PoseStyleID.StaffPoseID StaffPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewStaff))]
 		public int StaffPV => (int)StaffPose;
@@ -277,7 +277,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.MagicBookPoseID.Hold)]
 		public PoseStyleID.MagicBookPoseID MagicBookPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewMagicBook))]
 		public int MagicBookPV => (int)MagicBookPose;
@@ -288,7 +288,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.MagicItemPoseID.Levitate_OffHand)]
 		public PoseStyleID.MagicItemPoseID MagicItemPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewMagicItem))]
 		public int MagicItemPV => (int)MagicItemPose;
@@ -353,7 +353,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GiantItemPoseID.Carry)]
 		public PoseStyleID.GiantItemPoseID GiantItemPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantItem))]
 		public int GiantItemPV => (int)GiantItemPose;
@@ -364,7 +364,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GiantMeleePoseID.Combat_Two_Hand_Berserk)]
 		public PoseStyleID.GiantMeleePoseID GiantWeaponPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMelee))]
 		public int GiantMeleePV => (int)GiantWeaponPose;
@@ -375,7 +375,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GiantBowPoseID.Combat_Hunter)]
 		public PoseStyleID.GiantBowPoseID GiantBowPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantBow))]
 		public int GiantBowPV => (int)GiantBowPose;
@@ -386,7 +386,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GiantGunPoseID.OffHand_Shoulder)]
 		public PoseStyleID.GiantGunPoseID GiantGunPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantGun))]
 		public int GiantGunPV => (int)GiantGunPose;
@@ -397,7 +397,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(PoseStyleID.GiantMagicPoseID.Levitate_Aimed)]
 		public PoseStyleID.GiantMagicPoseID GiantMagicPose { get; set; }
 
-		[JsonIgnore]
+		[JsonIgnore][ShowDespiteJsonIgnore]
 		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;

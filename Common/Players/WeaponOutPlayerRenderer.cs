@@ -87,7 +87,14 @@ namespace WeaponOutLite.Common.Players
 		/// </summary>
 		internal Item gameMenuItem;
 
-		public override void ResetEffects() {
+        public override void OnEnterWorld()
+        {
+			if (Main.netMode != NetmodeID.SinglePlayer) {
+				// Request players to sync 
+            }
+        }
+
+        public override void ResetEffects() {
 			showHeldItemThisFrame = true;
 
 			// Terraria Overhaul Integration
@@ -218,6 +225,10 @@ namespace WeaponOutLite.Common.Players
         private void manageBodyFrame() {
 			//no item so nothing to show
 			if (Player.HeldItem == null || Player.HeldItem.type == ItemID.None || Player.HeldItem.holdStyle != 0) return; 
+
+			if (CurrentDrawItemPose == null) {
+				throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
+            }
 
 			// Only if in a rest post
 			// 0 = standing
