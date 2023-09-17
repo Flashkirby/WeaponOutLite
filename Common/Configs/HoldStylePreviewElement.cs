@@ -239,7 +239,7 @@ namespace WeaponOutLite.Common.Configs
 	public class PreviewPowerTool : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Drax; }
 	public class PreviewLargeMelee : HoldStylePreviewElement
-	{ public override int PreviewItemType() => ItemID.BoneSword; }
+	{ public override int PreviewItemType() => ItemID.BladeofGrass; }
 	public class PreviewThrown : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Shuriken; }
 	public class PreviewThrownThin : HoldStylePreviewElement
