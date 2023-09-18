@@ -61,6 +61,7 @@ namespace WeaponOutLite.ID
             StanceInHand = DrawItemPoseID.StanceInHand,
             HoldReversedInHand = DrawItemPoseID.HoldReversedInHand,
             HoldInHandFront = DrawItemPoseID.HoldInHandFront,
+            HoldSpellTome = DrawItemPoseID.HoldSpellTome,
             HoldInOffHand = DrawItemPoseID.HoldInOffHand,
             CarryInBothHands = DrawItemPoseID.CarryInBothHands,
             StanceMachineTool = DrawItemPoseID.StanceMachineTool,
@@ -122,6 +123,7 @@ namespace WeaponOutLite.ID
         public const int StanceInHand       = 01002;
         public const int HoldReversedInHand = 01005;
         public const int HoldInHandFront    = 01010;
+        public const int HoldSpellTome      = 01013;
         public const int HoldInOffHand      = 01020;
         public const int CarryInBothHands   = 01100;
         public const int StanceMachineTool  = 01110;

@@ -274,7 +274,7 @@ namespace WeaponOutLite.Common.Configs
 		[Label("$Mods.WeaponOut.Config.MagicBookPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
-		[DefaultValue(PoseStyleID.MagicBookPoseID.Hold)]
+		[DefaultValue(PoseStyleID.MagicBookPoseID.HoldTome)]
 		public PoseStyleID.MagicBookPoseID MagicBookPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]

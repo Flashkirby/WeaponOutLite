@@ -122,6 +122,16 @@ Mods: {
 				Tooltip: Override and force the item to use this specific pose, if not set to Default.
 			}
 
+			CurrentPoseGroup: {
+				Label: Held Item Pose Group
+				Tooltip: The pose group the currently held item belongs to.
+			}
+
+			CurrentDrawItemPose: {
+				Label: Held Item Pose
+				Tooltip: The pose the currently held item is using.
+			}
+
 			ModIntegrationHeader: Mod Integrations
 
 			ModIntegrationTerrariaOverhaul: {
@@ -520,6 +530,7 @@ Mods: {
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
 				Combat_Two_Hand.Label: Combat Two Hand
+				HoldTome.Label: Hold Tome
 			}
 
 			LargeItemPoseID: {
@@ -852,6 +863,7 @@ Mods: {
 				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
 				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
 				Combat_Upright.Label: Combat Upright
+				HoldTome.Label: Hold Tome
 			}
 
 			MagicItemPoseID: {
@@ -981,6 +993,21 @@ Mods: {
 					Label: Style Override List
 					Tooltip: ""
 				}
+
+				CurrentPoseGroup: {
+					Label: "{$Mods.WeaponOut.Config.CurrentPoseGroup.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.ForcePoseGroup.Tooltip}"
+				}
+
+				CurrentDrawItemPose: {
+					Label: "{$Mods.WeaponOut.Config.CurrentDrawItemPose.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.CurrentDrawItemPose.Tooltip}"
+				}
+
+				CurrentItemPosePV: {
+					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Tooltip: ""
+				}
 			}
 
 			ItemDrawOverrideData: {
@@ -1093,6 +1120,7 @@ Mods: {
 				FloatingOrbitClockwiseSlow.Label: Floating Orbit Clockwise Slow
 				FloatingOrbitAntiClockwiseFast.Label: Floating Orbit Anti Clockwise Fast
 				FloatingOrbitClockwiseFast.Label: Floating Orbit Clockwise Fast
+				HoldSpellTome.Label: Hold Spell Tome
 			}
 
 			WeaponOutServerConfig: {

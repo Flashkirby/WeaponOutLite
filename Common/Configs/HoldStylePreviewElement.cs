@@ -311,4 +311,14 @@ namespace WeaponOutLite.Common.Configs
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMagic", AssetRequestMode.ImmediateLoad).Value;
 		}
 	}
+	public class PreviewHeldItem : HoldStylePreviewElement
+	{
+		public override int PreviewItemType()
+		{
+			if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+				return Main.LocalPlayer.HeldItem.type;
+			}
+			return ItemID.DirtBlock;
+		}
+	}
 }

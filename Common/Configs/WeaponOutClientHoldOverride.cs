@@ -12,6 +12,7 @@ using Terraria.Localization;
 using Terraria.ModLoader.Config;
 using Terraria.ModLoader.Config.UI;
 using WeaponOutLite.ID;
+using WeaponOutLite.Common.GlobalDrawItemPose;
 
 namespace WeaponOutLite.Common.Configs
 {
@@ -21,6 +22,42 @@ namespace WeaponOutLite.Common.Configs
         private HybridDictionary styleOverrideItemCache;
 
         public override ConfigScope Mode => ConfigScope.ClientSide;
+
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        [Label("$Mods.WeaponOut.Config.CurrentPoseGroup.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.CurrentPoseGroup.Tooltip")]
+        [DrawTicks]
+        public PoseStyleID.PoseGroup CurrentPoseGroup
+        {
+            get {
+                if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
+                    return currentPoseGroup;
+                }
+                return PoseStyleID.PoseGroup.Unassigned;
+            }
+        }
+
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
+        [Label("$Mods.WeaponOut.Config.CurrentDrawItemPose.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.CurrentDrawItemPose.Tooltip")]
+        [DrawTicks]
+        public DrawItemPoseID.DrawItemPose CurrentDrawItemPose
+        {
+            get {
+                if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+                    return (DrawItemPoseID.DrawItemPose)PoseSetClassifier.SelectItemPose(Main.LocalPlayer, Main.LocalPlayer.HeldItem).GetID();
+                }
+                return DrawItemPoseID.DrawItemPose.Default;
+            }
+        }
+
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        [Label("$Mods.WeaponOut.Config.Preview")]
+        [CustomModConfigItem(typeof(PreviewHeldItem))]
+        public int CurrentItemPosePV => (int)CurrentDrawItemPose;
+
 
         private List<ItemDrawOverrideData> styleOverrideList;
 
@@ -142,6 +179,14 @@ namespace WeaponOutLite.Common.Configs
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.DrawItemPose.Default)]
         public DrawItemPoseID.DrawItemPose ForceDrawItemPose;
+
+        public ItemDrawOverrideData()
+        {
+            // If the player is active and in-game, default to use what the player is holding
+            if(Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+                Item = new ItemDefinition(Main.LocalPlayer.HeldItem.type);
+            }
+        }
 
         public override string ToString() {
             if(Item == null) return "-";
