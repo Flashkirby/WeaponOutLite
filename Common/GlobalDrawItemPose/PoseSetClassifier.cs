@@ -24,6 +24,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             WeaponOutLite mod = WeaponOutLite.GetMod();
             var clientConfig = ModContent.GetInstance<WeaponOutClientConfig>();
 
+            // Skip selection if an item pose is already active
+            if (drawItemPose.GetID() != DrawItemPoseID.Unassigned) { return drawItemPose; }
+
             // Select the pose based on the client configured pose styles
             switch (poseGroup) {
                 case PoseGroup.Item:
@@ -115,7 +118,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         }
 
         /// <summary>
-        /// Fetch the posegrou pto use for the item, taking into account any additional configuration options
+        /// Fetch the posegroup to use for the item, taking into account any additional configuration options
         /// </summary>
         /// <returns></returns>
         public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
@@ -132,9 +135,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             if (itemOverride != null) {
                 // Found a forced pose in the config, so use this.
                 drawItemPose = mod.DrawStyle[(int)itemOverride.ForceDrawItemPose];
-                if (drawItemPose.GetID() == DrawItemPoseID.Unassigned) {
-                    poseGroup = itemOverride.ForcePoseGroup;
-                }
+                poseGroup = itemOverride.ForcePoseGroup;
             }
 
             // If the pose wasn't overwritten, and the style is not set, then figure out which one to use

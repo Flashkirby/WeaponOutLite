@@ -67,6 +67,8 @@ namespace WeaponOutLite.Common.Configs
             List<ItemDrawOverrideData> cleanDataList = new List<ItemDrawOverrideData>();
 
             foreach (var data in list) {
+                if(data == null || data.Item == null) { continue; }
+
                 try {
                     cleanDataList.Add(data);
                     styleOverrideItemCache.Add(data.Item?.Type, data);
@@ -95,10 +97,27 @@ namespace WeaponOutLite.Common.Configs
             styleOverrideList = new List<ItemDrawOverrideData>();
 
             // Example custom override for Terragrim
-            styleOverrideList.Add(new ItemDrawOverrideData()
-            {
+            styleOverrideList.Add(new ItemDrawOverrideData() {
+                //ItemID.EmpressBlade
                 Item = ItemDefinition.FromString("EmpressBlade"),
                 ForceDrawItemPose = DrawItemPoseID.DrawItemPose.FloatingOffHandAimed
+            });
+
+            // Special hold for lances
+            styleOverrideList.Add(new ItemDrawOverrideData() {
+                Item = ItemDefinition.FromString("JoustingLance"),
+                ForcePoseGroup = PoseStyleID.PoseGroup.Spear,
+                ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
+            });
+            styleOverrideList.Add(new ItemDrawOverrideData() {
+                Item = ItemDefinition.FromString("ShadowJoustingLance"),
+                ForcePoseGroup = PoseStyleID.PoseGroup.Spear,
+                ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
+            });
+            styleOverrideList.Add(new ItemDrawOverrideData() {
+                Item = ItemDefinition.FromString("HallowJoustingLance"),
+                ForcePoseGroup = PoseStyleID.PoseGroup.Spear,
+                ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
             });
         }
     }
