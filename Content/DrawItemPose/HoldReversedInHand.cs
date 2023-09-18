@@ -37,7 +37,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     (8) + (float)Math.Sin(data.rotation) * handleOffset);
                 data = data.WithHandOffset(p);
             }
-            else { // Grapple/Pulley
+            else { // Grapple/Pulley/Mount
                 data.color = Color.Transparent;
             }
             return data;

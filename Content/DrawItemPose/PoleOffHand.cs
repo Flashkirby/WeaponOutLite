@@ -34,7 +34,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(13f, 16f);
                 data = data.WithOffHandOffset(p);
             }
-            else { // Jumping/Grapple/Pulley
+            else { // Jumping/Grapple/Pulley/Mount
                 data.rotation = (float)(Math.PI * -0.20f);
                 data.position += new Vector2(10f, 19f);
             }

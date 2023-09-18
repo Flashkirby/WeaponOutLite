@@ -84,7 +84,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     0);
                 data = data.WithOffHandOffset(p);
             }
-            else { // Grapple/Pulley
+            else { // Grapple/Pulley/Mount
                 data.color = Color.Transparent;
             }
 
