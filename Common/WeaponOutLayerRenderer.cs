@@ -527,38 +527,63 @@ namespace WeaponOutLite.Common
 				ItemProjTextureCache.AddRange(new Texture2D[ItemProjTextureCache.Capacity - ItemProjTextureCache.Count]);
             }
 
-			if(ItemProjTextureCache[itemType] != null) {
+            //if (Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; } // DEBUG DO NOT RUN IN PRODUCTION
+
+            if (ItemProjTextureCache[itemType] != null) {
 				return;
 			}
 
 			// Don't actually load this texture until the game has done so - default to the item texture
 			if (Main.IsGraphicsDeviceAvailable && TextureAssets.Projectile[projectileType].IsLoaded) {
+				if (true) {
+					string text = $"Generating New {itemType}";
+					if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
+				}
 				Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
 
 				// Flip projectile texture horizontally to match item rotation
+				// This is because internally, spear projectiles go from bottom right to top left.
 				// This operation is somewhat expensive, so we only want to run it once and then cache the result
 				// It may also have odd interations if multiple frames are present
 				try {
-					Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Height, baseTexture.Width);
+					Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height);
+
+					// If the texture is not squarish, it's probably not something we need to flip. All spear textures are squares
 					Color[] data = new Color[baseTexture.Width * baseTexture.Height];
 					Color[] rotatedData = new Color[data.Length];
 					baseTexture.GetData(data);
-					var x = baseTexture.Width - 1;
-					var y = 0;
-					for (int i = 0; i < data.Length; i++) {
-						rotatedData[i] = data[x + y * baseTexture.Width];
-						x -= 1;
-						if (x < 0) {
-							x = baseTexture.Width - 1;
-							y += 1;
-						}
-					}
-					rotatedItemTexture.SetData(rotatedData);
 
-					ItemProjTextureCache[itemType] = rotatedItemTexture;
+					// Check how much of the graphic the spear has in this axes
+					int totalLength = Math.Min(baseTexture.Width, baseTexture.Height);
+					int coverageAlongLength = 0;
+					for (int i = 0; i < totalLength; i++) {
+						coverageAlongLength += data[i * baseTexture.Width + i].A > 0 ? 1 : 0;
+					}
+
+					// If the spear has pixels along at least 75% of this diagonal, it's probably flippable.
+					// System.Console.WriteLine($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
+					if (coverageAlongLength > totalLength * 0.75f) {
+						// Create a horizontally flipped texture
+						var x = baseTexture.Width - 1;
+						var y = 0;
+						for (int i = 0; i < data.Length; i++) {
+							rotatedData[i] = data[x + y * baseTexture.Width];
+							x -= 1;
+							if (x < 0) {
+								x = baseTexture.Width - 1;
+								y += 1;
+							}
+						}
+						rotatedItemTexture.SetData(rotatedData);
+
+						ItemProjTextureCache[itemType] = rotatedItemTexture;
+                    }
+                    else {
+						ItemProjTextureCache[itemType] = baseTexture;
+					}
 				}
 				catch (Exception e) {
-					Main.NewText("WeaponOutLite: Experimental feature failure, proj spears disabled");
+					Main.NewText("WeaponOutLite: Experimental feature failure, proj spears temporarily disabled");
 					ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
 					new Exception("Something happened when trying to rotate spear texture", e);
 				}
