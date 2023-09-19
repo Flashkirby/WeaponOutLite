@@ -64,7 +64,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer)) return idleData;
 
             // Face forward
-            data = data.SetOrigin(0.1f, 0.9f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
 
             // Rotate to face back and down
             data.rotation += (float)(Math.PI * 1f);

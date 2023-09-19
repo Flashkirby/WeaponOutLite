@@ -60,7 +60,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer)) return idleData;
 
             // Face top right
-            data = data.SetOrigin(0.1f, 0.9f, p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p).RotateFaceForward(p, height, width);
             data.rotation -= 1 * MathHelper.PiOver2;
 
             if (p.shieldRaised) {
@@ -105,7 +105,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                         data.rotation -= MathHelper.PiOver2 * 2f;
                     }
                     else {
-                        data = data.SetOrigin(0.1f, 0.5f - 0.4f * 2f, p);
+                        data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.5f - 0.4f * 2f, p);
                     }
                     data = DrawHelper.LerpData(data, idleData, t);
                 }

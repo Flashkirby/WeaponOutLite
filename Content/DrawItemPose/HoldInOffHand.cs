@@ -22,7 +22,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
             data = data.SetOrigin(0.05f, 0.85f, p);
 
-            if (bodyFrame == 0) { // Standing
+            if (bodyFrame == 0 || p.IsMountPoseActive()) { // Standing
                 data.position += new Vector2(6f, 10f);
             }
             else if (bodyFrame == 5) { // Jumping

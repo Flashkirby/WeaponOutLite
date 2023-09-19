@@ -21,7 +21,7 @@ namespace WeaponOutLite.Content.DrawItemPose
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
             // Face forward
-            data = data.SetOrigin(0.2f, 0.8f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.5f - 0.3f * (width / height), 0.8f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
 
             float minSize = 64;
             var smallItemOffset = Math.Max(new Vector2(width, height).Length(), minSize) / minSize; // 1 small increasing with size relative to minsize

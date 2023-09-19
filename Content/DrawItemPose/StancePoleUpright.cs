@@ -52,7 +52,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             }
 
             //data.origin = DrawHelper.NewOrigin(0.1f, 0.9f, data, p).Round2(p);
-            data = data.SetOrigin(0.1f, 0.9f, p);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p).RotateFaceForward(p, height, width);
 
             if (bodyFrame == 0 || bodyFrame > 5) {
                 // Idle/Running
@@ -60,7 +60,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     -2, 
                     17);
                 data = data.WithHandOffset(p);
-                data.rotation += (float)(Math.PI * -0.25f);
+                data.rotation += (float)(Math.PI * -0.5f);
             }
             else if (bodyFrame == 5) {
                 // Jumping
@@ -68,7 +68,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     0,
                     -2);
                 data = data.WithHandOffset(p);
-                data.rotation += (float)(Math.PI * -0.5f);
+                data.rotation += (float)(Math.PI * -0.75f);
             }
 
             // Sheathing
@@ -84,7 +84,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                         data.rotation -= MathHelper.PiOver2 * 2f;
                     }
                     else {
-                        data = data.SetOrigin(0.1f, 0.5f - 0.4f * 2f, p);
+                        data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.5f - 0.4f * 2f, p);
                     }
                     data = DrawHelper.LerpData(data, idleData, t);
                 }

@@ -54,11 +54,11 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer)) {
                 return idleData;
             }
-            data = data.SetOrigin(0f, 1f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.5f - 0.5f * (width / height), 1f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
 
             if (bodyFrame == 0 || (bodyFrame == 10 && p.compositeBackArm.enabled)) {
                 // Standing
-                data.position += new Vector2(8, 22);
+                data.position += new Vector2(10, 22);
                 data.rotation += (float)(Math.PI * -0.675f);
             }
             else if (bodyFrame > 5) {

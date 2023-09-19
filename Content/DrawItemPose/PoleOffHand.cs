@@ -23,19 +23,19 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
-            data = data.SetOrigin(0.1f, 0.9f, p);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p).RotateFaceForward(p, height, width);
 
             if (bodyFrame == 0) { // Standing
-                data.rotation = (float)(Math.PI * -0.25f);
+                data.rotation += (float)(Math.PI * -0.5f);
                 data.position += new Vector2(15f, 18f);
             }
             else if (bodyFrame > 5) { // Walk Cycles
-                data.rotation = (float)(Math.PI * -0.25f);
+                data.rotation += (float)(Math.PI * -0.5f);
                 data.position += new Vector2(13f, 16f);
                 data = data.WithOffHandOffset(p);
             }
             else { // Jumping/Grapple/Pulley/Mount
-                data.rotation = (float)(Math.PI * -0.20f);
+                data.rotation += (float)(Math.PI * -0.450f);
                 data.position += new Vector2(10f, 19f);
             }
             return data;

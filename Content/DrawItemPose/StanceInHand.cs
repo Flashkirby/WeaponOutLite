@@ -43,11 +43,11 @@ namespace WeaponOutLite.Content.DrawItemPose
                 return idleData;
             }
 
-            data = data.SetOrigin(0.05f, 0.5f + 0.35f, p);
+            data = data.SetOrigin(0.05f, 0.5f + 0.4f, p);
 
             if (bodyFrame == 0) { // Standing
                 data.rotation += (float)(Math.PI * 0.5f);
-                data.position += new Vector2(-6f, 8f);
+                data.position += new Vector2(-8f, 8f);
             }
             else if (bodyFrame == 5) { // Jumping
                 data.rotation += (float)(Math.PI * -2.25f);

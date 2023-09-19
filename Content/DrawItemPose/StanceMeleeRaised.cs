@@ -63,7 +63,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             float t = DrawHelper.AnimEaseOutNormal(20, timer);
 
             // Face forward
-            data = data.SetOrigin(0.1f, 0.9f, p);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p);
             if (bodyFrame < 5 || t > 0) {
                 data = data.ApplyFlip(p);
             }

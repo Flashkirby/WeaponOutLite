@@ -17,7 +17,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
-            data = data.SetOrigin(0.1f, 0.9f, p);
+            data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.9f, p);
             var handleOffset = DrawHelper.GetHandleLength(0.1f, 0.1f, width, height);
 
             if (bodyFrame == 0) { // Standing

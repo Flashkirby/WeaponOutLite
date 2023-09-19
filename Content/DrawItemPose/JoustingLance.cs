@@ -47,7 +47,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     (9f));
                 data = data.WithHandOffset(p);
             }
-            else if (bodyFrame == 3 && p.IsMountPoseActive()) { // Mount
+            else if (p.IsMountPoseActive()) { // Mount
                 float speedRotation = 0.25f;
                 if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
                     float maxSpeed = 3f;

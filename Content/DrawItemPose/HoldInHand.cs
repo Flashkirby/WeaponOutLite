@@ -21,7 +21,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
-            data = data.SetOrigin(0.05f, 0.85f, p);
+            data = data.SetOrigin(0.05f, 0.9f, p);
 
             if (bodyFrame == 0) { // Standing
                 data.rotation += (float)(Math.PI * 0.5f);

@@ -51,7 +51,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(-4, 14);
                 data.rotation += (float)(Math.PI * 0.25);
             }
-            else if (bodyFrame > 5) {
+            else if (bodyFrame > 5 ) {
                 // Running
                 data.position += new Vector2(1, 8);
                 data = data.WithHandOffset(p);
