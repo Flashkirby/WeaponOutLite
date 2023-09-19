@@ -12,12 +12,12 @@ Mods: {
 
 			EnableWeaponOutVisuals: {
 				Label: Enable WeaponOut Visuals
-				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody.
+				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody. (Global Setting)
 			}
 
 			EnableForcedWeaponOutVisuals: {
 				Label: Enable Forced Visuals
-				Tooltip: Forces all players to show held items, regardless of clientside settings.
+				Tooltip: Forces all players to show held items, regardless of clientside settings. (Global Setting)
 			}
 
 			EnableWeaponPhysics: {
@@ -27,7 +27,7 @@ Mods: {
 
 			EnableSheathingAnim: {
 				Label: Enable Sheathing Animations
-				Tooltip: Allows some combat poses to play transitional animations out of combat. (Local Only)
+				Tooltip: Allows some poses to smoothly transition to an idle pose. (Local Only)
 			}
 
 			EnableItemScaling: {
@@ -42,7 +42,7 @@ Mods: {
 
 			EnableProjSpears: {
 				Label: Enable Full Spears (Experimental)
-				Tooltip: Use actual spear sizes, rather than shrunken item version. (Local Only)
+				Tooltip: Prioritise spear projectile sprites once they are loaded. (Local Only)
 			}
 
 			EnableMenuDisplay: {
@@ -72,7 +72,7 @@ Mods: {
 
 			ShowHeldItem: {
 				Label: Show Held Item
-				Tooltip: Shows the item you are holding.
+				Tooltip: Shows the item you are holding. Other players can see this.
 			}
 
 			CombatDelayTimerMax: {
@@ -80,12 +80,16 @@ Mods: {
 				Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'
 			}
 
-			CombatStanceAlwaysOn.Label: Combat mode always active
+			CombatStanceAlwaysOn: {
+				Label: Combat pose always active.
+				Tooltip: Prevents combat poses from changing to idle poses.
+			}
+
 			SmallItemPose.Label: Normal Items
 			LargeItemPose.Label: Large Items
 			PotionPose.Label: Potions
 			Preview: Item Preview
-			BowDrawAmmo: Bows & Repeaters: Render currently equipped arrows
+			BowDrawAmmo: Bows & Repeaters: Render currently equipped arrows (Local Only)
 			YoyoHalfScale: Yoyos: Reduce yoyo size
 			LargeMeleePose: Large Melee Weapons
 			RapierPose: Shortswords & Rapiers
@@ -132,7 +136,7 @@ Mods: {
 				Tooltip: The pose the currently held item is using.
 			}
 
-			ModIntegrationHeader: Mod Integrations
+			ModIntegrationHeader: Mod Integrations & Compatibility
 
 			ModIntegrationTerrariaOverhaul: {
 				Label: Terraria Overhaul
@@ -158,7 +162,7 @@ Mods: {
 
 				CombatStanceAlwaysOn: {
 					Label: "{$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Label}"
-					Tooltip: ""
+					Tooltip: "{$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Tooltip}"
 				}
 
 				SmallItemPose: {
