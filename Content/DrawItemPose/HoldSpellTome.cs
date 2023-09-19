@@ -37,6 +37,10 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (bodyFrame == 4) { // Standing
                 data.position += new Vector2(9, 7);
             }
+            else if (bodyFrame == 0) { // Standing (menu)
+                data.position += new Vector2(4, 12);
+                data.rotation += MathHelper.PiOver4 * 5f;
+            }
             else if (bodyFrame == 5) { // Jumping
                 data.position += new Vector2(12, 2);
                 data.rotation -= MathHelper.PiOver4 / 2;
@@ -45,7 +49,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.rotation += MathHelper.PiOver4 * 5f;
                 data.position += new Vector2(
                     (4f),
-                    (12f));
+                    (10f));
                 data = data.WithHandOffset(p);
             }
             else { // Grapple/Pulley/Mount
