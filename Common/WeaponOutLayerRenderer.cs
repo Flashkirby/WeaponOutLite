@@ -142,13 +142,14 @@ namespace WeaponOutLite.Common
 
 			// For bows, potentially draw equipped arrow
 			if (bowDrawAmmo && heldItem.useAmmo == AmmoID.Arrow) {
-				Item ammo = FindAmmo(drawInfo.drawPlayer, heldItem.useAmmo);
-				if (ammo != null) {
+				Item ammo = FindAmmoVanilla(drawInfo.drawPlayer, heldItem.useAmmo);
+				int projectileType = ApplyVanillaAmmoReplacement(heldItem.type, ammo.shoot);
+				if (ammo != null && projectileType > 0) {
 					// create the arrow
-					if (tryCreateArrowDrawData(drawInfo.drawPlayer, ammo.shoot, itemData, out DrawData arrowData)) {
+					if (tryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
 						drawInfo.DrawDataCache.Add(arrowData);
 						// and any glow layer
-						if (tryCreateProjectileGlowLayerDrawData(drawInfo.drawPlayer, ammo, arrowData, out DrawData arrowGlowData)) {
+						if (tryCreateProjectileGlowLayerDrawData(drawInfo.drawPlayer, projectileType, arrowData, out DrawData arrowGlowData)) {
 							drawInfo.DrawDataCache.Add(arrowGlowData);
 						}
 					}
@@ -200,7 +201,13 @@ namespace WeaponOutLite.Common
 			}
 		}
 
-		private static Item FindAmmo(Player player, int useAmmo) {
+		/// <summary>
+		/// Attempt to find ammo slots - using default vanilla style behaviour (not taking into account mods)
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="useAmmo"></param>
+		/// <returns></returns>
+		private static Item FindAmmoVanilla(Player player, int useAmmo) {
 			// from Player.cs PickAmmo
 			// 1. go through ammo slots
 			for (int ammoPouch = 54; ammoPouch < 58; ammoPouch++) {
@@ -218,6 +225,42 @@ namespace WeaponOutLite.Common
 			}
 			return null;
 		}
+
+		/// <summary>
+		/// Swap out projectile types depending on the item. Various bows have custom code that replaces arrows on shoot.
+		/// </summary>
+		/// <param name="itemType"></param>
+		/// <param name="projectileType"></param>
+		/// <returns></returns>
+		private static int ApplyVanillaAmmoReplacement(int itemType, int projectileType)
+        {
+			bool woodenArrow = projectileType == ProjectileID.WoodenArrowFriendly;
+			switch (itemType) {
+				case ItemID.DD2BetsyBow:
+					return ProjectileID.DD2BetsyArrow;
+				case ItemID.BloodRainBow:
+					return ProjectileID.BloodArrow;
+				case ItemID.FairyQueenRangedItem:
+					return woodenArrow ? ProjectileID.FairyQueenRangedItemShot : projectileType;
+				case ItemID.HellwingBow:
+					return woodenArrow ? 0 : projectileType;
+				case ItemID.Marrow:
+					return ProjectileID.BoneArrow;
+				case ItemID.MoltenFury:
+					return woodenArrow ? ProjectileID.FireArrow : projectileType;
+				case ItemID.IceBow:
+					return ProjectileID.FrostArrow;
+				case ItemID.DD2PhoenixBow:
+					return woodenArrow ? ProjectileID.FireArrow : projectileType;
+				case ItemID.PulseBow:
+					return ProjectileID.MartianWalkerLaser; // Not actually the pulse bolt, but it looks close enough
+				case ItemID.ShadowFlameBow:
+					return ProjectileID.ShadowFlameArrow;
+				case ItemID.BeesKnees:
+					return woodenArrow ? ProjectileID.BeeArrow : projectileType;
+			}
+			return projectileType;
+        }
 
 		/// <summary>
 		/// Defines the list of variables used for drawing, and checks against a series of conditions that determine if an item can be drawn.
@@ -297,6 +340,7 @@ namespace WeaponOutLite.Common
 				//get draw location of player
 				int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
 				int drawY = (int)(drawPlayer.MountedCenter.Y - Main.screenPosition.Y + drawPlayer.gfxOffY) + GravityOffset;
+
                 // -3 is to help with centering later (see + 6 from gravity flip)
 
 				// Game menu cannot use the player center, use this position instead.
@@ -434,17 +478,17 @@ namespace WeaponOutLite.Common
 			return false;
 		}
 
-		internal static bool tryCreateProjectileGlowLayerDrawData(Player drawPlayer, Item item, DrawData data, out DrawData glowData) {
+		internal static bool tryCreateProjectileGlowLayerDrawData(Player drawPlayer, int projectileType, DrawData data, out DrawData glowData) {
 			// Get the glowmask from the proejctile
 
 			Projectile p = new Projectile();
-			p.SetDefaults(item.shoot);
+			p.SetDefaults(projectileType);
 
 			if (p.glowMask != -1) {
-				Color glowLighting = new Color(250, 250, 250, item.alpha);
-				glowLighting = drawPlayer.GetImmuneAlpha(item.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
+				Color glowLighting = new Color(250, 250, 250, p.alpha);
+				glowLighting = drawPlayer.GetImmuneAlpha(p.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
 				glowData = new DrawData(
-				   TextureAssets.GlowMask[item.glowMask].Value,
+				   TextureAssets.GlowMask[p.glowMask].Value,
 				   data.position,
 				   data.sourceRect,
 				   glowLighting,
@@ -482,6 +526,7 @@ namespace WeaponOutLite.Common
 					arrowData.effect = SpriteEffects.FlipVertically;
 				}
 			}
+			arrowData.effect = arrowData.effect | SpriteEffects.FlipHorizontally;
 
 			// change texture and recentre
 			arrowData.texture = itemTexture;
@@ -514,6 +559,27 @@ namespace WeaponOutLite.Common
 
             arrowData.rotation += MathHelper.PiOver2 * directionGrav;
 
+			Projectile p = new Projectile();
+			p.SetDefaults(projectileType);
+
+			if (projectileType == ProjectileID.JestersArrow) {
+				arrowData.color = new Color(256, 256, 256, arrowData.color.A);
+			}
+
+			if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
+			if(projectileType == ProjectileID.FairyQueenRangedItemShot) {
+				arrowData.origin = arrowData.texture.Size() / 2;
+				arrowData.rotation -= MathHelper.PiOver2 * directionGrav;
+				p.ai[1] = drawPlayer.miscCounterNormalized * 12f;
+				arrowData.color = p.GetFairyQueenWeaponsColor();
+				arrowData.color = new Color(
+					arrowData.color.R / 4 + 192,
+					arrowData.color.G / 4 + 192,
+					arrowData.color.B / 4 + 192, 0);
+			}
+			if (projectileType == ProjectileID.MartianWalkerLaser) {
+				arrowData.color = new Color(192, 192, 256, 0);
+			}
 
 			return true;
 		}

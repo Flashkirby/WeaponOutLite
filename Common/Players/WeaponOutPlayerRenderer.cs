@@ -226,6 +226,7 @@ namespace WeaponOutLite.Common.Players
 			//no item so nothing to show
 			if (Player.HeldItem == null || Player.HeldItem.type == ItemID.None || Player.HeldItem.holdStyle != 0) return; 
 
+			// TODO: Investigate multipleyer
 			if (CurrentDrawItemPose == null) {
 				throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
             }

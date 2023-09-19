@@ -411,15 +411,16 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool EnableMenuDisplay { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
-		[DefaultValue(false)]
-		public bool EnableMeleeEffects { get; set; }
-
 		[Label("$Mods.WeaponOut.Config.EnableProjSpears.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableProjSpears.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableProjSpears { get; set; }
+
+		[JsonIgnore] // This is not likely to work any time soon.
+		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
+		[DefaultValue(false)]
+		public bool EnableMeleeEffects { get; set; }
 
 		#endregion
 
