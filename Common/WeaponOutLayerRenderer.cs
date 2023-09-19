@@ -565,15 +565,20 @@ namespace WeaponOutLite.Common
 
 			Projectile p = new Projectile();
 			p.SetDefaults(projectileType);
-
-			if (projectileType == ProjectileID.JestersArrow) {
-				arrowData.color = new Color(256, 256, 256, arrowData.color.A);
-			}
-
 			if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
+
+			if (projectileType == ProjectileID.JestersArrow ||
+				projectileType == ProjectileID.HolyArrow ||
+				projectileType == ProjectileID.FireArrow ||
+				projectileType == ProjectileID.FrostburnArrow ||
+				projectileType == ProjectileID.CursedArrow ||
+				projectileType == ProjectileID.IchorArrow ||
+				projectileType == ProjectileID.ShimmerArrow) {
+				arrowData.color = new Color(256, 256, 256, (byte)p.alpha);
+			}
 			if(projectileType == ProjectileID.FairyQueenRangedItemShot) {
 				arrowData.origin = arrowData.texture.Size() / 2;
-				arrowData.rotation -= MathHelper.PiOver2 * directionGrav;
+				arrowData.rotation += MathHelper.PiOver2 * directionGrav;
 				p.ai[1] = drawPlayer.miscCounterNormalized * 12f;
 				arrowData.color = p.GetFairyQueenWeaponsColor();
 				arrowData.color = new Color(
