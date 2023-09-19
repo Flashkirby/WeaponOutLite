@@ -306,7 +306,11 @@ namespace WeaponOutLite.Common
 				if(isSpear) {
 					CreateItemProjectileSpearTexture(heldItem.type, heldItem.shoot);
 					if(ItemProjTextureCache[heldItem.type] != null) {
-						itemTexture = ItemProjTextureCache[heldItem.type];
+						bool isTheTextureActuallyBigger = ItemProjTextureCache[heldItem.type].Width > itemTexture.Width
+							 || ItemProjTextureCache[heldItem.type].Height > itemTexture.Height;
+                        if (isTheTextureActuallyBigger) {
+							itemTexture = ItemProjTextureCache[heldItem.type];
+						}
 					}
 				}
 			}
@@ -593,15 +597,17 @@ namespace WeaponOutLite.Common
 				ItemProjTextureCache.AddRange(new Texture2D[ItemProjTextureCache.Capacity - ItemProjTextureCache.Count]);
             }
 
-            //if (Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; } // DEBUG DO NOT RUN IN PRODUCTION
+			//
+			if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; }
+			//
 
-            if (ItemProjTextureCache[itemType] != null) {
+			if (ItemProjTextureCache[itemType] != null) {
 				return;
 			}
 
 			// Don't actually load this texture until the game has done so - default to the item texture
 			if (Main.IsGraphicsDeviceAvailable && TextureAssets.Projectile[projectileType].IsLoaded) {
-				if (true) {
+				if (WeaponOutLite.DEBUG_EXPERIMENTAL) {
 					string text = $"Generating New {itemType}";
 					if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
 				}

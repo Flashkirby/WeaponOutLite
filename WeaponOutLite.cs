@@ -31,6 +31,7 @@ namespace WeaponOutLite
         // TODO: visual not saved on exiting world (but not game)
         internal const bool DEBUG_MULTIPLAYER = false;
         internal const bool DEBUG_TEST_ITEMS = false;
+        internal const bool DEBUG_EXPERIMENTAL = false;
         internal static string TEXT_DEBUG = null;
 
         private static WeaponOutLite instance;
