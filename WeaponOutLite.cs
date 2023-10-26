@@ -30,7 +30,7 @@ namespace WeaponOutLite
         // TODO: Mirsario — Today at 16:41 I should note that overhaul currently changes the swing animation, and the logistic part of it too.The swing only lasts half of the use time, so check with it.
         // TODO: visual not saved on exiting world (but not game)
         internal const bool DEBUG_MULTIPLAYER = false;
-        internal const bool DEBUG_TEST_ITEMS = false;
+        internal const bool DEBUG_TEST_ITEMS = false; 
         internal const bool DEBUG_EXPERIMENTAL = false;
         internal static string TEXT_DEBUG = null;
 

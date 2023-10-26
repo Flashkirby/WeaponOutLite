@@ -10,10 +10,17 @@ namespace WeaponOutLite.Common.Players
 {
     public class WeaponOutPlayerRenderer : ModPlayer
 	{
-		/// <summary>
-		/// Value for player showing an item held
-		/// </summary>
-		public bool isShowingHeldItem = true;
+		public int id;
+		public int MyStat;
+		public WeaponOutPlayerRenderer()
+        {
+			id = GetHashCode();
+        }
+
+        /// <summary>
+        /// Value for player showing an item held
+        /// </summary>
+        public bool isShowingHeldItem = true;
 
 		public bool showHeldItemThisFrame = true;
 
@@ -56,10 +63,10 @@ namespace WeaponOutLite.Common.Players
 			}
 		}
 
-		/// <summary>
-		/// Final checks for if the held item should be drawn this frame, eg. if attacking
-		/// </summary>
-		public bool DrawHeldItem
+        /// <summary>
+        /// Final checks for if the held item should be drawn this frame, eg. if attacking
+        /// </summary>
+        public bool DrawHeldItem
 		{
 			get {
 				return IsShowingHeldItem && showHeldItemThisFrame &&
@@ -90,8 +97,9 @@ namespace WeaponOutLite.Common.Players
         public override void OnEnterWorld()
         {
 			if (Main.netMode != NetmodeID.SinglePlayer) {
-				// Request players to sync 
-            }
+				// Fixes BUG20231026A
+				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
+			}
         }
 
         public override void ResetEffects() {
@@ -145,8 +153,10 @@ namespace WeaponOutLite.Common.Players
         // Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
         // Server receives toWho=-1, fromWho=0
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
-			// Send a message out to the server if the player just synced
+			// Send a message out to the server when a sync is required, such as a new player joining the server
+			MyStat = Main.rand.Next();
 			if (fromWho == -1) {
+				Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
 				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
 			}
 		}
@@ -224,11 +234,18 @@ namespace WeaponOutLite.Common.Players
         /// </summary>
         private void manageBodyFrame() {
 			//no item so nothing to show
-			if (Player.HeldItem == null || Player.HeldItem.type == ItemID.None || Player.HeldItem.holdStyle != 0) return; 
+			if (Player.HeldItem == null || Player.HeldItem.type == ItemID.None || Player.HeldItem.holdStyle != 0) return;
 
-			// TODO: Investigate multipleyer
+			// BUG20231026A
+			// ReceiveUpdateWeaponVisual is being called when new player B is set on client A, but B's value is null here
+			// modPlayer.CurrentDrawItemPose = DrawStyle[holdStyleID] is being called properly...
+			// But modifications to the modplayer in that method seem to be reverted by the time this method is called (all values reset to null)
+			// tested IsCloneable and overriding Clone doesn't solve this.
+			// 
 			if (CurrentDrawItemPose == null) {
-				throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
+				//throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
+				// Ignore this state. The next time a player changes their held item in MP, it will be re-synced anyway.
+				return;
             }
 
 			// Only if in a rest post

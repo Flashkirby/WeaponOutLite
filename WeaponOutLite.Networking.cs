@@ -65,6 +65,10 @@ namespace WeaponOutLite
             int playerWhoAmI = reader.ReadByte();
             bool isShowingItem= reader.ReadBoolean();
             int holdStyleID = reader.ReadInt32();
+            if (DEBUG_MULTIPLAYER) {
+                string text = $"Mod Packet ReceiveUpdateWeaponVisual: {playerWhoAmI} is show {isShowingItem} | with style  {holdStyleID}";
+                if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
+            }
 
             WeaponOutPlayerRenderer modPlayer = Main.player[playerWhoAmI].GetModPlayer<WeaponOutPlayerRenderer>();
             modPlayer.IsShowingHeldItem = isShowingItem;
