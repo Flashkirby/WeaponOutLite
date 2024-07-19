@@ -83,7 +83,7 @@ namespace WeaponOutLite
             customItemHoldGroups = new HybridDictionary();
             customItemHoldStyles = new HashSet<int>();
 
-            Common.WeaponOutLayerRenderer.ItemProjTextureCache = new List<Microsoft.Xna.Framework.Graphics.Texture2D>();
+            Common.WeaponOutLayerRenderer.Load();
 
             // Moved to UIDIsplay
             //On.Terraria.Main.DrawInventory += OnDrawInventory;
@@ -99,7 +99,7 @@ namespace WeaponOutLite
             customItemHoldGroups = new HybridDictionary();
             customItemHoldStyles = null;
 
-            Common.WeaponOutLayerRenderer.ItemProjTextureCache = null;
+            Common.WeaponOutLayerRenderer.Unload();
 
             // Moved to UIDisplay
             //On.Terraria.Main.DrawInventory -= OnDrawInventory;

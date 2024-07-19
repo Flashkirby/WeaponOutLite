@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,7 +26,12 @@ namespace WeaponOutLite.Common
     public static class WeaponOutLayerRenderer
 	{
 		/// <summary>
-		/// Cache for special proj textures. DO NOT access before calling CreateItemProjectileSpearTexture. Initialised/reset in Mod Load/Unload.
+		/// For logging errors once only per item, rather than spamming the player during a session
+		/// </summary>
+		private static HashSet<int> ItemLogOnceRecorder;
+
+		/// <summary>
+		/// Cache for special proj textures. DO NOT access before calling CreateItemProjectileSpearTexture, which sets the capacity
 		/// </summary>
 		public static List<Texture2D> ItemProjTextureCache { get; set; }
 
@@ -36,18 +42,51 @@ namespace WeaponOutLite.Common
 		/// </summary>
 		const int GravityOffset = -3;
 
+        /// <summary>
+        /// Initialised in main mod file Load().
+        /// </summary>
+        internal static void Load()
+		{
+            ItemLogOnceRecorder = new HashSet<int>();
+            ItemProjTextureCache = new List<Texture2D>();
+        }
+
+        /// <summary>
+        /// Initialised in main mod file Unload.
+        /// </summary>
+        internal static void Unload()
+        {
+			ItemLogOnceRecorder = null;
+            ItemProjTextureCache = null;
+        }
+
 		/// <summary>
 		/// Wrapper for adding the item and glow draw data to the draw set
 		/// </summary>
 		/// <param name="drawInfo">Draw set with item draw data</param>
-		internal static void DrawPlayerItem(ref PlayerDrawSet drawInfo) {
+		internal static void DrawPlayerItem(ref PlayerDrawSet drawInfo)
+		{
 			// Create basic draw data, centred on the player
 			if (tryCreateBaseDrawData(drawInfo, out DrawData itemData)) {
 
 				var heldItem = drawInfo.drawPlayer.inventory[drawInfo.drawPlayer.selectedItem];
 				var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
 				var bowDrawAmmo = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
-				AddItemToDrawInfoCache(ref drawInfo, itemData, heldItem, modPlayer, bowDrawAmmo);
+
+				try {
+					AddItemToDrawInfoCache(ref drawInfo, itemData, heldItem, modPlayer, bowDrawAmmo);
+				}
+				catch (Exception ex) {
+					int logType = -1;
+					if (drawInfo.heldItem != null) {
+						logType = drawInfo.heldItem.type;
+					}
+					if (!ItemLogOnceRecorder.Contains(logType)) {
+						ItemLogOnceRecorder.Add(logType);
+						WeaponOutLite.GetMod().Logger.Error($"WeaponOut: Exception in renderer {ex}");
+						Main.NewText("WeaponOutLite: Exception in render for this item. Error has been logged.");
+					}
+				}
 			}
 		}
 
@@ -142,9 +181,9 @@ namespace WeaponOutLite.Common
 
 			// For bows, potentially draw equipped arrow
 			if (bowDrawAmmo && heldItem.useAmmo == AmmoID.Arrow) {
-				Item ammo = FindAmmoVanilla(drawInfo.drawPlayer, heldItem.useAmmo);
-				int projectileType = ApplyVanillaAmmoReplacement(heldItem.type, ammo.shoot);
-				if (ammo != null && projectileType > 0) {
+				Item ammo = FindAmmoVanillaOrNull(drawInfo.drawPlayer, heldItem.useAmmo);
+				int projectileType = ApplyVanillaAmmoReplacement(heldItem.type, ammo?.shoot ?? 0);
+                if (ammo != null && projectileType > 0) {
 					// create the arrow
 					if (tryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
 						drawInfo.DrawDataCache.Add(arrowData);
@@ -207,7 +246,7 @@ namespace WeaponOutLite.Common
 		/// <param name="player"></param>
 		/// <param name="useAmmo"></param>
 		/// <returns></returns>
-		private static Item FindAmmoVanilla(Player player, int useAmmo) {
+		private static Item? FindAmmoVanillaOrNull(Player player, int useAmmo) {
 			// from Player.cs PickAmmo
 			// 1. go through ammo slots
 			for (int ammoPouch = 54; ammoPouch < 58; ammoPouch++) {
