@@ -136,7 +136,11 @@
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Combat_Hold = DrawItemPoseID.StanceInHand,
+            Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
+            Combat_Raised = DrawItemPoseID.StanceMeleeRaised,
+            Combat_Trail = DrawItemPoseID.StanceMeleeTrail,
         }
 
         public enum WhipPoseID
@@ -244,6 +248,7 @@
             Combat_Pole_Ready = DrawItemPoseID.StancePoleReady,
             Combat_Pole_Upright = DrawItemPoseID.StancePoleUpright,
             Combat_Pole_Shoulder = DrawItemPoseID.StancePoleShoulder,
+            Combat_Pole_Two_Hand = DrawItemPoseID.StancePoleTwoHand,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -373,6 +378,7 @@
             Combat_Pole_Ready = DrawItemPoseID.StancePoleReady,
             Combat_Pole_Upright = DrawItemPoseID.StancePoleUpright,
             Combat_Pole_Shoulder = DrawItemPoseID.StancePoleShoulder,
+            Combat_Pole_Two_Hand = DrawItemPoseID.StancePoleTwoHand,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,

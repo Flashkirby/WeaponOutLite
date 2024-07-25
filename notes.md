@@ -5,8 +5,6 @@ See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
 
 Playtest Raised Suggestions:
 
-- add combat hold to thrown weapons
-- spear hold two handed from middle
 
 Known Bugs:
 

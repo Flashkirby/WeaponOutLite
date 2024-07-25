@@ -80,6 +80,7 @@ namespace WeaponOutLite.ID
             StancePoleReady = DrawItemPoseID.StancePoleReady,
             StancePoleShoulder = DrawItemPoseID.StancePoleShoulder,
             StancePoleUpright = DrawItemPoseID.StancePoleUpright,
+            StancePoleTwoHand = DrawItemPoseID.StancePoleTwoHand,
             JoustingLance = DrawItemPoseID.JoustingLance,
             BackFlail = DrawItemPoseID.BackFlail,
             BackFlailShoulder = DrawItemPoseID.BackFlailShoulder,
@@ -146,6 +147,7 @@ namespace WeaponOutLite.ID
         public const int StancePoleReady            = 13010;
         public const int StancePoleShoulder         = 13020;
         public const int StancePoleUpright          = 13030;
+        public const int StancePoleTwoHand          = 13040;
         public const int JoustingLance              = 13101;
 
         public const int BackFlail                  = 14000;

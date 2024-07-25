@@ -726,6 +726,7 @@ Mods: {
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
+				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
 			}
 
 			YoyoPoseID: {
@@ -795,6 +796,10 @@ Mods: {
 				Levitate_Aimed.Label: Levitate Aimed
 				Floating_Back.Label: Floating Back
 				Combat_Upright.Label: Combat Upright
+				Combat_Hold.Label: Combat Hold
+				Combat_Ready.Label: Combat Ready
+				Combat_Raised.Label: Combat Raised
+				Combat_Trail.Label: Combat Trail
 			}
 
 			PowerToolPoseID: {
@@ -912,6 +917,7 @@ Mods: {
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
+				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
 			}
 
 			MagicBookPoseID: {
@@ -1192,6 +1198,7 @@ Mods: {
 				FloatingOrbitAntiClockwiseFast.Label: Floating Orbit Anti Clockwise Fast
 				FloatingOrbitClockwiseFast.Label: Floating Orbit Clockwise Fast
 				HoldSpellTome.Label: Hold Spell Tome
+				StancePoleTwoHand.Label: Stance Pole Two Hand
 			}
 
 			WeaponOutServerConfig: {
