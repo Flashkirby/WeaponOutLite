@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -122,11 +123,25 @@ namespace WeaponOutLite.Common.Players
 			}
 		}
 
-		/// <summary>
-		/// This calls a little bit earlier than FrameEffects, allowing it to trigger before some accessory visuals are updated. 
-		/// This primarily affects vanity shields and back arm visuals (but just after actual shields unfortunately)
-		/// </summary>
-        public override void UpdateVisibleAccessories()
+        public override void PostUpdate()
+        {
+            // This is for displaying items in-game
+            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
+
+                manageCombatTimer();
+
+                if (DrawHeldItem && !Main.dedServ) {
+
+                    if (Player == Main.LocalPlayer) {
+                        manageHoldStyle();
+                    }
+
+                    manageBodyFrame();
+                }
+            }
+        }
+
+        public override void FrameEffects()
         {
 			if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
 				// This is for displaying items in the menu. Pull this from the main menu once loaded
@@ -141,21 +156,6 @@ namespace WeaponOutLite.Common.Players
 			}
 			else {
 				gameMenuItem = null;
-
-				// This is for displaying items in-game
-                if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
-
-                    manageCombatTimer();
-
-                    if (DrawHeldItem && !Main.dedServ) {
-
-                        if (Player == Main.LocalPlayer) {
-                            manageHoldStyle();
-                        }
-
-                        manageBodyFrame();
-                    }
-                }
             }
         }
 
