@@ -1,14 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using Terraria.ModLoader;
 using WeaponOutLite.Common.Configs;
-using WeaponOutLite.Common.GlobalDrawItemPose;
 using WeaponOutLite.Common.Players;
 using WeaponOutLite.ID;
 
@@ -63,9 +55,6 @@ namespace WeaponOutLite.Common
         protected override void Draw(ref PlayerDrawSet drawInfo) {
             // If not enabled, stop
             if (!ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) return;
-
-            // Don't draw in when rendering armour after-images
-            if (drawInfo.shadow != 0f) return;
 
             WeaponOutLayerRenderer.DrawPlayerItem(ref drawInfo);
         }

@@ -412,7 +412,7 @@ namespace WeaponOutLite.Common
 					drawY += (int)(seatDownOffset.Y * 2 + GravityOffset);
 
 					//WeaponOutLite.TEXT_DEBUG += $"{seatDownOffset}";
-				}else if(drawPlayer.sleeping.isSleeping && PlayerSleepingHelper.GetSleepingTargetInfo(playerTile.X, playerTile.Y, out int targetSleepDirection, out Vector2 anchorPosition, out Vector2 visualoffset)) {
+				} else if (drawPlayer.sleeping.isSleeping && PlayerSleepingHelper.GetSleepingTargetInfo(playerTile.X, playerTile.Y, out int targetSleepDirection, out Vector2 anchorPosition, out Vector2 visualoffset)) {
 					drawX += (int)(visualoffset.X * targetSleepDirection);
 					drawY += (int)(visualoffset.Y * 2 + GravityOffset);
 					//WeaponOutLite.TEXT_DEBUG += visualoffset;
@@ -439,10 +439,18 @@ namespace WeaponOutLite.Common
                     spriteEffects = SpriteEffects.FlipHorizontally | spriteEffects;
                 }
 
-				// Create a base draw data from the values built above
-				data = new DrawData(
+				// apply shadow offset if present
+				Vector2 shadowOffset = new Vector2();
+                if (drawInfo.shadow > 0) {
+					shadowOffset = drawInfo.Center - drawInfo.drawPlayer.MountedCenter
+						+ (drawInfo.drawPlayer.Center - drawInfo.drawPlayer.MountedCenter);
+                    lighting *= 1f - drawInfo.shadow;
+                }
+
+                // Create a base draw data from the values built above
+                data = new DrawData(
 						itemTexture,
-						new Vector2(drawX, drawY),
+						new Vector2(drawX, drawY) + shadowOffset,
 						sourceRect,
 						lighting,
 						0f,
