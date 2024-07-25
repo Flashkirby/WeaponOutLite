@@ -20,7 +20,7 @@ namespace WeaponOutLite.Content.DrawItemPose
         private bool CanUseBasePose(Player p, int timer) => timer == 0 || p.grapCount > 0 || p.pulley;
 
         public override short DrawDepth(Player p, Item i, int timer) {
-            if (CanUseBasePose(p, timer) || p.IsMountPoseActive() || DrawHelper.AnimLinearNormal(30, timer) > 0.2f) {
+            if (CanUseBasePose(p, timer) || p.IsMountPoseActive() || DrawHelper.AnimLinearNormal(45, timer) > 0.2f) {
                 return base.DrawDepth(p, i, timer);
             }
             return DrawDepthID.Hand;
@@ -31,13 +31,13 @@ namespace WeaponOutLite.Content.DrawItemPose
                 return bodyFrame;
             }
 
-            float t = DrawHelper.AnimLinearNormal(30, timer);
+            float t = DrawHelper.AnimLinearNormal(45, timer);
             float sheatheRotation = 0f;
             if (t > 0) {
                 sheatheRotation = DrawHelper.AnimArmRaiseLower(t) * 1f;
             }
 
-            if (bodyFrame == 0 && t < 0.4f) {
+            if (bodyFrame == 0) {
                 // standing
                 if(p.legFrame.Y == 0) p.legFrame.Y = 9 * p.legFrame.Height;
 
@@ -90,7 +90,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 return idleData;
             }
 
-            float t = DrawHelper.AnimOverEaseNormal(30, timer);
+            float t = DrawHelper.AnimOverEaseNormal(45, timer);
             data = data.SetOrigin(0.1f, 0.9f, p).RotateFaceForward(p, height, width);
             data.rotation -= MathHelper.PiOver4;
 
@@ -99,12 +99,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(6, 10);
                 data.rotation += (float)(Math.PI * 1.15f);
             }
-            else if (bodyFrame >= 5) {
+            else if (bodyFrame >= 5 || p.IsMountPoseActive()) {
                 if (p.velocity.Y == 0) {
                     float length = new Vector2(width, height).Length();
 
                     // Get a point somewhere around the end of the weapon
-                    Vector2 weaponPoint = p.Center + new Vector2(-p.width / 2 - length * 0.8f, p.height / 2) * p.Directions;
+                    Vector2 weaponPoint = p.MountedCenter + new Vector2(-p.width / 2 - length * 0.8f, p.height / 2) * p.Directions;
                     //var d = Dust.NewDustDirect(weaponPoint + new Vector2(-2, -4), 0, 0, DustID.MinecartSpark, p.velocity.X, p.velocity.Y);
                     //d.noLight = true;
 
@@ -147,7 +147,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     }
                     float lengthScale = Math.Max((length - 20f) / 5f, 1);
 
-                    if (Main.rand.Next(64 * 2 / (int)Math.Max(lengthScale * Math.Abs(p.velocity.X), 4)) == 0) {
+                    if (timer > 30 && Main.rand.Next(64 * 2 / (int)Math.Max(lengthScale * Math.Abs(p.velocity.X), 4)) == 0) {
                         if (tile.HasUnactuatedTile && Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType]) {
                             WorldGen.KillTile_MakeTileDust(tilePos.X, tilePos.Y, tile);
                         }
@@ -179,6 +179,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             // Sheathing
             if (t > 0f) {
                 data.position += new Vector2(26f, -18f) * t;
+                data.position += new Vector2(0, (width + height) * -0.5f * t);
 
                 // flip item at the halfway point
                 if (t > 1f / 2f) {

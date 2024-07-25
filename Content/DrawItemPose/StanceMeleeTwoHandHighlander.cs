@@ -94,8 +94,9 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(11, 1);
 
                 data.rotation += (float)(Math.PI * -0.23f);
+
             }
-            else if (bodyFrame >= 5) {
+            else if (bodyFrame >= 5 || p.IsMountPoseActive()) {
                 float physicsRotation = 0f;
                 var motionNormal = 0f;
                 if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {

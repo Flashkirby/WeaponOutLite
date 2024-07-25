@@ -79,6 +79,9 @@ namespace WeaponOutLite.Content.DrawItemPose
                     data.position += new Vector2(2, -8);
                 }
             }
+            else if (p.IsMountPoseActive()) {
+                data.position += new Vector2(10, 4);
+            }
 
             // Sheathing
             float t = DrawHelper.AnimOverEaseOutNormal(30, timer);

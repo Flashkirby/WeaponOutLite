@@ -2,6 +2,8 @@
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
+using WeaponOutLite.Common.Configs;
 using WeaponOutLite.Common.GlobalDrawItemPose;
 using WeaponOutLite.ID;
 
@@ -69,6 +71,20 @@ namespace WeaponOutLite.Content.DrawItemPose
                     -2);
                 data = data.WithHandOffset(p);
                 data.rotation += (float)(Math.PI * -0.75f);
+            }
+            else if (p.IsMountPoseActive()) { // Mount
+                data = data.SetOrigin(0.25f, 0.75f, p);
+                float speedRotation = 0.25f;
+                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    float maxSpeed = 3f;
+                    speedRotation = Math.Clamp(p.velocity.X * p.direction, 0f, maxSpeed);
+                    speedRotation = speedRotation / maxSpeed * 0.25f;
+                }
+                // 0.25f to 0.00f
+                data.rotation -= (float)(Math.PI * (0.5f - speedRotation));
+                data.position += new Vector2(
+                    (10f),
+                    (6f));
             }
 
             // Sheathing

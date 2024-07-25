@@ -133,7 +133,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
                 data.rotation += (float)(Math.PI * 0.5f);
             }
-            else if (bodyFrame == 0) {
+            else if (bodyFrame == 0 || p.IsMountPoseActive()) {
                 // idle
                 data.position += new Vector2(4, 14);
 

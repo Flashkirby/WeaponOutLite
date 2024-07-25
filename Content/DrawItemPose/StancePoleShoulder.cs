@@ -17,7 +17,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.5f) {
                 return base.DrawDepth(p, i, timer);
             }
-            return p.compositeFrontArm.enabled ? DrawDepthID.Hand : DrawDepthID.Front;
+            return p.compositeFrontArm.enabled || p.IsMountPoseActive() ? DrawDepthID.Hand : DrawDepthID.Front;
         }
 
         public override int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer) {
@@ -71,6 +71,10 @@ namespace WeaponOutLite.Content.DrawItemPose
                 // Jumping
                 data.position += new Vector2(18, 8);
                 data.rotation += (float)(Math.PI * -0.825f);
+            }
+            else if (p.IsMountPoseActive()) {
+                data.position += new Vector2(14, 22);
+                data.rotation += (float)(Math.PI * -0.675f);
             }
 
             // Sheathing
