@@ -17,8 +17,13 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual short DrawDepth(Player p, Item i, int timer) => DrawDepthID.Back;
 
-        public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer) {
-            if(bodyFrame == 0) {
+        public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer)
+        {
+            // TODO: Although this is called in PostUpdate, worth checking if this can potentially cause gameplay issues
+            p.shield = -1; // Hide shield
+            p.cShield = -1; // Hide cosmetic shield
+
+            if (bodyFrame == 0) {
                 Player.CompositeArmStretchAmount backArm = Player.CompositeArmStretchAmount.Full;
                 p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * -0.25f * p.direction);
             }

@@ -19,6 +19,12 @@ namespace WeaponOutLite.Content.DrawItemPose
         public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer)
         {
             if (bodyFrame == 0) {
+                /** For this particular use case, we won't be hiding the shield as this is the default pose for vanity items
+                 *  ie. if the player wants to hide the shield while editing vanity they can do it themselves
+                 **/
+                //p.shield = -1; // Hide shield
+                //p.cShield = -1; // Hide cosmetic shield
+
                 Player.CompositeArmStretchAmount backArm = Player.CompositeArmStretchAmount.Full;
                 p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * -0.25f * p.direction);
             }
