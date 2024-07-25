@@ -16,5 +16,12 @@ Known Bugs:
 - melee effect experimental feature: phase blades and phase sabers have flickering lights
 
 Compatibility List:
-Overhaul - Toggle, disables hold pose for guns.
-Melee Effects+ - to do https://steamcommunity.com/sharedfiles/filedetails/?id=2966457992
+
++ Improved Movement Visuals, No Known Conflicts
++ Vibrant Reverie, Rifle default animations
+= Overhaul, Toggle, disables hold pose for guns.
+= Melee Effects+, Toggle, fix for swords being reclassified as shortswords/rapiers due to noUseGraphic being set.
+= ArmamentDisplayLite, Auto disable this mod for weapons
+- Overhaul Gun Animations, Overrides ranged weapons, unless "Vanilla aim animation" is enabled in serverside settings. Also makes ranged weapons autoReuse (separate from Autofire option).
+- ArmamentDisplay, weapon display switch conflict
+- CoolerItemVisualEffect, weapon display switch conflict

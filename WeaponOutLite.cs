@@ -36,7 +36,12 @@ namespace WeaponOutLite
 
         private static WeaponOutLite instance;
 
-        public bool TerrariaOverhaulModLoaded = false;
+        // Mod Integrations ♥
+        public static bool TerrariaOverhaulModLoaded { get { return ModLoader.HasMod("TerrariaOverhaul"); } }
+        public static bool ItemCustomizerModLoaded { get { return false; } }
+        public static bool W1KModReduxModLoaded { get { return ModLoader.HasMod("W1KModRedux"); } }
+        public static bool MeleeEffectsPlusModLoaded { get { return ModLoader.HasMod("MeleeWeaponEffects") || ModLoader.HasMod("MeleeEffects"); } }
+        public static bool ArmamentDisplayLiteModLoaded { get { return ModLoader.HasMod("WeaponDisplayLite"); } }
 
         /// <summary>
         /// Hook for mods to handle predraw for the default style. Return false to override the normal draw code (replace with custom style)

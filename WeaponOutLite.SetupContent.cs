@@ -17,9 +17,6 @@ namespace WeaponOutLite
     partial class WeaponOutLite : Mod
     {
         public override void PostSetupContent() {
-
-            TerrariaOverhaulModLoaded = ModLoader.HasMod("TerrariaOverhaul");
-
             // Get the WeaponOutLite mod
             Mod weaponOutLite = ModLoader.GetMod("WeaponOutLite");
 

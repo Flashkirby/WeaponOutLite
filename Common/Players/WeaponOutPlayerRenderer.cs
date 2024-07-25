@@ -106,7 +106,7 @@ namespace WeaponOutLite.Common.Players
 			showHeldItemThisFrame = true;
 
 			// Terraria Overhaul Integration
-			if (WeaponOutLite.GetMod().TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul) {
+			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul) {
 				// Basic implementation of https://github.com/Mirsario/TerrariaOverhaul/blob/668f5ed01b7af8ba4530645b605e5ee11030ba56/Common/PlayerEffects/PlayerHoldOutAnimation.cs?ts=4#L99
 				// to prevent visual conflicts
 				var item = Player.HeldItem;

@@ -332,6 +332,11 @@ namespace WeaponOutLite.Common
 			// no item so nothing to show, and items with predefined hold styles already have draw code/layers
 			if (heldItem == null || heldItem.type == ItemID.None || heldItem.holdStyle != 0) return false;
 
+			// Armament Display Lite, which handles weapons specifically
+			if (heldItem.damage > 0 && WeaponOutLite.ArmamentDisplayLiteModLoaded) {
+				return false;
+			}
+
 			itemTexture = TextureAssets.Item[heldItem.type].Value;
 
 			// Experimental projectile spear code
@@ -446,13 +451,14 @@ namespace WeaponOutLite.Common
 						spriteEffects,
 						0);
 
-				// Item customiser integration (for whatever the 1.4 equivalent is)
-				// https://github.com/gamrguy/ItemCustomizer
-				//if (itemCustomizer != null) {
-				//	data.shader = ItemCustomizerGetShader(itemCustomizer, heldItem);
-				//}
+                // Item customiser integration (for whatever the 1.4 equivalent is)
+				// As of 25/07/2024 it doesn't look like a mod like this is on the workshop yet)
+                // https://github.com/gamrguy/ItemCustomizer
+                //if (ItemCustomizerModLoaded) {
+                //	data.shader = ItemCustomizerGetShader(itemCustomizer, heldItem);
+                //}
 
-				return true;
+                return true;
 			}
 			data = default;
 			return false;

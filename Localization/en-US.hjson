@@ -85,31 +85,32 @@ Mods: {
 				Tooltip: Prevents combat poses from changing to idle poses.
 			}
 
-			SmallItemPose.Label: Normal Items
-			LargeItemPose.Label: Large Items
-			PotionPose.Label: Potions
 			Preview: Item Preview
-			BowDrawAmmo: Bows & Repeaters: Render currently equipped arrows (Local Only)
-			YoyoHalfScale: Yoyos: Reduce yoyo size
-			LargeMeleePose: Large Melee Weapons
-			RapierPose: Shortswords & Rapiers
-			SpearPose: Spears
-			YoyoPose: Yoyos
-			FlailPose: Flails
-			WhipPose: Whips
-			ThrownPose: Throwing Weapons
-			ThrownThinPose: Throwing Knives
-			PowerToolPose: Power Tools
-			BowPose: Bows
-			RepeaterPose: Crossbows & Repeaters
-			PistolPose: Handguns
-			GunPose: Automatic Guns
-			GunManualPose: Semi-automatic Guns
-			ShotgunPose: Shotguns
-			LauncherPose: Rocket Launchers
-			StaffPose: Magic Staves
-			MagicBookPose: Spell Tomes
-			MagicItemPose: Magical Foci
+			SmallItemPose.Label: "[i:2]Normal Items"
+			LargeItemPose.Label: "[i:33]Large Items"
+			PotionPose.Label: "[i:126]Potions"
+			SmallMeleePose: "[i:3508]Melee Weapons"
+			LargeMeleePose: "[i:190]Large Melee Weapons"
+			RapierPose: "[i:3507]Shortswords & Rapiers"
+			SpearPose: "[i:280]Spears"
+			YoyoPose: "[i:3278]Yoyos"
+			YoyoHalfScale: "[i:3278]Yoyos: Reduce yoyo size"
+			FlailPose: "[i:5011]Flails"
+			WhipPose: "[i:4672]Whips"
+			ThrownPose: "[i:42]Throwing Weapons"
+			ThrownThinPose: "[i:279] Throwing Knives"
+			PowerToolPose: "[i:579] Power Tools"
+			BowPose: "[i:39] Bows"
+			BowDrawAmmo: "[i:39]Bows & [i:435]Repeaters: Render currently equipped arrows (Local Only)"
+			RepeaterPose: "[i:435]Crossbows & Repeaters"
+			PistolPose: "[i:95]Handguns"
+			GunPose: "[i:98] Automatic Guns"
+			GunManualPose: "[i:96]Semi-automatic Guns"
+			ShotgunPose: "[i:964]Shotguns"
+			LauncherPose: "[i:759]Launchers"
+			StaffPose: "[i:739]Magic Staves"
+			MagicBookPose: "[i:165]Spell Tomes"
+			MagicItemPose: "[i:4270]Magical Foci"
 			GiantItemPose: Giant Items
 			GiantWeaponPose: Giant Melee Weapons
 			GiantBowPose: Giant Bows
@@ -139,8 +140,38 @@ Mods: {
 			ModIntegrationHeader: Mod Integrations & Compatibility
 
 			ModIntegrationTerrariaOverhaul: {
-				Label: Terraria Overhaul
+				Label: "[i:509] Toggle: Terraria Overhaul"
 				Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons
+			}
+
+			ModIntegrationMeleeEffectsPlus: {
+				Label: "[i:509] Toggle: Melee Effects+"
+				Tooltip: Applies a fix to attempt to help identify different types of swords.
+			}
+
+			ModIntegrationVibrantReverie: {
+				Label: "[i:1344] Automatic: Vibrant Reverie"
+				Tooltip: Default preferences for certain items. Thanks W1K [i:58]!
+			}
+
+			ModIntegrationOverhaulGunAnimations: {
+				Label: "[i:2701] Manual: Overhaul Gun Animations"
+				Tooltip: Enable Overhaul Gun Animations Setting: Vanilla aim animation to remove rendering conflicts.
+			}
+
+			ModIntegrationArmamentDisplay: {
+				Label: "[i:2701] Manual: ArmamentDisplay"
+				Tooltip: Disable ArmamentDisplay Visual Effect Setting: Weapon display switch to remove rendering conflicts.
+			}
+
+			ModIntegrationArmamentDisplayLite: {
+				Label: "[i:1344] Automatic: ArmamentDisplayLite"
+				Tooltip: Disables this mod's idle poses for weapons. I can only assume this is the reason why both of these mods are installed.
+			}
+
+			ModIntegrationCoolerItemVisualEffect: {
+				Label: "[i:2701] Manual: CoolerItemVisualEffect"
+				Tooltip: Disable CoolerItemVisualEffect Advanced Setting: Other Settings: Weapon display switch to remove rendering conflicts.
 			}
 		}
 	}
@@ -196,7 +227,7 @@ Mods: {
 				}
 
 				SmallMeleePose: {
-					Label: Melee Weapons
+					Label: "{$Mods.WeaponOut.Config.SmallMeleePose}"
 					Tooltip: ""
 				}
 
@@ -510,14 +541,34 @@ Mods: {
 					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip}"
 				}
 
-				ExampleInt: {
-					Label: Example Int
-					Tooltip: ""
+				ModIntegrationOverhaulGunAnimations: {
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Tooltip}"
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Label}"
 				}
 
-				ExampleIntThatWishesToBeSeen: {
-					Label: Example Int BUT REAL
-					Tooltip: ""
+				ModIntegrationVibrantReverie: {
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Tooltip}"
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Label}"
+				}
+
+				ModIntegrationMeleeEffectsPlus: {
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Tooltip}"
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Label}"
+				}
+
+				ModIntegrationArmamentDisplay: {
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Tooltip}"
+				}
+
+				ModIntegrationArmamentDisplayLite: {
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Tooltip}"
+				}
+
+				ModIntegrationCoolerItemVisualEffect: {
+					Label: "{$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Tooltip}"
 				}
 			}
 

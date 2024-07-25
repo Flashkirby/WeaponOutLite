@@ -23,7 +23,7 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool ShowHeldItem { get; set; } // This is controlled by WeaponOutPlayerRenderer.cs, but the option is here for people who historically may have issues with that button for whatever reason. See OnChanged for link to class.
 
-		[Label("$Mods.WeaponOut.Config.CombatDelayTimerMax.Label")]
+        [Label("$Mods.WeaponOut.Config.CombatDelayTimerMax.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.CombatDelayTimerMax.Tooltip")]
 		[Increment(0.5f)]
 		[Range(0, 10f)]
@@ -55,7 +55,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLargeItem))]
 		public int LargeItemPosePV => (int)LargeItemPose;
 
-		[Label("$Mods.WeaponOut.Config.PotionPose.Label")]
+        [Label("$Mods.WeaponOut.Config.PotionPose.Label")]
 		[DrawTicks]
 		[DefaultValue(PoseStyleID.PotionPoseID.HoldForward)]
 		public PoseStyleID.PotionPoseID PotionPose { get; set; }
@@ -431,12 +431,41 @@ namespace WeaponOutLite.Common.Configs
 		[Label("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip")]
 		[DefaultValue(true)]
-
         public bool ModIntegrationTerrariaOverhaul { get; set; }
 
-		#endregion
+        [Label("$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Tooltip")]
+        [DefaultValue(true)]
+        public bool ModIntegrationMeleeEffectsPlus { get; set; }
 
-		public override void OnChanged() {
+        [Label("$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Tooltip")]
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationOverhaulGunAnimations { get { return false; } }
+
+        [Label("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Tooltip")]
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationArmamentDisplay { get { return false; } }
+
+        [Label("$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Tooltip")]
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationCoolerItemVisualEffect { get { return false; } }
+
+        [Label("$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Label")]
+		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Tooltip")]
+		[JsonIgnore][ShowDespiteJsonIgnore]
+		public bool ModIntegrationVibrantReverie { get { return WeaponOutLite.W1KModReduxModLoaded; } }
+
+        [Label("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Tooltip")]
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationArmamentDisplayLite { get { return WeaponOutLite.ArmamentDisplayLiteModLoaded; } }
+
+        #endregion
+
+        public override void OnChanged() {
 			// In the main menu, the local player is a default object with a blank name which cannot be made in-game
 			if (Main.LocalPlayer.name == "") return;
 

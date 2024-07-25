@@ -1,18 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using Terraria;
-using Terraria.ID;
-using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader.Config;
-using Terraria.ModLoader.Config.UI;
 using WeaponOutLite.ID;
 using WeaponOutLite.Common.GlobalDrawItemPose;
+using Terraria.ModLoader;
 
 namespace WeaponOutLite.Common.Configs
 {
@@ -23,7 +19,8 @@ namespace WeaponOutLite.Common.Configs
 
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
-        [JsonIgnore][ShowDespiteJsonIgnore]
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
         [Label("$Mods.WeaponOut.Config.CurrentPoseGroup.Label")]
         [Tooltip("$Mods.WeaponOut.Config.CurrentPoseGroup.Tooltip")]
         [DrawTicks]
@@ -53,7 +50,8 @@ namespace WeaponOutLite.Common.Configs
             }
         }
 
-        [JsonIgnore][ShowDespiteJsonIgnore]
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
         [Label("$Mods.WeaponOut.Config.Preview")]
         [CustomModConfigItem(typeof(PreviewHeldItem))]
         public int CurrentItemPosePV => (int)CurrentDrawItemPose;
@@ -81,22 +79,26 @@ namespace WeaponOutLite.Common.Configs
         /// </summary>
         /// <param name="itemType">item.type</param>
         /// <returns>StyelOverrideData or DEATH (null)</returns>
-        public ItemDrawOverrideData FindStyleOverride(int itemType) {
+        public ItemDrawOverrideData FindStyleOverride(int itemType)
+        {
             return styleOverrideItemCache[itemType] as ItemDrawOverrideData;
         }
 
-        public override void OnLoaded() {
+        public override void OnLoaded()
+        {
             styleOverrideItemCache = new HybridDictionary();
         }
 
-        public override void OnChanged() {
+        public override void OnChanged()
+        {
             if (styleOverrideList == null) { //restore defaults 
                 styleOverrideList = new List<ItemDrawOverrideData>();
                 styleOverrideItemCache = new HybridDictionary();
             }
         }
 
-        private List<ItemDrawOverrideData> CleanStyleOverrideListAndCache(List<ItemDrawOverrideData> list) {
+        private List<ItemDrawOverrideData> CleanStyleOverrideListAndCache(List<ItemDrawOverrideData> list)
+        {
             // If the cache is not ready yet, don't clean
             if (styleOverrideItemCache == null || list == null) return list;
 
@@ -104,7 +106,7 @@ namespace WeaponOutLite.Common.Configs
             List<ItemDrawOverrideData> cleanDataList = new List<ItemDrawOverrideData>();
 
             foreach (var data in list) {
-                if(data == null || data.Item == null) { continue; }
+                if (data == null || data.Item == null) { continue; }
 
                 try {
                     cleanDataList.Add(data);
@@ -129,7 +131,8 @@ namespace WeaponOutLite.Common.Configs
             return cleanDataList;
         }
 
-        public WeaponOutClientHoldOverride() {
+        public WeaponOutClientHoldOverride()
+        {
             // Set the default style datas
             styleOverrideList = new List<ItemDrawOverrideData>();
 
@@ -156,6 +159,24 @@ namespace WeaponOutLite.Common.Configs
                 ForcePoseGroup = PoseStyleID.PoseGroup.Spear,
                 ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
             });
+
+            // Custom integration defaults
+            if (WeaponOutLite.W1KModReduxModLoaded) {
+                string vibrantReverie = "W1KModRedux";
+
+                // We bolt actioning these rifles
+                styleOverrideList.Add(new ItemDrawOverrideData() {
+                    Item = new ItemDefinition(vibrantReverie, "HuntingRifle"),
+                    ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
+                    ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
+                });
+
+                styleOverrideList.Add(new ItemDrawOverrideData() {
+                    Item = new ItemDefinition(vibrantReverie, "MouserMagnum"),
+                    ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
+                    ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
+                });
+            }
         }
     }
 

@@ -244,7 +244,17 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 if (item.noUseGraphic) {
                     // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas, but modded weapons may also use this.
                     if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier) {
-                        return PoseGroup.Rapier;
+                        // Skip attempt to classify here if the melee effects mod integration is active
+                        // Since it sets all melee swords to be this type, I would rather use normal poses
+                        if (item.useStyle == ItemUseStyleID.Rapier && 
+                            WeaponOutLite.MeleeEffectsPlusModLoaded && 
+                            ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus) {
+                            
+                        }
+                        else {
+                            return PoseGroup.Rapier;
+                        }
+
                     }
 
                     // Various shoot items can be categorised into melee weapons, unique (large) guns, and magic 
