@@ -123,6 +123,13 @@ namespace WeaponOutLite
                         else if (args[1] is ModItem) { RegisterItemStyle((ModItem)args[1], style); return true; }
                         else if (args[1] is int[]) { RegisterItemStyle((int[])args[1], style); return true; }
                         return false;
+                    case "RegisterVanityItem":
+                        style = PoseStyleID.PoseGroup.VanityItem;
+                        if (arg1IsInt) { RegisterItemStyle(arg1Int, style); return true; }
+                        if (args[1] is Item) { RegisterItemStyle((Item)args[1], style); return true; }
+                        else if (args[1] is ModItem) { RegisterItemStyle((ModItem)args[1], style); return true; }
+                        else if (args[1] is int[]) { RegisterItemStyle((int[])args[1], style); return true; }
+                        return false;
                     case "RegisterLargeMelee":
                         style = PoseStyleID.PoseGroup.LargeMelee;
                         if (arg1IsInt) { RegisterItemStyle(arg1Int, style); return true; }

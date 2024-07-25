@@ -16,14 +16,21 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual short DrawDepth(Player p, Item i, int timer) => DrawDepthID.OffHand;
 
-        public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer) => bodyFrame;
+        public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer)
+        {
+            if (bodyFrame == 0) {
+                Player.CompositeArmStretchAmount backArm = Player.CompositeArmStretchAmount.Full;
+                p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * -0.25f * p.direction);
+            }
+            return bodyFrame;
+        }
 
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
             data = data.SetOrigin(0.05f, 0.85f, p);
 
             if (bodyFrame == 0 || p.IsMountPoseActive()) { // Standing
-                data.position += new Vector2(6f, 10f);
+                data.position += new Vector2(16f, 10f);
             }
             else if (bodyFrame == 5) { // Jumping
                 data.rotation += (float)(Math.PI * -0.5f);

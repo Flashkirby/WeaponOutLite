@@ -5,8 +5,6 @@ See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
 
 Playtest Raised Suggestions:
 
-- hide holding dyes (makes tint comparison harder), or make them held in the offhand
-- maybe do the same for equipables
 - add combat hold to thrown weapons
 - spear hold two handed from middle
 

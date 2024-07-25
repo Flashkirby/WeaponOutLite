@@ -6,8 +6,9 @@
         {
             Unassigned = 0,
             Item = 10,
-            LargeItem = 50,
             Potion = 20,
+            LargeItem = 50,
+            VanityItem = 60,
             PowerTool = 70,
             Thrown = 90,
             ThrownThin = 95,
@@ -67,17 +68,37 @@
             Combat_Two_Hand_Guard = DrawItemPoseID.StanceTwoHandGuard,
             Combat_Two_Hand_Tail = DrawItemPoseID.StanceTwoHandTail,
         }
-        public enum PotionPoseID
+
+        public enum VanityItemPoseID
         {
             None = DrawItemPoseID.None,
+            Back = DrawItemPoseID.BackUpright,
+            Waist = DrawItemPoseID.WaistSheathe,
             Hold = DrawItemPoseID.HoldInHand,
             HoldForward = DrawItemPoseID.HoldInHandFront,
+            HoldTome = DrawItemPoseID.HoldSpellTome,
             OffHand = DrawItemPoseID.HoldInOffHand,
             Carry = DrawItemPoseID.CarryInBothHands,
-            Levitate = DrawItemPoseID.FloatingInFront,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
+        }
+
+        public enum PotionPoseID
+        {
+            None = DrawItemPoseID.None,
+            Back = DrawItemPoseID.BackUpright,
+            Waist = DrawItemPoseID.WaistSheathe,
+            Hold = DrawItemPoseID.HoldInHand,
+            HoldForward = DrawItemPoseID.HoldInHandFront,
+            HoldTome = DrawItemPoseID.HoldSpellTome,
+            OffHand = DrawItemPoseID.HoldInOffHand,
+            Carry = DrawItemPoseID.CarryInBothHands,
+            Levitate_Front = DrawItemPoseID.FloatingInFront,
+            Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
+            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
         }
 
         public enum PowerToolPoseID

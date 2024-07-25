@@ -35,6 +35,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 case PoseGroup.LargeItem:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.LargeItemPose];
                     break;
+                case PoseGroup.VanityItem:
+                    drawItemPose = mod.DrawStyle[(int)clientConfig.VanityItemPose];
+                    break;
                 case PoseGroup.Potion:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.PotionPose];
                     break;
@@ -389,6 +392,15 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // 🧪 Potions
             if (item.healLife > 0 || item.healMana > 0 || (item.buffType != 0 && item.maxStack > 1)) {
                 return PoseGroup.Potion;
+            }
+
+            // 💍 All equippable items / objects that affect a player visual slot go into this separate category.
+            if (item.vanity || item.accessory ||
+                item.dye != 0 || item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1 ||
+                item.handOnSlot != -1 || item.handOffSlot != -1 || item.backSlot != -1 || item.frontSlot != -1 ||
+                item.shoeSlot != -1 || item.waistSlot != -1 || item.wingSlot != -1 || item.shieldSlot != -1 ||
+                item.neckSlot != -1 || item.faceSlot != -1 || item.balloonSlot != -1 || item.beardSlot != -1) {
+                return PoseGroup.VanityItem;
             }
 
             // 📦 Big items such as paintings and crates, too wide to be held to the side

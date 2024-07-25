@@ -189,6 +189,10 @@ namespace WeaponOutLite
             };
 
             // Draw depth, used to define the layer the item should be drawn on relative to the player
+            // 1 = In front of player
+            // 0 = In front of player, behind front arm
+            // -1 = Behind player, in front of back arm
+            // -2 = Behind player
             Func<Player, Item, short, int, short> weaponOutLiteCustomDrawDepth = (Player player, Item i, short drawDepth, int timer) => {
                 if (i.type == ItemID.TheAxe) return 0; // Draw the axe in hand
                 if (i.type == ItemID.PortalGun) return 1; // Draw over hand

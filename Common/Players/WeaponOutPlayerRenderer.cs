@@ -87,10 +87,13 @@ namespace WeaponOutLite.Common.Players
 			set { Player.bodyFrame.Y = value * Player.bodyFrame.Height; }
 		}
 
-		public Item HeldItem => Main.gameMenu && gameMenuItem != null ? gameMenuItem : Player.inventory[Player.selectedItem];
+		/// <summary>
+		/// Main variable for determining held item. For safe access both in menus and in game
+		/// </summary>
+		public Item HeldItem => Main.gameMenu && gameMenuItem != null ? gameMenuItem : Player.HeldItem;
 
 		/// <summary>
-		/// Item is not fully loaded during game menu draw
+		/// Item is not fully loaded during game menu draw. We wait for this to be loaded before we register it as a Held Item
 		/// </summary>
 		internal Item gameMenuItem;
 
@@ -109,7 +112,7 @@ namespace WeaponOutLite.Common.Players
 			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul) {
 				// Basic implementation of https://github.com/Mirsario/TerrariaOverhaul/blob/668f5ed01b7af8ba4530645b605e5ee11030ba56/Common/PlayerEffects/PlayerHoldOutAnimation.cs?ts=4#L99
 				// to prevent visual conflicts
-				var item = Player.HeldItem;
+				var item = HeldItem;
 
 				if (item.noUseGraphic ||
 					item.useStyle != ItemUseStyleID.Shoot) {
@@ -119,39 +122,45 @@ namespace WeaponOutLite.Common.Players
 			}
 		}
 
-        public override void PostUpdate() {
-			if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
-
-				manageCombatTimer();
-
-				if (DrawHeldItem && !Main.dedServ) {
-
-					if(Player == Main.LocalPlayer) {
-						manageHoldStyle();
-					}
-
-					manageBodyFrame();
-				}
-			}
-		}
-
-        public override void FrameEffects()
+		/// <summary>
+		/// This calls a little bit earlier than FrameEffects, allowing it to trigger before some accessory visuals are updated. 
+		/// This primarily affects vanity shields and back arm visuals (but just after actual shields unfortunately)
+		/// </summary>
+        public override void UpdateVisibleAccessories()
         {
-            if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+			if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+				// This is for displaying items in the menu. Pull this from the main menu once loaded
 				if (gameMenuItem == null) {
 					gameMenuItem = Player.HeldItem;
 				}
 
 				CombatDelayTimer = 0;
 
-				CurrentDrawItemPose = PoseSetClassifier.SelectItemPose(Player, Player.HeldItem);
+				CurrentDrawItemPose = PoseSetClassifier.SelectItemPose(Player, HeldItem);
 				manageBodyFrame();
 			}
-            else { gameMenuItem = null; }
+			else {
+				gameMenuItem = null;
+
+				// This is for displaying items in-game
+                if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
+
+                    manageCombatTimer();
+
+                    if (DrawHeldItem && !Main.dedServ) {
+
+                        if (Player == Main.LocalPlayer) {
+                            manageHoldStyle();
+                        }
+
+                        manageBodyFrame();
+                    }
+                }
+            }
         }
 
         // Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
-        // Server receives toWho=-1, fromWho=0
+        // Server receives toWho=-1, fromWho=0 (player id 0)
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
 			// Send a message out to the server when a sync is required, such as a new player joining the server
 			MyStat = Main.rand.Next();
@@ -215,7 +224,7 @@ namespace WeaponOutLite.Common.Players
             // Get configs etc.
             WeaponOutLite myMod = Mod as WeaponOutLite;
 
-			CurrentDrawItemPose = PoseSetClassifier.SelectItemPose(Player, Player.HeldItem);
+			CurrentDrawItemPose = PoseSetClassifier.SelectItemPose(Player, HeldItem);
 
             // After item switch, check disaparity between Player and Client to see if we need to send a held item update
             // Net update with the change in pose and timer
@@ -234,7 +243,7 @@ namespace WeaponOutLite.Common.Players
         /// </summary>
         private void manageBodyFrame() {
 			//no item so nothing to show
-			if (Player.HeldItem == null || Player.HeldItem.type == ItemID.None || Player.HeldItem.holdStyle != 0) return;
+			if (HeldItem == null || HeldItem.type == ItemID.None || HeldItem.holdStyle != 0) return;
 
 			// BUG20231026A
 			// ReceiveUpdateWeaponVisual is being called when new player B is set on client A, but B's value is null here
@@ -253,7 +262,7 @@ namespace WeaponOutLite.Common.Players
 			// 5 = falling
 			// 6+ = running/flying
 			if (BodyFrameNum == 0 || BodyFrameNum >= 5) {
-				BodyFrameNum = CurrentDrawItemPose.UpdateIdleBodyFrame(Player, Player.HeldItem, BodyFrameNum, CombatDelayTimer);
+				BodyFrameNum = CurrentDrawItemPose.UpdateIdleBodyFrame(Player, HeldItem, BodyFrameNum, CombatDelayTimer);
 			}
 		}
     }

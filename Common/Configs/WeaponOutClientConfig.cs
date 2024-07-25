@@ -55,6 +55,17 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLargeItem))]
 		public int LargeItemPosePV => (int)LargeItemPose;
 
+        [Label("$Mods.WeaponOut.Config.VanityItemPose.Label")]
+        [DrawTicks]
+        [DefaultValue(PoseStyleID.VanityItemPoseID.OffHand)]
+        public PoseStyleID.VanityItemPoseID VanityItemPose { get; set; }
+
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
+        [Label("$Mods.WeaponOut.Config.Preview")]
+        [CustomModConfigItem(typeof(PreviewVanityItem))]
+        public int VanityItemPosePV => (int)VanityItemPose;
+
         [Label("$Mods.WeaponOut.Config.PotionPose.Label")]
 		[DrawTicks]
 		[DefaultValue(PoseStyleID.PotionPoseID.HoldForward)]

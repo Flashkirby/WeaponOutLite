@@ -88,6 +88,7 @@ Mods: {
 			Preview: Item Preview
 			SmallItemPose.Label: "[i:2]Normal Items"
 			LargeItemPose.Label: "[i:33]Large Items"
+			VanityItemPose.Label: "[i:1007]Equippable Items"
 			PotionPose.Label: "[i:126]Potions"
 			SmallMeleePose: "[i:3508]Melee Weapons"
 			LargeMeleePose: "[i:190]Large Melee Weapons"
@@ -242,6 +243,16 @@ Mods: {
 				}
 
 				LargeMeleePV: {
+					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Tooltip: ""
+				}
+
+				VanityItemPose: {
+					Label: "{$Mods.WeaponOut.Config.VanityItemPose.Label}"
+					Tooltip: ""
+				}
+
+				VanityItemPosePV: {
 					Label: "{$Mods.WeaponOut.Config.Preview}"
 					Tooltip: ""
 				}
@@ -616,6 +627,10 @@ Mods: {
 				Levitate_Front.Label: Levitate Front
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
+				Back.Label: Back
+				Waist.Label: Waist
+				HoldTome.Label: Hold Tome
+				Combat_Two_Hand.Label: Combat_ Two_ Hand
 			}
 
 			SmallMeleePoseID: {
@@ -1115,6 +1130,7 @@ Mods: {
 				GiantBow.Label: Giant Bow
 				GiantGun.Label: Giant Gun
 				GiantMagic.Label: Giant Magic
+				VanityItem.Label: Vanity Item
 			}
 
 			DrawItemPose: {
@@ -1190,6 +1206,22 @@ Mods: {
 					Label: "{$Mods.WeaponOut.Config.EnableForcedWeaponOutVisuals.Label}"
 					Tooltip: "{$Mods.WeaponOut.Config.EnableForcedWeaponOutVisuals.Tooltip}"
 				}
+			}
+
+			VanityItemPoseID: {
+				Tooltip: ""
+				None.Label: None
+				Back.Label: Back
+				Waist.Label: Waist
+				Hold.Label: Hold
+				HoldForward.Label: Hold Forward
+				HoldTome.Label: Hold Tome
+				OffHand.Label: Off Hand
+				Carry.Label: Carry
+				Levitate_Front.Label: Levitate_ Front
+				Levitate_OffHand.Label: Levitate_ Off Hand
+				Floating_Back.Label: Floating_ Back
+				Combat_Two_Hand.Label: Combat_ Two_ Hand
 			}
 		}
 	}

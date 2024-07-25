@@ -224,7 +224,9 @@ namespace WeaponOutLite.Common.Configs
 	{ public override int PreviewItemType() => ItemID.DirtBlock; }
 	public class PreviewLargeItem : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Furnace; }
-	public class PreviewPotionItem : HoldStylePreviewElement
+    public class PreviewVanityItem : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.RedDye; }
+    public class PreviewPotionItem : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.BottledWater; }
 	public class PreviewSmallMelee : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.CopperBroadsword; }
