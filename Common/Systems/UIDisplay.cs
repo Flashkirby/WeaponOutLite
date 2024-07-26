@@ -61,21 +61,32 @@ namespace WeaponOutLite.Common.Systems
             // Default locked state (off)
             var texture = TextureAssets.InventoryTickOff.Value;
             var hoverText = "WeaponOut: " + Lang.inter[73]; // "Off" see en_US.Legacy
+            var modPlayer = Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+            if(modPlayer == null) { return; }
 
-            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
+            bool forcedVisuals = ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals;
+
+            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals || forcedVisuals) {
 
                 // Enabled but turned off (hidden)
                 hoverText = "WeaponOut: " + Lang.inter[60]; // "Hidden"
 
-                if (Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>().IsShowingHeldItem) {
+                if (modPlayer.isShowingHeldItem || forcedVisuals) {
 
                     // Enabled and turned on
                     texture = TextureAssets.InventoryTickOn.Value;
                     hoverText = "WeaponOut: " + Lang.inter[59]; // "Visible"
 
                     // Except its being forced on, so locked anyway
-                    if (ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals) {
+                    if (forcedVisuals) {
                         hoverText = "WeaponOut: " + Lang.inter[72]; // "On"
+                    }
+
+                    if(modPlayer.HeldItem != null) {
+                        PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
+                        hoverText += " (";
+                        hoverText += PoseStyleID.MapPoseGroupToString(currentPoseGroup);
+                        hoverText += ")";
                     }
                 }
             }
@@ -88,7 +99,6 @@ namespace WeaponOutLite.Common.Systems
 
                 // On click
                 if (Main.mouseLeft && Main.mouseLeftRelease) {
-                    var modPlayer = Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
 
                     // Toggle
                     modPlayer.IsShowingHeldItem = !modPlayer.IsShowingHeldItem;

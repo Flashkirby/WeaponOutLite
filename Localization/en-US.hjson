@@ -86,37 +86,67 @@ Mods: {
 			}
 
 			Preview: Item Preview
-			SmallItemPose.Label: "[i:2]Normal Items"
-			LargeItemPose.Label: "[i:33]Large Items"
-			VanityItemPose.Label: "[i:1007]Equippable Items"
+			Unassigned: Unassigned
+			SmallItemPose: "[i:2]Normal Items"
+			Item: Normal Item
+			LargeItemPose: "[i:33]Large Items"
+			LargeItem: Large Item
+			VanityItemPose: "[i:1007]Equippable Items"
+			VanityItem: Equippable Item
 			PotionPose.Label: "[i:126]Potions"
+			Potion: Potion
 			SmallMeleePose: "[i:3508]Melee Weapons"
+			SmallMelee: Melee Weapon
 			LargeMeleePose: "[i:190]Large Melee Weapons"
+			LargeMelee: Large Melee Weapon
 			RapierPose: "[i:3507]Shortswords & Rapiers"
+			Rapier: Shortsword/Rapier
 			SpearPose: "[i:280]Spears"
+			Spear: Spear
 			YoyoPose: "[i:3278]Yoyos"
+			Yoyo: Yoyo
 			YoyoHalfScale: "[i:3278]Yoyos: Reduce yoyo size"
 			FlailPose: "[i:5011]Flails"
+			Flail: Flail
 			WhipPose: "[i:4672]Whips"
+			Whips: Whip
 			ThrownPose: "[i:42]Throwing Weapons"
+			Thrown: Throwing Weapon
 			ThrownThinPose: "[i:279] Throwing Knives"
+			ThrownThin: Throwing Knife
 			PowerToolPose: "[i:579] Power Tools"
+			PowerTool: Power Tool
 			BowPose: "[i:39] Bows"
+			Bow: Bow
 			BowDrawAmmo: "[i:39]Bows & [i:435]Repeaters: Render currently equipped arrows (Local Only)"
 			RepeaterPose: "[i:435]Crossbows & Repeaters"
+			Repeater: Crossbow/Repeater
 			PistolPose: "[i:95]Handguns"
+			Pistol: Handgun
 			GunPose: "[i:98] Automatic Guns"
+			Gun: Automatic Gun
 			GunManualPose: "[i:96]Semi-automatic Guns"
+			GunManual: Semi-automatic Gun
 			ShotgunPose: "[i:964]Shotguns"
+			Shotgun: Shotgun
 			LauncherPose: "[i:759]Launchers"
+			Launcher: Launcher
 			StaffPose: "[i:739]Magic Staves"
+			Staff: Magical Staff
 			MagicBookPose: "[i:165]Spell Tomes"
+			MagicBook: Spell Tome
 			MagicItemPose: "[i:4270]Magical Foci"
+			MagicItem: Magical Focus
 			GiantItemPose: Giant Items
+			GiantItem: Giant Item
 			GiantWeaponPose: Giant Melee Weapons
+			GiantWeapon: Giant Melee Weapon
 			GiantBowPose: Giant Bows
+			GiantBow: Giant Bow
 			GiantGunPose: Giant Ranged Weapons
+			GiantGun: Giant Ranged Weapon
 			GiantMagicPose: Giant Magic Weapons
+			GiantMagic: Giant Magic Weapon
 
 			ForcePoseGroup: {
 				Label: Item Pose Group
@@ -198,7 +228,7 @@ Mods: {
 				}
 
 				SmallItemPose: {
-					Label: "{$Mods.WeaponOut.Config.SmallItemPose.Label}"
+					Label: "{$Mods.WeaponOut.Config.SmallItemPose}"
 					Tooltip: ""
 				}
 
@@ -208,7 +238,7 @@ Mods: {
 				}
 
 				LargeItemPose: {
-					Label: "{$Mods.WeaponOut.Config.LargeItemPose.Label}"
+					Label: "{$Mods.WeaponOut.Config.LargeItemPose}"
 					Tooltip: ""
 				}
 
@@ -248,7 +278,7 @@ Mods: {
 				}
 
 				VanityItemPose: {
-					Label: "{$Mods.WeaponOut.Config.VanityItemPose.Label}"
+					Label: "{$Mods.WeaponOut.Config.VanityItemPose}"
 					Tooltip: ""
 				}
 
@@ -1107,36 +1137,36 @@ Mods: {
 
 			PoseGroup: {
 				Tooltip: ""
-				Unassigned.Label: Unassigned
-				Item.Label: Item
-				LargeItem.Label: Large Item
-				Potion.Label: Potion
-				PowerTool.Label: Power Tool
-				Thrown.Label: Thrown
-				ThrownThin.Label: Thrown Thin
-				Whips.Label: Whips
-				SmallMelee.Label: Small Melee
-				LargeMelee.Label: Large Melee
-				Spear.Label: Spear
-				Flail.Label: Flail
-				Rapier.Label: Rapier
-				Yoyo.Label: Yoyo
-				Bow.Label: Bow
-				Pistol.Label: Pistol
-				Gun.Label: Gun
-				GunManual.Label: Gun Manual
-				Shotgun.Label: Shotgun
-				Repeater.Label: Repeater
-				Launcher.Label: Launcher
-				Staff.Label: Staff
-				MagicBook.Label: Magic Book
-				MagicItem.Label: Magic Item
-				GiantItem.Label: Giant Item
-				GiantWeapon.Label: Giant Weapon
-				GiantBow.Label: Giant Bow
-				GiantGun.Label: Giant Gun
-				GiantMagic.Label: Giant Magic
-				VanityItem.Label: Vanity Item
+				Unassigned.Label: "{$Mods.WeaponOut.Config.Unassigned}"
+				Item.Label: "{$Mods.WeaponOut.Config.Item}"
+				LargeItem.Label: "{$Mods.WeaponOut.Config.LargeItem}"
+				Potion.Label: "{$Mods.WeaponOut.Config.Potion}"
+				PowerTool.Label: "{$Mods.WeaponOut.Config.PowerTool}"
+				Thrown.Label: "{$Mods.WeaponOut.Config.Thrown}"
+				ThrownThin.Label: "{$Mods.WeaponOut.Config.ThrownThin}"
+				Whips.Label: "{$Mods.WeaponOut.Config.Whips}"
+				SmallMelee.Label: "{$Mods.WeaponOut.Config.SmallMelee}"
+				LargeMelee.Label: "{$Mods.WeaponOut.Config.LargeMelee}"
+				Spear.Label: "{$Mods.WeaponOut.Config.Spear}"
+				Flail.Label: "{$Mods.WeaponOut.Config.Flail}"
+				Rapier.Label: "{$Mods.WeaponOut.Config.Rapier}"
+				Yoyo.Label: "{$Mods.WeaponOut.Config.Yoyo}"
+				Bow.Label: "{$Mods.WeaponOut.Config.Bow}"
+				Pistol.Label: "{$Mods.WeaponOut.Config.Pistol}"
+				Gun.Label: "{$Mods.WeaponOut.Config.Gun}"
+				GunManual.Label: "{$Mods.WeaponOut.Config.GunManual}"
+				Shotgun.Label: "{$Mods.WeaponOut.Config.Shotgun}"
+				Repeater.Label: "{$Mods.WeaponOut.Config.Repeater}"
+				Launcher.Label: "{$Mods.WeaponOut.Config.Launcher}"
+				Staff.Label: "{$Mods.WeaponOut.Config.Staff}"
+				MagicBook.Label: "{$Mods.WeaponOut.Config.MagicBook}"
+				MagicItem.Label: "{$Mods.WeaponOut.Config.MagicItem}"
+				GiantItem.Label: "{$Mods.WeaponOut.Config.GiantItem}"
+				GiantWeapon.Label: "{$Mods.WeaponOut.Config.GiantWeapon}"
+				GiantBow.Label: "{$Mods.WeaponOut.Config.GiantBow}"
+				GiantGun.Label: "{$Mods.WeaponOut.Config.GiantGun}"
+				GiantMagic.Label: "{$Mods.WeaponOut.Config.GiantMagic}"
+				VanityItem.Label: "{$Mods.WeaponOut.Config.VanityItem}"
 			}
 
 			DrawItemPose: {

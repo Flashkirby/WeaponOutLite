@@ -1,4 +1,6 @@
-﻿namespace WeaponOutLite.ID
+﻿using Terraria.Localization;
+
+namespace WeaponOutLite.ID
 {
     public static class PoseStyleID
     {
@@ -34,6 +36,11 @@
             GiantBow = 940,
             GiantGun = 950,
             GiantMagic = 960,
+        }
+
+        public static string MapPoseGroupToString(PoseGroup poseGroup)
+        {
+            return Language.GetTextValue("Mods.WeaponOut.Config." + poseGroup.ToString());
         }
 
         public enum ItemPoseID
@@ -341,6 +348,7 @@
             Combat_Cowboy = DrawItemPoseID.StancePistolCowboy,
             Combat_Power_Tool = DrawItemPoseID.StanceMachineTool,
         }
+       
         public enum LauncherPoseID
         {
             None = DrawItemPoseID.None,
