@@ -11,8 +11,8 @@ This mod is set up for localisation, so we are accepting translations!
 
 ## Summary
 
-WeaponOut Lite is based on the original purpose of WeaponOut before it ballooned into extra content. This version is just for the vanity effect without any content provided in the main mod. 
+WeaponOut Lite is based on the original feature in WeaponOut before it become a content mod. This version is just for the vanity effects.
 
 ## Credits
 
-Flashkirby99 - I am making this mod.
+Flashkirby - I am making this mod.

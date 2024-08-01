@@ -1,6 +1,6 @@
 displayName = WeaponOut Lite [1.4.4-beta]
 author = Flashkirby
-version = 0.0.20240725.0
+version = 0.0.20240801.0
 
 homepage = https://github.com/Flashkirby/WeaponOutLite/
 

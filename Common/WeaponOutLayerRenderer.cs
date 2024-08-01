@@ -671,45 +671,62 @@ namespace WeaponOutLite.Common
 				}
 				Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
 
-				// Flip projectile texture horizontally to match item rotation
-				// This is because internally, spear projectiles go from bottom right to top left.
-				// This operation is somewhat expensive, so we only want to run it once and then cache the result
-				// It may also have odd interations if multiple frames are present
-				try {
-					Texture2D rotatedItemTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height);
+                // Flip projectile texture horizontally to match item rotation
+                // This is because internally, spear projectiles go from bottom right to top left.
+                // This operation is somewhat expensive, so we only want to run it once and then cache the result
+                // It may also have odd interations if multiple frames are present	
+                //		In these cases we can only really assume the spear is vertical
+                try {
 
-					// If the texture is not squarish, it's probably not something we need to flip. All spear textures are squares
-					Color[] data = new Color[baseTexture.Width * baseTexture.Height];
-					Color[] rotatedData = new Color[data.Length];
+                    // If the texture is not squarish, it's probably not something we need to flip. All spear textures are squares
+                    int frames = Math.Max(1, Main.projFrames[projectileType]);
+                    Color[] data = new Color[baseTexture.Width * baseTexture.Height];
+
+					// Set the contents of data to the base texture
 					baseTexture.GetData(data);
 
-					// Check how much of the graphic the spear has in this axes
-					int totalLength = Math.Min(baseTexture.Width, baseTexture.Height);
+					// Get the first frame only by truncating pixel data
+					// This obviously only works for vertical animation frame
+					if (frames > 1) {
+						Array.Resize(ref data, baseTexture.Width * baseTexture.Height / frames);
+						baseTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height / frames);
+						baseTexture.SetData(data);
+					}
+
+                    // Check how much of the graphic the spear has in this axes
+                    int totalLength = Math.Min(baseTexture.Width, baseTexture.Height);
 					int coverageAlongLength = 0;
 					for (int i = 0; i < totalLength; i++) {
 						coverageAlongLength += data[i * baseTexture.Width + i].A > 0 ? 1 : 0;
 					}
 
-					// If the spear has pixels along at least 75% of this diagonal, it's probably flippable.
-					// System.Console.WriteLine($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
-					if (coverageAlongLength > totalLength * 0.75f) {
+                    // If the spear has pixels along at least 75% of this diagonal, it's probably flippable.
+                    // Flippable using Rotted Fork as a reference for a flipped spear
+
+                    // Main.NewText($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
+                    ItemProjTextureCache[itemType] = baseTexture;
+
+                    Color[] rotatedData = new Color[data.Length];
+                    if (coverageAlongLength > totalLength * 0.75f) {
 						// Create a horizontally flipped texture
+						// set a pointer starting from the top right
 						var x = baseTexture.Width - 1;
 						var y = 0;
 						for (int i = 0; i < data.Length; i++) {
+							// read across, moving cursor left as rotatedData goes right
 							rotatedData[i] = data[x + y * baseTexture.Width];
 							x -= 1;
+							// once cursor hits border, return to right edge and go down 1 row
 							if (x < 0) {
 								x = baseTexture.Width - 1;
 								y += 1;
 							}
 						}
-						rotatedItemTexture.SetData(rotatedData);
 
-						ItemProjTextureCache[itemType] = rotatedItemTexture;
-                    }
-                    else {
-						ItemProjTextureCache[itemType] = baseTexture;
+						Texture2D flippedTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height);
+						flippedTexture.SetData(rotatedData);
+
+						ItemProjTextureCache[itemType] = flippedTexture;
 					}
 				}
 				catch (Exception e) {
