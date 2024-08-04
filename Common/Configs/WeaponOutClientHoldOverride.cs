@@ -28,6 +28,7 @@ namespace WeaponOutLite.Common.Configs
         {
             get {
                 if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+                    // Get pose group for display
                     PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
                     return currentPoseGroup;
                 }
@@ -46,7 +47,7 @@ namespace WeaponOutLite.Common.Configs
                 if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
                     return (DrawItemPoseID.DrawItemPose)PoseSetClassifier.SelectItemPose(Main.LocalPlayer, Main.LocalPlayer.HeldItem).GetID();
                 }
-                return DrawItemPoseID.DrawItemPose.Default;
+                return DrawItemPoseID.DrawItemPose.Unassigned;
             }
         }
 
@@ -198,7 +199,7 @@ namespace WeaponOutLite.Common.Configs
         [Label("$Mods.WeaponOut.Config.ForceDrawItemPose.Label")]
         [Tooltip("$Mods.WeaponOut.Config.ForceDrawItemPose.Tooltip")]
         [DrawTicks]
-        [DefaultValue(DrawItemPoseID.DrawItemPose.Default)]
+        [DefaultValue(DrawItemPoseID.DrawItemPose.Unassigned)]
         public DrawItemPoseID.DrawItemPose ForceDrawItemPose;
 
         public ItemDrawOverrideData()
@@ -215,7 +216,7 @@ namespace WeaponOutLite.Common.Configs
             if (Item.Type == 0) {
                 pre = Language.GetTextValue("Workshop.PreviewImagePathEmpty");
             }
-            if (ForceDrawItemPose != DrawItemPoseID.DrawItemPose.Default) {
+            if (ForceDrawItemPose != DrawItemPoseID.DrawItemPose.Unassigned) {
                 return pre + $" = {ForceDrawItemPose}";
             }
             if (ForcePoseGroup != PoseStyleID.PoseGroup.Unassigned) {

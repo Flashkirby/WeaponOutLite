@@ -60,9 +60,15 @@ namespace WeaponOutLite
 
         /// <summary>
         /// List of item ids that should prioritise a pose group, used in PoseSetClassifier before other selections
-        /// This is for setting up items that don't work with the standard automatic style seletion
+        /// This is for setting up items that don't work with the standard automatic style selection
         /// </summary>
         internal HybridDictionary customItemHoldGroups;
+
+        /// <summary>
+        /// List of item ids that should prioritise a pose, used in PoseSetClassifier before other selections
+        /// This is for advanced mod integrations looking to specify preferences/behaviours on specific items
+        /// </summary>
+        internal HybridDictionary customItemHoldPose;
 
         /// <summary>
         /// List of item ids that should use the custom style
@@ -86,6 +92,7 @@ namespace WeaponOutLite
             customDrawDepthFuncs = new List<Func<Player, Item, short, int, short>>();
             customUpdateIdleBodyFrameFuncs = new List<Func<Player, Item, int, int, int>>();
             customItemHoldGroups = new HybridDictionary();
+            customItemHoldPose = new HybridDictionary();
             customItemHoldStyles = new HashSet<int>();
 
             Common.WeaponOutLayerRenderer.Load();
@@ -102,6 +109,7 @@ namespace WeaponOutLite
             customDrawDepthFuncs = null;
             customUpdateIdleBodyFrameFuncs = null;
             customItemHoldGroups = new HybridDictionary();
+            customItemHoldPose = new HybridDictionary();
             customItemHoldStyles = null;
 
             Common.WeaponOutLayerRenderer.Unload();

@@ -51,7 +51,7 @@ namespace WeaponOutLite.ID
         // enum for forced styles
         public enum DrawItemPose
         {
-            Default = DrawItemPoseID.Unassigned,
+            Unassigned = DrawItemPoseID.Unassigned,
             None = DrawItemPoseID.None,
             Back = DrawItemPoseID.Back,
             BackUpright = DrawItemPoseID.BackUpright,
@@ -102,6 +102,7 @@ namespace WeaponOutLite.ID
             StanceLauncherShoulder = DrawItemPoseID.StanceLauncherShoulder,
             FloatingBack = DrawItemPoseID.FloatingBack,
             FloatingBackUpright = DrawItemPoseID.FloatingBackUpright,
+            FloatingBackAimed = DrawItemPoseID.FloatingBackAimed,
             FloatingInFront = DrawItemPoseID.FloatingInFront,
             FloatingOffHandAimed = DrawItemPoseID.FloatingOffHandAimed,
             FloatingOffHand = DrawItemPoseID.FloatingOffHand,
@@ -130,7 +131,7 @@ namespace WeaponOutLite.ID
         public const int StanceMachineTool  = 01110;
 
         public const int StanceMeleeReady           = 10000;
-        public const int StanceMeleeTrail        = 10010;
+        public const int StanceMeleeTrail           = 10010;
         public const int StanceMeleeRaised          = 10020;
         public const int StanceMeleeUpright         = 10030;
 
@@ -172,9 +173,10 @@ namespace WeaponOutLite.ID
 
         public const int FloatingBack                   = 30000;
         public const int FloatingBackUpright            = 30001;
+        public const int FloatingBackAimed              = 30003;
         public const int FloatingInFront                = 30010;
         public const int FloatingOffHandAimed           = 30020;
-        public const int FloatingOffHand            = 30025;
+        public const int FloatingOffHand                = 30025;
         public const int FloatingOrbitAntiClockwiseSlow = 30030;
         public const int FloatingOrbitClockwiseSlow     = 30031;
         public const int FloatingOrbitAntiClockwiseFast = 30032;

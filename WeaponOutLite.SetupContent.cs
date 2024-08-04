@@ -57,10 +57,11 @@ namespace WeaponOutLite
             if (!(bool)weaponOutLite.Call("RegisterGun", ItemID.CoinGun )) { throw new ArgumentException("RegisterGun ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
 
+            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.NebulaBlaze, "None"));
+            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.BouncingShield, "None"));
 
             // Register these items to use Custom Holdstyles. The other functions will not call for an item unless it is specified here first.
             if (!(bool)weaponOutLite.Call("RegisterCustomItemStyle", new int[] {
-                ItemID.NebulaBlaze, ItemID.BouncingShield,
                 ItemID.TheAxe,
                 ItemID.PortalGun,
                 ItemID.ChargedBlasterCannon, ItemID.AleThrowingGlove,
@@ -70,9 +71,9 @@ namespace WeaponOutLite
             Func<Player, Item, DrawData, float, float, int, int, DrawData> weaponOutLiteCustomDrawData = (Player p, Item i, DrawData data, float h, float w, int bodyFrame, int timer) => {
                 bool walkDisplacement = false;
 
-                if (i.type == ItemID.NebulaBlaze || i.type == ItemID.BouncingShield) {
-                    data.color = Color.Transparent;
-                }
+                //if (i.type == ItemID.NebulaBlaze || i.type == ItemID.BouncingShield) {
+                //    data.color = Color.Transparent;
+                //}
 
                 if (i.type == ItemID.TheAxe) {
                     // Rotate clockwise 180

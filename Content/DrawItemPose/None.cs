@@ -8,7 +8,8 @@ using WeaponOutLite.ID;
 namespace WeaponOutLite.Content.DrawItemPose
 {
     /// <summary>
-    /// Specifically, nothing
+    /// Specifically, nothing.
+    /// Basically hidden
     /// </summary>
     public class None : IDrawItemPose
     {

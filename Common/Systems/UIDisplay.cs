@@ -83,6 +83,7 @@ namespace WeaponOutLite.Common.Systems
                     }
 
                     if(modPlayer.HeldItem != null) {
+                        // Get the group to display
                         PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
                         hoverText += " (";
                         hoverText += PoseStyleID.MapPoseGroupToString(currentPoseGroup);

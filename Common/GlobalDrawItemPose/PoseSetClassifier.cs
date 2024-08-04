@@ -19,6 +19,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// </summary>
         public static IDrawItemPose SelectItemPose(Player p, Item item) {
 
+            // Get group data for item pose
             GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose);
 
             WeaponOutLite mod = WeaponOutLite.GetMod();
@@ -132,6 +133,11 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // Set initial pose style and item pose object
             poseGroup = PoseGroup.Unassigned;
             drawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+
+            // Set the item pose if its been set as a preferred, which skips pose group
+            if (mod.customItemHoldPose.Contains(item.type)) {
+                drawItemPose = mod.DrawStyle[(int)mod.customItemHoldPose[item.type]];
+            }
 
             // Read custom config for forced pose override
             ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
