@@ -627,7 +627,7 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Two_Hand.Label: Combat Two Hand
 				HoldTome.Label: Hold Tome
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			LargeItemPoseID: {
@@ -645,7 +645,7 @@ Mods: {
 				Combat_Two_Hand.Label: Combat Two Hand
 				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
 				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			PotionPoseID: {
@@ -662,8 +662,8 @@ Mods: {
 				Back.Label: Back
 				Waist.Label: Waist
 				HoldTome.Label: Hold Tome
-				Combat_Two_Hand.Label: Combat_ Two_ Hand
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Combat_Two_Hand.Label: Combat Two Hand
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			SmallMeleePoseID: {
@@ -689,6 +689,8 @@ Mods: {
 				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
 				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
 				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			LargeMeleePoseID: {
@@ -711,6 +713,8 @@ Mods: {
 				Combat_Upright.Label: Combat Upright
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			RapierPoseID: {
@@ -736,6 +740,8 @@ Mods: {
 				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
 				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
 				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			SpearPoseID: {
@@ -760,6 +766,8 @@ Mods: {
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
 				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			YoyoPoseID: {
@@ -778,6 +786,7 @@ Mods: {
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			FlailPoseID: {
@@ -789,7 +798,7 @@ Mods: {
 				Combat_Ready.Label: Combat Ready
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			WhipPoseID: {
@@ -815,6 +824,8 @@ Mods: {
 				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
 				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
 				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			ThrownPoseID: {
@@ -834,6 +845,8 @@ Mods: {
 				Combat_Ready.Label: Combat Ready
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			PowerToolPoseID: {
@@ -857,6 +870,8 @@ Mods: {
 				Combat_Rifle_OffHand.Label: Combat Rifle Off Hand
 				Combat_Pistol_OffHand.Label: Combat Pistol Off Hand
 				Combat_Pistol.Label: Combat Pistol
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			BowPoseID: {
@@ -867,7 +882,8 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Hold.Label: Combat Hold
 				Combat_Hunter.Label: Combat Hunter
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GunPoseID: {
@@ -890,7 +906,9 @@ Mods: {
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Cowboy.Label: Combat Cowboy
 				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back.Label: Floating_ Back
+				Floating_Back.Label: Floating Back
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			PistolPoseID: {
@@ -908,6 +926,8 @@ Mods: {
 				Combat_Two_Hand.Label: Combat Two Hand
 				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
 				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			LauncherPoseID: {
@@ -930,7 +950,9 @@ Mods: {
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Cowboy.Label: Combat Cowboy
 				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back.Label: Floating_ Back
+				Floating_Back.Label: Floating Back
+				Floating_Back_Aimed.Label: Floating Back Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			StaffPoseID: {
@@ -955,7 +977,8 @@ Mods: {
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
 				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			MagicBookPoseID: {
@@ -978,8 +1001,8 @@ Mods: {
 				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
 				Combat_Upright.Label: Combat Upright
 				HoldTome.Label: Hold Tome
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			MagicItemPoseID: {
@@ -999,9 +1022,9 @@ Mods: {
 				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
 				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
 				Combat_Upright.Label: Combat Upright
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
-				Back_Upright.Label: Back_ Upright
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
+				Back_Upright.Label: Back Upright
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GiantItemPoseID: {
@@ -1017,9 +1040,9 @@ Mods: {
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
 				Combat_Two_Hand.Label: Combat Two Hand
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
-				Back_Upright.Label: Back_ Upright
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Upright.Label: Floating Back Upright
+				Back_Upright.Label: Back Upright
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GiantMeleePoseID: {
@@ -1042,7 +1065,7 @@ Mods: {
 				Combat_Upright.Label: Combat Upright
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GiantBowPoseID: {
@@ -1053,7 +1076,7 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Hold.Label: Combat Hold
 				Combat_Hunter.Label: Combat Hunter
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GiantGunPoseID: {
@@ -1077,7 +1100,7 @@ Mods: {
 				Combat_Bolt_Action.Label: Combat Bolt Action
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
+				Floating_Back_Aimed.Label: Floating Back Aimed
 			}
 
 			GiantMagicPoseID: {
@@ -1109,7 +1132,7 @@ Mods: {
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 
 			WeaponOutClientHoldOverride: {
@@ -1277,11 +1300,11 @@ Mods: {
 				HoldTome.Label: Hold Tome
 				OffHand.Label: Off Hand
 				Carry.Label: Carry
-				Levitate_Front.Label: Levitate_ Front
-				Levitate_OffHand.Label: Levitate_ Off Hand
-				Floating_Back.Label: Floating_ Back
-				Combat_Two_Hand.Label: Combat_ Two_ Hand
-				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Levitate_Front.Label: Levitate Front
+				Levitate_OffHand.Label: Levitate Off Hand
+				Floating_Back.Label: Floating Back
+				Combat_Two_Hand.Label: Combat Two Hand
+				Floating_Back_Upright.Label: Floating Back Upright
 			}
 		}
 	}
