@@ -9,6 +9,7 @@ namespace WeaponOutLite.ID
 {
     /// <summary>
     /// Static class for setting the NetIDs for poses. 
+    /// This is where all base poses need to be set.
     /// </summary>
     public static class DrawItemPoseID
     {

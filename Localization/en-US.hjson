@@ -627,6 +627,7 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Two_Hand.Label: Combat Two Hand
 				HoldTome.Label: Hold Tome
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			LargeItemPoseID: {
@@ -644,6 +645,7 @@ Mods: {
 				Combat_Two_Hand.Label: Combat Two Hand
 				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
 				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			PotionPoseID: {
@@ -661,6 +663,7 @@ Mods: {
 				Waist.Label: Waist
 				HoldTome.Label: Hold Tome
 				Combat_Two_Hand.Label: Combat_ Two_ Hand
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			SmallMeleePoseID: {
@@ -786,6 +789,7 @@ Mods: {
 				Combat_Ready.Label: Combat Ready
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			WhipPoseID: {
@@ -863,6 +867,7 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Hold.Label: Combat Hold
 				Combat_Hunter.Label: Combat Hunter
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			GunPoseID: {
@@ -885,6 +890,7 @@ Mods: {
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Cowboy.Label: Combat Cowboy
 				Combat_Power_Tool.Label: Combat Power Tool
+				Floating_Back.Label: Floating_ Back
 			}
 
 			PistolPoseID: {
@@ -924,6 +930,7 @@ Mods: {
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Cowboy.Label: Combat Cowboy
 				Combat_Power_Tool.Label: Combat Power Tool
+				Floating_Back.Label: Floating_ Back
 			}
 
 			StaffPoseID: {
@@ -948,6 +955,7 @@ Mods: {
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
 				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			MagicBookPoseID: {
@@ -970,6 +978,8 @@ Mods: {
 				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
 				Combat_Upright.Label: Combat Upright
 				HoldTome.Label: Hold Tome
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			MagicItemPoseID: {
@@ -989,6 +999,9 @@ Mods: {
 				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
 				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
 				Combat_Upright.Label: Combat Upright
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Back_Upright.Label: Back_ Upright
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			GiantItemPoseID: {
@@ -1004,6 +1017,9 @@ Mods: {
 				Levitate_OffHand.Label: Levitate Off Hand
 				Floating_Back.Label: Floating Back
 				Combat_Two_Hand.Label: Combat Two Hand
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
+				Back_Upright.Label: Back_ Upright
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			GiantMeleePoseID: {
@@ -1026,6 +1042,7 @@ Mods: {
 				Combat_Upright.Label: Combat Upright
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			GiantBowPoseID: {
@@ -1036,6 +1053,7 @@ Mods: {
 				Floating_Back.Label: Floating Back
 				Combat_Hold.Label: Combat Hold
 				Combat_Hunter.Label: Combat Hunter
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			GiantGunPoseID: {
@@ -1059,6 +1077,7 @@ Mods: {
 				Combat_Bolt_Action.Label: Combat Bolt Action
 				Combat_Pump_Action.Label: Combat Pump Action
 				Combat_Power_Tool.Label: Combat Power Tool
+				Floating_Back_Aimed.Label: Floating_ Back_ Aimed
 			}
 
 			GiantMagicPoseID: {
@@ -1090,6 +1109,7 @@ Mods: {
 				Combat_Raised.Label: Combat Raised
 				Combat_Trail.Label: Combat Trail
 				Combat_Fencer.Label: Combat Fencer
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 
 			WeaponOutClientHoldOverride: {
@@ -1220,6 +1240,7 @@ Mods: {
 				StanceLauncherShoulder.Label: Stance Launcher Shoulder
 				FloatingBack.Label: Floating Back
 				FloatingBackUpright.Label: Floating Back Upright
+				FloatingBackAimed.Label: Floating Back Aimed
 				FloatingInFront.Label: Floating In Front
 				FloatingOffHandAimed.Label: Floating Off Hand Aimed
 				FloatingOffHand.Label: Floating Off Hand
@@ -1229,6 +1250,7 @@ Mods: {
 				FloatingOrbitClockwiseFast.Label: Floating Orbit Clockwise Fast
 				HoldSpellTome.Label: Hold Spell Tome
 				StancePoleTwoHand.Label: Stance Pole Two Hand
+				Unassigned.Label: Unassigned
 			}
 
 			WeaponOutServerConfig: {
@@ -1259,6 +1281,7 @@ Mods: {
 				Levitate_OffHand.Label: Levitate_ Off Hand
 				Floating_Back.Label: Floating_ Back
 				Combat_Two_Hand.Label: Combat_ Two_ Hand
+				Floating_Back_Upright.Label: Floating_ Back_ Upright
 			}
 		}
 	}

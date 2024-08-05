@@ -26,9 +26,6 @@ Repo: https://github.com/Flashkirby/WeaponOutLite
 ### Development Features: 
 
 - See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
-- Bows more levitate options, back and also face forwards (aimed)
-- repeater and guns levitate back option
-- staff floating back - facing upwards
 - Make this mod no sync
 
 ### Known Bugs:

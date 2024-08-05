@@ -8,11 +8,11 @@ using WeaponOutLite.ID;
 namespace WeaponOutLite.Content.DrawItemPose
 {
     /// <summary>
-    /// Floating behind and facing up, opposite from Terraprisma
+    /// Floating and pointing forwards, with back hand held out
     /// </summary>
-    public class FloatingBackUpright : IDrawItemPose
+    public class FloatingBackAimed : IDrawItemPose
     {
-        public virtual int GetID() => DrawItemPoseID.FloatingBackUpright;
+        public virtual int GetID() => DrawItemPoseID.FloatingBackAimed;
 
         public virtual short DrawDepth(Player p, Item i, int timer) => DrawDepthID.Back;
 
@@ -21,14 +21,14 @@ namespace WeaponOutLite.Content.DrawItemPose
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
             data = DrawHelper.RotateFaceForward(data, p, height, width);
-            data.rotation -= MathHelper.PiOver4;
 
-            Vector2 spin = new Vector2(MathF.Sin(Main.GlobalTimeWrappedHourly * 2f) * p.direction, -MathF.Cos(Main.GlobalTimeWrappedHourly * 2f));
+            Vector2 spin = new Vector2(MathF.Sin(Main.GlobalTimeWrappedHourly * 2f) * 0.5f, -MathF.Cos(Main.GlobalTimeWrappedHourly * 2f));
+            data.position += new Vector2(
+                -Math.Max(height, width) / 2f,
+                -(height + width) / 4f) + spin * 2f;
+            data.position += (-p.velocity * 1f) * p.Directions; //momentum
 
-            data.position += new Vector2(-24f, 8f - Math.Max(height,width) / 4f ) + spin * 2f;
-            data.position += (-p.velocity) * p.Directions; // momentum
-
-            data.rotation += (float)(spin.X * -0.02f); // rotate 180 deg
+            data.rotation += (float)(spin.Y * 0.02f); // 
 
             return data;
         }

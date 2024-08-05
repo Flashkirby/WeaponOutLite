@@ -2,6 +2,10 @@
 
 namespace WeaponOutLite.ID
 {
+    /// <summary>
+    /// Class for IDs per pose group. 
+    /// These are the poses available for each group, referencing DrawwItemPoseID
+    /// </summary>
     public static class PoseStyleID
     {
         public enum PoseGroup
@@ -55,7 +59,7 @@ namespace WeaponOutLite.ID
             Carry = DrawItemPoseID.CarryInBothHands,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
         }
 
@@ -70,7 +74,7 @@ namespace WeaponOutLite.ID
             Carry = DrawItemPoseID.CarryInBothHands,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Two_Hand_Guard = DrawItemPoseID.StanceTwoHandGuard,
             Combat_Two_Hand_Tail = DrawItemPoseID.StanceTwoHandTail,
@@ -88,7 +92,7 @@ namespace WeaponOutLite.ID
             Carry = DrawItemPoseID.CarryInBothHands,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
         }
 
@@ -104,7 +108,7 @@ namespace WeaponOutLite.ID
             Carry = DrawItemPoseID.CarryInBothHands,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
         }
 
@@ -120,6 +124,8 @@ namespace WeaponOutLite.ID
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Power_Tool = DrawItemPoseID.StanceMachineTool,
             Combat_Shoulder = DrawItemPoseID.StanceLauncherShoulder,
@@ -143,6 +149,8 @@ namespace WeaponOutLite.ID
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -161,6 +169,8 @@ namespace WeaponOutLite.ID
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -186,6 +196,8 @@ namespace WeaponOutLite.ID
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -209,6 +221,8 @@ namespace WeaponOutLite.ID
             OffHand = DrawItemPoseID.HoldInOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Two_Hand_Guard = DrawItemPoseID.StanceTwoHandGuard,
             Combat_Two_Hand_Berserk = DrawItemPoseID.StanceTwoHandBerserk,
@@ -232,6 +246,7 @@ namespace WeaponOutLite.ID
             OffHand = DrawItemPoseID.HoldInOffHand,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -251,6 +266,8 @@ namespace WeaponOutLite.ID
             PoleOffHand = DrawItemPoseID.PoleOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Pole_Ready = DrawItemPoseID.StancePoleReady,
             Combat_Pole_Upright = DrawItemPoseID.StancePoleUpright,
@@ -272,7 +289,7 @@ namespace WeaponOutLite.ID
             OffHand_Shoulder = DrawItemPoseID.BackFlailShoulder,
             Combat_Ready = DrawItemPoseID.StanceFlailReady,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
         }
 
         public enum RapierPoseID
@@ -286,6 +303,8 @@ namespace WeaponOutLite.ID
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Ready = DrawItemPoseID.StanceMeleeReady,
             Combat_Upright = DrawItemPoseID.StanceMeleeUpright,
@@ -306,6 +325,8 @@ namespace WeaponOutLite.ID
             Back = DrawItemPoseID.BackBow,
             BackAlt = DrawItemPoseID.BackDownward,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceBowInHand,
             Combat_Hunter = DrawItemPoseID.StanceBowHunt,
         }
@@ -319,9 +340,11 @@ namespace WeaponOutLite.ID
             HoldForward = DrawItemPoseID.HoldInHandFront,
             Combat_Offhand = DrawItemPoseID.StancePistolHoldUp,
             Combat_Cowboy = DrawItemPoseID.StancePistolCowboy,
+            Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBack,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Two_Hand_Guard = DrawItemPoseID.StanceTwoHandGuard,
             Combat_Two_Hand_Brave = DrawItemPoseID.StanceTwoHandBrave,
@@ -337,6 +360,9 @@ namespace WeaponOutLite.ID
             HoldForward = DrawItemPoseID.HoldInHandFront,
             OffHand_Upright = DrawItemPoseID.HoldRifleOffHandUpright,
             OffHand_Shoulder = DrawItemPoseID.BackGunShoulder,
+            Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Combat_Hip_Ready = DrawItemPoseID.StanceRifleHipReady,
@@ -359,6 +385,9 @@ namespace WeaponOutLite.ID
             HoldForward = DrawItemPoseID.HoldInHandFront,
             OffHand_Upright = DrawItemPoseID.HoldRifleOffHandUpright,
             OffHand_Shoulder = DrawItemPoseID.StanceLauncherShoulder,
+            Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Combat_Hip_Ready = DrawItemPoseID.StanceRifleHipReady,
@@ -382,6 +411,8 @@ namespace WeaponOutLite.ID
             PoleOffHand = DrawItemPoseID.PoleOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceInHand,
             Combat_Pole_Ready = DrawItemPoseID.StancePoleReady,
             Combat_Pole_Upright = DrawItemPoseID.StancePoleUpright,
@@ -399,7 +430,6 @@ namespace WeaponOutLite.ID
         {
             None = DrawItemPoseID.None,
             Back = DrawItemPoseID.Back,
-            BackUpright = DrawItemPoseID.BackUpright,
             Waist = DrawItemPoseID.WaistHolster,
             Hold = DrawItemPoseID.HoldInHand,
             HoldTome = DrawItemPoseID.HoldSpellTome,
@@ -409,7 +439,8 @@ namespace WeaponOutLite.ID
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
-            Floating_BackAlt = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Orbit_Clockwise_Fast = DrawItemPoseID.FloatingOrbitClockwiseFast,
             Orbit_AntiClock_Fast = DrawItemPoseID.FloatingOrbitAntiClockwiseFast,
             Orbit_Clockwise_Slow = DrawItemPoseID.FloatingOrbitClockwiseSlow,
@@ -421,14 +452,15 @@ namespace WeaponOutLite.ID
         {
             None = DrawItemPoseID.None,
             Back = DrawItemPoseID.Back,
-            BackUpright = DrawItemPoseID.BackUpright,
+            Back_Upright = DrawItemPoseID.BackUpright,
             Waist = DrawItemPoseID.WaistHolster,
             Hold = DrawItemPoseID.HoldInHand,
             HoldForward = DrawItemPoseID.HoldInHandFront,
             OffHand = DrawItemPoseID.HoldInOffHand,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Orbit_Clockwise_Fast = DrawItemPoseID.FloatingOrbitClockwiseFast,
             Orbit_AntiClock_Fast = DrawItemPoseID.FloatingOrbitAntiClockwiseFast,
             Orbit_Clockwise_Slow = DrawItemPoseID.FloatingOrbitClockwiseSlow,
@@ -439,7 +471,7 @@ namespace WeaponOutLite.ID
         public enum GiantItemPoseID
         {
             None = DrawItemPoseID.None,
-            Back = DrawItemPoseID.BackUpright,
+            Back_Upright = DrawItemPoseID.BackUpright,
             Waist = DrawItemPoseID.WaistSheathe,
             Hold = DrawItemPoseID.HoldInHand,
             HoldForward = DrawItemPoseID.HoldInHandFront,
@@ -447,7 +479,8 @@ namespace WeaponOutLite.ID
             Carry = DrawItemPoseID.CarryInBothHands,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
         }
 
@@ -460,6 +493,7 @@ namespace WeaponOutLite.ID
             OffHand = DrawItemPoseID.HoldInOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Two_Hand = DrawItemPoseID.StanceTwoHand,
             Combat_Two_Hand_Guard = DrawItemPoseID.StanceTwoHandGuard,
             Combat_Two_Hand_Berserk = DrawItemPoseID.StanceTwoHandBerserk,
@@ -479,6 +513,7 @@ namespace WeaponOutLite.ID
             Back = DrawItemPoseID.BackBow,
             BackAlt = DrawItemPoseID.BackDownward,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Combat_Hold = DrawItemPoseID.StanceBowInHand,
             Combat_Hunter = DrawItemPoseID.StanceBowHunt,
         }
@@ -494,6 +529,7 @@ namespace WeaponOutLite.ID
             OffHand_Upright = DrawItemPoseID.HoldRifleOffHandUpright,
             OffHand_Shoulder = DrawItemPoseID.StanceLauncherShoulder,
             Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Aimed = DrawItemPoseID.FloatingBackAimed,
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
@@ -519,8 +555,8 @@ namespace WeaponOutLite.ID
             Levitate_Front = DrawItemPoseID.FloatingInFront,
             Levitate_OffHand = DrawItemPoseID.FloatingOffHand,
             Levitate_Aimed = DrawItemPoseID.FloatingOffHandAimed,
-            Floating_Back = DrawItemPoseID.FloatingBackUpright,
-            Floating_BackAlt = DrawItemPoseID.FloatingBack,
+            Floating_Back = DrawItemPoseID.FloatingBack,
+            Floating_Back_Upright = DrawItemPoseID.FloatingBackUpright,
             Orbit_Clockwise_Fast = DrawItemPoseID.FloatingOrbitClockwiseFast,
             Orbit_AntiClock_Fast = DrawItemPoseID.FloatingOrbitAntiClockwiseFast,
             Orbit_Clockwise_Slow = DrawItemPoseID.FloatingOrbitClockwiseSlow,

@@ -57,8 +57,9 @@ namespace WeaponOutLite
             if (!(bool)weaponOutLite.Call("RegisterGun", ItemID.CoinGun )) { throw new ArgumentException("RegisterGun ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
 
-            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.NebulaBlaze, "None"));
-            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.BouncingShield, "None"));
+            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.NebulaBlaze, "None") || 
+                !(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.BouncingShield, "None")
+            ) { throw new ArgumentException("RegisterItemHoldPose ModCall Failed"); }
 
             // Register these items to use Custom Holdstyles. The other functions will not call for an item unless it is specified here first.
             if (!(bool)weaponOutLite.Call("RegisterCustomItemStyle", new int[] {

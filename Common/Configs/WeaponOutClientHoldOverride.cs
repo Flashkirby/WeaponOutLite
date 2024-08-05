@@ -161,23 +161,23 @@ namespace WeaponOutLite.Common.Configs
                 ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
             });
 
-            // Custom integration defaults
-            if (WeaponOutLite.W1KModReduxModLoaded) {
-                string vibrantReverie = "W1KModRedux";
+            //// Custom integration defaults
+            //if (WeaponOutLite.W1KModReduxModLoaded) {
+            //    string vibrantReverie = "W1KModRedux";
 
-                // We bolt actioning these rifles
-                styleOverrideList.Add(new ItemDrawOverrideData() {
-                    Item = new ItemDefinition(vibrantReverie, "HuntingRifle"),
-                    ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
-                    ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
-                });
+            //    // We bolt actioning these rifles
+            //    styleOverrideList.Add(new ItemDrawOverrideData() {
+            //        Item = new ItemDefinition(vibrantReverie, "HuntingRifle"),
+            //        ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
+            //        ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
+            //    });
 
-                styleOverrideList.Add(new ItemDrawOverrideData() {
-                    Item = new ItemDefinition(vibrantReverie, "MouserMagnum"),
-                    ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
-                    ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
-                });
-            }
+            //    styleOverrideList.Add(new ItemDrawOverrideData() {
+            //        Item = new ItemDefinition(vibrantReverie, "MouserMagnum"),
+            //        ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
+            //        ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
+            //    });
+            //}
         }
     }
 
@@ -205,7 +205,7 @@ namespace WeaponOutLite.Common.Configs
         public ItemDrawOverrideData()
         {
             // If the player is active and in-game, default to use what the player is holding
-            if(Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
+            if(Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null && Item == null) {
                 Item = new ItemDefinition(Main.LocalPlayer.HeldItem.type);
             }
         }
