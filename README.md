@@ -23,17 +23,17 @@ Flashkirby - I am making this mod.
 ## Notes
 Repo: https://github.com/Flashkirby/WeaponOutLite
 
-### Development Features: 
+### Development Features
 
 - See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
 - Make this mod no sync
 
-### Known Bugs:
+### Known Bugs
 
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix
 - melee effect experimental feature: phase blades and phase sabers have flickering lights
 
-#### Compatibility List:
+#### Mod Compatibility
 - Improved Movement Visuals, No Known Conflicts
 - Vibrant Reverie, Rifle default animations
 ---
@@ -44,3 +44,4 @@ Repo: https://github.com/Flashkirby/WeaponOutLite
 - Overhaul Gun Animations, Overrides ranged weapons, unless "Vanilla aim animation" is enabled in serverside settings. Also makes ranged weapons autoReuse (separate from Autofire option).
 - ArmamentDisplay, weapon display switch conflict
 - CoolerItemVisualEffect, weapon display switch conflict
+- DawnMOD, weapon display switch conflict
