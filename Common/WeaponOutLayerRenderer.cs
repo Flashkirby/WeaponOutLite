@@ -16,6 +16,8 @@ using WeaponOutLite.Common.GlobalDrawItemPose;
 using WeaponOutLite.Common.Players;
 using WeaponOutLite.Content.DrawItemPose;
 using WeaponOutLite.ID;
+using static WeaponOutLite.ID.DrawItemPoseID;
+using static WeaponOutLite.ID.PoseStyleID;
 
 namespace WeaponOutLite.Common
 {
@@ -101,10 +103,11 @@ namespace WeaponOutLite.Common
 						}
 					}
 				}
-			}
+            }
+            var config = ModContent.GetInstance<WeaponOutClientConfig>();
 
-			// Get the scaled height and width of the item to be drawn
-			float height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.X;
+            // Get the scaled height and width of the item to be drawn
+            float height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.X;
 			float width = (itemData.sourceRect?.Width ?? 0) * itemData.scale.Y;
 
 			var bodyFrame = drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height;
@@ -113,8 +116,11 @@ namespace WeaponOutLite.Common
 			itemData.scale *= DrawHelper.GetGiantTextureScale(width * itemData.scale.X, height * itemData.scale.Y);
 
 			// If enabled, shrink yoyos by 50%
-			if (ModContent.GetInstance<WeaponOutClientConfig>().YoyoHalfScale && ItemID.Sets.Yoyo[heldItem.type]) {
-				itemData.scale *= 0.66f;
+            if (config.YoyoHalfScale) {
+                bool customYoyo = ModContent.GetInstance<WeaponOutClientHoldOverride>().FindStyleOverride(heldItem.type)?.ForcePoseGroup == PoseGroup.Yoyo;
+                if (ItemID.Sets.Yoyo[heldItem.type] || customYoyo) {
+                    itemData.scale *= 0.66f;
+                }
 			}
 
 			// Origin pixel perfect centre and place in centre
@@ -196,7 +202,7 @@ namespace WeaponOutLite.Common
 			}
 
 			// Draw weapon effects
-			if (ModContent.GetInstance<WeaponOutClientConfig>().EnableMeleeEffects) {
+			if (config.EnableMeleeEffects) {
 				try {
 					if (modPlayer != null && heldItem != null && modPlayer.Player != null && modPlayer.CombatDelayTimer > 0) {
 						const int MAX_STEPS = 4;
@@ -234,7 +240,7 @@ namespace WeaponOutLite.Common
 				}
 				catch (Exception e) {
 					Main.NewText("WeaponOutLite: Experimental feature failure, melee effects disabled");
-					ModContent.GetInstance<WeaponOutClientConfig>().EnableMeleeEffects = false;
+                    config.EnableMeleeEffects = false;
 					new Exception("Something happened when trying to generate melee effects", e);
 				}
 			}
@@ -324,8 +330,10 @@ namespace WeaponOutLite.Common
 			heldItem = null;
 			itemTexture = null;
 
-			// Don't draw when player doesn't meet standard draw conditions
-			if ((!modPlayer.DrawHeldItem && !(Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay)) || holdStyle == null) return false;
+            var config = ModContent.GetInstance<WeaponOutClientConfig>();
+
+            // Don't draw when player doesn't meet standard draw conditions
+            if ((!modPlayer.DrawHeldItem && !(Main.gameMenu && config.EnableMenuDisplay)) || holdStyle == null) return false;
 
 			// Player player's held item
 			heldItem = modPlayer.HeldItem;
@@ -340,7 +348,7 @@ namespace WeaponOutLite.Common
 			itemTexture = TextureAssets.Item[heldItem.type].Value;
 
 			// Experimental projectile spear code
-            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears && heldItem.shoot != 0) {
+            if (config.EnableProjSpears && heldItem.shoot != 0) {
 
 				// Check if this is a spear
 				PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
@@ -385,14 +393,16 @@ namespace WeaponOutLite.Common
 
 				Rectangle sourceRect = calculateSourceRect(heldItem, itemTexture);
 
-				//get draw location of player
-				int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
+                var config = ModContent.GetInstance<WeaponOutClientConfig>();
+
+                //get draw location of player
+                int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
 				int drawY = (int)(drawPlayer.MountedCenter.Y - Main.screenPosition.Y + drawPlayer.gfxOffY) + GravityOffset;
 
                 // -3 is to help with centering later (see + 6 from gravity flip)
 
-				// Game menu cannot use the player center, use this position instead.
-                if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+                // Game menu cannot use the player center, use this position instead.
+                if (Main.gameMenu && config.EnableMenuDisplay) {
 					drawX = (int)(drawInfo.Position.X - Main.screenPosition.X) + 10;
 					drawY = (int)(drawInfo.Position.Y - Main.screenPosition.Y) + 18;
 				}
@@ -418,10 +428,10 @@ namespace WeaponOutLite.Common
 					//WeaponOutLite.TEXT_DEBUG += visualoffset;
 				}
 
-				// get Scale
-				float scale = ModContent.GetInstance<WeaponOutClientConfig>().EnableItemScaling? DrawHelper.SnapNearOne(heldItem.scale) : 1f;
+                // get Scale
+                float scale = config.EnableItemScaling? DrawHelper.SnapNearOne(heldItem.scale) : 1f;
 
-				//get the lighting on the player's tile
+                //get the lighting on the player's tile
 				Color lighting = Lighting.GetColor(
 						(int)((drawInfo.Position.X + drawPlayer.width / 2f) / 16f),
 						(int)((drawInfo.Position.Y + drawPlayer.height / 2f) / 16f));
