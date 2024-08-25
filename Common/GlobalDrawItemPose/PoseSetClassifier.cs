@@ -277,8 +277,18 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             }
                             else {
                                 if (item.channel) {
-                                    // Flails and jousting lances... though really more likely flails
-                                    return PoseGroup.Flail;
+                                    // ➰◉ Modded yoyos that are not marked as yoyos in the yoyo set
+                                    // They may still be yoyos if they feature all of the following attributes
+                                    if (w == 30 && h == 26 && item.scale == 1f 
+                                        && item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed) 
+                                        && item.channel && item.useAnimation == 25 && item.useTime == 25
+                                        && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f) {
+                                        return PoseGroup.Yoyo;
+                                    }
+                                    else {
+                                        // Flails and jousting lances... though really more likely flails
+                                        return PoseGroup.Flail;
+                                    }
                                 }
                                 else {
                                     // 🔱 Spears are diagonal sprites

@@ -42,7 +42,12 @@ Mods: {
 
 			EnableProjSpears: {
 				Label: Enable Full Spears (Experimental)
-				Tooltip: Prioritise spear projectile sprites once they are loaded. (Local Only)
+				Tooltip: Use spear projectile sprites. (Local Only)
+			}
+
+			EnableProjYoyos: {
+				Label: Enable Small Yoyos (Experimental)
+				Tooltip: Use yoyo projectile sprites. (Local Only)
 			}
 
 			EnableMenuDisplay: {
@@ -575,6 +580,11 @@ Mods: {
 				EnableProjSpears: {
 					Label: "{$Mods.WeaponOut.Config.EnableProjSpears.Label}"
 					Tooltip: "{$Mods.WeaponOut.Config.EnableProjSpears.Tooltip}"
+				}
+
+				EnableProjYoyos: {
+					Label: "{$Mods.WeaponOut.Config.EnableProjYoyos.Label}"
+					Tooltip: "{$Mods.WeaponOut.Config.EnableProjYoyos.Tooltip}"
 				}
 
 				ModIntegrationTerrariaOverhaul: {

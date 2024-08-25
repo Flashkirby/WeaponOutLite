@@ -427,7 +427,12 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool EnableProjSpears { get; set; }
 
-		[JsonIgnore] // This is not likely to work any time soon.
+        [Label("$Mods.WeaponOut.Config.EnableProjYoyos.Label")]
+        [Tooltip("$Mods.WeaponOut.Config.EnableProjYoyos.Tooltip")]
+        [DefaultValue(true)]
+        public bool EnableProjYoyos { get; set; }
+
+        [JsonIgnore] // This is not likely to work any time soon.
 		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
 		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
 		[DefaultValue(false)]

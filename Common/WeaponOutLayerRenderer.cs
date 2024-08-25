@@ -71,8 +71,8 @@ namespace WeaponOutLite.Common
 			// Create basic draw data, centred on the player
 			if (tryCreateBaseDrawData(drawInfo, out DrawData itemData)) {
 
-				var heldItem = drawInfo.drawPlayer.inventory[drawInfo.drawPlayer.selectedItem];
-				var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+                var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+                var heldItem = modPlayer.HeldItem;
 				var bowDrawAmmo = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
 
 				try {
@@ -115,11 +115,18 @@ namespace WeaponOutLite.Common
 			// Apply giant scaling where applicable
 			itemData.scale *= DrawHelper.GetGiantTextureScale(width * itemData.scale.X, height * itemData.scale.Y);
 
-			// If enabled, shrink yoyos by 50%
+			// If enabled, shrink yoyos if they are base item textures
             if (config.YoyoHalfScale) {
-                bool customYoyo = ModContent.GetInstance<WeaponOutClientHoldOverride>().FindStyleOverride(heldItem.type)?.ForcePoseGroup == PoseGroup.Yoyo;
-                if (ItemID.Sets.Yoyo[heldItem.type] || customYoyo) {
-                    itemData.scale *= 0.66f;
+                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
+                if (poseGroup == PoseGroup.Yoyo) {
+
+					// Apply reduced size if the yoyo is using the item texture, ignore if the proj is loaded
+					bool applyScale = !config.EnableProjYoyos;
+					if (config.EnableProjYoyos && ItemProjTextureCache.Capacity > heldItem.type) {
+						applyScale = ItemProjTextureCache[heldItem.type] == null;
+                    }
+
+                    itemData.scale *= applyScale ? 0.66f : 1f;
                 }
 			}
 
@@ -316,7 +323,7 @@ namespace WeaponOutLite.Common
 		/// <param name="holdStyle"></param>
 		/// <param name="heldItem"></param>
 		/// <param name="itemTexture"></param>
-		/// <returns></returns>
+		/// <returns>true if an texture is successfully loaded/returns>
 		public static bool CanDrawBaseDrawData(PlayerDrawSet drawInfo, 
 			out Player drawPlayer, 
 			out WeaponOutPlayerRenderer modPlayer, 
@@ -347,42 +354,40 @@ namespace WeaponOutLite.Common
 
 			itemTexture = TextureAssets.Item[heldItem.type].Value;
 
-			// Experimental projectile spear code
-            if (config.EnableProjSpears && heldItem.shoot != 0) {
+			// Fetch pose group if required
+            if (heldItem.shoot != 0 && (config.EnableProjSpears || config.EnableProjYoyos)) {
+                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
 
-				// Check if this is a spear
-				PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
-				bool isSpear = poseGroup == PoseStyleID.PoseGroup.Spear;
+                // Experimental projectile spear code
+                if (config.EnableProjSpears) {
 
-				// Don't actually load this texture until the game has done so - default to the item texture
-				if(isSpear) {
-					CreateItemProjectileSpearTexture(heldItem.type, heldItem.shoot);
-					if(ItemProjTextureCache[heldItem.type] != null) {
-						bool isTheTextureActuallyBigger = ItemProjTextureCache[heldItem.type].Width > itemTexture.Width
-							 || ItemProjTextureCache[heldItem.type].Height > itemTexture.Height;
-                        if (isTheTextureActuallyBigger) {
-							itemTexture = ItemProjTextureCache[heldItem.type];
-						}
-					}
-				}
-			}
+                    // Check if this is a spear
+                    bool isSpear = poseGroup == PoseStyleID.PoseGroup.Spear;
 
-			if (config.EnableProjSpears && heldItem.shoot != 0) {
-				bool customYoyo = ModContent.GetInstance<WeaponOutClientHoldOverride>().FindStyleOverride(heldItem.type)?.ForcePoseGroup == PoseGroup.Yoyo;
-				bool maybeYoyo = heldItem.useStyle == ItemUseStyleID.Shoot
-					&& heldItem.useAnimation == 25
-					&& heldItem.useTime == 25
-					&& heldItem.noUseGraphic
-					&& heldItem.DamageType.Equals(DamageClass.MeleeNoSpeed)
-					&& heldItem.noMelee
-					&& heldItem.UseSound.Equals(SoundID.Item1);
-				if (ItemID.Sets.Yoyo[heldItem.type] || customYoyo || maybeYoyo) {
-                    CreateItemProjectileYoyoTexture(heldItem.type, heldItem.shoot);
-                    if (ItemProjTextureCache[heldItem.type] != null) {
-                        itemTexture = ItemProjTextureCache[heldItem.type];
+                    if (isSpear) {
+                        CreateItemProjectileSpearTexture(heldItem.type, heldItem.shoot);
+                        if (ItemProjTextureCache[heldItem.type] != null) {
+                            bool isTheTextureActuallyBigger = ItemProjTextureCache[heldItem.type].Width > itemTexture.Width
+                                 || ItemProjTextureCache[heldItem.type].Height > itemTexture.Height;
+                            if (isTheTextureActuallyBigger) {
+                                itemTexture = ItemProjTextureCache[heldItem.type];
+                            }
+                        }
                     }
                 }
-			}
+				if (config.EnableProjYoyos) {
+
+                    // Check if this is a yoyo
+                    bool isYoyo = poseGroup == PoseStyleID.PoseGroup.Yoyo;
+
+                    if (isYoyo) {
+                        CreateItemProjectileYoyoTexture(heldItem.type, heldItem.shoot);
+                        if (ItemProjTextureCache[heldItem.type] != null) {
+                            itemTexture = ItemProjTextureCache[heldItem.type];
+                        }
+                    }
+                }
+            }
 
 			// if no texture to item then can't render anything  ¯\_(ツ)_/¯
 			if (itemTexture == null) return false;
@@ -542,8 +547,14 @@ namespace WeaponOutLite.Common
 		/// <param name="data">Finished draw data</param>
 		/// <param name="drawPlayer">The drawPlayer from drawInfo</param>
 		internal static bool tryCreateGlowLayerDrawData(Player drawPlayer, Item item, DrawData data, out DrawData glowData) {
-			// Technically glowmasks start at 0, but 0 is used for a projectile, and item.glowMask = -1 isn't set during the gameMenu
-			if (item.glowMask > 0) {
+            // Technically glowmasks start at 0, but 0 is used for a projectile, and item.glowMask = -1 isn't set during the gameMenu
+            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos && ItemProjTextureCache.Capacity > item.type && ItemProjTextureCache[item.type] != null) {
+				if (tryCreateProjectileGlowLayerDrawData(drawPlayer, item.shoot, data, out glowData)) {
+					return true;
+				}
+            }
+
+            if (item.glowMask > 0) {
 				Color glowLighting = new Color(250, 250, 250, item.alpha);
 				glowLighting = drawPlayer.GetImmuneAlpha(item.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
 				glowData = new DrawData(
@@ -563,7 +574,7 @@ namespace WeaponOutLite.Common
 		}
 
 		internal static bool tryCreateProjectileGlowLayerDrawData(Player drawPlayer, int projectileType, DrawData data, out DrawData glowData) {
-			// Get the glowmask from the proejctile
+			// Get the glowmask from the projectile
 
 			Projectile p = new Projectile();
 			p.SetDefaults(projectileType);
@@ -694,9 +705,9 @@ namespace WeaponOutLite.Common
 			if (ItemProjTextureCache[itemType] != null) {
 				return;
             }
-            // Don't actually load this texture until the game has done so - default to the item texture
+            // Load vanilla textures
             if (!Main.IsGraphicsDeviceAvailable || !TextureAssets.Projectile[projectileType].IsLoaded) {
-                return;
+                Main.instance.LoadProjectile(projectileType);
             }
 
             // Don't actually load this texture until the game has done so - default to the item texture
@@ -784,10 +795,10 @@ namespace WeaponOutLite.Common
             if (ItemProjTextureCache[itemType] != null) {
                 return;
             }
-            // Don't actually load this texture until the game has done so - default to the item texture
+            // Load vanilla textures
             if (!Main.IsGraphicsDeviceAvailable || !TextureAssets.Projectile[projectileType].IsLoaded) {
-				return;
-			}
+                Main.instance.LoadProjectile(projectileType);
+            }
 
             Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
 
@@ -817,7 +828,7 @@ namespace WeaponOutLite.Common
             }
             catch (Exception e) {
                 Main.NewText("WeaponOutLite: Experimental feature failure, proj yoyos temporarily disabled");
-                ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
+                ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos = false;
                 new Exception("Something happened when trying to extract yoyo texture", e);
             }
             
