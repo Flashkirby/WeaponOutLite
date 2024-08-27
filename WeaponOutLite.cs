@@ -1,21 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using WeaponOutLite.ID;
 using WeaponOutLite.Common.GlobalDrawItemPose;
-using WeaponOutLite.Content.DrawItemPose;
-using Microsoft.Xna.Framework;
-using WeaponOutLite.Common.Players;
-using Terraria.ID;
-using Terraria.Audio;
-using Terraria.GameContent;
-using ReLogic.Graphics;
-using WeaponOutLite.Common.Configs;
 using System;
 using Terraria.DataStructures;
 using System.Collections.Specialized;
-using Terraria.UI;
 
 namespace WeaponOutLite
 {
@@ -39,7 +29,6 @@ namespace WeaponOutLite
         // Mod Integrations ♥
         public static bool TerrariaOverhaulModLoaded { get { return ModLoader.HasMod("TerrariaOverhaul"); } }
         public static bool ItemCustomizerModLoaded { get { return false; } }
-        public static bool W1KModReduxModLoaded { get { return ModLoader.HasMod("W1KModRedux"); } }
         public static bool MeleeEffectsPlusModLoaded { get { return ModLoader.HasMod("MeleeWeaponEffects") || ModLoader.HasMod("MeleeEffects"); } }
         public static bool ArmamentDisplayLiteModLoaded { get { return ModLoader.HasMod("WeaponDisplayLite"); } }
 

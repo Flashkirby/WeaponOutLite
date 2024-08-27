@@ -258,7 +258,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                         if (item.useStyle == ItemUseStyleID.Rapier && 
                             WeaponOutLite.MeleeEffectsPlusModLoaded && 
                             ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus) {
-                            
+                            // skip
                         }
                         else {
                             return PoseGroup.Rapier;

@@ -1,1152 +1,462 @@
 Mods: {
 	# TIL hjson supports comments
-	WeaponOut: {
-		Config: {
+	WeaponOutLite: {
+		Common: {
 			Instructions: To customise item hold styles:
-			ClientSideConfigLabel: Personal Preferences
-			OverrideConfigLabel: Item Manual Override
-			ServerSideConfigLabel: Global/Server
-			ClientSidePlayerHeader: Display & Poses
-			ServerSideHeader: Feature Toggles
-			ClientSideGraphicHeader: Local Graphics
-
-			EnableWeaponOutVisuals: {
-				Label: Enable WeaponOut Visuals
-				Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody. (Global Setting)
-			}
-
-			EnableForcedWeaponOutVisuals: {
-				Label: Enable Forced Visuals
-				Tooltip: Forces all players to show held items, regardless of clientside settings. (Global Setting)
-			}
-
-			EnableWeaponPhysics: {
-				Label: Enable Item Physics
-				Tooltip: Allows some held items to react to motion. Disable to prevent motion based item movement. (Local Only)
-			}
-
-			EnableSheathingAnim: {
-				Label: Enable Sheathing Animations
-				Tooltip: Allows some poses to smoothly transition to an idle pose. (Local Only)
-			}
-
-			EnableItemScaling: {
-				Label: Enable Extreme Item scaling
-				Tooltip: Allows items to show their size modifiers (if greater than +-10%). Disable to keep all item sizes pixel perfect. (Local Only)
-			}
-
-			EnableMeleeEffects: {
-				Label: Enable Melee Effects (Experimental)
-				Tooltip: Allows weapons to continue showing melee effects after being swung. (Local Only)
-			}
-
-			EnableProjSpears: {
-				Label: Enable Full Spears (Experimental)
-				Tooltip: Use spear projectile sprites. (Local Only)
-			}
-
-			EnableProjYoyos: {
-				Label: Enable Small Yoyos (Experimental)
-				Tooltip: Use yoyo projectile sprites. (Local Only)
-			}
-
-			EnableMenuDisplay: {
-				Label: Enable Menu Display (Experimental)
-				Tooltip: Enable showing player preview with first item in the Player Select screen. (Local Only)
-			}
-
-			SmallSwordThreshold: {
-				Label: One Handed Sword Threshold (Pixels)
-				Tooltip: Maximum average of width/height to classify a Sword as one handed. (Local Only)
-			}
-
-			SmallGunThreshold: {
-				Label: One Handed Gun Threshold (Pixels)
-				Tooltip: Maximum width to classify a Gun as one handed. (Local Only)
-			}
-
-			GiantItemThreshold: {
-				Label: Giant Item Threshold (Pixels)
-				Tooltip: Maximum width or height before attempting to scale down. (Local Only)
-			}
-
-			GiantItemScalePercent: {
-				Label: Giant Item Scaling (%):
-				Tooltip: The scale to apply to a 'giant' item. If the item is still over the limit, it will use a different set of poses. (Local Only)
-			}
-
-			ShowHeldItem: {
-				Label: Show Held Item
-				Tooltip: Shows the item you are holding. Other players can see this.
-			}
-
-			CombatDelayTimerMax: {
-				Label: Combat mode duration (Seconds)
-				Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'
-			}
-
-			CombatStanceAlwaysOn: {
-				Label: Combat pose always active.
-				Tooltip: Prevents combat poses from changing to idle poses.
-			}
-
 			Preview: Item Preview
-			Unassigned: Unassigned
-			SmallItemPose: "[i:2]Normal Items"
-			Item: Normal Item
-			LargeItemPose: "[i:33]Large Items"
-			LargeItem: Large Item
-			VanityItemPose: "[i:1007]Equippable Items"
-			VanityItem: Equippable Item
-			PotionPose.Label: "[i:126]Potions"
-			Potion: Potion
-			SmallMeleePose: "[i:3508]Melee Weapons"
-			SmallMelee: Melee Weapon
-			LargeMeleePose: "[i:190]Large Melee Weapons"
-			LargeMelee: Large Melee Weapon
-			RapierPose: "[i:3507]Shortswords & Rapiers"
-			Rapier: Shortsword/Rapier
-			SpearPose: "[i:280]Spears"
-			Spear: Spear
-			YoyoPose: "[i:3278]Yoyos"
-			Yoyo: Yoyo
-			YoyoHalfScale: "[i:3278]Yoyos: Reduce yoyo size"
-			FlailPose: "[i:5011]Flails"
-			Flail: Flail
-			WhipPose: "[i:4672]Whips"
-			Whips: Whip
-			ThrownPose: "[i:42]Throwing Weapons"
-			Thrown: Throwing Weapon
-			ThrownThinPose: "[i:279] Throwing Knives"
-			ThrownThin: Throwing Knife
-			PowerToolPose: "[i:579] Power Tools"
-			PowerTool: Power Tool
-			BowPose: "[i:39] Bows"
-			Bow: Bow
-			BowDrawAmmo: "[i:39]Bows & [i:435]Repeaters: Render currently equipped arrows (Local Only)"
-			RepeaterPose: "[i:435]Crossbows & Repeaters"
-			Repeater: Crossbow/Repeater
-			PistolPose: "[i:95]Handguns"
-			Pistol: Handgun
-			GunPose: "[i:98] Automatic Guns"
-			Gun: Automatic Gun
-			GunManualPose: "[i:96]Semi-automatic Guns"
-			GunManual: Semi-automatic Gun
-			ShotgunPose: "[i:964]Shotguns"
-			Shotgun: Shotgun
-			LauncherPose: "[i:759]Launchers"
-			Launcher: Launcher
-			StaffPose: "[i:739]Magic Staves"
-			Staff: Magical Staff
-			MagicBookPose: "[i:165]Spell Tomes"
-			MagicBook: Spell Tome
-			MagicItemPose: "[i:4270]Magical Foci"
-			MagicItem: Magical Focus
-			GiantItemPose: Giant Items
-			GiantItem: Giant Item
-			GiantWeaponPose: Giant Melee Weapons
-			GiantWeapon: Giant Melee Weapon
-			GiantBowPose: Giant Bows
-			GiantBow: Giant Bow
-			GiantGunPose: Giant Ranged Weapons
-			GiantGun: Giant Ranged Weapon
-			GiantMagicPose: Giant Magic Weapons
-			GiantMagic: Giant Magic Weapon
 
-			ForcePoseGroup: {
-				Label: Item Pose Group
-				Tooltip: Manually assign the item to a pose group.
-			}
-
-			ForceDrawItemPose: {
-				Label: Forced Item Pose
-				Tooltip: Override and force the item to use this specific pose, if not set to Default.
-			}
-
-			CurrentPoseGroup: {
-				Label: Held Item Pose Group
-				Tooltip: The pose group the currently held item belongs to.
-			}
-
-			CurrentDrawItemPose: {
-				Label: Held Item Pose
-				Tooltip: The pose the currently held item is using.
-			}
-
-			ModIntegrationHeader: Mod Integrations & Compatibility
-
-			ModIntegrationTerrariaOverhaul: {
-				Label: "[i:509] Toggle: Terraria Overhaul"
-				Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons
-			}
-
-			ModIntegrationMeleeEffectsPlus: {
-				Label: "[i:509] Toggle: Melee Effects+"
-				Tooltip: Applies a fix to attempt to help identify different types of swords.
-			}
-
-			ModIntegrationVibrantReverie: {
-				Label: "[i:1344] Automatic: Vibrant Reverie"
-				Tooltip: Default preferences for certain items. Thanks W1K [i:58]!
-			}
-
-			ModIntegrationOverhaulGunAnimations: {
-				Label: "[i:2701] Manual: Overhaul Gun Animations"
-				Tooltip: Enable Overhaul Gun Animations Setting: Vanilla aim animation to remove rendering conflicts.
-			}
-
-			ModIntegrationArmamentDisplay: {
-				Label: "[i:2701] Manual: ArmamentDisplay"
-				Tooltip: Disable ArmamentDisplay Visual Effect Setting: Weapon display switch to remove rendering conflicts.
-			}
-
-			ModIntegrationArmamentDisplayLite: {
-				Label: "[i:1344] Automatic: ArmamentDisplayLite"
-				Tooltip: Disables this mod's idle poses for weapons. I can only assume this is the reason why both of these mods are installed.
-			}
-
-			ModIntegrationCoolerItemVisualEffect: {
-				Label: "[i:2701] Manual: CoolerItemVisualEffect"
-				Tooltip: Disable CoolerItemVisualEffect Advanced Setting: Other Settings: Weapon display switch to remove rendering conflicts.
+			PoseGroup: {
+				Unassigned: Unassigned
+				Item: Normal Item
+				LargeItem: Large Item
+				VanityItem: Equippable Item
+				Potion: Potion
+				SmallMelee: Melee Weapon
+				LargeMelee: Large Melee Weapon
+				Rapier: Shortsword/Rapier
+				Spear: Spear
+				Yoyo: Yoyo
+				Flail: Flail
+				Whips: Whip
+				Thrown: Throwing Weapon
+				ThrownThin: Throwing Knife
+				PowerTool: Power Tool
+				Bow: Bow
+				Repeater: Crossbow/Repeater
+				Pistol: Handgun
+				Gun: Automatic Gun
+				GunManual: Semi-automatic Gun
+				Shotgun: Shotgun
+				Launcher: Launcher
+				Staff: Magical Staff
+				MagicBook: Spell Tome
+				MagicItem: Magical Focus
+				GiantItem: Giant Item
+				GiantWeapon: Giant Melee Weapon
+				GiantBow: Giant Bow
+				GiantGun: Giant Ranged Weapon
+				GiantMagic: Giant Magic Weapon
 			}
 		}
-	}
 
-	WeaponOutLite: {
 		Configs: {
 			WeaponOutClientConfig: {
-				DisplayName: "{$Mods.WeaponOut.Config.ClientSideConfigLabel}"
+				DisplayName: Personal Preferences
+
+				Headers: {
+					PlayerHeader: Display & Poses
+					LocalGraphics: Local Graphics
+					ModIntegrationHeader: Mod Integrations & Compatibility
+				}
 
 				ShowHeldItem: {
-					Label: "{$Mods.WeaponOut.Config.ShowHeldItem.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ShowHeldItem.Tooltip}"
+					Label: Show Held Item
+					Tooltip: Shows the item you are holding. Other players can see this. Default is On.
 				}
 
 				CombatDelayTimerMax: {
-					Label: "{$Mods.WeaponOut.Config.CombatDelayTimerMax.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.CombatDelayTimerMax.Tooltip}"
+					Label: Combat mode duration (Seconds)
+					Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'. Default is 3 seconds.
 				}
 
 				CombatStanceAlwaysOn: {
-					Label: "{$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Tooltip}"
+					Label: Combat pose always active.
+					Tooltip: Prevents combat poses from changing to idle poses. Default is Off.
 				}
 
 				SmallItemPose: {
-					Label: "{$Mods.WeaponOut.Config.SmallItemPose}"
-					Tooltip: ""
+					Label: "[i:2]Normal Items"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.Hold.Label}
 				}
 
 				SmallItemPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				LargeItemPose: {
-					Label: "{$Mods.WeaponOut.Config.LargeItemPose}"
-					Tooltip: ""
+					Label: "[i:33]Large Items"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.TwoHandCarry.Label}
 				}
 
 				LargeItemPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				PotionPose: {
-					Label: "{$Mods.WeaponOut.Config.PotionPose.Label}"
-					Tooltip: ""
+					Label: "[i:126]Potions"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.HoldForward.Label}
 				}
 
 				PotionPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				SmallMeleePose: {
-					Label: "{$Mods.WeaponOut.Config.SmallMeleePose}"
-					Tooltip: ""
+					Label: "[i:3508]Melee Weapons"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatReady.Label}
 				}
 
 				SmallMeleePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				LargeMeleePose: {
-					Label: "{$Mods.WeaponOut.Config.LargeMeleePose}"
-					Tooltip: ""
+					Label: "[i:190]Large Melee Weapons"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHand.Label}
 				}
 
 				LargeMeleePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				VanityItemPose: {
-					Label: "{$Mods.WeaponOut.Config.VanityItemPose}"
-					Tooltip: ""
+					Label: "[i:1007]Equippable Items"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.OffHand.Label}
 				}
 
 				VanityItemPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				RapierPose: {
-					Label: "{$Mods.WeaponOut.Config.RapierPose}"
-					Tooltip: ""
+					Label: "[i:3507]Shortswords & Rapiers"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatHold.Label}
 				}
 
 				RapierPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				SpearPose: {
-					Label: "{$Mods.WeaponOut.Config.SpearPose}"
-					Tooltip: ""
+					Label: "[i:280]Spears"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatPoleReady.Label}
 				}
 
 				SpearPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				YoyoPose: {
-					Label: "{$Mods.WeaponOut.Config.YoyoPose}"
-					Tooltip: ""
+					Label: "[i:3278]Yoyos"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.Hold.Label}
 				}
 
 				YoyoPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				YoyoHalfScale: {
-					Label: "{$Mods.WeaponOut.Config.YoyoHalfScale}"
-					Tooltip: ""
+					Label: "[i:3278]Yoyos: Reduce yoyo size"
+					Tooltip: Default is On
 				}
 
 				FlailPose: {
-					Label: "{$Mods.WeaponOut.Config.FlailPose}"
-					Tooltip: ""
+					Label: "[i:5011]Flails"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatFlailReady.Label}
 				}
 
 				FlailPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				WhipPose: {
-					Label: "{$Mods.WeaponOut.Config.WhipPose}"
-					Tooltip: ""
+					Label: "[i:4672]Whips"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.Hold.Label}
 				}
 
 				WhipPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				ThrownPose: {
-					Label: "{$Mods.WeaponOut.Config.ThrownPose}"
-					Tooltip: ""
+					Label: "[i:42]Throwing Weapons"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatUpright.Label}
 				}
 
 				ThrownPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				ThrownThinPose: {
-					Label: "{$Mods.WeaponOut.Config.ThrownThinPose}"
-					Tooltip: ""
+					Label: "[i:279] Throwing Knives"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.Hold.Label}
 				}
 
 				ThrownThinPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				PowerToolPose: {
-					Label: "{$Mods.WeaponOut.Config.PowerToolPose}"
-					Tooltip: ""
+					Label: "[i:579] Power Tools"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandPowerTool.Label}
 				}
 
 				PowerToolPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				BowPose: {
-					Label: "{$Mods.WeaponOut.Config.BowPose}"
-					Tooltip: ""
+					Label: "[i:39] Bows"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandBow.Label}
 				}
 
 				BowPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				RepeaterPose: {
-					Label: "{$Mods.WeaponOut.Config.RepeaterPose}"
-					Tooltip: ""
+					Label: "[i:435]Crossbows & Repeaters"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandRifleDown.Label}
 				}
 
 				RepeaterPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				BowDrawAmmo: {
-					Label: "{$Mods.WeaponOut.Config.BowDrawAmmo}"
-					Tooltip: ""
+					Label: "[i:39]Bows & [i:435]Repeaters: Render currently equipped arrows (Local Only)"
+					Tooltip: Default is On
 				}
 
 				PistolPose: {
-					Label: "{$Mods.WeaponOut.Config.PistolPose}"
-					Tooltip: ""
+					Label: "[i:95]Handguns"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.Hold.Label}
 				}
 
 				PistolPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				GunPose: {
-					Label: "{$Mods.WeaponOut.Config.GunPose}"
-					Tooltip: ""
+					Label: "[i:98] Automatic Guns"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandRifleHip.Label}
 				}
 
 				GunPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				GunManualPose: {
-					Label: "{$Mods.WeaponOut.Config.GunManualPose}"
-					Tooltip: ""
+					Label: "[i:96]Semi-automatic Guns"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandBoltAction.Label}
 				}
 
 				GunManualPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				ShotgunPose: {
-					Label: "{$Mods.WeaponOut.Config.ShotgunPose}"
-					Tooltip: ""
+					Label: "[i:964]Shotguns"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandPumpAction.Label}
 				}
 
 				ShotgunPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				LauncherPose: {
-					Label: "{$Mods.WeaponOut.Config.LauncherPose}"
-					Tooltip: ""
+					Label: "[i:759]Launchers"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.OffHandShoulder.Label}
 				}
 
 				LauncherPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				StaffPose: {
-					Label: "{$Mods.WeaponOut.Config.StaffPose}"
-					Tooltip: ""
+					Label: "[i:739]Magic Staves"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.OffHandPole.Label}
 				}
 
 				StaffPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				MagicBookPose: {
-					Label: "{$Mods.WeaponOut.Config.MagicBookPose}"
-					Tooltip: ""
+					Label: "[i:165]Spell Tomes"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.HoldTome.Label}
 				}
 
 				MagicBookPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				MagicItemPose: {
-					Label: "{$Mods.WeaponOut.Config.MagicItemPose}"
-					Tooltip: ""
+					Label: "[i:4270]Magical Foci"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.FloatingOffHand.Label}
 				}
 
 				MagicItemPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				EnableWeaponPhysics: {
-					Label: "{$Mods.WeaponOut.Config.EnableWeaponPhysics.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableWeaponPhysics.Tooltip}"
+					Label: Enable Item Physics
+					Tooltip: Allows some held items to react to motion. Disable to prevent motion based item movement. Default is On. (Local Only)
 				}
 
 				EnableSheathingAnim: {
-					Label: "{$Mods.WeaponOut.Config.EnableSheathingAnim.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableSheathingAnim.Tooltip}"
+					Label: Enable Sheathing Animations
+					Tooltip: Allows some poses to smoothly transition to an idle pose. Default is On. (Local Only)
 				}
 
 				EnableItemScaling: {
-					Label: "{$Mods.WeaponOut.Config.EnableItemScaling.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableItemScaling.Tooltip}"
+					Label: Enable Extreme Item scaling
+					Tooltip: Allows items to show their size modifiers (if greater than +-10%). Disable to keep all item sizes pixel perfect. Default is On. (Local Only)
 				}
 
 				SmallSwordThreshold: {
-					Label: "{$Mods.WeaponOut.Config.SmallSwordThreshold.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.SmallSwordThreshold.Tooltip}"
+					Label: One Handed Sword Threshold (Pixels)
+					Tooltip: Maximum average of width/height to classify a Sword as one handed. Default is 50. (Local Only)
 				}
 
 				SmallGunThreshold: {
-					Label: "{$Mods.WeaponOut.Config.SmallGunThreshold.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.SmallGunThreshold.Tooltip}"
+					Label: One Handed Gun Threshold (Pixels)
+					Tooltip: Maximum width to classify a Gun as one handed. Default is 36. (Local Only)
 				}
 
 				GiantItemThreshold: {
-					Label: "{$Mods.WeaponOut.Config.GiantItemThreshold.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.GiantItemThreshold.Tooltip}"
+					Label: Giant Item Threshold (Pixels)
+					Tooltip: Maximum width or height before attempting to scale down. Default is 80. (Local Only)
 				}
 
 				GiantItemScalePercent: {
-					Label: "{$Mods.WeaponOut.Config.GiantItemScalePercent.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.GiantItemScalePercent.Tooltip}"
+					Label: Giant Item Scaling (%)
+					Tooltip: Scale down giant items to this percentage. If the item is still over the threshold, it will use one of the poses below. Default is 100%. (Local Only)
 				}
 
 				GiantItemPose: {
-					Label: "{$Mods.WeaponOut.Config.GiantItemPose}"
-					Tooltip: ""
+					Label: Giant Items
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.TwoHandCarry.Label}
 				}
 
 				GiantItemPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: Giant Items
 					Tooltip: ""
 				}
 
 				GiantWeaponPose: {
-					Label: "{$Mods.WeaponOut.Config.GiantWeaponPose}"
-					Tooltip: ""
+					Label: Giant Melee Weapons
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandBerserk.Label}
 				}
 
 				GiantMeleePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				GiantBowPose: {
-					Label: "{$Mods.WeaponOut.Config.GiantBowPose}"
-					Tooltip: ""
+					Label: Giant Bows
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandBow.Label}
 				}
 
 				GiantBowPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				GiantGunPose: {
-					Label: "{$Mods.WeaponOut.Config.GiantGunPose}"
-					Tooltip: ""
+					Label: Giant Ranged Weapons
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatOffHandShoulder.Label}
 				}
 
 				GiantGunPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				GiantMagicPose: {
-					Label: "{$Mods.WeaponOut.Config.GiantMagicPose}"
-					Tooltip: ""
+					Label: Giant Magic Weapons
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.FloatingAimed.Label}
 				}
 
 				GiantMagicPV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
 
 				EnableMenuDisplay: {
-					Label: "{$Mods.WeaponOut.Config.EnableMenuDisplay.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableMenuDisplay.Tooltip}"
+					Label: Enable Menu Display (Experimental)
+					Tooltip: Enable showing player preview with first item in the Player Select screen. Default is On. (Local Only)
 				}
 
 				EnableMeleeEffects: {
-					Label: "{$Mods.WeaponOut.Config.EnableMeleeEffects.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip}"
+					Label: Enable Melee Effects (Experimental)
+					Tooltip: Allows weapons to continue showing melee effects after being swung. Default is Off. (Local Only)
 				}
 
 				EnableProjSpears: {
-					Label: "{$Mods.WeaponOut.Config.EnableProjSpears.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableProjSpears.Tooltip}"
+					Label: Enable Full Spears (Experimental)
+					Tooltip: Use spear projectile sprites. Default is On. (Local Only)
 				}
 
 				EnableProjYoyos: {
-					Label: "{$Mods.WeaponOut.Config.EnableProjYoyos.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableProjYoyos.Tooltip}"
+					Label: Enable Small Yoyos (Experimental)
+					Tooltip: Use yoyo projectile sprites. Default is On. (Local Only)
 				}
 
 				ModIntegrationTerrariaOverhaul: {
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip}"
-				}
-
-				ModIntegrationOverhaulGunAnimations: {
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Tooltip}"
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Label}"
-				}
-
-				ModIntegrationVibrantReverie: {
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Tooltip}"
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Label}"
+					Label: "[i:509] Toggle: Terraria Overhaul"
+					Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons. Default is On.
 				}
 
 				ModIntegrationMeleeEffectsPlus: {
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Tooltip}"
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Label}"
+					Label: "[i:509] Toggle: Melee Effects+"
+					Tooltip: Applies a fix to attempt to help identify different types of swords. Default is On.
+				}
+
+				ModIntegrationVibrantReverie: {
+					Label: "[i:1344] Automatic: Vibrant Reverie"
+					Tooltip: Default preferences for certain items. Thanks W1K [i:58]!
+				}
+
+				ModIntegrationOverhaulGunAnimations: {
+					Label: "[i:2701] Manual: Overhaul Gun Animations"
+					Tooltip: Enable Overhaul Gun Animations Setting: Vanilla aim animation to remove rendering conflicts.
 				}
 
 				ModIntegrationArmamentDisplay: {
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Tooltip}"
+					Label: "[i:2701] Manual: ArmamentDisplay"
+					Tooltip: Disable ArmamentDisplay Visual Effect Setting: Weapon display switch to remove rendering conflicts.
 				}
 
 				ModIntegrationArmamentDisplayLite: {
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Tooltip}"
+					Label: "[i:1344] Automatic: ArmamentDisplayLite"
+					Tooltip: Disables this mod's idle poses for weapons. I can only assume this is the reason why both of these mods are installed.
 				}
 
 				ModIntegrationCoolerItemVisualEffect: {
-					Label: "{$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Tooltip}"
+					Label: "[i:2701] Manual: CoolerItemVisualEffect"
+					Tooltip: Disable CoolerItemVisualEffect Advanced Setting: Other Settings: Weapon display switch to remove rendering conflicts.
 				}
 			}
 
-			ItemPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Carry.Label: Carry
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				HoldTome.Label: Hold Tome
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			LargeItemPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Carry.Label: Carry
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			PotionPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Carry.Label: Carry
-				Levitate.Label: Levitate
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Back.Label: Back
-				Waist.Label: Waist
-				HoldTome.Label: Hold Tome
-				Combat_Two_Hand.Label: Combat Two Hand
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			SmallMeleePoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldReverse.Label: Hold Reverse
-				OffHand.Label: Off Hand
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Rapier.Label: Combat Rapier
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Berserk.Label: Combat Two Hand Berserk
-				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			LargeMeleePoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				OffHand.Label: Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Berserk.Label: Combat Two Hand Berserk
-				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			RapierPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldReverse.Label: Hold Reverse
-				OffHand.Label: Off Hand
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Fencer.Label: Combat Fencer
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Berserk.Label: Combat Two Hand Berserk
-				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			SpearPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				Hold.Label: Hold
-				OffHand.Label: Off Hand
-				PoleOffHand.Label: Pole Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Pole_Ready.Label: Combat Pole Ready
-				Combat_Pole_Upright.Label: Combat Pole Upright
-				Combat_Pole_Shoulder.Label: Combat Pole Shoulder
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Fencer.Label: Combat Fencer
-				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			YoyoPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Levitate_Front.Label: Levitate Front
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Fencer.Label: Combat Fencer
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			FlailPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				OffHand_Shoulder.Label: Off Hand Shoulder
-				Combat_Ready.Label: Combat Ready
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			WhipPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldReverse.Label: Hold Reverse
-				OffHand.Label: Off Hand
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Rapier.Label: Combat Rapier
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Berserk.Label: Combat Two Hand Berserk
-				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			ThrownPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldReverse.Label: Hold Reverse
-				OffHand.Label: Off Hand
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Upright.Label: Combat Upright
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			PowerToolPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				HoldOffHand.Label: Hold Off Hand
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Power_Tool.Label: Combat Power Tool
-				Combat_Shoulder.Label: Combat Shoulder
-				Combat_Rifle_Hip.Label: Combat Rifle Hip
-				Combat_Rifle_Up.Label: Combat Rifle Up
-				Combat_Rifle_Down.Label: Combat Rifle Down
-				Combat_Rifle_OffHand.Label: Combat Rifle Off Hand
-				Combat_Pistol_OffHand.Label: Combat Pistol Off Hand
-				Combat_Pistol.Label: Combat Pistol
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			BowPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackAlt.Label: Back Alt
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Hunter.Label: Combat Hunter
-				Floating_Back_Upright.Label: Floating Back Upright
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GunPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackAlt.Label: Back Alt
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				HoldForward.Label: Hold Forward
-				OffHand_Upright.Label: Off Hand Upright
-				OffHand_Shoulder.Label: Off Hand Shoulder
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Combat_Hip_Ready.Label: Combat Hip Ready
-				Combat_Ready.Label: Combat Ready
-				Combat_ReadyAlt.Label: Combat Ready Alt
-				Combat_Offhand.Label: Combat Offhand
-				Combat_Bolt_Action.Label: Combat Bolt Action
-				Combat_Pump_Action.Label: Combat Pump Action
-				Combat_Cowboy.Label: Combat Cowboy
-				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back.Label: Floating Back
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			PistolPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				Combat_Offhand.Label: Combat Offhand
-				Combat_Cowboy.Label: Combat Cowboy
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			LauncherPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackAlt.Label: Back Alt
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				HoldForward.Label: Hold Forward
-				OffHand_Upright.Label: Off Hand Upright
-				OffHand_Shoulder.Label: Off Hand Shoulder
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Combat_Hip_Ready.Label: Combat Hip Ready
-				Combat_Ready.Label: Combat Ready
-				Combat_ReadyAlt.Label: Combat Ready Alt
-				Combat_Offhand.Label: Combat Offhand
-				Combat_Bolt_Action.Label: Combat Bolt Action
-				Combat_Pump_Action.Label: Combat Pump Action
-				Combat_Cowboy.Label: Combat Cowboy
-				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back.Label: Floating Back
-				Floating_Back_Aimed.Label: Floating Back Aimed
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
-			StaffPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				Hold.Label: Hold
-				OffHand.Label: Off Hand
-				PoleOffHand.Label: Pole Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Pole_Ready.Label: Combat Pole Ready
-				Combat_Pole_Upright.Label: Combat Pole Upright
-				Combat_Pole_Shoulder.Label: Combat Pole Shoulder
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Fencer.Label: Combat Fencer
-				Combat_Pole_Two_Hand.Label: Combat Pole Two Hand
-				Floating_Back_Upright.Label: Floating Back Upright
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			MagicBookPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Floating_BackAlt.Label: Floating Back Alt
-				Orbit_Clockwise_Fast.Label: Orbit Clockwise Fast
-				Orbit_AntiClock_Fast.Label: Orbit Anti Clock Fast
-				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
-				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
-				Combat_Upright.Label: Combat Upright
-				HoldTome.Label: Hold Tome
-				Floating_Back_Upright.Label: Floating Back Upright
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			MagicItemPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Orbit_Clockwise_Fast.Label: Orbit Clockwise Fast
-				Orbit_AntiClock_Fast.Label: Orbit Anti Clock Fast
-				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
-				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
-				Combat_Upright.Label: Combat Upright
-				Floating_Back_Upright.Label: Floating Back Upright
-				Back_Upright.Label: Back Upright
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GiantItemPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Carry.Label: Carry
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Floating_Back_Upright.Label: Floating Back Upright
-				Back_Upright.Label: Back Upright
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GiantMeleePoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				OffHand.Label: Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Two_Hand_Guard.Label: Combat Two Hand Guard
-				Combat_Two_Hand_Berserk.Label: Combat Two Hand Berserk
-				Combat_Two_Hand_Highlander.Label: Combat Two Hand Highlander
-				Combat_Two_Hand_Brave.Label: Combat Two Hand Brave
-				Combat_Two_Hand_Tail.Label: Combat Two Hand Tail
-				Combat_Hold.Label: Combat Hold
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GiantBowPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackAlt.Label: Back Alt
-				Floating_Back.Label: Floating Back
-				Combat_Hold.Label: Combat Hold
-				Combat_Hunter.Label: Combat Hunter
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GiantGunPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackAlt.Label: Back Alt
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				HoldForward.Label: Hold Forward
-				OffHand_Upright.Label: Off Hand Upright
-				OffHand_Shoulder.Label: Off Hand Shoulder
-				Floating_Back.Label: Floating Back
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Combat_Hip_Ready.Label: Combat Hip Ready
-				Combat_Ready.Label: Combat Ready
-				Combat_ReadyAlt.Label: Combat Ready Alt
-				Combat_Offhand.Label: Combat Offhand
-				Combat_Bolt_Action.Label: Combat Bolt Action
-				Combat_Pump_Action.Label: Combat Pump Action
-				Combat_Power_Tool.Label: Combat Power Tool
-				Floating_Back_Aimed.Label: Floating Back Aimed
-			}
-
-			GiantMagicPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				Waist.Label: Waist
-				WaistAlt.Label: Waist Alt
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				OffHand.Label: Off Hand
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Levitate_Aimed.Label: Levitate Aimed
-				Floating_Back.Label: Floating Back
-				Floating_BackAlt.Label: Floating Back Alt
-				Orbit_Clockwise_Fast.Label: Orbit Clockwise Fast
-				Orbit_AntiClock_Fast.Label: Orbit Anti Clock Fast
-				Orbit_Clockwise_Slow.Label: Orbit Clockwise Slow
-				Orbit_AntiClock_Slow.Label: Orbit Anti Clock Slow
-				Combat_Hold.Label: Combat Hold
-				Combat_Pole_Ready.Label: Combat Pole Ready
-				Combat_Pole_Upright.Label: Combat Pole Upright
-				Combat_Pole_Shoulder.Label: Combat Pole Shoulder
-				Combat_Two_Hand.Label: Combat Two Hand
-				Combat_Ready.Label: Combat Ready
-				Combat_Upright.Label: Combat Upright
-				Combat_Raised.Label: Combat Raised
-				Combat_Trail.Label: Combat Trail
-				Combat_Fencer.Label: Combat Fencer
-				Floating_Back_Upright.Label: Floating Back Upright
-			}
-
 			WeaponOutClientHoldOverride: {
-				DisplayName: "{$Mods.WeaponOut.Config.OverrideConfigLabel}"
+				DisplayName: Item Manual Override
 
 				StyleOverrideList: {
 					Label: Style Override List
@@ -1154,18 +464,33 @@ Mods: {
 				}
 
 				CurrentPoseGroup: {
-					Label: "{$Mods.WeaponOut.Config.CurrentPoseGroup.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ForcePoseGroup.Tooltip}"
+					Label: Held Item Pose Group
+					Tooltip: The pose group the currently held item belongs to.
 				}
 
 				CurrentDrawItemPose: {
-					Label: "{$Mods.WeaponOut.Config.CurrentDrawItemPose.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.CurrentDrawItemPose.Tooltip}"
+					Label: Held Item Pose
+					Tooltip: The pose the currently held item is using.
 				}
 
 				CurrentItemPosePV: {
-					Label: "{$Mods.WeaponOut.Config.Preview}"
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
+				}
+			}
+
+			WeaponOutServerConfig: {
+				DisplayName: Global/Server
+				Headers.ServerSide: Feature Toggles
+
+				EnableWeaponOutVisuals: {
+					Label: Enable WeaponOut Visuals
+					Tooltip: Enables players to show held weapons, tools, items etc. Turning this off this will disable WeaponOut Lite for everybody. (Global Setting)
+				}
+
+				EnableForcedWeaponOutVisuals: {
+					Label: Enable Forced Visuals
+					Tooltip: Forces all players to show held items, regardless of clientside settings. (Global Setting)
 				}
 			}
 
@@ -1178,53 +503,114 @@ Mods: {
 				}
 
 				ForcePoseGroup: {
-					Label: "{$Mods.WeaponOut.Config.ForcePoseGroup.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ForcePoseGroup.Tooltip}"
+					Label: Item Pose Group
+					Tooltip: Manually assign the item to a pose group.
 				}
 
 				ForceDrawItemPose: {
-					Label: "{$Mods.WeaponOut.Config.ForceDrawItemPose.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.ForceDrawItemPose.Tooltip}"
+					Label: Forced Item Pose
+					Tooltip: Override and force the item to use this specific pose, if not set to Default.
 				}
 			}
 
 			PoseGroup: {
 				Tooltip: ""
-				Unassigned.Label: "{$Mods.WeaponOut.Config.Unassigned}"
-				Item.Label: "{$Mods.WeaponOut.Config.Item}"
-				LargeItem.Label: "{$Mods.WeaponOut.Config.LargeItem}"
-				Potion.Label: "{$Mods.WeaponOut.Config.Potion}"
-				PowerTool.Label: "{$Mods.WeaponOut.Config.PowerTool}"
-				Thrown.Label: "{$Mods.WeaponOut.Config.Thrown}"
-				ThrownThin.Label: "{$Mods.WeaponOut.Config.ThrownThin}"
-				Whips.Label: "{$Mods.WeaponOut.Config.Whips}"
-				SmallMelee.Label: "{$Mods.WeaponOut.Config.SmallMelee}"
-				LargeMelee.Label: "{$Mods.WeaponOut.Config.LargeMelee}"
-				Spear.Label: "{$Mods.WeaponOut.Config.Spear}"
-				Flail.Label: "{$Mods.WeaponOut.Config.Flail}"
-				Rapier.Label: "{$Mods.WeaponOut.Config.Rapier}"
-				Yoyo.Label: "{$Mods.WeaponOut.Config.Yoyo}"
-				Bow.Label: "{$Mods.WeaponOut.Config.Bow}"
-				Pistol.Label: "{$Mods.WeaponOut.Config.Pistol}"
-				Gun.Label: "{$Mods.WeaponOut.Config.Gun}"
-				GunManual.Label: "{$Mods.WeaponOut.Config.GunManual}"
-				Shotgun.Label: "{$Mods.WeaponOut.Config.Shotgun}"
-				Repeater.Label: "{$Mods.WeaponOut.Config.Repeater}"
-				Launcher.Label: "{$Mods.WeaponOut.Config.Launcher}"
-				Staff.Label: "{$Mods.WeaponOut.Config.Staff}"
-				MagicBook.Label: "{$Mods.WeaponOut.Config.MagicBook}"
-				MagicItem.Label: "{$Mods.WeaponOut.Config.MagicItem}"
-				GiantItem.Label: "{$Mods.WeaponOut.Config.GiantItem}"
-				GiantWeapon.Label: "{$Mods.WeaponOut.Config.GiantWeapon}"
-				GiantBow.Label: "{$Mods.WeaponOut.Config.GiantBow}"
-				GiantGun.Label: "{$Mods.WeaponOut.Config.GiantGun}"
-				GiantMagic.Label: "{$Mods.WeaponOut.Config.GiantMagic}"
-				VanityItem.Label: "{$Mods.WeaponOut.Config.VanityItem}"
+				Unassigned.Label: Unassigned
+				Item.Label: Normal Item
+				LargeItem.Label: Large Item
+				VanityItem.Label: Equippable Item
+				Potion.Label: Potion
+				SmallMelee.Label: Melee Weapon
+				LargeMelee.Label: Large Melee Weapon
+				Rapier.Label: Shortsword/Rapier
+				Spear.Label: Spear
+				Yoyo.Label: Yoyo
+				Flail.Label: Flail
+				Whips.Label: Whip
+				Thrown.Label: Throwing Weapon
+				ThrownThin.Label: Throwing Knife
+				PowerTool.Label: Power Tool
+				Bow.Label: Bow
+				Repeater.Label: Crossbow/Repeater
+				Pistol.Label: Handgun
+				Gun.Label: Automatic Gun
+				GunManual.Label: Semi-automatic Gun
+				Shotgun.Label: Shotgun
+				Launcher.Label: Launcher
+				Staff.Label: Magical Staff
+				MagicBook.Label: Spell Tome
+				MagicItem.Label: Magical Focus
+				GiantItem.Label: Giant Item
+				GiantWeapon.Label: Giant Melee Weapon
+				GiantBow.Label: Giant Bow
+				GiantGun.Label: Giant Ranged Weapon
+				GiantMagic.Label: Giant Magic Weapon
+			}
+
+			LabelledItemPose: {
+				Tooltip: ""
+				None.Label: None
+				Back.Label: Back
+				BackUpright.Label: Back Upright
+				BackDownward.Label: Back Downward
+				BackBow.Label: Back Bow
+				Waist.Label: Waist
+				WaistHolster.Label: Waist Holster
+				Hold.Label: Hold
+				HoldForward.Label: Hold Forward
+				HoldReverse.Label: Hold Reverse
+				HoldTome.Label: Hold Tome
+				OffHand.Label: Off Hand
+				OffHandFlailShoulder.Label: Off Hand Flail Shoulder
+				OffHandPole.Label: Off Hand Pole
+				OffHandShoulder.Label: Off Hand Shoulder
+				OffHandUpright.Label: Off Hand Upright
+				TwoHandCarry.Label: Two Hand Carry
+				TwoHandJoustingLance.Label: Two Hand Jousting Lance
+				FloatingBack.Label: Floating Back
+				FloatingBackUpright.Label: Floating Back Upright
+				FloatingBackAimed.Label: Floating Back Aimed
+				FloatingFront.Label: Floating Front
+				FloatingOffHand.Label: Floating Off Hand
+				FloatingAimed.Label: Floating Aimed
+				OrbitClockwiseFast.Label: Orbit Clockwise Fast
+				OrbitAntiClockFast.Label: Orbit Anti Clock Fast
+				OrbitClockwiseSlow.Label: Orbit Clockwise Slow
+				OrbitAntiClockSlow.Label: Orbit Anti Clock Slow
+				CombatHold.Label: Combat Hold
+				CombatReady.Label: Combat Ready
+				CombatUpright.Label: Combat Upright
+				CombatRaised.Label: Combat Raised
+				CombatTrail.Label: Combat Trail
+				CombatRapier.Label: Combat Rapier
+				CombatPoleUpright.Label: Combat Pole Upright
+				CombatPoleReady.Label: Combat Pole Ready
+				CombatFlailReady.Label: Combat Flail Ready
+				CombatBowHold.Label: Combat Bow Hold
+				CombatPistol.Label: Combat Pistol
+				CombatOffHandPoleShoulder.Label: Combat Off Hand Pole Shoulder
+				CombatOffHandPistol.Label: Combat Off Hand Pistol
+				CombatOffHandShoulder.Label: Combat Off Hand Shoulder
+				CombatTwoHand.Label: Combat Two Hand
+				CombatTwoHandBrave.Label: Combat Two Hand Brave
+				CombatTwoHandTail.Label: Combat Two Hand Tail
+				CombatTwoHandHighlander.Label: Combat Two Hand Highlander
+				CombatTwoHandBerserk.Label: Combat Two Hand Berserk
+				CombatTwoHandGuard.Label: Combat Two Hand Guard
+				CombatTwoHandPoleTwoHand.Label: Combat Two Hand Pole Two Hand
+				CombatTwoHandPowerTool.Label: Combat Two Hand Power Tool
+				CombatTwoHandBow.Label: Combat Two Hand Bow
+				CombatTwoHandRifleHip.Label: Combat Two Hand Rifle Hip
+				CombatTwoHandRifleUp.Label: Combat Two Hand Rifle Up
+				CombatTwoHandRifleDown.Label: Combat Two Hand Rifle Down
+				CombatTwoHandRifleDown2.Label: Combat Two Hand Rifle Down2
+				CombatTwoHandBoltAction.Label: Combat Two Hand Bolt Action
+				CombatTwoHandPumpAction.Label: Combat Two Hand Pump Action
 			}
 
 			DrawItemPose: {
 				Tooltip: ""
-				Default.Label: Default
+				Unassigned.Label: Unassigned
 				None.Label: None
 				Back.Label: Back
 				BackUpright.Label: Back Upright
@@ -1234,6 +620,7 @@ Mods: {
 				StanceInHand.Label: Stance In Hand
 				HoldReversedInHand.Label: Hold Reversed In Hand
 				HoldInHandFront.Label: Hold In Hand Front
+				HoldSpellTome.Label: Hold Spell Tome
 				HoldInOffHand.Label: Hold In Off Hand
 				CarryInBothHands.Label: Carry In Both Hands
 				StanceMachineTool.Label: Stance Machine Tool
@@ -1252,6 +639,7 @@ Mods: {
 				StancePoleReady.Label: Stance Pole Ready
 				StancePoleShoulder.Label: Stance Pole Shoulder
 				StancePoleUpright.Label: Stance Pole Upright
+				StancePoleTwoHand.Label: Stance Pole Two Hand
 				JoustingLance.Label: Jousting Lance
 				BackFlail.Label: Back Flail
 				BackFlailShoulder.Label: Back Flail Shoulder
@@ -1281,40 +669,6 @@ Mods: {
 				FloatingOrbitClockwiseSlow.Label: Floating Orbit Clockwise Slow
 				FloatingOrbitAntiClockwiseFast.Label: Floating Orbit Anti Clockwise Fast
 				FloatingOrbitClockwiseFast.Label: Floating Orbit Clockwise Fast
-				HoldSpellTome.Label: Hold Spell Tome
-				StancePoleTwoHand.Label: Stance Pole Two Hand
-				Unassigned.Label: Unassigned
-			}
-
-			WeaponOutServerConfig: {
-				DisplayName: "{$Mods.WeaponOut.Config.ServerSideConfigLabel}"
-
-				EnableWeaponOutVisuals: {
-					Label: "{$Mods.WeaponOut.Config.EnableWeaponOutVisuals.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableWeaponOutVisuals.Tooltip}"
-				}
-
-				EnableForcedWeaponOutVisuals: {
-					Label: "{$Mods.WeaponOut.Config.EnableForcedWeaponOutVisuals.Label}"
-					Tooltip: "{$Mods.WeaponOut.Config.EnableForcedWeaponOutVisuals.Tooltip}"
-				}
-			}
-
-			VanityItemPoseID: {
-				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				Waist.Label: Waist
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				HoldTome.Label: Hold Tome
-				OffHand.Label: Off Hand
-				Carry.Label: Carry
-				Levitate_Front.Label: Levitate Front
-				Levitate_OffHand.Label: Levitate Off Hand
-				Floating_Back.Label: Floating Back
-				Combat_Two_Hand.Label: Combat Two Hand
-				Floating_Back_Upright.Label: Floating Back Upright
 			}
 		}
 	}

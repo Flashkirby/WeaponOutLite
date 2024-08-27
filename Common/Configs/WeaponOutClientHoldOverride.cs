@@ -12,7 +12,6 @@ using Terraria.ModLoader;
 
 namespace WeaponOutLite.Common.Configs
 {
-    [Label("$Mods.WeaponOut.Config.OverrideConfigLabel")]
     public class WeaponOutClientHoldOverride : ModConfig
     {
         private HybridDictionary styleOverrideItemCache;
@@ -21,8 +20,6 @@ namespace WeaponOutLite.Common.Configs
 
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
-        [Label("$Mods.WeaponOut.Config.CurrentPoseGroup.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.CurrentPoseGroup.Tooltip")]
         [DrawTicks]
         public PoseStyleID.PoseGroup CurrentPoseGroup
         {
@@ -38,8 +35,6 @@ namespace WeaponOutLite.Common.Configs
 
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
-        [Label("$Mods.WeaponOut.Config.CurrentDrawItemPose.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.CurrentDrawItemPose.Tooltip")]
         [DrawTicks]
         public DrawItemPoseID.DrawItemPose CurrentDrawItemPose
         {
@@ -53,7 +48,7 @@ namespace WeaponOutLite.Common.Configs
 
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
-        [Label("$Mods.WeaponOut.Config.Preview")]
+        [Label("$Mods.WeaponOutLite.Common.Preview")]
         [CustomModConfigItem(typeof(PreviewHeldItem))]
         public int CurrentItemPosePV => (int)CurrentDrawItemPose;
 
@@ -160,24 +155,6 @@ namespace WeaponOutLite.Common.Configs
                 ForcePoseGroup = PoseStyleID.PoseGroup.Spear,
                 ForceDrawItemPose = DrawItemPoseID.DrawItemPose.JoustingLance
             });
-
-            //// Custom integration defaults
-            //if (WeaponOutLite.W1KModReduxModLoaded) {
-            //    string vibrantReverie = "W1KModRedux";
-
-            //    // We bolt actioning these rifles
-            //    styleOverrideList.Add(new ItemDrawOverrideData() {
-            //        Item = new ItemDefinition(vibrantReverie, "HuntingRifle"),
-            //        ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
-            //        ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
-            //    });
-
-            //    styleOverrideList.Add(new ItemDrawOverrideData() {
-            //        Item = new ItemDefinition(vibrantReverie, "MouserMagnum"),
-            //        ForcePoseGroup = PoseStyleID.PoseGroup.GunManual,
-            //        ForceDrawItemPose = DrawItemPoseID.DrawItemPose.StanceRifleBoltAction,
-            //    });
-            //}
         }
     }
 
@@ -190,14 +167,10 @@ namespace WeaponOutLite.Common.Configs
         public ItemDefinition Item;
 
 
-        [Label("$Mods.WeaponOut.Config.ForcePoseGroup.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ForcePoseGroup.Tooltip")]
         [DrawTicks]
         [DefaultValue(PoseStyleID.PoseGroup.Unassigned)]
         public PoseStyleID.PoseGroup ForcePoseGroup;
 
-        [Label("$Mods.WeaponOut.Config.ForceDrawItemPose.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ForceDrawItemPose.Tooltip")]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.DrawItemPose.Unassigned)]
         public DrawItemPoseID.DrawItemPose ForceDrawItemPose;

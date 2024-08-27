@@ -122,13 +122,14 @@ namespace WeaponOutLite.Common.Systems
                             System.IO.File.WriteAllText(path, json);
                     */
 
+                    // To customise item hold styles: Settings -> Mod Configurations -> WeaponOut Lite: Personal Preferences
                     Main.NewText(
-                        Language.GetTextValue("Mods.WeaponOut.Config.Instructions") +
+                        Language.GetTextValue("Mods.WeaponOutLite.Common.Instructions") +
                         Language.GetTextValue("LegacyMenu.14") +
                         " [g:5] " +
                         Language.GetTextValue("tModLoader.ModConfiguration") +
                         " [g:5] WeaponOut Lite: " + 
-                        Language.GetTextValue("Mods.WeaponOut.Config.ClientSideConfigLabel")
+                        Language.GetTextValue("Mods.WeaponOutLite.Configs.WeaponOutClientConfig.DisplayName")
                         );
                 }
             }

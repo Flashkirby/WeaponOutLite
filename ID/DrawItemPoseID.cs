@@ -49,7 +49,9 @@ namespace WeaponOutLite.ID
             return dict;
         }
 
-        // enum for forced styles
+        /// <summary>
+        /// Internal/Network mapping for draw item poses. See IDrawItemPose GetID()
+        /// </summary>
         public enum DrawItemPose
         {
             Unassigned = DrawItemPoseID.Unassigned,
@@ -113,74 +115,155 @@ namespace WeaponOutLite.ID
             FloatingOrbitClockwiseFast = DrawItemPoseID.FloatingOrbitClockwiseFast,
         }
 
-        public const int Custom     = -1;
-        public const int Unassigned = 0;
-        public const int None       = 1;
 
+        /// <summary>
+        /// A more human readable version of DrawItemPose, for the default config. This is what the selected group allows access to.
+        /// This is basically everything except for Unassigned, and any other weird specific hold poses reserved for client override, etc.
+        /// </summary>
+        public enum LabelledItemPose
+        {
+            /* Back & Waist */
+            //Unassigned = DrawItemPoseID.Unassigned,
+            None = DrawItemPoseID.None,
+            Back = DrawItemPoseID.Back,
+            BackUpright = DrawItemPoseID.BackUpright,
+            BackDownward = DrawItemPoseID.BackDownward,
+            BackBow = DrawItemPoseID.BackBow,
+            Waist = DrawItemPoseID.WaistSheathe,
+            WaistHolster = DrawItemPoseID.WaistHolster,
+            /* Front */
+            Hold = DrawItemPoseID.HoldInHand,
+            HoldForward = DrawItemPoseID.HoldInHandFront,
+            HoldReverse = DrawItemPoseID.HoldReversedInHand,
+            HoldTome = DrawItemPoseID.HoldSpellTome,
+            /* Offhand */
+            OffHand = DrawItemPoseID.HoldInOffHand,
+            OffHandFlailShoulder = DrawItemPoseID.BackFlailShoulder,
+            OffHandPole = DrawItemPoseID.PoleOffHand,
+            OffHandShoulder = DrawItemPoseID.BackGunShoulder,
+            OffHandUpright = DrawItemPoseID.HoldRifleOffHandUpright,
+            /* Two hand */
+            TwoHandCarry = DrawItemPoseID.CarryInBothHands,
+            TwoHandJoustingLance = DrawItemPoseID.JoustingLance,
+
+            /* Levitate */
+            FloatingBack = DrawItemPoseID.FloatingBack,
+            FloatingBackUpright = DrawItemPoseID.FloatingBackUpright,
+            FloatingBackAimed = DrawItemPoseID.FloatingBackAimed,
+            FloatingFront = DrawItemPoseID.FloatingInFront,
+            FloatingOffHand = DrawItemPoseID.FloatingOffHand,
+            FloatingAimed = DrawItemPoseID.FloatingOffHandAimed,
+            OrbitClockwiseFast = DrawItemPoseID.FloatingOrbitClockwiseFast,
+            OrbitAntiClockFast = DrawItemPoseID.FloatingOrbitAntiClockwiseFast,
+            OrbitClockwiseSlow = DrawItemPoseID.FloatingOrbitClockwiseSlow,
+            OrbitAntiClockSlow = DrawItemPoseID.FloatingOrbitAntiClockwiseSlow,
+
+            // Combat Front  */
+            CombatHold = DrawItemPoseID.StanceInHand,
+            CombatReady = DrawItemPoseID.StanceMeleeReady,
+            CombatUpright = DrawItemPoseID.StanceMeleeUpright,
+            CombatRaised = DrawItemPoseID.StanceMeleeRaised,
+            CombatTrail = DrawItemPoseID.StanceMeleeTrail,
+            CombatRapier = DrawItemPoseID.StanceRapierFootForward,
+            CombatPoleUpright = DrawItemPoseID.StancePoleUpright,
+            CombatPoleReady = DrawItemPoseID.StancePoleReady,
+            CombatFlailReady = DrawItemPoseID.StanceFlailReady,
+            CombatBowHold = DrawItemPoseID.StanceBowInHand,
+            CombatPistol = DrawItemPoseID.StancePistolCowboy,
+            /* Combat Offhand  */
+            CombatOffHandPoleShoulder = DrawItemPoseID.StancePoleShoulder,
+            CombatOffHandPistol = DrawItemPoseID.StancePistolHoldUp,
+            CombatOffHandShoulder = DrawItemPoseID.StanceLauncherShoulder,
+            /* Combat Twohand */
+            CombatTwoHand = DrawItemPoseID.StanceTwoHand,
+            CombatTwoHandBrave = DrawItemPoseID.StanceTwoHandBrave,
+            CombatTwoHandTail = DrawItemPoseID.StanceTwoHandTail,
+            CombatTwoHandHighlander = DrawItemPoseID.StanceTwoHandHighlander,
+            CombatTwoHandBerserk = DrawItemPoseID.StanceTwoHandBerserk,
+            CombatTwoHandGuard = DrawItemPoseID.StanceTwoHandGuard,
+            CombatTwoHandPoleTwoHand = DrawItemPoseID.StancePoleTwoHand,
+            CombatTwoHandPowerTool = DrawItemPoseID.StanceMachineTool,
+            CombatTwoHandBow = DrawItemPoseID.StanceBowHunt,
+            CombatTwoHandRifleHip = DrawItemPoseID.StanceRifleHipReady,
+            CombatTwoHandRifleUp = DrawItemPoseID.StanceRifleHoldUp,
+            CombatTwoHandRifleDown = DrawItemPoseID.StanceRiflePointDown,
+            CombatTwoHandRifleDown2 = DrawItemPoseID.StanceRiflePointDown2,
+            CombatTwoHandBoltAction = DrawItemPoseID.StanceRifleBoltAction,
+            CombatTwoHandPumpAction = DrawItemPoseID.StanceRiflePumpAction,
+        }
+
+        // Default values
+        public const int Custom             = -1;
+        public const int Unassigned         = 0;
+        public const int None               = 1;
+
+        // Back & Waist
         public const int Back               = 00010;
-        public const int BackUpright        = 00020;
-        public const int WaistSheathe       = 00060;
-        public const int WaistHolster       = 00070;
-        
-        public const int HoldInHand         = 01000;
-        public const int StanceInHand       = 01002;
-        public const int HoldReversedInHand = 01005;
-        public const int HoldInHandFront    = 01010;
-        public const int HoldSpellTome      = 01013;
-        public const int HoldInOffHand      = 01020;
-        public const int CarryInBothHands   = 01100;
-        public const int StanceMachineTool  = 01110;
+        public const int BackDownward       = 00020;
+        public const int BackUpright        = 00030;
+        public const int BackFlail          = 00040;
+        public const int BackBow            = 00050;
+        public const int WaistSheathe   = 00500;
+        public const int WaistHolster   = 00510;
+        // Front
+        public const int HoldInHand         = 10000;
+        public const int HoldInHandFront    = 10010;
+        public const int HoldReversedInHand = 10020;
+        public const int HoldSpellTome      = 10030;
+        // Offhand
+        public const int HoldInOffHand              = 20000;
+        public const int BackFlailShoulder          = 20010;
+        public const int PoleOffHand                = 20020;
+        public const int BackGunShoulder            = 20030;
+        public const int HoldRifleOffHandUpright    = 20040;
+        // Two hand
+        public const int CarryInBothHands       = 30000;
+        public const int JoustingLance          = 30050;
 
-        public const int StanceMeleeReady           = 10000;
-        public const int StanceMeleeTrail           = 10010;
-        public const int StanceMeleeRaised          = 10020;
-        public const int StanceMeleeUpright         = 10030;
+        // Levitate
+        public const int FloatingBack                   = 40000;
+        public const int FloatingBackUpright            = 40010;
+        public const int FloatingBackAimed              = 40020;
+        public const int FloatingInFront                = 40100;
+        public const int FloatingOffHand                = 40110;
+        public const int FloatingOffHandAimed           = 40120;
+        public const int FloatingOrbitClockwiseFast         = 41000;
+        public const int FloatingOrbitAntiClockwiseFast     = 41001;
+        public const int FloatingOrbitClockwiseSlow         = 41010;
+        public const int FloatingOrbitAntiClockwiseSlow     = 41011;
 
-        public const int StanceTwoHand              = 11000;
-        public const int StanceTwoHandBrave         = 11010;
-        public const int StanceTwoHandTail          = 11020;
-        public const int StanceTwoHandHighlander    = 11030;
-        public const int StanceTwoHandBerserk       = 11040;
-        public const int StanceTwoHandGuard         = 11050;
+        // Combat Front 
+        public const int StanceInHand               = 50000;
+        public const int StanceMeleeReady           = 50050;
+        public const int StanceMeleeUpright         = 50060;
+        public const int StanceMeleeRaised          = 50070;
+        public const int StanceMeleeTrail           = 50080;
+        public const int StanceRapierFootForward    = 50100;
+        public const int StancePoleReady            = 50200;
+        public const int StancePoleUpright          = 50210;
+        public const int StanceFlailReady           = 50220;
+        public const int StanceBowInHand            = 50300;
+        public const int StancePistolCowboy         = 50400;
+        // Combat Offhand 
+        public const int StancePoleShoulder         = 60200;
+        public const int StancePistolHoldUp         = 60400;
+        public const int StanceLauncherShoulder     = 60450;
+        // Combat Twohand
+        public const int StanceTwoHand              = 70000;
+        public const int StanceTwoHandBrave         = 70010;
+        public const int StanceTwoHandTail          = 70020;
+        public const int StanceTwoHandHighlander    = 70030;
+        public const int StanceTwoHandBerserk       = 70040;
+        public const int StanceTwoHandGuard         = 70050;
+        public const int StancePoleTwoHand          = 70200;
+        public const int StanceMachineTool          = 70250;
+        public const int StanceBowHunt              = 70300;
+        public const int StanceRifleHipReady        = 70400;
+        public const int StanceRifleHoldUp          = 70410;
+        public const int StanceRiflePointDown       = 70420;
+        public const int StanceRiflePointDown2      = 70430;
+        public const int StanceRifleBoltAction      = 70440;
+        public const int StanceRiflePumpAction      = 70450;
 
-        public const int StanceRapierFootForward    = 12000;
-
-        public const int PoleOffHand                = 13000;
-        public const int StancePoleReady            = 13010;
-        public const int StancePoleShoulder         = 13020;
-        public const int StancePoleUpright          = 13030;
-        public const int StancePoleTwoHand          = 13040;
-        public const int JoustingLance              = 13101;
-
-        public const int BackFlail                  = 14000;
-        public const int BackFlailShoulder          = 14010;
-        public const int StanceFlailReady           = 14020;
-
-        public const int BackBow                    = 20000;
-        public const int StanceBowInHand            = 20010;
-        public const int StanceBowHunt              = 20020;
-        public const int StancePistolHoldUp         = 21000;
-        public const int StancePistolCowboy         = 21010;
-        public const int BackDownward               = 21110;
-        public const int HoldRifleOffHandUpright    = 21120;
-        public const int StanceRifleHipReady        = 21130;
-        public const int StanceRiflePointDown       = 21140;
-        public const int StanceRiflePointDown2      = 21150;
-        public const int StanceRifleHoldUp          = 21160;
-        public const int StanceRifleBoltAction      = 21170;
-        public const int StanceRiflePumpAction      = 21180;
-        public const int BackGunShoulder            = 22000;
-        public const int StanceLauncherShoulder     = 22010;
-
-        public const int FloatingBack                   = 30000;
-        public const int FloatingBackUpright            = 30001;
-        public const int FloatingBackAimed              = 30003;
-        public const int FloatingInFront                = 30010;
-        public const int FloatingOffHandAimed           = 30020;
-        public const int FloatingOffHand                = 30025;
-        public const int FloatingOrbitAntiClockwiseSlow = 30030;
-        public const int FloatingOrbitClockwiseSlow     = 30031;
-        public const int FloatingOrbitAntiClockwiseFast = 30032;
-        public const int FloatingOrbitClockwiseFast     = 30033;
     }
 }

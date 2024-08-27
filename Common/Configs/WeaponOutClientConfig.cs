@@ -10,323 +10,284 @@ namespace WeaponOutLite.Common.Configs
 {
     // Unless set as an auto property, mod config will always place public fields at the top.
     // This causes order issues as other write options, such as getters and [JsonIgnore][ShowDespiteJsonIgnore], will get pushed to the bottom.
-    [Label("$Mods.WeaponOut.Config.ClientSideConfigLabel")]
 	public class WeaponOutClientConfig : ModConfig
 	{
 		public override ConfigScope Mode => ConfigScope.ClientSide;
 
-		[Header("$Mods.WeaponOut.Config.ClientSidePlayerHeader")]
+		[Header("PlayerHeader")]
 		#region ClientSidePlayerHeader
 
-		[Label("$Mods.WeaponOut.Config.ShowHeldItem.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.ShowHeldItem.Tooltip")]
 		[DefaultValue(true)]
 		public bool ShowHeldItem { get; set; } // This is controlled by WeaponOutPlayerRenderer.cs, but the option is here for people who historically may have issues with that button for whatever reason. See OnChanged for link to class.
 
-        [Label("$Mods.WeaponOut.Config.CombatDelayTimerMax.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.CombatDelayTimerMax.Tooltip")]
 		[Increment(0.5f)]
 		[Range(0, 10f)]
 		[DefaultValue(3f)]
 		[Slider]
 		public float CombatDelayTimerMax { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.CombatStanceAlwaysOn.Label")]
 		[DefaultValue(false)]
 		public bool CombatStanceAlwaysOn { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.SmallItemPose.Label")]
-		[DrawTicks]
-		[DefaultValue(PoseStyleID.ItemPoseID.Hold)]
-		public PoseStyleID.ItemPoseID SmallItemPose { get; set; }
+        [DrawTicks]
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
+		public DrawItemPoseID.LabelledItemPose SmallItemPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewSmallItem))]
 		public int SmallItemPosePV => (int)SmallItemPose;
 
-		[Label("$Mods.WeaponOut.Config.LargeItemPose.Label")]
 		[DrawTicks]
-		[DefaultValue(PoseStyleID.LargeItemPoseID.Carry)]
-		public PoseStyleID.LargeItemPoseID LargeItemPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.TwoHandCarry)]
+		public DrawItemPoseID.LabelledItemPose LargeItemPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewLargeItem))]
 		public int LargeItemPosePV => (int)LargeItemPose;
 
-        [Label("$Mods.WeaponOut.Config.VanityItemPose.Label")]
         [DrawTicks]
-        [DefaultValue(PoseStyleID.VanityItemPoseID.OffHand)]
-        public PoseStyleID.VanityItemPoseID VanityItemPose { get; set; }
+        [DefaultValue(DrawItemPoseID.LabelledItemPose.OffHand)]
+        public DrawItemPoseID.LabelledItemPose VanityItemPose { get; set; }
 
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
-        [Label("$Mods.WeaponOut.Config.Preview")]
+        [Label("$Mods.WeaponOutLite.Common.Preview")]
         [CustomModConfigItem(typeof(PreviewVanityItem))]
         public int VanityItemPosePV => (int)VanityItemPose;
 
-        [Label("$Mods.WeaponOut.Config.PotionPose.Label")]
 		[DrawTicks]
-		[DefaultValue(PoseStyleID.PotionPoseID.HoldForward)]
-		public PoseStyleID.PotionPoseID PotionPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.HoldForward)]
+		public DrawItemPoseID.LabelledItemPose PotionPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewPotionItem))]
 		public int PotionPosePV => (int)PotionPose;
 
 		[Label("Melee Weapons")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.SmallMeleePoseID.Combat_Ready)]
-		public PoseStyleID.SmallMeleePoseID SmallMeleePose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatReady)]
+		public DrawItemPoseID.LabelledItemPose SmallMeleePose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewSmallMelee))]
 		public int SmallMeleePV => (int)SmallMeleePose;
 
-		[Label("$Mods.WeaponOut.Config.LargeMeleePose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.LargeMeleePoseID.Combat_Two_Hand)]
-		public PoseStyleID.LargeMeleePoseID LargeMeleePose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHand)]
+		public DrawItemPoseID.LabelledItemPose LargeMeleePose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewLargeMelee))]
 		public int LargeMeleePV => (int)LargeMeleePose;
 
-		[Label("$Mods.WeaponOut.Config.RapierPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.RapierPoseID.Combat_Hold)]
-		public PoseStyleID.RapierPoseID RapierPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatHold)]
+		public DrawItemPoseID.LabelledItemPose RapierPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewRapier))]
 		public int RapierPV => (int)RapierPose;
 
-		[Label("$Mods.WeaponOut.Config.SpearPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.SpearPoseID.Combat_Pole_Ready)]
-		public PoseStyleID.SpearPoseID SpearPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatPoleReady)]
+		public DrawItemPoseID.LabelledItemPose SpearPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewSpear))]
 		public int SpearPV => (int)SpearPose;
 
-		[Label("$Mods.WeaponOut.Config.YoyoPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.YoyoPoseID.Hold)]
-		public PoseStyleID.YoyoPoseID YoyoPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
+		public DrawItemPoseID.LabelledItemPose YoyoPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewYoyo))]
 		public int YoyoPV => (int)YoyoPose;
 
-		[Label("$Mods.WeaponOut.Config.YoyoHalfScale")]
 		[DefaultValue(true)]
 		public bool YoyoHalfScale { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.FlailPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.FlailPoseID.Combat_Ready)]
-		public PoseStyleID.FlailPoseID FlailPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatFlailReady)]
+		public DrawItemPoseID.LabelledItemPose FlailPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewFlail))]
 		public int FlailPV => (int)FlailPose;
 
-		[Label("$Mods.WeaponOut.Config.WhipPose")]
 		[DrawTicks]
 		[SliderColor(104, 214, 255)]
-		[DefaultValue(PoseStyleID.WhipPoseID.Hold)]
-		public PoseStyleID.WhipPoseID WhipPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
+		public DrawItemPoseID.LabelledItemPose WhipPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewWhip))]
 		public int WhipPV => (int)WhipPose;
 
-		[Label("$Mods.WeaponOut.Config.ThrownPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.ThrownPoseID.Combat_Upright)]
-		public PoseStyleID.ThrownPoseID ThrownPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatUpright)]
+        public DrawItemPoseID.LabelledItemPose ThrownPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewThrown))]
 		public int ThrownPV => (int)ThrownPose;
 
-		[Label("$Mods.WeaponOut.Config.ThrownThinPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.ThrownPoseID.Hold)]
-		public PoseStyleID.ThrownPoseID ThrownThinPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
+		public DrawItemPoseID.LabelledItemPose ThrownThinPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewThrownThin))]
 		public int ThrownThinPV => (int)ThrownThinPose;
 
-		[Label("$Mods.WeaponOut.Config.PowerToolPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)]
-		[DefaultValue(PoseStyleID.PowerToolPoseID.Combat_Power_Tool)]
-		public PoseStyleID.PowerToolPoseID PowerToolPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandPowerTool)]
+		public DrawItemPoseID.LabelledItemPose PowerToolPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewPowerTool))]
 		public int PowerToolPV => (int)PowerToolPose;
 
-		[Label("$Mods.WeaponOut.Config.BowPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.BowPoseID.Combat_Hunter)]
-		public PoseStyleID.BowPoseID BowPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBow)]
+        public DrawItemPoseID.LabelledItemPose BowPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewBow))]
 		public int BowPV => (int)BowPose;
 
-		[Label("$Mods.WeaponOut.Config.RepeaterPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Combat_Ready)]
-		public PoseStyleID.GunPoseID RepeaterPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleDown)]
+        public DrawItemPoseID.LabelledItemPose RepeaterPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewRepeater))]
 		public int RepeaterPV => (int)RepeaterPose;
 
-		[Label("$Mods.WeaponOut.Config.BowDrawAmmo")]
 		[DefaultValue(true)]
 		public bool BowDrawAmmo { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.PistolPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.PistolPoseID.Hold)]
-		public PoseStyleID.PistolPoseID PistolPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
+		public DrawItemPoseID.LabelledItemPose PistolPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewPistol))]
 		public int PistolPV => (int)PistolPose;
 
-		[Label("$Mods.WeaponOut.Config.GunPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Combat_Hip_Ready)]
-		public PoseStyleID.GunPoseID GunPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleHip)]
+        public DrawItemPoseID.LabelledItemPose GunPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGun))]
 		public int GunPV => (int)GunPose;
 
-		[Label("$Mods.WeaponOut.Config.GunManualPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Combat_Bolt_Action)]
-		public PoseStyleID.GunPoseID GunManualPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBoltAction)]
+		public DrawItemPoseID.LabelledItemPose GunManualPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGunManual))]
 		public int GunManualPV => (int)GunManualPose;
 
-		[Label("$Mods.WeaponOut.Config.ShotgunPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GunPoseID.Combat_Pump_Action)]
-		public PoseStyleID.GunPoseID ShotgunPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandPumpAction)]
+		public DrawItemPoseID.LabelledItemPose ShotgunPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewShotgun))]
 		public int ShotgunPosePV => (int)ShotgunPose;
 
-		[Label("$Mods.WeaponOut.Config.LauncherPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.LauncherPoseID.OffHand_Shoulder)]
-		public PoseStyleID.LauncherPoseID LauncherPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandShoulder)]
+        public DrawItemPoseID.LabelledItemPose LauncherPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewLauncher))]
 		public int LauncherPV => (int)LauncherPose;
 
-		[Label("$Mods.WeaponOut.Config.StaffPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
-		[DefaultValue(PoseStyleID.StaffPoseID.PoleOffHand)]
-		public PoseStyleID.StaffPoseID StaffPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandPole)]
+        public DrawItemPoseID.LabelledItemPose StaffPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewStaff))]
 		public int StaffPV => (int)StaffPose;
 
-		[Label("$Mods.WeaponOut.Config.MagicBookPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
-		[DefaultValue(PoseStyleID.MagicBookPoseID.HoldTome)]
-		public PoseStyleID.MagicBookPoseID MagicBookPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.HoldTome)]
+		public DrawItemPoseID.LabelledItemPose MagicBookPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewMagicBook))]
 		public int MagicBookPV => (int)MagicBookPose;
 
-		[Label("$Mods.WeaponOut.Config.MagicItemPose")]
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
-		[DefaultValue(PoseStyleID.MagicItemPoseID.Levitate_OffHand)]
-		public PoseStyleID.MagicItemPoseID MagicItemPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingOffHand)]
+		public DrawItemPoseID.LabelledItemPose MagicItemPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewMagicItem))]
 		public int MagicItemPV => (int)MagicItemPose;
 
 		#endregion
 
 
-		[Header("$Mods.WeaponOut.Config.ClientSideGraphicHeader")]
-		#region ClientSideGraphicHeader
+		[Header("LocalGraphics")]
+        #region LocalGraphics
 
-		[Label("$Mods.WeaponOut.Config.EnableWeaponPhysics.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableWeaponPhysics.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableWeaponPhysics { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.EnableSheathingAnim.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableSheathingAnim.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableSheathingAnim { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.EnableItemScaling.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableItemScaling.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableItemScaling { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.SmallSwordThreshold.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.SmallSwordThreshold.Tooltip")]
 		[Increment(2)]
 		[Range(0f, 64)]
 		[DefaultValue(50f)]
@@ -334,8 +295,6 @@ namespace WeaponOutLite.Common.Configs
 		[SliderColor(254, 159, 30)]
 		public int SmallSwordThreshold { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.SmallGunThreshold.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.SmallGunThreshold.Tooltip")]
 		[Increment(2)]
 		[Range(0f, 64)]
 		[DefaultValue(36f)]
@@ -343,73 +302,63 @@ namespace WeaponOutLite.Common.Configs
 		[SliderColor(0, 242, 171)]
 		public int SmallGunThreshold { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.GiantItemThreshold.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.GiantItemThreshold.Tooltip")]
 		[Increment(2)]
 		[Range(64, 256)]
 		[DefaultValue(80f)]
 		[Slider]
 		public int GiantItemThreshold { get; set; } // For reference, the breaker blade's longest side is 80px * 1.1 scale
 
-		[Label("$Mods.WeaponOut.Config.GiantItemScalePercent.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.GiantItemScalePercent.Tooltip")]
 		[Increment(1f)]
 		[Range(0f, 100f)]
 		[DefaultValue(100f)]
 		[Slider]
 		public float GiantItemScalePercent { get; set; } // If still over the threshold, use the GIANT pose sets
 
-		[Label("$Mods.WeaponOut.Config.GiantItemPose")]
 		[DrawTicks]
-		[DefaultValue(PoseStyleID.GiantItemPoseID.Carry)]
-		public PoseStyleID.GiantItemPoseID GiantItemPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.TwoHandCarry)]
+		public DrawItemPoseID.LabelledItemPose GiantItemPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantItem))]
 		public int GiantItemPV => (int)GiantItemPose;
 
-		[Label("$Mods.WeaponOut.Config.GiantWeaponPose")]
 		[DrawTicks]
 		[SliderColor(254, 159, 30)] // and summon weapons!
-		[DefaultValue(PoseStyleID.GiantMeleePoseID.Combat_Two_Hand_Berserk)]
-		public PoseStyleID.GiantMeleePoseID GiantWeaponPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBerserk)]
+		public DrawItemPoseID.LabelledItemPose GiantWeaponPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMelee))]
 		public int GiantMeleePV => (int)GiantWeaponPose;
 
-		[Label("$Mods.WeaponOut.Config.GiantBowPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GiantBowPoseID.Combat_Hunter)]
-		public PoseStyleID.GiantBowPoseID GiantBowPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBow)]
+		public DrawItemPoseID.LabelledItemPose GiantBowPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantBow))]
 		public int GiantBowPV => (int)GiantBowPose;
 
-		[Label("$Mods.WeaponOut.Config.GiantGunPose")]
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(PoseStyleID.GiantGunPoseID.OffHand_Shoulder)]
-		public PoseStyleID.GiantGunPoseID GiantGunPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatOffHandShoulder)]
+		public DrawItemPoseID.LabelledItemPose GiantGunPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantGun))]
 		public int GiantGunPV => (int)GiantGunPose;
 
-		[Label("$Mods.WeaponOut.Config.GiantMagicPose")] // and summon items!
 		[DrawTicks]
 		[SliderColor(254, 127, 230)]
-		[DefaultValue(PoseStyleID.GiantMagicPoseID.Levitate_Aimed)]
-		public PoseStyleID.GiantMagicPoseID GiantMagicPose { get; set; }
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingAimed)]
+		public DrawItemPoseID.LabelledItemPose GiantMagicPose { get; set; } // and summon items!
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
-		[Label("$Mods.WeaponOut.Config.Preview")]
+		[Label("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;
 
@@ -417,65 +366,40 @@ namespace WeaponOutLite.Common.Configs
 
 		#region ClientSideExperimental
 
-		[Label("$Mods.WeaponOut.Config.EnableMenuDisplay.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableMenuDisplay.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableMenuDisplay { get; set; }
 
-		[Label("$Mods.WeaponOut.Config.EnableProjSpears.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableProjSpears.Tooltip")]
 		[DefaultValue(true)]
 		public bool EnableProjSpears { get; set; }
 
-        [Label("$Mods.WeaponOut.Config.EnableProjYoyos.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.EnableProjYoyos.Tooltip")]
         [DefaultValue(true)]
         public bool EnableProjYoyos { get; set; }
 
         [JsonIgnore] // This is not likely to work any time soon.
-		[Label("$Mods.WeaponOut.Config.EnableMeleeEffects.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.EnableMeleeEffects.Tooltip")]
 		[DefaultValue(false)]
 		public bool EnableMeleeEffects { get; set; }
 
 		#endregion
 
 
-		[Header("$Mods.WeaponOut.Config.ModIntegrationHeader")]
+		[Header("ModIntegrationHeader")]
 		#region ModIntegrations
 
-		[Label("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationTerrariaOverhaul.Tooltip")]
 		[DefaultValue(true)]
         public bool ModIntegrationTerrariaOverhaul { get; set; }
 
-        [Label("$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationMeleeEffectsPlus.Tooltip")]
         [DefaultValue(true)]
         public bool ModIntegrationMeleeEffectsPlus { get; set; }
 
-        [Label("$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationOverhaulGunAnimations.Tooltip")]
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationOverhaulGunAnimations { get { return false; } }
 
-        [Label("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplay.Tooltip")]
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationArmamentDisplay { get { return false; } }
 
-        [Label("$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationCoolerItemVisualEffect.Tooltip")]
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationCoolerItemVisualEffect { get { return false; } }
 
-        [Label("$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Label")]
-		[Tooltip("$Mods.WeaponOut.Config.ModIntegrationVibrantReverie.Tooltip")]
-		[JsonIgnore][ShowDespiteJsonIgnore]
-		public bool ModIntegrationVibrantReverie { get { return WeaponOutLite.W1KModReduxModLoaded; } }
-
-        [Label("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Label")]
-        [Tooltip("$Mods.WeaponOut.Config.ModIntegrationArmamentDisplayLite.Tooltip")]
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationArmamentDisplayLite { get { return WeaponOutLite.ArmamentDisplayLiteModLoaded; } }
 
