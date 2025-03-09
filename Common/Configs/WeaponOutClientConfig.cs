@@ -364,6 +364,9 @@ namespace WeaponOutLite.Common.Configs
 
 		#endregion
 
+		/*
+		 Experimental because the code in here may have issues when introduced to modded content
+		 */
 		#region ClientSideExperimental
 
 		[DefaultValue(true)]
@@ -375,8 +378,11 @@ namespace WeaponOutLite.Common.Configs
         [DefaultValue(true)]
         public bool EnableProjYoyos { get; set; }
 
-        [JsonIgnore] // This is not likely to work any time soon.
-		[DefaultValue(false)]
+
+        [JsonIgnore]
+        /* The idea here was to emulate the light and dust effects from various melee weapons 
+         * but there are so many different implementations that it's unlikely to work any time soon. So ignore hide setting for now */
+        [DefaultValue(false)]
 		public bool EnableMeleeEffects { get; set; }
 
 		#endregion
