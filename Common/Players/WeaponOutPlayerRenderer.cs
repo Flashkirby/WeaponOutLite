@@ -159,6 +159,14 @@ namespace WeaponOutLite.Common.Players
             }
         }
 
+		public override void OnHurt(Player.HurtInfo info)
+		{
+			if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceWhenHurt)
+			{
+                manageCombatTimer(combatPoseTriggered: true);
+            }
+		}
+
         // Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
         // Server receives toWho=-1, fromWho=0 (player id 0)
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
@@ -181,23 +189,24 @@ namespace WeaponOutLite.Common.Players
 		/// <summary>
 		/// Client and Server
 		/// </summary>
-		private void manageCombatTimer() {
-			// Only client
+		private void manageCombatTimer(bool combatPoseTriggered = false) {
+			// Only process this line clientside, since every client can have different local configs
 			if (Player == Main.LocalPlayer) {
 				int combatDelayTimerMax = (int)(ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f);
                 if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceAlwaysOn) {
 					combatDelayTimerMax = int.MaxValue;
                 }
 
-				if (Player.ItemAnimationActive) {
-					// Set to max while using an item
+				if (combatPoseTriggered || Player.ItemAnimationActive) {
+					// Set to max while using an item, or combat is triggered
 					CombatDelayTimer = combatDelayTimerMax;
                 }
-                else if (CombatDelayTimer == combatDelayTimerMax) {
-					// Frame that the item use ends
-					// Update clients with the combat delay timer
-					((WeaponOutLite)Mod).SendUpdateCombatTimer(this);
-				}
+
+				// As long as the timer is maxed out and the player is not using the item, send a net update
+				if (CombatDelayTimer == combatDelayTimerMax && !Player.ItemAnimationActive)
+                {
+                    ((WeaponOutLite)Mod).SendUpdateCombatTimer(this);
+                }
 			}
 
 			// Always tick down to 0

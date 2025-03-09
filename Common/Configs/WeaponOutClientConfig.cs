@@ -29,6 +29,9 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(false)]
 		public bool CombatStanceAlwaysOn { get; set; }
 
+        [DefaultValue(true)]
+        public bool CombatStanceWhenHurt { get; set; }
+
         [DrawTicks]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose SmallItemPose { get; set; }

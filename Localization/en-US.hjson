@@ -55,13 +55,18 @@ Mods: {
 				}
 
 				CombatDelayTimerMax: {
-					Label: Combat mode duration (Seconds)
+					Label: Combat pose duration (Seconds)
 					Tooltip: How long to hold an item out after using it. Only applies to poses that begin with 'Combat'. Default is 3 seconds.
 				}
 
 				CombatStanceAlwaysOn: {
 					Label: Combat pose always active.
 					Tooltip: Prevents combat poses from changing to idle poses. Default is Off.
+				}
+
+				CombatStanceWhenHurt: {
+					Label: Combat pose activates when hurt.
+					Tooltip: Enter combat pose when you are hurt by something. Default is On.
 				}
 
 				SmallItemPose: {
