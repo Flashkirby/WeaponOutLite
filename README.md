@@ -7,29 +7,24 @@
 This mod is set up for localisation, so we are accepting translations!
 
 ## Summary
-
-WeaponOut Lite is based on the original feature in WeaponOut before it become a content mod. This version is just for the vanity effects.
+WeaponOut Lite is based on the original feature in WeaponOut before it become a content mod, focussing entirely on displaying held items. This version is just for the vanity effects.
 
 - Displays items you are holding
 - Customise poses available via the Mod Configuration menu
 
-WeaponOut Lite is based on the original feature of the WeaponOut mod, without the additional content.
-
 # Credits
-Flashkirby - I am making this mod.
+Developer: Flashkirby
 
 <p align="center"><img src="http://i.imgur.com/kdcROYP.png"/></p>
 
 ## Notes
 Repo: https://github.com/Flashkirby/WeaponOutLite
 
-### Development Features
-
+### Todo
 - See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
 - Make this mod no sync
 
 ### Known Bugs
-
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix
 - melee effect experimental feature: phase blades and phase sabers have flickering lights
 
