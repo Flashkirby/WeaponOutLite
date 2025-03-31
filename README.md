@@ -1,6 +1,6 @@
 ﻿# WeaponOut Lite
 <p align="center">
-<img src="https://raw.githubusercontent.com/Flashkirby/WeaponOutLite/master/icon.png"/>
+<img src="https://raw.githubusercontent.com/Flashkirby/WeaponOutLite/main/icon.png"/>
 </p>
 <p align="center"><img src="http://i.imgur.com/kdcROYP.png"/></p>
 
