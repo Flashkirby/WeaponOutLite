@@ -588,6 +588,7 @@ Mods: {
 				CombatRaised.Label: Combat Raised
 				CombatTrail.Label: Combat Trail
 				CombatRapier.Label: Combat Rapier
+				CombatRapierHold.Label: Combat Rapier Hold
 				CombatPoleUpright.Label: Combat Pole Upright
 				CombatPoleReady.Label: Combat Pole Ready
 				CombatFlailReady.Label: Combat Flail Ready
@@ -640,6 +641,7 @@ Mods: {
 				StanceTwoHandBerserk.Label: Stance Two Hand Berserk
 				StanceTwoHandGuard.Label: Stance Two Hand Guard
 				StanceRapierFootForward.Label: Stance Rapier Foot Forward
+				StanceRapierHold.Label: Stance Rapier Hold
 				PoleOffHand.Label: Pole Off Hand
 				StancePoleReady.Label: Stance Pole Ready
 				StancePoleShoulder.Label: Stance Pole Shoulder
