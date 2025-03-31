@@ -14,14 +14,16 @@ WeaponOut Lite is based on the original feature in WeaponOut before it become a 
 
 # Credits
 Developer: Flashkirby
+Beta Testers: Karob, RunicPixels, W1K
 
 <p align="center"><img src="http://i.imgur.com/kdcROYP.png"/></p>
 
 ## Notes
-Repo: https://github.com/Flashkirby/WeaponOutLite
+Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 
 ### Todo
 - See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
+- finish StanceRapierHold (diagonal forward stance for rapier)
 - Make this mod no sync
 
 ### Known Bugs

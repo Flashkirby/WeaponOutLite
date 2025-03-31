@@ -7,6 +7,7 @@ WeaponOut Lite is based on the original feature in WeaponOut before it become a 
 
 [i/s1:58] [c/FF0000:Credits] [i/s1:58]
 Developer: Flashkirby
+Beta Testers: Karob, RunicPixels, W1K
 
 Join the discord? https://discord.gg/4Sj4T344bE
 Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
