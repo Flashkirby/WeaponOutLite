@@ -1,0 +1,27 @@
+[g:5] [c/FFFF00:Summary] [g:4] 
+[i/s1:184] Displays items you are holding
+[i/s1:184] Customise poses available via the Mod Configuration menu
+
+[g:5] [c/00FF88:Details] [g:4] 
+WeaponOut Lite is based on the original feature in WeaponOut before it become a content mod, focussing entirely on displaying held items. This version is just for the vanity effects.
+
+[i/s1:58] [c/FF0000:Credits] [i/s1:58]
+Developer: Flashkirby
+Beta Testers: Karob, RunicPixels, W1K
+
+Join the discord? https://discord.gg/4Sj4T344bE
+Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
+
+[i/s1:1344] [c/00FFFF:Mod Compatibility] [i/s1:1344] 
+
+- Improved Movement Visuals, No Known Conflicts
+- Vibrant Reverie, Rifle default animations
+---
+- Overhaul, Toggle, disables hold pose for guns.
+-Melee Effects+, Toggle, fix for swords being reclassified as shortswords/rapiers due to noUseGraphic being set.
+- ArmamentDisplayLite, Auto disable this mod for weapons
+---
+- Overhaul Gun Animations, Overrides ranged weapons, unless "Vanilla aim animation" is enabled in serverside settings. Also makes ranged weapons autoReuse (separate from Autofire option).
+- ArmamentDisplay, weapon display switch conflict
+- CoolerItemVisualEffect, weapon display switch conflict
+- DawnMOD, weapon display switch conflict
