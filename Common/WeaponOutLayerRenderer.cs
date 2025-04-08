@@ -71,7 +71,7 @@ namespace WeaponOutLite.Common
 			// Create basic draw data, centred on the player
 			if (tryCreateBaseDrawData(drawInfo, out DrawData itemData)) {
 
-                var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+                if (!drawInfo.drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
                 var heldItem = modPlayer.HeldItem;
 				var bowDrawAmmo = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
 
@@ -331,11 +331,16 @@ namespace WeaponOutLite.Common
 			out Item heldItem, 
 			out Texture2D itemTexture) {
 
-			drawPlayer = drawInfo.drawPlayer;
-			modPlayer = drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+            heldItem = null;
+            itemTexture = null;
+
+            drawPlayer = drawInfo.drawPlayer;
+			if (!drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out modPlayer))
+            {
+                holdStyle = null;
+                return false;
+			}
 			holdStyle = modPlayer.CurrentDrawItemPose;
-			heldItem = null;
-			itemTexture = null;
 
             var config = ModContent.GetInstance<WeaponOutClientConfig>();
 

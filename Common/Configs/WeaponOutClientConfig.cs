@@ -418,13 +418,15 @@ namespace WeaponOutLite.Common.Configs
 			// In the main menu, the local player is a default object with a blank name which cannot be made in-game
 			if (Main.LocalPlayer.name == "") return;
 
-			try {
-				Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>().isShowingHeldItem = this.ShowHeldItem;
-			}
-			catch {
-				// No mod player currently assigned to a local player (ie. still in the main menu)
-				return;
-			}
+			if (Main.LocalPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer))
+			{
+                modPlayer.isShowingHeldItem = this.ShowHeldItem;
+            }
+			else
+			{
+                // No mod player currently assigned to a local player (ie. still in the main menu)
+                return;
+            }
 		}
 
 	}

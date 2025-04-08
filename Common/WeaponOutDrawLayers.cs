@@ -38,7 +38,7 @@ namespace WeaponOutLite.Common
 
         private short GetDrawDepth(PlayerDrawSet drawInfo) {
             // Check if the current draw item style wants to set the draw layer
-            var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+            if (!drawInfo.drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return DrawDepthID.Back; }
             return modPlayer.CurrentDrawItemPose?.DrawDepth(drawInfo.drawPlayer, drawInfo.drawPlayer.HeldItem, modPlayer.CombatDelayTimer) ?? 0;
         }
 

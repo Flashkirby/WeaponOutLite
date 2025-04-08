@@ -29,10 +29,15 @@ namespace WeaponOutLite
                 switch (method) {
                     // HidePlayerHeldItem(int playerWhoAmI)
                     case "HidePlayerHeldItem":
-                        if (args[1] is int) {
+                        if (args[1] is int)
+                        {
                             int whoAmI = (int)args[1];
-                            if (whoAmI >= 0 && whoAmI < Main.player.Length) {
-                                Main.player[whoAmI].GetModPlayer<WeaponOutPlayerRenderer>().showHeldItemThisFrame = false;
+                            if (whoAmI >= 0 && whoAmI < Main.player.Length)
+                            {
+                                if (Main.player[whoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer))
+                                {
+                                    modPlayer.showHeldItemThisFrame = false;
+                                }
                             }
                         }
                         return false;
