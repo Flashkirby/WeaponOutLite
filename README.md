@@ -28,6 +28,7 @@ Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 ### Known Bugs
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix
 - melee effect experimental feature: phase blades and phase sabers have flickering lights
+- check if right click to modify config is possible (save without direct modification)
 
 #### Mod Compatibility
 - Improved Movement Visuals, No Known Conflicts
