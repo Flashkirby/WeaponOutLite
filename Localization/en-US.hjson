@@ -12,7 +12,9 @@ Mods: {
 				VanityItem: Equippable Item
 				Potion: Potion
 				SmallMelee: Melee Weapon
+				SmallTool: Tool
 				LargeMelee: Large Melee Weapon
+				LargeTool: Large Tool
 				Rapier: Shortsword/Rapier
 				Spear: Spear
 				Yoyo: Yoyo
@@ -109,12 +111,32 @@ Mods: {
 					Tooltip: ""
 				}
 
+				SmallToolPose: {
+					Label: "[i:1]Tools"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatReady.Label}
+				}
+
+				SmallToolPV: {
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
+					Tooltip: ""
+				}
+
 				LargeMeleePose: {
 					Label: "[i:190]Large Melee Weapons"
 					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHand.Label}
 				}
 
 				LargeMeleePV: {
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
+					Tooltip: ""
+				}
+
+				LargeToolPose: {
+					Label: "[i:2341]Large Tools"
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHand.Label}
+				}
+
+				LargeToolPV: {
 					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
@@ -520,36 +542,38 @@ Mods: {
 
 			PoseGroup: {
 				Tooltip: ""
-				Unassigned.Label: Unassigned
-				Item.Label: Normal Item
-				LargeItem.Label: Large Item
-				VanityItem.Label: Equippable Item
-				Potion.Label: Potion
-				SmallMelee.Label: Melee Weapon
-				LargeMelee.Label: Large Melee Weapon
-				Rapier.Label: Shortsword/Rapier
-				Spear.Label: Spear
-				Yoyo.Label: Yoyo
-				Flail.Label: Flail
-				Whips.Label: Whip
-				Thrown.Label: Throwing Weapon
-				ThrownThin.Label: Throwing Knife
-				PowerTool.Label: Power Tool
-				Bow.Label: Bow
-				Repeater.Label: Crossbow/Repeater
-				Pistol.Label: Handgun
-				Gun.Label: Automatic Gun
-				GunManual.Label: Semi-automatic Gun
-				Shotgun.Label: Shotgun
-				Launcher.Label: Launcher
-				Staff.Label: Magical Staff
-				MagicBook.Label: Spell Tome
-				MagicItem.Label: Magical Focus
-				GiantItem.Label: Giant Item
-				GiantWeapon.Label: Giant Melee Weapon
-				GiantBow.Label: Giant Bow
-				GiantGun.Label: Giant Ranged Weapon
-				GiantMagic.Label: Giant Magic Weapon
+				Unassigned.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Unassigned}"
+				Item.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Item}"
+				LargeItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeItem}"
+				VanityItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.VanityItem}"
+				Potion.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Potion}"
+				SmallMelee.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallMelee}"
+				SmallTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallTool}"
+				LargeMelee.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeMelee}"
+				LargeTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeTool}"
+				Rapier.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Rapier}"
+				Spear.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Spear}"
+				Yoyo.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Yoyo}"
+				Flail.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Flail}"
+				Whips.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Whips}"
+				Thrown.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Thrown}"
+				ThrownThin.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.ThrownThin}"
+				PowerTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.PowerTool}"
+				Bow.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Bow}"
+				Repeater.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Repeater}"
+				Pistol.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Pistol}"
+				Gun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Gun}"
+				GunManual.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GunManual}"
+				Shotgun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Shotgun}"
+				Launcher.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Launcher}"
+				Staff.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Staff}"
+				MagicBook.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicBook}"
+				MagicItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicItem}"
+				GiantItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantItem}"
+				GiantWeapon.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantWeapon}"
+				GiantBow.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantBow}"
+				GiantGun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantGun}"
+				GiantMagic.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantMagic}"
 			}
 
 			LabelledItemPose: {

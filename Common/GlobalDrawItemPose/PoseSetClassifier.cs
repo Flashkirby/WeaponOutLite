@@ -51,8 +51,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 case PoseGroup.SmallMelee:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.SmallMeleePose];
                     break;
+                case PoseGroup.SmallTool:
+                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallToolPose];
+                    break;
                 case PoseGroup.LargeMelee:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.LargeMeleePose];
+                    break;
+                case PoseGroup.LargeTool:
+                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeToolPose];
                     break;
                 case PoseGroup.Thrown:
                     drawItemPose = mod.DrawStyle[(int)clientConfig.ThrownPose];
@@ -352,12 +358,19 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                         return PoseGroup.Staff;
                     }
 
+                    // ⛏️
+                    bool isTool = item.axe > 0 || item.pick > 0 || item.hammer > 0;
+
                     // 🔪 small swinging weapons
-                    if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2) {
+                    if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2)
+                    {
+                        if (isTool) { return PoseGroup.SmallTool; }
                         return PoseGroup.SmallMelee;
                     }
                     // ⚔ big swinging weapons
-                    else {
+                    else
+                    {
+                        if (isTool) { return PoseGroup.LargeTool; }
                         return PoseGroup.LargeMelee;
 
                     }

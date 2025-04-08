@@ -230,7 +230,9 @@ namespace WeaponOutLite.Common.Configs
 	{ public override int PreviewItemType() => ItemID.BottledWater; }
 	public class PreviewSmallMelee : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.CopperBroadsword; }
-	public class PreviewRapier : HoldStylePreviewElement
+    public class PreviewSmallTool : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.IronPickaxe; }
+    public class PreviewRapier : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.CopperShortsword; }
 	public class PreviewSpear : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Spear; }
@@ -240,9 +242,11 @@ namespace WeaponOutLite.Common.Configs
 	{ public override int PreviewItemType() => ItemID.WoodYoyo; }
 	public class PreviewPowerTool : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Drax; }
-	public class PreviewLargeMelee : HoldStylePreviewElement
-	{ public override int PreviewItemType() => ItemID.BladeofGrass; }
-	public class PreviewThrown : HoldStylePreviewElement
+    public class PreviewLargeMelee : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.BladeofGrass; }
+    public class PreviewLargeTool : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.ReaverShark; }
+    public class PreviewThrown : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Shuriken; }
 	public class PreviewThrownThin : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.ThrowingKnife; }

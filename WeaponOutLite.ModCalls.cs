@@ -215,6 +215,18 @@ namespace WeaponOutLite
                         else if (args[1] is int[]) { RegisterItemStyle((int[])args[1], style); return true; }
                         return false;
 
+                    // RegisterLargeTool(int itemType)
+                    // RegisterLargeTool(Item item)
+                    // RegisterLargeTool(ModItem modItem)
+                    // RegisterLargeTool(Item itemTypeArray)
+                    case "RegisterLargeTool":
+                        style = PoseStyleID.PoseGroup.LargeMelee;
+                        if (arg1IsInt) { RegisterItemStyle(arg1Int, style); return true; }
+                        if (args[1] is Item) { RegisterItemStyle((Item)args[1], style); return true; }
+                        else if (args[1] is ModItem) { RegisterItemStyle((ModItem)args[1], style); return true; }
+                        else if (args[1] is int[]) { RegisterItemStyle((int[])args[1], style); return true; }
+                        return false;
+
                     // RegisterLauncher(int itemType)
                     // RegisterLauncher(Item item)
                     // RegisterLauncher(ModItem modItem)
@@ -317,6 +329,18 @@ namespace WeaponOutLite
                     // RegisterSmallMelee(Item itemTypeArray)
                     case "RegisterSmallMelee":
                         style = PoseStyleID.PoseGroup.SmallMelee;
+                        if (arg1IsInt) { RegisterItemStyle(arg1Int, style); return true; }
+                        if (args[1] is Item) { RegisterItemStyle((Item)args[1], style); return true; }
+                        else if (args[1] is ModItem) { RegisterItemStyle((ModItem)args[1], style); return true; }
+                        else if (args[1] is int[]) { RegisterItemStyle((int[])args[1], style); return true; }
+                        return false;
+
+                    // RegisterSmallTool(int itemType)
+                    // RegisterSmallTool(Item item)
+                    // RegisterSmallTool(ModItem modItem)
+                    // RegisterSmallTool(Item itemTypeArray)
+                    case "RegisterSmallTool":
+                        style = PoseStyleID.PoseGroup.SmallTool;
                         if (arg1IsInt) { RegisterItemStyle(arg1Int, style); return true; }
                         if (args[1] is Item) { RegisterItemStyle((Item)args[1], style); return true; }
                         else if (args[1] is ModItem) { RegisterItemStyle((ModItem)args[1], style); return true; }
