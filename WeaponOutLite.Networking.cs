@@ -70,7 +70,7 @@ namespace WeaponOutLite
                 if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
             }
 
-            WeaponOutPlayerRenderer modPlayer = Main.player[playerWhoAmI].GetModPlayer<WeaponOutPlayerRenderer>();
+            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
             modPlayer.IsShowingHeldItem = isShowingItem;
 
             try {
@@ -104,7 +104,7 @@ namespace WeaponOutLite
             int playerWhoAmI = reader.ReadByte();
             var combatTimer = reader.ReadInt32();
 
-            WeaponOutPlayerRenderer modPlayer = Main.player[playerWhoAmI].GetModPlayer<WeaponOutPlayerRenderer>();
+            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
             modPlayer.CombatDelayTimer = combatTimer;
 
             // Forward server->clients

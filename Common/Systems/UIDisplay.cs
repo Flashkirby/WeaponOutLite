@@ -61,8 +61,7 @@ namespace WeaponOutLite.Common.Systems
             // Default locked state (off)
             var texture = TextureAssets.InventoryTickOff.Value;
             var hoverText = "WeaponOut: " + Lang.inter[73]; // "Off" see en_US.Legacy
-            var modPlayer = Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
-            if(modPlayer == null) { return; }
+            if (!Main.LocalPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
 
             bool forcedVisuals = ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals;
 

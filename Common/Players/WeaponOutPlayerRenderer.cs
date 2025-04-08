@@ -106,17 +106,20 @@ namespace WeaponOutLite.Common.Players
 			}
         }
 
-        public override void ResetEffects() {
+		public override void ResetEffects()
+		{
 			showHeldItemThisFrame = true;
 
 			// Terraria Overhaul Integration
-			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul) {
-				// Basic implementation of https://github.com/Mirsario/TerrariaOverhaul/blob/668f5ed01b7af8ba4530645b605e5ee11030ba56/Common/PlayerEffects/PlayerHoldOutAnimation.cs?ts=4#L99
-				// to prevent visual conflicts
-				var item = HeldItem;
+			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul)
+			{
+                // Basic implementation of ShouldForceUseAnim to prevent visual conflicts
+                // https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118
+                var item = HeldItem;
 
 				if (item.noUseGraphic ||
-					item.useStyle != ItemUseStyleID.Shoot) {
+					item.useStyle != ItemUseStyleID.Shoot)
+				{
 					// return
 				}
 				else { WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI); }
