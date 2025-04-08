@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader.Config;
 using WeaponOutLite.Common.Players;
@@ -427,6 +428,19 @@ namespace WeaponOutLite.Common.Configs
 			}
 		}
 
-	}
+        /// <summary>
+        /// Custom implementation of internal method Terraria.ModLoader.Config.ConfigManager.Save()
+		/// Compatible with tModLoader 1.4.4.9
+        /// </summary>
+        public void Save()
+        {
+            Directory.CreateDirectory(ConfigManager.ModConfigPath);
+            string filename = Mod.Name + "_" + Name + ".json";
+            string path = Path.Combine(ConfigManager.ModConfigPath, filename);
+            string json = JsonConvert.SerializeObject(this, ConfigManager.serializerSettings);
+            File.WriteAllText(path, json);
+
+        }
+    }
 
 }
