@@ -1,6 +1,6 @@
 ﻿# WeaponOut Lite
 <p align="center">
-<img src="https://raw.githubusercontent.com/Flashkirby/WeaponOutLite/master/icon.png"/>
+<img src="https://raw.githubusercontent.com/Flashkirby/WeaponOutLite/main/icon.png"/>
 </p>
 <p align="center"><img src="http://i.imgur.com/kdcROYP.png"/></p>
 
@@ -22,7 +22,6 @@ Beta Testers: Karob, RunicPixels, W1K
 Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 
 ### Todo
-- See PR https://github.com/Flashkirby/WeaponOutLite/pull/4
 - finish StanceRapierHold (diagonal forward stance for rapier)
 - Make this mod no sync
 
