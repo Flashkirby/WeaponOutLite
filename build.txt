@@ -2,7 +2,7 @@ displayName = WeaponOut Lite
 author = Flashkirby
 version = 1.0.1
 
-homepage = https://github.com/Flashkirby/WeaponOutLite/
+homepage = https://steamcommunity.com/workshop/filedetails/discussion/3455924006/595145468747528229/
 
 includeSource = true
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.suo, *.sln, .git, .gitignore, *.env, *.md, .git\*, *.psd, *.fw.png *.TMP, *.ase, *.aseprite
