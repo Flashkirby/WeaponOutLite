@@ -17,7 +17,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.5f) {
                 return base.DrawDepth(p, i, timer);
             }
-            return p.compositeFrontArm.enabled || p.IsMountPoseActive() ? DrawDepthID.Hand : DrawDepthID.Front;
+            return DrawDepthID.Hand;
         }
 
         public override int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer) {
@@ -45,6 +45,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 Player.CompositeArmStretchAmount frontArm = Player.CompositeArmStretchAmount.None;
                 p.SetCompositeArmFront(enabled: true, frontArm, (float)Math.PI * -0.5f * p.direction);
             }
+            else if (bodyFrame > 5)
+            {
+                Player.CompositeArmStretchAmount frontArm = Player.CompositeArmStretchAmount.Quarter;
+                p.SetCompositeArmFront(enabled: true, frontArm, (float)Math.PI * -0.25f * p.direction);
+            }
+            
 
             return bodyFrame;
         }
@@ -54,17 +60,19 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer)) {
                 return idleData;
             }
-            data = data.SetOrigin(0.5f - 0.5f * (width / height), 1f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
+            Main.NewText($"width={width / height}");
+            data = data.SetOrigin(0.5f - 0.4375f + 0 * (height / height), 0.5f + 0.4375f + 0* (width / height), p).ApplyFlip(p).RotateFaceForward(p, height, width);
+
 
             if (bodyFrame == 0 || (bodyFrame == 10 && p.compositeBackArm.enabled)) {
                 // Standing
-                data.position += new Vector2(10, 22);
+                data.position += new Vector2(6, 20);
                 data.rotation += (float)(Math.PI * -0.675f);
             }
             else if (bodyFrame > 5) {
                 // Running
-                data.position += new Vector2(12, 16);
-                data = data.WithHandOffset(p);
+                data.position += new Vector2(16, 18);
+                data = data.WithWaistOffset(p);
                 data.rotation += (float)(Math.PI * -0.75f);
             }
             else if (bodyFrame == 5) {
