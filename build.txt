@@ -1,6 +1,6 @@
 displayName = WeaponOut Lite
 author = Flashkirby
-version = 1.0.1
+version = 1.0.2-dev
 
 homepage = https://steamcommunity.com/workshop/filedetails/discussion/3455924006/595145468747528229/
 
