@@ -60,7 +60,6 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer)) {
                 return idleData;
             }
-            Main.NewText($"width={width / height}");
             data = data.SetOrigin(0.5f - 0.4375f + 0 * (height / height), 0.5f + 0.4375f + 0* (width / height), p).ApplyFlip(p).RotateFaceForward(p, height, width);
 
 
