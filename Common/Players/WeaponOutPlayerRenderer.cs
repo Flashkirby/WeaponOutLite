@@ -176,7 +176,7 @@ namespace WeaponOutLite.Common.Players
 			// Send a message out to the server when a sync is required, such as a new player joining the server
 			MyStat = Main.rand.Next();
 			if (fromWho == -1) {
-				Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
+				if(WeaponOutLite.DEBUG_MULTIPLAYER) Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
 				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
 			}
 		}
