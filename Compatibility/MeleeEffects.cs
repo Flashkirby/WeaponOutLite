@@ -7,7 +7,7 @@ namespace WeaponOutLite.Compatibility
     /// https://steamcommunity.com/sharedfiles/filedetails/?id=2851052437
     /// https://steamcommunity.com/sharedfiles/filedetails/?id=2966457992
     /// </summary>
-    public static class MeleeEffects
+    internal static class MeleeEffects
     {
         public static bool Found => ModLoader.HasMod("MeleeWeaponEffects") || ModLoader.HasMod("MeleeEffects");
     }

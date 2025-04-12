@@ -110,21 +110,45 @@ namespace WeaponOutLite.Common.Players
 		{
 			showHeldItemThisFrame = true;
 
-			// Terraria Overhaul Integration
-			if (TerrariaOverhaul.Found && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul)
-			{
+			// Mod Integrations
+			ModCompatibleHideItem();
+
+        }
+
+		private void ModCompatibleHideItem()
+        {
+			var config = ModContent.GetInstance<WeaponOutClientConfig>();
+            var item = HeldItem;
+
+            // Terraria Overhaul Integration
+            if (TerrariaOverhaul.Found && config.ModIntegrationTerrariaOverhaul)
+            {
                 // Basic implementation of ShouldForceUseAnim to prevent visual conflicts
                 // https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118
-                var item = HeldItem;
 
-				if (item.noUseGraphic ||
-					item.useStyle != ItemUseStyleID.Shoot)
-				{
-					// return
-				}
-				else { WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI); }
-			}
-		}
+                if (item.noUseGraphic ||
+                    item.useStyle != ItemUseStyleID.Shoot)
+                {
+                    // return
+                }
+                else
+                {
+                    WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+                    return;
+                }
+            }
+
+			if (InsurgencyWeapons.Found && config.ModIntegrationInsurgencyWeapons)
+			{
+				// Insurgency has its own render system for weapons - but this can be disabled in its own config.
+				if (InsurgencyWeapons.HasItem(item))
+                {
+                    WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+                    return;
+                }
+            }
+        }
+
 
         public override void PostUpdate()
         {
