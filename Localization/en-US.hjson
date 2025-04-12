@@ -448,7 +448,7 @@ Mods: {
 
 				ModIntegrationTerrariaOverhaul: {
 					Label: "[i:509] Toggle: Terraria Overhaul"
-					Tooltip: Hide item drawing when aimable weapons are selected. See the Terraria Overhaul setting: AlwaysShowAimableWeapons. Default is On.
+					Tooltip: Hide item drawing when aimable weapons are selected. See also: Terraria Overhaul > AlwaysShowAimableWeapons. Default is On.
 				}
 
 				ModIntegrationMeleeEffectsPlus: {
@@ -458,7 +458,7 @@ Mods: {
 
 				ModIntegrationVibrantReverie: {
 					Label: "[i:1344] Automatic: Vibrant Reverie"
-					Tooltip: Default preferences for certain items. Thanks W1K [i:58]!
+					Tooltip: Mod Call integration supported. Thanks W1K [i:58]!
 				}
 
 				ModIntegrationOverhaulGunAnimations: {
@@ -468,7 +468,7 @@ Mods: {
 
 				ModIntegrationArmamentDisplay: {
 					Label: "[i:2701] Manual: ArmamentDisplay"
-					Tooltip: Disable ArmamentDisplay Visual Effect Setting: Weapon display switch to remove rendering conflicts.
+					Tooltip: Disable ArmamentDisplay Visual Effect Setting > Weapon display switch to remove rendering conflicts.
 				}
 
 				ModIntegrationArmamentDisplayLite: {
@@ -478,7 +478,12 @@ Mods: {
 
 				ModIntegrationCoolerItemVisualEffect: {
 					Label: "[i:2701] Manual: CoolerItemVisualEffect"
-					Tooltip: Disable CoolerItemVisualEffect Advanced Setting: Other Settings: Weapon display switch to remove rendering conflicts.
+					Tooltip: Disable CoolerItemVisualEffect Advanced Setting > Other Settings > Weapon display switch to remove rendering conflicts.
+				}
+
+				ModIntegrationInsurgencyWeapons: {
+					Label: "[i:2701] Manual: Insurgency Weapons"
+					Tooltip: "Hide item drawing when insurgency weapons are selected. See also: Insurgency Server Side > Hide weapon when not in use. Default is On. "
 				}
 			}
 

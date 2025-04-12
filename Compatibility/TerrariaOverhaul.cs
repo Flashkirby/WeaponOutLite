@@ -6,7 +6,7 @@ namespace WeaponOutLite.Compatibility
     /// Terraria Overhaul
     /// https://steamcommunity.com/sharedfiles/filedetails/?id=2811803870
     /// </summary>
-    public static class TerrariaOverhaul
+    internal static class TerrariaOverhaul
     {
         public static bool Found => ModLoader.HasMod("TerrariaOverhaul");
     }

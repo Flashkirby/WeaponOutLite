@@ -414,12 +414,17 @@ namespace WeaponOutLite.Common.Configs
 		[Header("ModIntegrationHeader")]
 		#region ModIntegrations
 
+		// Toggles
 		[DefaultValue(true)]
         public bool ModIntegrationTerrariaOverhaul { get; set; }
 
         [DefaultValue(true)]
         public bool ModIntegrationMeleeEffectsPlus { get; set; }
 
+        [DefaultValue(true)]
+        public bool ModIntegrationInsurgencyWeapons { get; set; }
+
+        // Manual changes required / Unsupported
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationOverhaulGunAnimations { get { return false; } }
 
@@ -428,6 +433,10 @@ namespace WeaponOutLite.Common.Configs
 
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationCoolerItemVisualEffect { get { return false; } }
+
+		// Automatic
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationVibrantReverie { get { return VibrantReverie.Found; } }
 
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationArmamentDisplayLite { get { return WeaponDisplayLite.Found; } }

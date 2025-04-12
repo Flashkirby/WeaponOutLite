@@ -6,7 +6,7 @@ namespace WeaponOutLite.Compatibility
     /// ArmamentDisplayLite
     /// https://steamcommunity.com/sharedfiles/filedetails/?id=2892618574
     /// </summary>
-    public static class WeaponDisplayLite
+    internal static class WeaponDisplayLite
     {
         public static bool Found => ModLoader.HasMod("WeaponDisplayLite");
     }
