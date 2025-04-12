@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.Common.GlobalDrawItemPose;
+using WeaponOutLite.Compatibility;
 
 namespace WeaponOutLite.Common.Players
 {
@@ -110,7 +111,7 @@ namespace WeaponOutLite.Common.Players
 			showHeldItemThisFrame = true;
 
 			// Terraria Overhaul Integration
-			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul)
+			if (TerrariaOverhaul.Found && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul)
 			{
                 // Basic implementation of ShouldForceUseAnim to prevent visual conflicts
                 // https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118

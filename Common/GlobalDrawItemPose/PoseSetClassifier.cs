@@ -5,7 +5,9 @@ using Terraria.ID;
 using Terraria.GameContent;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.ID;
+using WeaponOutLite.Compatibility;
 using static WeaponOutLite.ID.PoseStyleID;
+using static WeaponOutLite.ID.DrawItemPoseID;
 
 namespace WeaponOutLite.Common.GlobalDrawItemPose
 {
@@ -31,97 +33,97 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // Select the pose based on the client configured pose styles
             switch (poseGroup) {
                 case PoseGroup.Item:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallItemPose];
                     break;
                 case PoseGroup.LargeItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeItemPose];
                     break;
                 case PoseGroup.VanityItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.VanityItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.VanityItemPose];
                     break;
                 case PoseGroup.Potion:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PotionPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PotionPose];
                     break;
                 case PoseGroup.PowerTool:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PowerToolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PowerToolPose];
                     break;
                 case PoseGroup.Yoyo:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.YoyoPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.YoyoPose];
                     break;
                 case PoseGroup.SmallMelee:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallMeleePose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallMeleePose];
                     break;
                 case PoseGroup.SmallTool:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallToolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallToolPose];
                     break;
                 case PoseGroup.LargeMelee:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeMeleePose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeMeleePose];
                     break;
                 case PoseGroup.LargeTool:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeToolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeToolPose];
                     break;
                 case PoseGroup.Thrown:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ThrownPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ThrownPose];
                     break;
                 case PoseGroup.ThrownThin:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ThrownThinPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ThrownThinPose];
                     break;
                 case PoseGroup.Spear:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SpearPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SpearPose];
                     break;
                 case PoseGroup.Rapier:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.RapierPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.RapierPose];
                     break;
                 case PoseGroup.Flail:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.FlailPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.FlailPose];
                     break;
                 case PoseGroup.Whips:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.WhipPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.WhipPose];
                     break;
                 case PoseGroup.Bow:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.BowPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.BowPose];
                     break;
                 case PoseGroup.Repeater:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.RepeaterPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.RepeaterPose];
                     break;
                 case PoseGroup.Pistol:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PistolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PistolPose];
                     break;
                 case PoseGroup.Gun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GunPose];
                     break;
                 case PoseGroup.GunManual:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GunManualPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GunManualPose];
                     break;
                 case PoseGroup.Shotgun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ShotgunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ShotgunPose];
                     break;
                 case PoseGroup.Launcher:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LauncherPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LauncherPose];
                     break;
                 case PoseGroup.Staff:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.StaffPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.StaffPose];
                     break;
                 case PoseGroup.MagicBook:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.MagicBookPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.MagicBookPose];
                     break;
                 case PoseGroup.MagicItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.MagicItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.MagicItemPose];
                     break;
                 case PoseGroup.GiantItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantItemPose];
                     break;
                 case PoseGroup.GiantWeapon:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantWeaponPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantWeaponPose];
                     break;
                 case PoseGroup.GiantBow:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantBowPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantBowPose];
                     break;
                 case PoseGroup.GiantGun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantGunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantGunPose];
                     break;
                 case PoseGroup.GiantMagic:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantMagicPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantMagicPose];
                     break;
             }
             return drawItemPose;
@@ -130,7 +132,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// <summary>
         /// Fetch the posegroup to use for the item, taking into account any additional configuration options
         /// </summary>
-        /// <returns></returns>
+        /// <param name="item">The item being classified</param>
+        /// <param name="poseGroup">The pose group of the item, used to determined its DrawItemPose if DrawItemPoseID.Unassigned</param>
+        /// <param name="drawItemPose">The specific DrawItemPose to use. If set, the poseGroup is skipped. </param>
         public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
         {
             WeaponOutLite mod = WeaponOutLite.GetMod();
@@ -138,18 +142,19 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
             // Set initial pose style and item pose object
             poseGroup = PoseGroup.Unassigned;
-            drawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+            drawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
 
             // Set the item pose if its been set as a preferred, which skips pose group
-            if (mod.customItemHoldPose.Contains(item.type)) {
-                drawItemPose = mod.DrawStyle[(int)mod.customItemHoldPose[item.type]];
+            if (mod.priorityItemHoldPose.TryGetValue(item.type, out DrawItemPose itemPose))
+            {
+                drawItemPose = mod.ItemPoses[(int)itemPose];
             }
 
             // Read custom config for forced pose override
             ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
             if (itemOverride != null) {
                 // Found a forced pose in the config, so use this.
-                drawItemPose = mod.DrawStyle[(int)itemOverride.ForceDrawItemPose];
+                drawItemPose = mod.ItemPoses[(int)itemOverride.ForceDrawItemPose];
                 poseGroup = itemOverride.ForcePoseGroup;
             }
 
@@ -159,16 +164,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
                 // If the item has been modded to use a custom pose, use that
                 if (mod.customItemHoldStyles.Contains(item.type)) {
-                    drawItemPose = mod.DrawStyle[DrawItemPoseID.Custom];
+                    drawItemPose = mod.ItemPoses[DrawItemPoseID.Custom];
                 }
                 else {
                     // Otherwise, figure out which one to use
-                    if (mod.customItemHoldGroups.Contains(item.type)) {
-                        poseGroup = (PoseGroup)mod.customItemHoldGroups[item.type];
-                    }
-                    else {
-                        poseGroup = CalculateDrawStyleType(item);
-                    }
+                    if (mod.priorityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
+                    else if (mod.compatibilityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
+                    else poseGroup = CalculateDrawStyleType(item);
+
                     //WeaponOutLite.TEXT_DEBUG += "\nclassifier " + item.useStyle + " = " + poseGroup;
                 }
             }
@@ -259,10 +262,11 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 if (item.noUseGraphic) {
                     // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas, but modded weapons may also use this.
                     if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier) {
+                        // Applies a fix to attempt to help identify different types of swords. Default is On.
                         // Skip attempt to classify here if the melee effects mod integration is active
                         // Since it sets all melee swords to be this type, I would rather use normal poses
                         if (item.useStyle == ItemUseStyleID.Rapier && 
-                            WeaponOutLite.MeleeEffectsPlusModLoaded && 
+                            MeleeEffects.Found && 
                             ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus) {
                             // skip
                         }

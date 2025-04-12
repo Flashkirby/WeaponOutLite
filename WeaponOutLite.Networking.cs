@@ -74,10 +74,10 @@ namespace WeaponOutLite
             modPlayer.IsShowingHeldItem = isShowingItem;
 
             try {
-                modPlayer.CurrentDrawItemPose = DrawStyle[holdStyleID];
+                modPlayer.CurrentDrawItemPose = ItemPoses[holdStyleID];
             }
             catch {
-                modPlayer.CurrentDrawItemPose = DrawStyle[DrawItemPoseID.Unassigned];
+                modPlayer.CurrentDrawItemPose = ItemPoses[DrawItemPoseID.Unassigned];
             }
 
             // If we are the server, we just received this from the updating client.

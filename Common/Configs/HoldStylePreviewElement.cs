@@ -76,10 +76,10 @@ namespace WeaponOutLite.Common.Configs
 			WeaponOutLite mod = WeaponOutLite.GetMod();
 			WeaponOutPlayerRenderer modPlayer = new WeaponOutPlayerRenderer();
 			try {
-				modPlayer.CurrentDrawItemPose = mod.DrawStyle[(int)holdStyleID];
+				modPlayer.CurrentDrawItemPose = mod.ItemPoses[(int)holdStyleID];
 			}
 			catch {
-				modPlayer.CurrentDrawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+				modPlayer.CurrentDrawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
 			}
 			modPlayer.CombatDelayTimer = int.MaxValue;
 

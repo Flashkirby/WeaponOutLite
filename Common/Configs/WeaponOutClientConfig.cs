@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Terraria;
 using Terraria.ModLoader.Config;
 using WeaponOutLite.Common.Players;
+using WeaponOutLite.Compatibility;
 using WeaponOutLite.ID;
 
 namespace WeaponOutLite.Common.Configs
@@ -429,7 +430,7 @@ namespace WeaponOutLite.Common.Configs
         public bool ModIntegrationCoolerItemVisualEffect { get { return false; } }
 
         [JsonIgnore][ShowDespiteJsonIgnore]
-        public bool ModIntegrationArmamentDisplayLite { get { return WeaponOutLite.ArmamentDisplayLiteModLoaded; } }
+        public bool ModIntegrationArmamentDisplayLite { get { return WeaponDisplayLite.Found; } }
 
         #endregion
 

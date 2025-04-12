@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using WeaponOutLite.Common.Players;
 using static WeaponOutLite.ID.DrawItemPoseID;
 using static WeaponOutLite.ID.PoseStyleID;
+using System.Collections.Specialized;
 
 namespace WeaponOutLite
 {
@@ -452,16 +453,27 @@ namespace WeaponOutLite
             customItemHoldStyles.Add(itemType);
         }
 
+        /// <summary>
+        /// Accessor for customItemHoldStyles, for fully customised DrawItemPose
+        /// </summary>
         private void RegisterCustomItemStyle(Item item)
         {
             RegisterCustomItemStyle(item.type);
         }
 
+
+        /// <summary>
+        /// Accessor for customItemHoldStyles, for fully customised DrawItemPose
+        /// </summary>
         private void RegisterCustomItemStyle(ModItem modItem)
         {
             RegisterCustomItemStyle(modItem.Item.type);
         }
 
+
+        /// <summary>
+        /// Accessor for customItemHoldStyles, for fully customised DrawItemPose
+        /// </summary>
         private void RegisterCustomItemStyle(int[] itemTypeArray)
         {
             foreach (var itemType in itemTypeArray) {
@@ -470,36 +482,55 @@ namespace WeaponOutLite
         }
 
 
+        /// <summary>
+        /// List of item ids that should prioritise a pose group, used in PoseSetClassifier before other selections
+        /// This is for setting up items that don't work with the standard automatic style selection
+        /// </summary>
         private void RegisterItemStyle(int itemType, PoseStyleID.PoseGroup poseGroup)
         {
-            if (customItemHoldGroups.Contains(itemType)) {
+            if (priorityItemHoldGroups.ContainsKey(itemType)) {
                 Logger.Warn($"Item Type {itemType} has already been registered by a mod.");
                 return;
             }
-            customItemHoldGroups.Add(itemType, poseGroup);
+            priorityItemHoldGroups.Add(itemType, poseGroup);
         }
 
+        /// <summary>
+        /// Accessor for customItemHoldGroups, for PoseGroup
+        /// </summary>
         private void RegisterItemStyle(Item item, PoseStyleID.PoseGroup poseGroup)
         {
-            customItemHoldGroups.Add(item.type, poseGroup);
+            priorityItemHoldGroups.Add(item.type, poseGroup);
         }
 
+
+        /// <summary>
+        /// Accessor for customItemHoldGroups, for PoseGroup
+        /// </summary>
         private void RegisterItemStyle(ModItem modItem, PoseStyleID.PoseGroup poseGroup)
         {
-            customItemHoldGroups.Add(modItem.Item.type, poseGroup);
+            priorityItemHoldGroups.Add(modItem.Item.type, poseGroup);
         }
 
+
+        /// <summary>
+        /// Accessor for customItemHoldGroups, for PoseGroup
+        /// </summary>
         private void RegisterItemStyle(int[] itemTypeArray, PoseStyleID.PoseGroup poseGroup)
         {
             foreach (var itemType in itemTypeArray) {
-                customItemHoldGroups.Add(itemType, poseGroup);
+                priorityItemHoldGroups.Add(itemType, poseGroup);
             }
         }
 
+        /// <summary>
+        /// List of item ids that should prioritise a pose, used in PoseSetClassifier before other selections
+        /// This is for advanced mod integrations looking to specify preferences/behaviours on specific items
+        /// </summary>
         private bool RegisterItemHoldPose(int itemType, string itemPoseName)
         {
             if (Enum.TryParse(itemPoseName, true, out DrawItemPose pose)) {
-                customItemHoldPose.Add(itemType, pose);
+                priorityItemHoldPose.Add(itemType, pose);
                 return true;
             }
             else {
@@ -508,11 +539,17 @@ namespace WeaponOutLite
             }
         }
 
+        /// <summary>
+        /// Accessor for customItemHoldPose, for manually set DrawItemPose
+        /// </summary>
         private bool RegisterItemHoldPose(Item item, string itemPoseName)
         {
             return RegisterItemHoldPose(item.type, itemPoseName);
         }
 
+        /// <summary>
+        /// Accessor for customItemHoldPose, for manually set DrawItemPose
+        /// </summary>
         private bool RegisterItemHoldPose(ModItem modItem, string itemPoseName)
         {
             return RegisterItemHoldPose(modItem.Item.type, itemPoseName);
