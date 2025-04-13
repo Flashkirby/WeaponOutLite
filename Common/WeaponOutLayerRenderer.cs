@@ -704,7 +704,7 @@ namespace WeaponOutLite.Common
             // Populate inbetween space with empty textures
             UpdateProjectileTextureCache(itemType);
 
-            //
+            //  
             if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; }
 			//
 
@@ -737,9 +737,9 @@ namespace WeaponOutLite.Common
 				// Set the contents of data to the base texture
 				baseTexture.GetData(data);
 
-				// Get the first frame only by truncating pixel data
-				// This obviously only works for vertical animation frame
-				if (frames > 1) {
+                // Get the first frame only by truncating pixel data
+                // This obviously only works for vertical animation frame
+                if (frames > 1) {
 					Array.Resize(ref data, baseTexture.Width * baseTexture.Height / frames);
 					baseTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height / frames);
 					baseTexture.SetData(data);
@@ -750,16 +750,21 @@ namespace WeaponOutLite.Common
 				int coverageAlongLength = 0;
 				for (int i = 0; i < totalLength; i++) {
 					coverageAlongLength += data[i * baseTexture.Width + i].A > 0 ? 1 : 0;
-				}
-
-                // If the spear has pixels along at least 75% of this diagonal, it's probably flippable.
-                // Flippable using Rotted Fork as a reference for a flipped spear
+                }
 
                 // Main.NewText($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
                 ItemProjTextureCache[itemType] = baseTexture;
 
+                // If the spear has pixels along at least 50% of this diagonal, it's probably flippable.
+                // Flippable using Rotted Fork as a reference for a flipped spear
+				// CalamityMod Diseased Pike has a diagonal coverage of 51%
+                if (WeaponOutLite.DEBUG_EXPERIMENTAL)
+                {
+                    Console.WriteLine($"{itemType}:{projectileType} d-coverage {coverageAlongLength} = {(float)coverageAlongLength / totalLength * 100}%");
+                }
+
                 Color[] rotatedData = new Color[data.Length];
-                if (coverageAlongLength > totalLength * 0.75f) {
+                if (coverageAlongLength > totalLength * 0.5f) {
 					// Create a horizontally flipped texture
 					// set a pointer starting from the top right
 					var x = baseTexture.Width - 1;
