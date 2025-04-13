@@ -43,6 +43,7 @@ namespace WeaponOutLite.ID
             GiantBow = 940,
             GiantGun = 950,
             GiantMagic = 960,
+            GiantDamaging = 970,
         }
 
         public static string MapPoseGroupToString(PoseGroup poseGroup)

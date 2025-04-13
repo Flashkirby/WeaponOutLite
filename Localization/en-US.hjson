@@ -38,6 +38,7 @@ Mods: {
 				GiantBow: Giant Bow
 				GiantGun: Giant Ranged Weapon
 				GiantMagic: Giant Magic Weapon
+				GiantDamaging: Giant Misc Weapon
 			}
 		}
 
@@ -408,7 +409,7 @@ Mods: {
 
 				GiantGunPose: {
 					Label: Giant Ranged Weapons
-					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatOffHandShoulder.Label}
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.CombatTwoHandRifleUp.Label}
 				}
 
 				GiantGunPV: {
@@ -422,6 +423,16 @@ Mods: {
 				}
 
 				GiantMagicPV: {
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
+					Tooltip: ""
+				}
+
+				GiantDamagingPose: {
+					Label: Giant Misc Weapons
+					Tooltip: Default is {$Mods.WeaponOutLite.Configs.LabelledItemPose.OffHandPole.Label}
+				}
+
+				GiantDamagingPosePV: {
 					Label: "{$Mods.WeaponOutLite.Common.Preview}"
 					Tooltip: ""
 				}
@@ -484,6 +495,11 @@ Mods: {
 				ModIntegrationInsurgencyWeapons: {
 					Label: "[i:2701] Manual: Insurgency Weapons"
 					Tooltip: "Hide item drawing when insurgency weapons are selected. See also: Insurgency Server Side > Hide weapon when not in use. Default is On. "
+				}
+
+				ModIntegrationCalamityMod: {
+					Label: "[i:1344] Automatic: Calamity Mod"
+					Tooltip: Adds default classifications to Calamity weapons.
 				}
 			}
 
@@ -579,6 +595,7 @@ Mods: {
 				GiantBow.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantBow}"
 				GiantGun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantGun}"
 				GiantMagic.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantMagic}"
+				GiantDamaging.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantDamaging}"
 			}
 
 			LabelledItemPose: {

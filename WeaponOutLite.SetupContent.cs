@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using WeaponOutLite.Compatibility;
 
 namespace WeaponOutLite
 {
@@ -17,6 +18,9 @@ namespace WeaponOutLite
     partial class WeaponOutLite : Mod
     {
         public override void PostSetupContent() {
+          
+            CalamityMod.PostSetupContent();
+
             // Get the WeaponOutLite mod
             Mod weaponOutLite = ModLoader.GetMod("WeaponOutLite");
 
@@ -206,6 +210,6 @@ namespace WeaponOutLite
             if (!(bool)weaponOutLite.Call("RegisterCustomUpdateIdleBodyFrame", weaponOutLiteCustomIdleBodyFrame)) { throw new ArgumentException("RegisterCustomUpdateIdleBodyFrame ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterCustomDrawDepth", weaponOutLiteCustomDrawDepth)) { throw new ArgumentException("RegisterCustomDrawDepth ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterCustomPreDrawData", weaponOutLiteCustomDrawData)) { throw new ArgumentException("RegisterCustomPreDrawData ModCall Failed"); }
-        }
+                }
     }
 }
