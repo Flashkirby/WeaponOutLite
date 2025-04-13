@@ -357,7 +357,8 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // such as boomerangs, knives, shurikens, and the shadow dagger
                     // include Grenades and Molotov Cocktails
                     // Thinner, upright weapons like knives fall under a separate adjustment category
-                    if (h >= w * 1.5f) {
+                    // Also includes flat weapons, eg. Twisting Thunder from calamity mod
+                    if (h >= w * 1.5f || w >= h * 1.5f) {
                         return PoseGroup.ThrownThin;
                     }
 
