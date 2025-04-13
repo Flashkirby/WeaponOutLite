@@ -25,6 +25,12 @@ namespace WeaponOutLite.Common.Players
 
 		public bool showHeldItemThisFrame = true;
 
+		/// <summary> 
+		/// Many custom draw mods are modifying the arm. 
+		/// If this value isn't the one we set, assume another mod is doing something here, and back off.
+		/// </summary>
+		internal float? expectedFrontArmThisFrame = null;
+
 		/// <summary>
 		/// Draw style of the currently held item. If null, the layer renderer won't run.
 		/// </summary>
@@ -70,14 +76,19 @@ namespace WeaponOutLite.Common.Players
         public bool DrawHeldItem
 		{
 			get {
-				return IsShowingHeldItem && showHeldItemThisFrame &&
+                return IsShowingHeldItem && showHeldItemThisFrame &&
+					(   // front arm hasn't been modified by another mod 
+						(!Player.compositeFrontArm.enabled && expectedFrontArmThisFrame == null) ||
+						(Player.compositeFrontArm.enabled && expectedFrontArmThisFrame == Player.compositeFrontArm.rotation)
+					) &&
 					!Main.gameMenu && // Not in game menu ie. select screen
 					Player.active && // active player slot
 					!Player.dead && // alive
 					!Player.stoned && // unpetrified
 					Player.itemAnimation <= 0; // not swinging
 			}
-		}
+
+        }
 
 		/// <summary>
 		/// Current body frame
@@ -107,12 +118,12 @@ namespace WeaponOutLite.Common.Players
         }
 
 		public override void ResetEffects()
-		{
-			showHeldItemThisFrame = true;
+        {
+			expectedFrontArmThisFrame = null;
+            showHeldItemThisFrame = true;
 
-			// Mod Integrations
-			ModCompatibleHideItem();
-
+            // Mod Integrations
+            ModCompatibleHideItem();
         }
 
 		private void ModCompatibleHideItem()
@@ -273,11 +284,12 @@ namespace WeaponOutLite.Common.Players
             }
         }
 
-        /// <summary>
-        /// Modify the player's body frame if there is an idle body frame set in the style.
-        /// Clients Only
-        /// </summary>
-        private void manageBodyFrame() {
+		/// <summary>
+		/// Modify the player's body frame if there is an idle body frame set in the style.
+		/// Clients Only
+		/// </summary>
+		private void manageBodyFrame()
+		{
 			//no item so nothing to show
 			if (HeldItem == null || HeldItem.type == ItemID.None || HeldItem.holdStyle != 0) return;
 
@@ -287,19 +299,31 @@ namespace WeaponOutLite.Common.Players
 			// But modifications to the modplayer in that method seem to be reverted by the time this method is called (all values reset to null)
 			// tested IsCloneable and overriding Clone doesn't solve this.
 			// 
-			if (CurrentDrawItemPose == null) {
+			if (CurrentDrawItemPose == null)
+			{
 				//throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
 				// Ignore this state. The next time a player changes their held item in MP, it will be re-synced anyway.
 				return;
-            }
+			}
 
 			// Only if in a rest post
 			// 0 = standing
 			// 5 = falling
 			// 6+ = running/flying
-			if (BodyFrameNum == 0 || BodyFrameNum >= 5) {
+
+			bool idleFrames = BodyFrameNum == 0 || BodyFrameNum >= 5;
+			bool idleCompositeArms = !Player.compositeFrontArm.enabled && !Player.compositeBackArm.enabled;
+
+            if (idleFrames && idleCompositeArms)
+			{
 				BodyFrameNum = CurrentDrawItemPose.UpdateIdleBodyFrame(Player, HeldItem, BodyFrameNum, CombatDelayTimer);
 			}
+
+			// Monitor external modifications to compositeFrontArm to detect other mod overrides
+			if (Player.compositeFrontArm.enabled)
+			{ expectedFrontArmThisFrame = Player.compositeFrontArm.rotation; }
+			else
+			{ expectedFrontArmThisFrame = null; }
 		}
     }
 }
