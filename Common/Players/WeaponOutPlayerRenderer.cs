@@ -127,41 +127,54 @@ namespace WeaponOutLite.Common.Players
         }
 
 		private void ModCompatibleHideItem()
-        {
+		{
 			var config = ModContent.GetInstance<WeaponOutClientConfig>();
-            var item = HeldItem;
+			var item = HeldItem;
 
-            // Terraria Overhaul Integration
-            if (TerrariaOverhaul.Found && config.ModIntegrationTerrariaOverhaul)
-            {
-                // Basic implementation of ShouldForceUseAnim to prevent visual conflicts
-                // https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118
+			// Terraria Overhaul Integration
+			if (TerrariaOverhaul.Found && config.ModIntegrationTerrariaOverhaul)
+			{
+				// Basic implementation of ShouldForceUseAnim to prevent visual conflicts
+				// https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118
 
-                if (item.noUseGraphic ||
-                    item.useStyle != ItemUseStyleID.Shoot)
-                {
-                    // return
-                }
-                else
-                {
-                    WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
-                    return;
-                }
-            }
+				if (item.noUseGraphic ||
+					item.useStyle != ItemUseStyleID.Shoot)
+				{
+					// return
+				}
+				else
+				{
+					WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+					return;
+				}
+			}
 
 			if (InsurgencyWeapons.Found && config.ModIntegrationInsurgencyWeapons)
 			{
 				// Insurgency has its own render system for weapons - but this can be disabled in its own config.
 				if (InsurgencyWeapons.HasItem(item))
+				{
+					WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+					return;
+				}
+			}
+
+			if (CalamityMod.Found && CalamityMod.HasItem(item))
+			{
+				if (item.ModItem?.Name == "TheFinalDawn")
                 {
-                    WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
-                    return;
+                    bool attackFrames = BodyFrameNum >= 1 && BodyFrameNum <= 4;
+					if (attackFrames)
+                    {
+                        WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+                        return;
+                    }
                 }
             }
-        }
+		}
 
 
-        public override void PostUpdate()
+		public override void PostUpdate()
         {
             // This is for displaying items in-game
             if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {

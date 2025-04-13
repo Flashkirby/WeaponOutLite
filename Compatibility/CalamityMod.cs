@@ -45,6 +45,7 @@ namespace WeaponOutLite.Compatibility
                     case "Cosmilamp": mod.compatibilityItemHoldGroups.Add(i.Item.type, ID.PoseStyleID.PoseGroup.VanityItem); break;
                     case "EtherealSubjugator": mod.compatibilityItemHoldGroups.Add(i.Item.type, ID.PoseStyleID.PoseGroup.VanityItem); break;
                     case "TheOldReaper": mod.compatibilityItemHoldGroups.Add(i.Item.type, ID.PoseStyleID.PoseGroup.Staff); break;
+                    case "TheFinalDawn": mod.compatibilityItemHoldGroups.Add(i.Item.type, ID.PoseStyleID.PoseGroup.Staff); break;
                 }
             }
         }
