@@ -125,6 +125,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 case PoseGroup.GiantMagic:
                     drawItemPose = mod.ItemPoses[(int)clientConfig.GiantMagicPose];
                     break;
+                case PoseGroup.GiantDamaging:
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantDamagingPose];
+                    break;
             }
             return drawItemPose;
         }
@@ -200,7 +203,12 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// </summary>
         private static PoseGroup CalculateDrawStyleType(Item item) {
 
-            var itemTexture = TextureAssets.Item[item.type].Value;
+            var itemTexture = TextureAssets.Item[item.type]?.Value;
+            if(itemTexture == null)
+            {
+                return PoseGroup.Unassigned;
+            }
+
             var itemFrames = 1;
             if (Main.itemAnimations[item.type] != null) {
                 itemFrames = Main.itemAnimations[item.type].FrameCount;
@@ -228,6 +236,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 }
                 else if (item.DamageType.CountsAsClass(DamageClass.Magic) || item.DamageType.CountsAsClass(DamageClass.Summon)) {
                     return PoseGroup.GiantMagic;
+                }
+                else if (item.damage > 0)
+                {
+                    return PoseGroup.GiantDamaging;
                 }
                 return PoseGroup.GiantItem;
             }

@@ -81,7 +81,7 @@ namespace WeaponOutLite.Common.Configs
 
 
         [DrawTicks]
-        [DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHand)]
+        [DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBerserk)]
         public DrawItemPoseID.LabelledItemPose LargeToolPose { get; set; }
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
@@ -367,7 +367,7 @@ namespace WeaponOutLite.Common.Configs
 
 		[DrawTicks]
 		[SliderColor(0, 242, 171)]
-		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatOffHandShoulder)]
+		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleUp)]
 		public DrawItemPoseID.LabelledItemPose GiantGunPose { get; set; }
 
 		[JsonIgnore][ShowDespiteJsonIgnore]
@@ -375,24 +375,33 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantGun))]
 		public int GiantGunPV => (int)GiantGunPose;
 
-		[DrawTicks]
-		[SliderColor(254, 127, 230)]
-		[DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingAimed)]
-		public DrawItemPoseID.LabelledItemPose GiantMagicPose { get; set; } // and summon items!
+        [DrawTicks]
+        [SliderColor(254, 127, 230)]
+        [DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingAimed)]
+        public DrawItemPoseID.LabelledItemPose GiantMagicPose { get; set; } // and summon items!
 
-		[JsonIgnore][ShowDespiteJsonIgnore]
+        [JsonIgnore][ShowDespiteJsonIgnore]
 		[LabelKey("$Mods.WeaponOutLite.Common.Preview")]
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;
 
-		#endregion
+        [DrawTicks]
+        [DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandPole)]
+        public DrawItemPoseID.LabelledItemPose GiantDamagingPose { get; set; } // for things like calamity throwing weapons
 
-		/*
+        [JsonIgnore][ShowDespiteJsonIgnore]
+		[LabelKey("$Mods.WeaponOutLite.Common.Preview")]
+		[CustomModConfigItem(typeof(PreviewGiantDamaging))]
+		public int GiantDamagingPosePV => (int)GiantDamagingPose;
+
+        #endregion
+
+        /*
 		 Experimental because the code in here may have issues when introduced to modded content
 		 */
-		#region ClientSideExperimental
+        #region ClientSideExperimental
 
-		[DefaultValue(true)]
+        [DefaultValue(true)]
 		public bool EnableMenuDisplay { get; set; }
 
 		[DefaultValue(true)]
@@ -440,6 +449,9 @@ namespace WeaponOutLite.Common.Configs
 
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationArmamentDisplayLite { get { return WeaponDisplayLite.Found; } }
+
+        [JsonIgnore][ShowDespiteJsonIgnore]
+        public bool ModIntegrationCalamityMod { get { return CalamityMod.Found; } }
 
         #endregion
 
