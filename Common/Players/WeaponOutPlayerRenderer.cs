@@ -161,6 +161,7 @@ namespace WeaponOutLite.Common.Players
 
 			if (CalamityMod.Found && CalamityMod.HasItem(item))
 			{
+                // Something weird is happening with the way the animation is set during the charge attack.
 				if (item.ModItem?.Name == "TheFinalDawn")
                 {
                     bool attackFrames = BodyFrameNum >= 1 && BodyFrameNum <= 4;
