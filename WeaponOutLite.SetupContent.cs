@@ -35,6 +35,7 @@ namespace WeaponOutLite
                 ItemID.JoustingLance,
                 ItemID.ShadowJoustingLance,
                 ItemID.HallowJoustingLance,
+                ItemID.MonkStaffT1, // Sleepy Octopod
                 ItemID.MonkStaffT3, // Sky Fury
             })) { throw new ArgumentException("RegisterSpear ModCall Failed"); }
 

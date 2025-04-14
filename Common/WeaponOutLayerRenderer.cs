@@ -38,12 +38,18 @@ namespace WeaponOutLite.Common
 		/// </summary>
 		public static List<Texture2D> ItemProjTextureCache { get; set; }
 
-		/// <summary>
-		/// Offset to place the item at a different Y centre, so that when *-2, the position will be consistent when the player is upside down.
-		/// While this technically means the weapon is not placed directly in the centre,
-		/// this means any further position changes from DrawItemStyle, when inverted, don't have any weird offsets when flipped.
-		/// </summary>
-		const int GravityOffset = -3;
+        /// <summary>
+        /// In some cases we need to reference a projectile property - but setting new projectile every frame can
+        /// have unintended effects on performance especially for modded projectiles.
+        /// </summary>
+        internal static Dictionary<int, Projectile> projectileCache;
+
+        /// <summary>
+        /// Offset to place the item at a different Y centre, so that when *-2, the position will be consistent when the player is upside down.
+        /// While this technically means the weapon is not placed directly in the centre,
+        /// this means any further position changes from DrawItemStyle, when inverted, don't have any weird offsets when flipped.
+        /// </summary>
+        const int GravityOffset = -3;
 
         /// <summary>
         /// Initialised in main mod file Load().
@@ -52,6 +58,7 @@ namespace WeaponOutLite.Common
 		{
             ItemLogOnceRecorder = new HashSet<int>();
             ItemProjTextureCache = new List<Texture2D>();
+            projectileCache = new Dictionary<int, Projectile>();
         }
 
         /// <summary>
@@ -61,6 +68,7 @@ namespace WeaponOutLite.Common
         {
 			ItemLogOnceRecorder = null;
             ItemProjTextureCache = null;
+            projectileCache = null;
         }
 
 		/// <summary>
@@ -200,7 +208,7 @@ namespace WeaponOutLite.Common
 				int projectileType = ApplyVanillaAmmoReplacement(heldItem.type, ammo?.shoot ?? 0);
                 if (ammo != null && projectileType > 0) {
 					// create the arrow
-					if (tryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
+					if (TryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
 						drawInfo.DrawDataCache.Add(arrowData);
 						// and any glow layer
 						if (tryCreateProjectileGlowLayerDrawData(drawInfo.drawPlayer, projectileType, arrowData, out DrawData arrowGlowData)) {
@@ -598,12 +606,11 @@ namespace WeaponOutLite.Common
 		}
 
 		internal static bool tryCreateProjectileGlowLayerDrawData(Player drawPlayer, int projectileType, DrawData data, out DrawData glowData) {
-			// Get the glowmask from the projectile
+            // Get the glowmask from the projectile
 
-			Projectile p = new Projectile();
-			p.SetDefaults(projectileType);
+            var p = GetProjectile(projectileType);
 
-			if (p.glowMask != -1) {
+            if (p.glowMask != -1) {
 				Color glowLighting = new Color(250, 250, 250, p.alpha);
 				glowLighting = drawPlayer.GetImmuneAlpha(p.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
 				glowData = new DrawData(
@@ -622,7 +629,27 @@ namespace WeaponOutLite.Common
 			return false;
 		}
 
-		internal static bool tryCreateArrowDrawData(Player drawPlayer, int projectileType, DrawData itemData, out DrawData arrowData) {
+        /// <summary>
+        /// Use this instead of SetDefaults anywhere a projectile's properties need to be read.
+        /// </summary>
+        /// <param name="projectileType"></param>
+        /// <returns></returns>
+        internal static Projectile GetProjectile(int projectileType)
+        {
+            if (projectileCache.TryGetValue(projectileType, out Projectile p))
+            {
+                return p;
+            }
+            else
+            {
+                p = new Projectile();
+                p.SetDefaults(projectileType);
+                projectileCache[projectileType] = p;
+                return p;
+            }
+        }
+
+        internal static bool TryCreateArrowDrawData(Player drawPlayer, int projectileType, DrawData itemData, out DrawData arrowData) {
 			arrowData = itemData;
 
 			//var asset = Main.Assets.Request<Texture2D>(TextureAssets.Projectile[ammo.shoot].Name);
@@ -678,9 +705,8 @@ namespace WeaponOutLite.Common
 
             arrowData.rotation += MathHelper.PiOver2 * directionGrav;
 
-			Projectile p = new Projectile();
-			p.SetDefaults(projectileType);
-			if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
+			var p = GetProjectile(projectileType);
+            if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
 
 			if (projectileType == ProjectileID.JestersArrow ||
 				projectileType == ProjectileID.HolyArrow ||

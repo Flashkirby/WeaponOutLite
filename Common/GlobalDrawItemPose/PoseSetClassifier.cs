@@ -179,11 +179,6 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 }
             }
 
-            // If this pose group is set, this items should not be drawn.
-            if (poseGroup == PoseGroup.Ignore) {
-                drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
-            }
-
             ////////////////////////////////////////////////////////////////////////
             //                                                                    //
             // debugging override                                                 //
@@ -192,12 +187,12 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             /*
             if (ThoriumMod.Found && item.ModItem?.Mod?.Name == "ThoriumMod")
             {
-                if (item.ModItem?.Name == "Whip")
+                if (item.ModItem?.Name == "GoldenLocks")
                 {
-                    //poseGroup = PoseGroup.Whips;
+                    poseGroup = PoseGroup.Ignore;
                 }
             }
-            
+            /*
              */
             /*
             if (Main.SmartCursorIsUsed) {
@@ -210,6 +205,12 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             ////////////////////////////////////////////////////////////////////////
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
+
+            // If this pose group is set, this items should not be drawn.
+            if (poseGroup == PoseGroup.Ignore)
+            {
+                drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
+            }
             return;
         }
 
@@ -259,7 +260,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 return PoseGroup.GiantItem;
             }
 
-            // √⭕ Yoyo, if it's in the set
+            // √◉ Yoyo, if it's in the set
             if (ItemID.Sets.Yoyo[item.type]) {
                 return PoseGroup.Yoyo;
             }
@@ -274,6 +275,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 return PoseGroup.Staff;
             }
 
+            // ➰ Whips, if it's in a set
+            if (ProjectileID.Sets.IsAWhip[item.shoot]) {
+                return PoseGroup.Whips;
+            }
 
             if (item.damage > 0) {
                 // ✨ Weird (usually magical) weapons, such as medusa head, blood thorn, books
@@ -303,7 +308,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
                     }
 
-                    // ⛓ Whips are no graphic summon melee items
+                    // ➰ Whips are no graphic summon melee items
                     if (item.CountsAsClass(DamageClass.SummonMeleeSpeed) 
                         && item.noMelee)
                     {
@@ -313,44 +318,69 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // Various shoot items can be categorised into melee weapons, unique (large) guns, and magic 
                     if (item.useStyle == ItemUseStyleID.Shoot)
                     {
-                        // ⛓ Some modded weapons that are whip-like also use this setup
-                        if (item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed))
+                        if (item.CountsAsClass(DamageClass.Melee))
                         {
-                            return PoseGroup.Whips;
-                        }
-
-                        if (item.CountsAsClass(DamageClass.Melee)) {
                             // 🛠 Powertools are basically, very wide.
                             // The shortest drill is the Nebula Drill (54 x 30, 1.8:1)
                             // Short modded drills include Thorium.IllumiteDrill (50 x 30, 1.6:1),
-                            if (h <= w * 0.8f) {
+                            //
+                            // Need to make sure we don't accidently put spears and such here:
+                            // Most rectangular spears are actually taller (usually for halberds and glaives, eg. The Rotted Fork)
+                            // A rare example of a wide spear is the Calamity.BansheeHook (120 x 108, 1.11: 1) 
+                            if (h <= w * 0.8f)
+                            {
                                 return PoseGroup.PowerTool;
                             }
-                            else {
-                                if (item.channel) {
-                                    // ➰◉ Modded yoyos that are not marked as yoyos in the yoyo set
-                                    // They may still be yoyos if they feature all of the following attributes
-                                    if (w == 30 && h == 26 && item.scale == 1f 
-                                        && item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed) 
-                                        && item.channel && item.useAnimation == 25 && item.useTime == 25
-                                        && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f) {
-                                        return PoseGroup.Yoyo;
-                                    }
-                                    // ♣️ Sleepy Octopod
-                                    if(item.UseSound.Value == SoundID.DD2_MonkStaffSwing)
-                                    {
-                                        return PoseGroup.Spear;
-                                    }
-                                    // Channelled melee weapons have a lot of different behaviours
-                                    // Flails and jousting lances
-                                    return PoseGroup.Flail;
-                                }
-                                else {
-                                    // 🔱 Spears are diagonal sprites
-                                    // Most rectangular spears are actually taller (usually for halberds and glaives, eg. The Rotted Fork)
-                                    // A rare example of a wide spear is the Calamity.BansheeHook (120 x 108, 1.11: 1) 
+                            else
+                            {
+                                // nomelee melee weapons have a lot of different behaviours,
+                                // it's quite the mess if ItemID.Sets aren't assigned properly.
+
+                                // ♣️ Sleepy Octopod
+                                // Modded weapons that act like it will often use the same sound
+                                if (item.UseSound.HasValue && item.UseSound.Value == SoundID.DD2_MonkStaffSwing)
+                                {
                                     return PoseGroup.Spear;
                                 }
+
+                                // √◉ Modded yoyos that are not marked as yoyos in the yoyo set
+                                // They may still be yoyos if they feature all of the following attributes
+                                if (item.channel
+                                    && w == 30 && h == 26 && item.scale == 1f
+                                    && item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed)
+                                    && item.channel && item.useAnimation == 25 && item.useTime == 25
+                                    && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f)
+                                {
+                                    return PoseGroup.Yoyo;
+                                }
+
+                                // Properly implemented flails and spears have this set 
+                                var p = WeaponOutLayerRenderer.GetProjectile(item.shoot);
+                                if (ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[item.shoot])
+                                {
+                                    if (p.ownerHitCheck)
+                                    {
+                                        // 🔱 Spears use owner check
+                                        return PoseGroup.Spear;
+                                    }
+                                    else
+                                    {
+                                        // 🔨 Flails do not use owner hit check
+                                        // Also uses netImportant but that's not as useful
+                                        return PoseGroup.Flail;
+                                    }
+                                }
+
+                                if (p.extraUpdates >= 1)
+                                {
+                                    // ➰ Vanilla whips are set up with extra updates for calculation
+                                    // Modded whips that seek to emulate this probably have it set up
+                                    return PoseGroup.Whips;
+                                }
+
+                                // Still can't determine at this point, assume flail.
+                                return PoseGroup.Flail;
+
                             }
                         }
                         // 🔫 Special graphic guns are wider than thrown weapons (eg. Celebration Mk2)
@@ -366,6 +396,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             return PoseGroup.MagicItem;
                         }
                     }
+                    
                     // 🔱 Big "throwing" weapons may as well be like spears, eg. Javelin.
                     if (w == h && w >= 40) {
                         return PoseGroup.Spear;
