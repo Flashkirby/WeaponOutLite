@@ -20,6 +20,7 @@ namespace WeaponOutLite
         public override void PostSetupContent() {
           
             CalamityMod.PostSetupContent();
+            MetroidMod.PostSetupContent();
 
             // Get the WeaponOutLite mod
             Mod weaponOutLite = ModLoader.GetMod("WeaponOutLite");

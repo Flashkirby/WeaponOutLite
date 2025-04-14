@@ -12,6 +12,7 @@ namespace WeaponOutLite.ID
         public enum PoseGroup
         {
             Unassigned = 0,
+            Ignore = 1,
             Item = 10,
             Potion = 20,
             LargeItem = 50,

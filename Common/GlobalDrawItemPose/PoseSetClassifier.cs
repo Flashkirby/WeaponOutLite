@@ -179,6 +179,11 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 }
             }
 
+            // If this pose group is set, this items should not be drawn.
+            if (poseGroup == PoseGroup.Ignore) {
+                drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
+            }
+
             ////////////////////////////////////////////////////////////////////////
             //                                                                    //
             // debugging override                                                 //

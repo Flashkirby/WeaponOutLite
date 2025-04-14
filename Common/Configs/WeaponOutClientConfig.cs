@@ -447,11 +447,20 @@ namespace WeaponOutLite.Common.Configs
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationVibrantReverie { get { return VibrantReverie.Found; } }
 
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
+        public bool ModIntegrationThoriumMod { get { return ThoriumMod.Found; } }
+
         [JsonIgnore][ShowDespiteJsonIgnore]
         public bool ModIntegrationArmamentDisplayLite { get { return WeaponDisplayLite.Found; } }
 
-        [JsonIgnore][ShowDespiteJsonIgnore]
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
         public bool ModIntegrationCalamityMod { get { return CalamityMod.Found; } }
+
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
+        public bool ModIntegrationMetroidMod { get { return MetroidMod.Found; } }
 
         #endregion
 
