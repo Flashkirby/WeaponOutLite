@@ -210,6 +210,6 @@ namespace WeaponOutLite
             if (!(bool)weaponOutLite.Call("RegisterCustomUpdateIdleBodyFrame", weaponOutLiteCustomIdleBodyFrame)) { throw new ArgumentException("RegisterCustomUpdateIdleBodyFrame ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterCustomDrawDepth", weaponOutLiteCustomDrawDepth)) { throw new ArgumentException("RegisterCustomDrawDepth ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterCustomPreDrawData", weaponOutLiteCustomDrawData)) { throw new ArgumentException("RegisterCustomPreDrawData ModCall Failed"); }
-                }
+        }
     }
 }
