@@ -35,6 +35,9 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 case PoseGroup.Item:
                     drawItemPose = mod.ItemPoses[(int)clientConfig.SmallItemPose];
                     break;
+                case PoseGroup.Ignore:
+                    drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
+                    break;
                 case PoseGroup.LargeItem:
                     drawItemPose = mod.ItemPoses[(int)clientConfig.LargeItemPose];
                     break;
@@ -207,12 +210,6 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             ////////////////////////////////////////////////////////////////////////
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
-
-            // If this pose group is set, this items should not be drawn.
-            if (poseGroup == PoseGroup.Ignore)
-            {
-                drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
-            }
             return;
         }
 
