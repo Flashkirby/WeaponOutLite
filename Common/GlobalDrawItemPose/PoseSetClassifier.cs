@@ -184,22 +184,24 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // debugging override                                                 //
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
+            
             /*
             if (ThoriumMod.Found && item.ModItem?.Mod?.Name == "ThoriumMod")
             {
-                if (item.ModItem?.Name == "GoldenLocks")
+                if (item.ModItem?.Name == "Purify")
                 {
-                    poseGroup = PoseGroup.Ignore;
+                    poseGroup = PoseGroup.MagicBook;
                 }
             }
-            /*
-             */
+            /**/
+
             /*
             if (Main.SmartCursorIsUsed) {
                 poseGroup = PoseGroup.Unassigned;
                 drawItemPose = mod.DrawStyle[DrawItemPoseID.HoldInHand];
             }
-             */
+            /**/
+
             //poseGroup = PoseGroup.Unassigned;
             //drawItemPose = mod.DrawStyle[DrawItemPoseID.BackFlail];
             ////////////////////////////////////////////////////////////////////////
@@ -292,20 +294,26 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 // Special endgame weapons such as celebration mk2 and phantasm use this method
                 // Throwing weapons also fall under this category
                 if (item.noUseGraphic) {
-                    // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas, but modded weapons may also use this.
-                    if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier) {
-                        // Applies a fix to attempt to help identify different types of swords. Default is On.
-                        // Skip attempt to classify here if the melee effects mod integration is active
-                        // Since it sets all melee swords to be this type, I would rather use normal poses
-                        if (item.useStyle == ItemUseStyleID.Rapier && 
-                            MeleeEffects.Found && 
-                            ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus) {
-                            // skip
+                    // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas
+                    // Modded weapons may also use this
+                    // Thorium's Charged Splasher uses this in a ranged weapon
+                    if (!item.CountsAsClass(DamageClass.Ranged)) {
+                        if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier)
+                        {
+                            // Applies a fix to attempt to help identify different types of swords. Default is On.
+                            // Skip attempt to classify here if the melee effects mod integration is active
+                            // Since it sets all melee swords to be this type, I would rather use normal poses
+                            if (item.useStyle == ItemUseStyleID.Rapier &&
+                                MeleeEffects.Found &&
+                                ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus)
+                            {
+                                // skip
+                            }
+                            else
+                            {
+                                return PoseGroup.Rapier;
+                            }
                         }
-                        else {
-                            return PoseGroup.Rapier;
-                        }
-
                     }
 
                     // ➰ Whips are no graphic summon melee items
