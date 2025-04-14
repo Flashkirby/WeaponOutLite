@@ -141,6 +141,7 @@ namespace WeaponOutLite.Common
 			height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.Y;
 			width = (itemData.sourceRect?.Width ?? 0) * itemData.scale.X;
 
+
 			// Apply draw data from item style.
 			var drawItemStyle = modPlayer.CurrentDrawItemPose;
 			itemData = drawItemStyle.CalculateDrawData(
@@ -209,8 +210,25 @@ namespace WeaponOutLite.Common
 				}
 			}
 
-			// Draw weapon effects
-			if (config.EnableMeleeEffects) {
+            // When jumping, the arm is pointed upwards and Terraria will stop rendering the shoulders.
+            // However we can force it to display the shoulders - as long as the arm is below a certain angle threshold
+            if (bodyFrame == 5 && drawInfo.drawPlayer.compositeFrontArm.enabled)
+            {
+                // converting to integer so we can modulo it to within the bounds of 2 PI
+                int clampedRotation100 =
+                    (int)(drawInfo.compositeFrontArmRotation * 100 * drawInfo.drawPlayer.direction) % 314;
+                bool armIsFrontFacing = clampedRotation100 < 0 || clampedRotation100 > 235; // little bit of leeway past the top
+                bool armIsUnderHalfPI = Math.Abs(clampedRotation100) < 160;
+
+                if (armIsFrontFacing || armIsUnderHalfPI)
+                {
+                    drawInfo.hideCompositeShoulders = false;
+                    drawInfo.compShoulderOverFrontArm = true;
+                }
+            }
+
+            // Draw weapon effects
+            if (config.EnableMeleeEffects) {
 				try {
 					if (modPlayer != null && heldItem != null && modPlayer.Player != null && modPlayer.CombatDelayTimer > 0) {
 						const int MAX_STEPS = 4;
