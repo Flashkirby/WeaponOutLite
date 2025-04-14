@@ -748,9 +748,9 @@ namespace WeaponOutLite.Common
             // Populate inbetween space with empty textures
             UpdateProjectileTextureCache(itemType);
 
-            //  
-            if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; }
-			//
+            // 
+            if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.playerInventory) { ItemProjTextureCache[itemType] = null; Main.NewText("reset spear"); }
+            //
 
 			if (ItemProjTextureCache[itemType] != null) {
 				return;
@@ -767,7 +767,7 @@ namespace WeaponOutLite.Common
 			}
 			Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
 
-            // Flip projectile texture horizontally to match item rotation
+            // Check to see if we should flip projectile texture horizontally to match item rotation
             // This is because internally, spear projectiles go from bottom right to top left.
             // This operation is somewhat expensive, so we only want to run it once and then cache the result
             // It may also have odd interations if multiple frames are present	
@@ -789,11 +789,14 @@ namespace WeaponOutLite.Common
 					baseTexture.SetData(data);
 				}
 
-                // Check how much of the graphic the spear has in this axes
+                // Check to see if the texture has more pixels on the flipped diagonal than the original
+                // By doing an X shaped check of the texture
                 int totalLength = Math.Min(baseTexture.Width, baseTexture.Height);
-				int coverageAlongLength = 0;
+				int coverageAlongLength = 0; // bottom right to top left
+                int coverageAlongOriginal = 0; // bottom left to top right
 				for (int i = 0; i < totalLength; i++) {
-					coverageAlongLength += data[i * baseTexture.Width + i].A > 0 ? 1 : 0;
+					coverageAlongLength += data[i * baseTexture.Width + i].A > 127 ? 1 : 0;
+                    coverageAlongOriginal += data[i * baseTexture.Width + baseTexture.Width - 1 - i].A > 127 ? 1 : 0;
                 }
 
                 // Main.NewText($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
@@ -804,11 +807,12 @@ namespace WeaponOutLite.Common
 				// CalamityMod Diseased Pike has a diagonal coverage of 51%
                 if (WeaponOutLite.DEBUG_EXPERIMENTAL)
                 {
-                    Console.WriteLine($"{itemType}:{projectileType} d-coverage {coverageAlongLength} = {(float)coverageAlongLength / totalLength * 100}%");
+                    Main.NewText($"{itemType}:{projectileType} d-coverage {coverageAlongLength} = {(float)coverageAlongLength / totalLength * 100}%");
+                    Main.NewText($"Diagonal = {coverageAlongLength} vs perpendicular {coverageAlongOriginal}");
                 }
 
                 Color[] rotatedData = new Color[data.Length];
-                if (coverageAlongLength > totalLength * 0.5f) {
+                if (coverageAlongLength > coverageAlongOriginal) {
 					// Create a horizontally flipped texture
 					// set a pointer starting from the top right
 					var x = baseTexture.Width - 1;
