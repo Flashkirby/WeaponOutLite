@@ -21,6 +21,7 @@ namespace WeaponOutLite
           
             CalamityMod.PostSetupContent();
             MetroidMod.PostSetupContent();
+            Redemption.PostSetupContent();
             ThoriumMod.PostSetupContent();
 
             // Get the WeaponOutLite mod

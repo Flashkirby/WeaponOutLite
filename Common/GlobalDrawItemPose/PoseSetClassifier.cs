@@ -184,7 +184,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // debugging override                                                 //
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
-            
+
             /*
             if (ThoriumMod.Found && item.ModItem?.Mod?.Name == "ThoriumMod")
             {
@@ -386,9 +386,16 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                                     return PoseGroup.Whips;
                                 }
 
+                                // Now we're in the realm of modded melee weapons
+                                if (CalculateModdedWeaponDrawStyleType(item, p, w, h, out var poseGroup))
+                                {
+                                    return poseGroup;
+                                }
+                                else
+                                {
                                 // Still can't determine at this point, assume flail.
                                 return PoseGroup.Flail;
-
+                                }
                             }
                         }
                         // 🔫 Special graphic guns are wider than thrown weapons (eg. Celebration Mk2)
@@ -524,6 +531,30 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
             // 💎 Small hand held items, like blocks, bombs
             return PoseGroup.Item;
+        }
+
+        private static bool CalculateModdedWeaponDrawStyleType(Item item, Projectile p, float w, float h, out PoseGroup poseGroup)
+        {
+            poseGroup = PoseGroup.Unassigned;
+            if (item.ModItem == null) return false;
+
+            bool defaultToMeleeWeapon = false;
+
+            // Redemption weapons are typically heavily modded melee weapons
+            if (Redemption.Found) defaultToMeleeWeapon = true;
+
+
+            if (defaultToMeleeWeapon)
+            {
+                // 🔪 small swinging weapons
+                if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2)
+                { poseGroup = PoseGroup.SmallMelee; }
+                // ⚔ big swinging weapons
+                else
+                { poseGroup = PoseGroup.LargeMelee; }
+            }
+
+            return poseGroup != PoseGroup.Unassigned;
         }
     }
 }

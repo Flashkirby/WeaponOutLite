@@ -462,6 +462,10 @@ namespace WeaponOutLite.Common.Configs
         [ShowDespiteJsonIgnore]
         public bool ModIntegrationMetroidMod { get { return MetroidMod.Found; } }
 
+        [JsonIgnore]
+        [ShowDespiteJsonIgnore]
+        public bool ModIntegrationRedemption { get { return Redemption.Found; } }
+
         #endregion
 
         public override void OnChanged() {

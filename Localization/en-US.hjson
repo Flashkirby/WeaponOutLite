@@ -511,6 +511,11 @@ Mods: {
 					Label: "[i:1344] Automatic: Thorium Mod"
 					Tooltip: Adds default classifications to Thorium weapons. Mod Call integration supported. Thanks direwolf420 [i:58]!
 				}
+
+				ModIntegrationRedemption: {
+					Label: "[i:1344] Automatic: Mod of Redemption"
+					Tooltip: Adds default classifications to Redemption weapons.
+				}
 			}
 
 			WeaponOutClientHoldOverride: {
