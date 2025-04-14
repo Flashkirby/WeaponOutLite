@@ -31,7 +31,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
             data.position += new Vector2(
                 4 + (8 / smallItemOffset),
-                8 + (4 / smallItemOffset));
+                4 + (4 / smallItemOffset));
 
             // Motion determined by fall speed, or forward running speed
             if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
