@@ -190,11 +190,21 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
             /*
+            if (ThoriumMod.Found && item.ModItem?.Mod?.Name == "ThoriumMod")
+            {
+                if (item.ModItem?.Name == "Whip")
+                {
+                    //poseGroup = PoseGroup.Whips;
+                }
+            }
+            
+             */
+            /*
             if (Main.SmartCursorIsUsed) {
                 poseGroup = PoseGroup.Unassigned;
                 drawItemPose = mod.DrawStyle[DrawItemPoseID.HoldInHand];
             }
-            */
+             */
             //poseGroup = PoseGroup.Unassigned;
             //drawItemPose = mod.DrawStyle[DrawItemPoseID.BackFlail];
             ////////////////////////////////////////////////////////////////////////
@@ -293,8 +303,22 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
                     }
 
+                    // ⛓ Whips are no graphic summon melee items
+                    if (item.CountsAsClass(DamageClass.SummonMeleeSpeed) 
+                        && item.noMelee)
+                    {
+                        return PoseGroup.Whips;
+                    }
+
                     // Various shoot items can be categorised into melee weapons, unique (large) guns, and magic 
-                    if (item.useStyle == ItemUseStyleID.Shoot) {
+                    if (item.useStyle == ItemUseStyleID.Shoot)
+                    {
+                        // ⛓ Some modded weapons that are whip-like also use this setup
+                        if (item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed))
+                        {
+                            return PoseGroup.Whips;
+                        }
+
                         if (item.CountsAsClass(DamageClass.Melee)) {
                             // 🛠 Powertools are basically, very wide.
                             // The shortest drill is the Nebula Drill (54 x 30, 1.8:1)
@@ -312,10 +336,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                                         && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f) {
                                         return PoseGroup.Yoyo;
                                     }
-                                    else {
-                                        // Flails and jousting lances... though really more likely flails
-                                        return PoseGroup.Flail;
+                                    // ♣️ Sleepy Octopod
+                                    if(item.UseSound.Value == SoundID.DD2_MonkStaffSwing)
+                                    {
+                                        return PoseGroup.Spear;
                                     }
+                                    // Channelled melee weapons have a lot of different behaviours
+                                    // Flails and jousting lances
+                                    return PoseGroup.Flail;
                                 }
                                 else {
                                     // 🔱 Spears are diagonal sprites
@@ -341,11 +369,6 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // 🔱 Big "throwing" weapons may as well be like spears, eg. Javelin.
                     if (w == h && w >= 40) {
                         return PoseGroup.Spear;
-                    }
-
-                    // ⛓ Whips are no graphic summon melee items
-                    if (item.CountsAsClass(DamageClass.SummonMeleeSpeed)) {
-                        return PoseGroup.Whips;
                     }
 
                     //WeaponOutLite.TEXT_DEBUG += $"\n{w / h} : ({w} {h})";  //todo remove
