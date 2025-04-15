@@ -14,6 +14,7 @@ namespace WeaponOutLite.Common.Configs
 	public class WeaponOutClientConfig : ModConfig
 	{
 		public override ConfigScope Mode => ConfigScope.ClientSide;
+        public override void OnLoaded() => WeaponOutLite.ClientConfig = this;
 
 		[Header("PlayerHeader")]
 		#region ClientSidePlayerHeader

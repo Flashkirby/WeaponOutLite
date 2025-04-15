@@ -25,7 +25,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose);
 
             WeaponOutLite mod = WeaponOutLite.GetMod();
-            var clientConfig = ModContent.GetInstance<WeaponOutClientConfig>();
+            var clientConfig = WeaponOutLite.ClientConfig;
 
             // Skip selection if an item pose is already active
             if (drawItemPose.GetID() != DrawItemPoseID.Unassigned) { return drawItemPose; }
@@ -144,7 +144,6 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
         {
             WeaponOutLite mod = WeaponOutLite.GetMod();
-            var clientOverride = ModContent.GetInstance<WeaponOutClientHoldOverride>();
 
             // Set initial pose style and item pose object
             poseGroup = PoseGroup.Unassigned;
@@ -157,7 +156,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             }
 
             // Read custom config for forced pose override
-            ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
+            ItemDrawOverrideData itemOverride = WeaponOutLite.ClientHoldOverride.FindStyleOverride(item.type);
             if (itemOverride != null) {
                 // Found a forced pose in the config, so use this.
                 drawItemPose = mod.ItemPoses[(int)itemOverride.ForceDrawItemPose];
@@ -231,8 +230,8 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             float w = itemTexture.Width * item.scale;
             float h = itemTexture.Height * item.scale / itemFrames;
 
-            var giantItemThreshold = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemThreshold;
-            var giantItemScale = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+            var giantItemThreshold = WeaponOutLite.ClientConfig.GiantItemThreshold;
+            var giantItemScale = WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
             if (giantItemThreshold < Math.Max(w, h)) {
                 w *= giantItemScale;
                 h *= giantItemScale;
@@ -302,7 +301,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             // Since it sets all melee swords to be this type, I would rather use normal poses
                             if (item.useStyle == ItemUseStyleID.Rapier &&
                                 MeleeEffects.Found &&
-                                ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus)
+                                WeaponOutLite.ClientConfig.ModIntegrationMeleeEffectsPlus)
                             {
                                 // skip
                             }
@@ -396,7 +395,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             }
                         }
                         // 🔫 Special graphic guns are wider than thrown weapons (eg. Celebration Mk2)
-                        if (w > h && w > ModContent.GetInstance<WeaponOutClientConfig>().SmallGunThreshold) {
+                        if (w > h && w > WeaponOutLite.ClientConfig.SmallGunThreshold) {
                             // quickfix for detecting shotguns, since they use this sound
                             if(item.UseSound == SoundID.Item36) {
                                 return PoseGroup.Shotgun;
@@ -450,7 +449,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     bool isTool = item.axe > 0 || item.pick > 0 || item.hammer > 0;
 
                     // 🔪 small swinging weapons
-                    if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2)
+                    if (h + w <= WeaponOutLite.ClientConfig.SmallSwordThreshold * 2)
                     {
                         if (isTool) { return PoseGroup.SmallTool; }
                         return PoseGroup.SmallMelee;
@@ -471,7 +470,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // The "tallest" gun is the Pew-Matic Horn (28 x 26, 1.07:1)
                     if (w > h) {
                         // ⭕ small guns
-                        if (w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallGunThreshold) {
+                        if (w <= WeaponOutLite.ClientConfig.SmallGunThreshold) {
                             return PoseGroup.Pistol;
                         }
 
@@ -544,7 +543,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             if (defaultToMeleeWeapon)
             {
                 // 🔪 small swinging weapons
-                if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2)
+                if (h + w <= WeaponOutLite.ClientConfig.SmallSwordThreshold * 2)
                 { poseGroup = PoseGroup.SmallMelee; }
                 // ⚔ big swinging weapons
                 else

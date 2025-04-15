@@ -49,7 +49,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * (-0.3f - sheatheRotation) * p.direction);
 
             //// Moving to rest pose
-            //float animationTime = -(timer - ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f);
+            //float animationTime = -(timer - WeaponOutLite.ClientConfig.CombatDelayTimerMax * 60f);
             //if (t == 0 && animationTime <= p.HeldItem.useAnimation * 1.5f) {
             //    var at = DrawHelper.AnimEaseOutNormal(p.HeldItem.useAnimation * 1.5f, animationTime);
             //    if(at > 0.5f) bodyFrame = 4;

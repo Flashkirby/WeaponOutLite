@@ -116,7 +116,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     Tile tile = new Tile();
 
                     // With weapon physics, have the weapon drop if it's floating
-                    if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                         for (int i = 0; i < length / 32; i++) {
                             int nextX = tilePos.X + i * p.direction;
                             int nextY = tilePos.Y + i * (int)p.gravDir;

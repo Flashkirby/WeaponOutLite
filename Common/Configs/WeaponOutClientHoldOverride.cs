@@ -14,9 +14,14 @@ namespace WeaponOutLite.Common.Configs
 {
     public class WeaponOutClientHoldOverride : ModConfig
     {
-        private HybridDictionary styleOverrideItemCache;
-
         public override ConfigScope Mode => ConfigScope.ClientSide;
+        public override void OnLoaded()
+        {
+            WeaponOutLite.ClientHoldOverride = this;
+            styleOverrideItemCache = new HybridDictionary();
+        }
+
+        private HybridDictionary styleOverrideItemCache;
 
         [JsonIgnore]
         [ShowDespiteJsonIgnore]
@@ -78,11 +83,6 @@ namespace WeaponOutLite.Common.Configs
         public ItemDrawOverrideData FindStyleOverride(int itemType)
         {
             return styleOverrideItemCache[itemType] as ItemDrawOverrideData;
-        }
-
-        public override void OnLoaded()
-        {
-            styleOverrideItemCache = new HybridDictionary();
         }
 
         public override void OnChanged()

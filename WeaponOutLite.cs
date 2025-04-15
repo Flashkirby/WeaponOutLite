@@ -7,6 +7,7 @@ using System;
 using Terraria.DataStructures;
 using static WeaponOutLite.ID.PoseStyleID;
 using static WeaponOutLite.ID.DrawItemPoseID;
+using WeaponOutLite.Common.Configs;
 
 namespace WeaponOutLite
 {
@@ -24,6 +25,10 @@ namespace WeaponOutLite
         internal static string TEXT_DEBUG = null;
 
         private static WeaponOutLite instance;
+
+        internal static WeaponOutClientConfig ClientConfig;
+        internal static WeaponOutClientHoldOverride ClientHoldOverride;
+        internal static WeaponOutServerConfig ServerConfig;
 
         // Mod Integrations ♥
         // Migrated to WeaponOutLite.Compatibility namespace
@@ -96,6 +101,10 @@ namespace WeaponOutLite
 
         public override void Unload() {
             instance = null;
+            ClientConfig = null;
+            ClientHoldOverride = null;
+            ServerConfig = null;
+
             ItemPoses = null;
 
             customItemHoldStyles = null;

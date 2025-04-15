@@ -99,7 +99,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             else if (bodyFrame >= 5 || p.IsMountPoseActive()) {
                 float physicsRotation = 0f;
                 var motionNormal = 0f;
-                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                     motionNormal = Math.Clamp(p.velocity.X * p.direction * 0.1f, -1f, 1f);
                 }
                 physicsRotation -= motionNormal * 0.15f;

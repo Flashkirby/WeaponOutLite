@@ -13,7 +13,7 @@ namespace WeaponOutLite.Content.DrawItemPose
     internal static class DrawHelper
 	{
 		public static float AnimArmWaggle(float normal) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			return -(float)Math.Sin(2f * Math.Pow(normal, 2) * Math.PI) * 0.5f;
 		}
 
@@ -22,7 +22,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Value from 0 to 1 to 0</returns>
 		public static float AnimArmRaiseLower(float normal, float speed = 1f) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			return (float)Math.Sin(Math.Pow(normal, speed) * Math.PI);
 		}
 
@@ -31,7 +31,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimLinearNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = Math.Clamp(1f - timer / duration, 0f, 1f);
 			return sheathing;
 		}
@@ -40,7 +40,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimEaseOutEaseInNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = Math.Clamp(1f - timer / duration, 0f, 1f);
 			var sheathingCurve = (float)Math.Pow(sheathing - 0.5f, 3) * 4f + 0.5f;
 			return sheathingCurve;
@@ -50,7 +50,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimEaseInEaseOutNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = Math.Clamp(1f - timer / duration, 0f, 1f);
 			var sheathingCurve = 0.5f - 0.5f * (float)Math.Cos(sheathing * Math.PI);
 			return sheathingCurve;
@@ -60,7 +60,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimEaseOutNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = Math.Clamp(1f - timer /duration, 0f, 1f);
 			var sheathingCurve = 1 + (float)Math.Pow(sheathing - 1f, 3);
 			return sheathingCurve;
@@ -71,7 +71,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimEaseInNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = 1f - Math.Min(timer, duration) / (float)(duration);
 			var sheathingCurve = (float)Math.Pow(sheathing, 3);
 			return sheathingCurve;
@@ -82,7 +82,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimOverEaseOutNormal(float duration, float timer) {
-			if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+			if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
 			var sheathing = 1f - Math.Min(timer, duration) / (float)(duration);
 			var sheathingCurve = 0.675f - 0.5f * (float)Math.Cos(sheathing * Math.PI) - 0.175f * (float)Math.Cos(2 * sheathing * Math.PI);
 			return (float)sheathingCurve;
@@ -94,7 +94,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 		/// </summary>
 		/// <returns>Returns a value from 0 to 1, as timer reaches 0</returns>
 		public static float AnimOverEaseNormal(float duration, float timer) {
-            if (!ModContent.GetInstance<WeaponOutClientConfig>().EnableSheathingAnim) return 0f;
+            if (!WeaponOutLite.ClientConfig.EnableSheathingAnim) return 0f;
             var sheathing = 1f - Math.Min(timer, duration) / (float)(duration);
 			// var sheathingCurve = (Math.Cos(sheathing * 1.5f * Math.PI) / (30 * Math.Pow(sheathing, 2) + 1)); // 1 - cos 2xpi * 1/(30x^2 + 1) * 1.032
 			var sheathingCurve = 0.55f - 0.55f * (float)Math.Cos(sheathing * 1.2 * Math.PI);
@@ -326,9 +326,9 @@ namespace WeaponOutLite.Content.DrawItemPose
         /// Modifies the scale according to the configs if the item surpasses the "giant" threshold"
         /// </summary>
         public static float GetGiantTextureScale(float width, float height) {
-			var threshold = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemThreshold;
+			var threshold = WeaponOutLite.ClientConfig.GiantItemThreshold;
 			if (threshold < Math.Max(width, height)) {
-				return ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+				return WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 			}
 			return 1f;
 		}

@@ -85,7 +85,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             else if (p.IsMountPoseActive()) { // Mount
                 data = data.SetOrigin(0.25f, 0.75f, p);
                 float speedRotation = 0.25f;
-                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                     float maxSpeed = 3f;
                     speedRotation = Math.Clamp(p.velocity.X * p.direction, 0f, maxSpeed);
                     speedRotation = speedRotation / maxSpeed * 0.25f;

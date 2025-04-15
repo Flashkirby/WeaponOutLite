@@ -54,7 +54,7 @@ namespace WeaponOutLite.Common
 
         protected override void Draw(ref PlayerDrawSet drawInfo) {
             // If not enabled, stop
-            if (!ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) return;
+            if (!WeaponOutLite.ServerConfig.EnableWeaponOutVisuals) return;
 
             WeaponOutLayerRenderer.DrawPlayerItem(ref drawInfo);
         }

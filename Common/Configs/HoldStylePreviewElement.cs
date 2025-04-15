@@ -32,7 +32,7 @@ namespace WeaponOutLite.Common.Configs
 			Point drawCentre = hitbox.Center;
 			int? holdStyleID = (MemberInfo.GetValue(Item) as int?);
 			int itemType = PreviewItemType();
-			bool drawArrow = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
+			bool drawArrow = WeaponOutLite.ClientConfig.BowDrawAmmo;
 
 			// Create a new dummy player
 			PlayerDrawSet dummyInfo = new PlayerDrawSet();
@@ -276,7 +276,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.AngelStatue;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantItem", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -285,7 +285,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.WoodenSword;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMelee", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -294,7 +294,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.WoodenBow;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantBow", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -303,7 +303,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.FlintlockPistol;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantGun", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -312,7 +312,7 @@ namespace WeaponOutLite.Common.Configs
     {
         public override float MinHeightPx => 128f;
         public override int PreviewItemType() => ItemID.WandofSparking;
-        public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+        public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
         public override void OverrideDrawItem(ref Texture2D texture, ref Item item)
         {
             texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMagic", AssetRequestMode.ImmediateLoad).Value;
@@ -322,7 +322,7 @@ namespace WeaponOutLite.Common.Configs
     {
         public override float MinHeightPx => 128f;
         public override int PreviewItemType() => ItemID.Dynamite;
-        public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+        public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
         public override void OverrideDrawItem(ref Texture2D texture, ref Item item)
         {
             texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantItem", AssetRequestMode.ImmediateLoad).Value;

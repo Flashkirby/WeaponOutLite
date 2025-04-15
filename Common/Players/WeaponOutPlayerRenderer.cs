@@ -49,13 +49,13 @@ namespace WeaponOutLite.Common.Players
 		public bool IsShowingHeldItem
 		{
 			get {
-				if (ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals) {
+				if (WeaponOutLite.ServerConfig.EnableForcedWeaponOutVisuals) {
 					return true;
                 }
 				if (Player == Main.LocalPlayer) {
-					bool configShowHeldItem = ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem;
+					bool configShowHeldItem = WeaponOutLite.ClientConfig.ShowHeldItem;
 					if (isShowingHeldItem != configShowHeldItem) {
-						ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem = isShowingHeldItem;
+						WeaponOutLite.ClientConfig.ShowHeldItem = isShowingHeldItem;
 					}
 					return isShowingHeldItem;
 				}
@@ -64,7 +64,7 @@ namespace WeaponOutLite.Common.Players
             set {
 				isShowingHeldItem = value;
 				if (Player == Main.LocalPlayer) {
-					ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem = isShowingHeldItem;
+					WeaponOutLite.ClientConfig.ShowHeldItem = isShowingHeldItem;
 					((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
 				}
 			}
@@ -128,7 +128,7 @@ namespace WeaponOutLite.Common.Players
 
 		private void ModCompatibleHideItem()
 		{
-			var config = ModContent.GetInstance<WeaponOutClientConfig>();
+			var config = WeaponOutLite.ClientConfig;
 			var item = HeldItem;
 
 			// Terraria Overhaul Integration
@@ -178,7 +178,7 @@ namespace WeaponOutLite.Common.Players
 		public override void PostUpdate()
         {
             // This is for displaying items in-game
-            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
+            if (WeaponOutLite.ServerConfig.EnableWeaponOutVisuals) {
 
                 manageCombatTimer();
 
@@ -195,7 +195,7 @@ namespace WeaponOutLite.Common.Players
 
         public override void FrameEffects()
         {
-			if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+			if (Main.gameMenu && WeaponOutLite.ClientConfig.EnableMenuDisplay) {
 				// This is for displaying items in the menu. Pull this from the main menu once loaded
 				if (gameMenuItem == null) {
 					gameMenuItem = Player.HeldItem;
@@ -213,7 +213,7 @@ namespace WeaponOutLite.Common.Players
 
 		public override void OnHurt(Player.HurtInfo info)
 		{
-			if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceWhenHurt)
+			if (WeaponOutLite.ClientConfig.CombatStanceWhenHurt)
 			{
                 manageCombatTimer(combatPoseTriggered: true);
             }
@@ -244,8 +244,8 @@ namespace WeaponOutLite.Common.Players
 		private void manageCombatTimer(bool combatPoseTriggered = false) {
 			// Only process this line clientside, since every client can have different local configs
 			if (Player == Main.LocalPlayer) {
-				int combatDelayTimerMax = (int)(ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f);
-                if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceAlwaysOn) {
+				int combatDelayTimerMax = (int)(WeaponOutLite.ClientConfig.CombatDelayTimerMax * 60f);
+                if (WeaponOutLite.ClientConfig.CombatStanceAlwaysOn) {
 					combatDelayTimerMax = int.MaxValue;
                 }
 

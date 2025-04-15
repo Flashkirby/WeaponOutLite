@@ -82,7 +82,7 @@ namespace WeaponOutLite.Common
 
                 if (!drawInfo.drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
                 var heldItem = modPlayer.HeldItem;
-				var bowDrawAmmo = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
+				var bowDrawAmmo = WeaponOutLite.ClientConfig.BowDrawAmmo;
 
 				try {
 					AddItemToDrawInfoCache(ref drawInfo, itemData, heldItem, modPlayer, bowDrawAmmo);
@@ -113,7 +113,7 @@ namespace WeaponOutLite.Common
 					}
 				}
             }
-            var config = ModContent.GetInstance<WeaponOutClientConfig>();
+            var config = WeaponOutLite.ClientConfig;
 
             // Get the scaled height and width of the item to be drawn
             float height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.X;
@@ -369,7 +369,7 @@ namespace WeaponOutLite.Common
 			}
 			holdStyle = modPlayer.CurrentDrawItemPose;
 
-            var config = ModContent.GetInstance<WeaponOutClientConfig>();
+            var config = WeaponOutLite.ClientConfig;
 
             // Don't draw when player doesn't meet standard draw conditions
             if ((!modPlayer.DrawHeldItem && !(Main.gameMenu && config.EnableMenuDisplay)) || holdStyle == null) return false;
@@ -447,7 +447,7 @@ namespace WeaponOutLite.Common
 
 				Rectangle sourceRect = calculateSourceRect(heldItem, itemTexture);
 
-                var config = ModContent.GetInstance<WeaponOutClientConfig>();
+                var config = WeaponOutLite.ClientConfig;
 
                 //get draw location of player
                 int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
@@ -580,7 +580,7 @@ namespace WeaponOutLite.Common
 		/// <param name="drawPlayer">The drawPlayer from drawInfo</param>
 		internal static bool tryCreateGlowLayerDrawData(Player drawPlayer, Item item, DrawData data, out DrawData glowData) {
             // Technically glowmasks start at 0, but 0 is used for a projectile, and item.glowMask = -1 isn't set during the gameMenu
-            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos && ItemProjTextureCache.Capacity > item.type && ItemProjTextureCache[item.type] != null) {
+            if (WeaponOutLite.ClientConfig.EnableProjYoyos && ItemProjTextureCache.Capacity > item.type && ItemProjTextureCache[item.type] != null) {
 				if (tryCreateProjectileGlowLayerDrawData(drawPlayer, item.shoot, data, out glowData)) {
 					return true;
 				}
@@ -836,7 +836,7 @@ namespace WeaponOutLite.Common
 			}
 			catch (Exception e) {
 				Main.NewText("WeaponOutLite: Experimental feature failure, proj spears temporarily disabled");
-				ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
+				WeaponOutLite.ClientConfig.EnableProjSpears = false;
 				new Exception("Something happened when trying to rotate spear texture", e);
 			}
 		}
@@ -887,7 +887,7 @@ namespace WeaponOutLite.Common
             }
             catch (Exception e) {
                 Main.NewText("WeaponOutLite: Experimental feature failure, proj yoyos temporarily disabled");
-                ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos = false;
+                WeaponOutLite.ClientConfig.EnableProjYoyos = false;
                 new Exception("Something happened when trying to extract yoyo texture", e);
             }
             
