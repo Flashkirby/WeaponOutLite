@@ -18,11 +18,11 @@ namespace WeaponOutLite.Content.DrawItemPose
 
         public virtual DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
 
-            data = data.SetOrigin(0.5f, 0.5f, p).ApplyFlip(p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.5f, 0.5f, p).RotateFaceForward(p, height, width);
 
             data.position += new Vector2(
                 2 + width *  -0.1f, 
-                height * - 0.05f).Round2();
+                height * 0.05f).Round2();
             data.rotation -= MathHelper.Pi * 1.25f;
 
             return data.WithWaistOffset(p);

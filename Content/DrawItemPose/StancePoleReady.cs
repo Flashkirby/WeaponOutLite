@@ -14,7 +14,7 @@ namespace WeaponOutLite.Content.DrawItemPose
         private bool CanUseBasePose(Player p, int timer) => timer == 0 || p.grapCount > 0 || p.pulley;
 
         public override short DrawDepth(Player p, Item i, int timer) {
-            if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.5f) {
+            if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.25f) {
                 return base.DrawDepth(p, i, timer);
             }
             return DrawDepthID.Hand;
@@ -27,7 +27,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
             float t = DrawHelper.AnimLinearNormal(30, timer);
             if (t > 0 && bodyFrame != 5) {
-                float sheatheRotation = DrawHelper.AnimArmRaiseLower(t, 1.5f) * -0.75f;
+                float sheatheRotation = DrawHelper.AnimArmRaiseLower(t, 1f) * 0.33f;
 
                 Player.CompositeArmStretchAmount frontArm = Player.CompositeArmStretchAmount.ThreeQuarters;
                 if (t > 0.2 && t < 0.8) frontArm = Player.CompositeArmStretchAmount.None;
@@ -49,34 +49,30 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (bodyFrame == 0) {
                 // Standing
                 data.position += new Vector2(-4, 14);
-                data.rotation += (float)(Math.PI * 0.25);
+                data.rotation -= (float)(Math.PI * 1.75);
             }
             else if (bodyFrame > 5 ) {
-                // Running
+                // Runndding
                 data.position += new Vector2(1, 8);
                 data = data.WithHandOffset(p);
-                data.rotation += (float)(Math.PI * 0f);
+                data.rotation -= (float)(Math.PI * 2f);
             }
             else if (bodyFrame == 5) {
                 // Jumping
                 data.position += new Vector2(-8, -8);
-                data.rotation += (float)(Math.PI * -0.25f);
+                data.rotation -= (float)(Math.PI * 2.25f);
             }
             else if (p.IsMountPoseActive()) {
                 data.position += new Vector2(13, 6);
-                data.rotation += (float)(Math.PI * -0.125f);
+                data.rotation -= (float)(Math.PI * 2.125f);
             }
 
-            // Sheathing
-            float t = DrawHelper.AnimOverEaseOutNormal(30, timer);
-            if (t > 1f / 2f) {
-                // flip item at the halfway point
-                data = data.ApplyFlip(p);
-                data.rotation -= MathHelper.PiOver2;
-                data = DrawHelper.LerpData(data, idleData, t);
-            }
-            else {
-                idleData.rotation += MathHelper.PiOver2;
+            // Sheathing OnBack
+            float t = DrawHelper.AnimEaseOutNormal(30, timer);
+            if (t > 0)
+            {
+                data.position.X -= 8f * (float)Math.Sin(t * Math.PI);
+                data.position.Y += 16f * (float)Math.Sin(t * 0.75f * Math.PI);
                 data = DrawHelper.LerpData(data, idleData, t);
             }
 

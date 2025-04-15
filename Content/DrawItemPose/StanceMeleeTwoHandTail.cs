@@ -176,27 +176,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 }
             }
 
-            // Sheathing
-            if (t > 0f) {
+            // Sheathing OnBack
+            if (t > 0f)
+            {
                 data.position += new Vector2(26f, -18f) * t;
                 data.position += new Vector2(0, (width + height) * -0.5f * t);
-
-                // flip item at the halfway point
-                if (t > 1f / 2f) {
-                    data = data.ApplyFlip(p);
-                    // if it looks like a sword object, try to keep the correct visual rotation after flipping
-                    // double the offset values since the lerp will be halfway to the resting point
-                    if (width < height * 1.5f && height < width * 1.5f) {
-                        data.rotation -= MathHelper.PiOver2 * 2f;
-                    }
-                    else {
-                        data = data.SetOrigin(0.1f, 0.5f - 0.4f * 2f, p);
-                    }
-                    data = DrawHelper.LerpData(data, idleData, t);
-                }
-                else {
-                    data = DrawHelper.LerpData(data, idleData, t);
-                }
+                data = DrawHelper.LerpData(data, idleData, t);
             }
 
             return data.WithWaistOffset(p);

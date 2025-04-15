@@ -271,33 +271,61 @@ namespace WeaponOutLite.Content.DrawItemPose
 			return rotationOffset / 4f;
 		}
 
-		public static DrawData ApplyFlip(this DrawData data, float xDir, float yDir) {
-			SpriteEffects spriteEffects = SpriteEffects.None;
-			if (xDir > 0) spriteEffects = SpriteEffects.FlipVertically;
-			if (yDir < 0) {
-				spriteEffects = SpriteEffects.FlipHorizontally | spriteEffects;
-			}
-			data.effect = spriteEffects;
+        public static DrawData ApplyFlip(this DrawData data, float xDir, float yDir)
+        {
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (xDir > 0) spriteEffects = SpriteEffects.FlipVertically;
+            if (yDir < 0)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally | spriteEffects;
+            }
+            data.effect = spriteEffects;
 
-			// When flipping an even number, pick the opposite pixel. See set origins for more details
-			if (data.sourceRect.Value.Height % 4 == 0) data.position.Y += 2;
-			return data;
-		}
+            // When flipping an even number, pick the opposite pixel. See set origins for more details
+            if (data.sourceRect.Value.Height % 4 == 0) data.position.Y += 2;
+            return data;
+        }
 
-		/// <summary>
-		/// Apply flip, run this after setting origin but before rotation
-		/// </summary>
-		/// <param name="data">drawdata of the item</param>
-		/// <param name="player">player holding item</param>
-		/// <returns>drawdata</returns>
-		public static DrawData ApplyFlip(this DrawData data, Player player) {
+        public static DrawData Unflip(this DrawData data, float xDir, float yDir)
+        {
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (xDir < 0) spriteEffects = SpriteEffects.FlipVertically;
+            if (yDir < 0)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally | spriteEffects;
+            }
+            data.effect = spriteEffects;
+
+            // When flipping an even number, pick the opposite pixel. See set origins for more details
+            if (data.sourceRect.Value.Height % 4 == 0) data.position.Y -= 2;
+            return data;
+        }
+
+        /// <summary>
+        /// Apply flip, run this after setting origin but before rotation
+        /// </summary>
+        /// <param name="data">drawdata of the item</param>
+        /// <param name="player">player holding item</param>
+        /// <returns>drawdata</returns>
+        public static DrawData ApplyFlip(this DrawData data, Player player) {
 			return data.ApplyFlip(player.direction, player.gravDir);
-		}
+        }
 
-		/// <summary>
-		/// Modifies the scale according to the configs if the item surpasses the "giant" threshold"
-		/// </summary>
-		public static float GetGiantTextureScale(float width, float height) {
+        /// <summary>
+        /// Unflips your flip
+        /// </summary>
+        /// <param name="data">drawdata of the item</param>
+        /// <param name="player">player holding item</param>
+        /// <returns>drawdata</returns>
+        public static DrawData Unflip(this DrawData data, Player player)
+        {
+            return data.Unflip(player.direction, player.gravDir);
+        }
+
+        /// <summary>
+        /// Modifies the scale according to the configs if the item surpasses the "giant" threshold"
+        /// </summary>
+        public static float GetGiantTextureScale(float width, float height) {
 			var threshold = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemThreshold;
 			if (threshold < Math.Max(width, height)) {
 				return ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
