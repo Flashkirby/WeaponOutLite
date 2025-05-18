@@ -42,7 +42,7 @@ namespace WeaponOutLite.ID
             try {
                 dict.Add(style.GetID(), style);
             }
-            catch (ArgumentException e) {
+            catch (ArgumentException) {
                 var existing = dict[style.GetID()];
                 throw new Exception("Failed to load " + style.GetType().Name + " ()" + style.GetID() + ", already set by " + existing.GetType().Name);
             }
@@ -194,6 +194,8 @@ namespace WeaponOutLite.ID
             CombatTwoHandPumpAction = DrawItemPoseID.StanceRiflePumpAction,
         }
 
+        #region NetIDs
+
         // Default values
         public const int Custom             = -1;
         public const int Unassigned         = 0;
@@ -268,5 +270,6 @@ namespace WeaponOutLite.ID
         public const int StanceRifleBoltAction      = 70440;
         public const int StanceRiflePumpAction      = 70450;
 
+        #endregion
     }
 }

@@ -85,7 +85,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
             // Moving to rest pose
             float delay = 10f;
-            float animationTime = Math.Max(0, -(timer - ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f) - delay);
+            float animationTime = Math.Max(0, -(timer - WeaponOutLite.ClientConfig.CombatDelayTimerMax * 60f) - delay);
             if (t == 0 && animationTime <= 40) {
                 var at = DrawHelper.AnimLinearNormal(40, animationTime);
                 if (at > 0) {
@@ -117,7 +117,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             // Sheathing calculation
             float t = DrawHelper.AnimEaseInEaseOutNormal(30, timer);
             float delay = 10f;
-            float animationTime = Math.Max(0, -(timer - ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f) - delay);
+            float animationTime = Math.Max(0, -(timer - WeaponOutLite.ClientConfig.CombatDelayTimerMax * 60f) - delay);
             bool inBoltAnimation = t == 0 && animationTime <= 40;
 
             data = data.SetOrigin(0.25f, 1f / 3f, p);

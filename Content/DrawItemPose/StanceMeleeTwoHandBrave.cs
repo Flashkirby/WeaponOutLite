@@ -25,7 +25,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             if (CanUseBasePose(p, timer) || p.IsMountPoseActive() || DrawHelper.AnimLinearNormal(30, timer) > 0.2f) {
                 return base.DrawDepth(p, i, timer);
             }
-            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+            if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                 if (p.velocity.Y != 0 && p.velocity.Y < 2f) {
                     return DrawDepthID.Back;
                 }
@@ -79,7 +79,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     // ground
                     float physicsRotation = 0f;
                     var motionNormal = 1f;
-                    if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                         var motion = p.velocity.X * p.direction;
                         motionNormal = Math.Clamp(Math.Max(motion - 1f, 0f) * 0.625f, 0f, 1f);
                     }
@@ -95,7 +95,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     // air
                     float physicsRotation = 0f;
                     var motionNormal = 0f;
-                    if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                         motionNormal = Math.Clamp(p.velocity.Y * 0.1f, -1f, 1f);
                     }
                     physicsRotation -= motionNormal * 0.15f;
@@ -147,7 +147,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
                     // Motion determined by horizontal speed
                     var motionNormal = 1f;
-                    if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                         var motion = p.velocity.X * p.direction;
                         motionNormal = Math.Clamp(Math.Max(motion - 1f, 0f) * 0.625f, 0f, 1f);
                     }
@@ -161,7 +161,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
                     // Motion determined by vertical speed
                     var motionNormal = 0f;
-                    if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                    if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                         var motion = p.velocity.Y;
                         motionNormal = Math.Clamp(motion * 0.1f, -1f, 1f);
                     }
@@ -170,18 +170,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 }
             }
 
-            // Sheathing
+            // Sheathing OnBack
             float t = DrawHelper.AnimOverEaseOutNormal(30, timer);
-            data.position.X += 16f * (float)Math.Sin(t * Math.PI);
-            data.position.Y -= height / 2 * (float)Math.Sin(t * Math.PI);
-            if (t > 1f / 2f) {
-                // flip item at the halfway point
-                data = data.ApplyFlip(p);
-                data.rotation -= MathHelper.PiOver2;
-                data = DrawHelper.LerpData(data, idleData, t);
-            }
-            else {
-                idleData.rotation += MathHelper.PiOver2;
+            if (t > 0)
+            {
+                data.position.X += 24f * (float)Math.Sin(t * Math.PI);
+                data.position.Y -= height * (float)Math.Sin(t * Math.PI * 0.5f);
                 data = DrawHelper.LerpData(data, idleData, t);
             }
 

@@ -6,8 +6,9 @@ namespace WeaponOutLite.Common.Configs
 	public class WeaponOutServerConfig : ModConfig
 	{
 		public override ConfigScope Mode => ConfigScope.ServerSide;
+        public override void OnLoaded() => WeaponOutLite.ServerConfig = this;
 
-		[Header("ServerSide")] 
+        [Header("ServerSide")] 
 
 		[DefaultValue(true)]
 		public bool EnableWeaponOutVisuals;

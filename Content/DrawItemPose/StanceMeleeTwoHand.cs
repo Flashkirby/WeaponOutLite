@@ -83,18 +83,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(10, 4);
             }
 
-            // Sheathing
+            // Sheathing OnBack
             float t = DrawHelper.AnimOverEaseOutNormal(30, timer);
-            data.position.X += 16f * (float)Math.Sin(t * Math.PI);
-            data.position.Y -= height / 2 * (float)Math.Sin(t * Math.PI);
-            if (t > 1f / 2f) {
-                // flip item at the halfway point
-                data = data.ApplyFlip(p);
-                data.rotation -= MathHelper.PiOver2;
-                data = DrawHelper.LerpData(data, idleData, t);
-            }
-            else {
-                idleData.rotation += MathHelper.PiOver2;
+            if (t > 0f)
+            {
+                data.position.X += 8f * (float)Math.Sin(t * Math.PI);
+                data.position.Y -= height * (float)Math.Sin(t * 0.5f * Math.PI);
                 data = DrawHelper.LerpData(data, idleData, t);
             }
 

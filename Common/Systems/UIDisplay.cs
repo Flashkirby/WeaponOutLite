@@ -61,12 +61,11 @@ namespace WeaponOutLite.Common.Systems
             // Default locked state (off)
             var texture = TextureAssets.InventoryTickOff.Value;
             var hoverText = "WeaponOut: " + Lang.inter[73]; // "Off" see en_US.Legacy
-            var modPlayer = Main.LocalPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
-            if(modPlayer == null) { return; }
+            if (!Main.LocalPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
 
-            bool forcedVisuals = ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals;
+            bool forcedVisuals = WeaponOutLite.ServerConfig.EnableForcedWeaponOutVisuals;
 
-            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals || forcedVisuals) {
+            if (WeaponOutLite.ServerConfig.EnableWeaponOutVisuals || forcedVisuals) {
 
                 // Enabled but turned off (hidden)
                 hoverText = "WeaponOut: " + Lang.inter[60]; // "Hidden"
@@ -114,7 +113,7 @@ namespace WeaponOutLite.Common.Systems
                      * this function will remain unused.
                      * TODO: see if this has changed in tmodloader for 1.4.4, or just implement a copy of the code thusly:
                      
-                            Terraria.ModLoader.Config.ModConfig config = ModContent.GetInstance<WeaponOutClientConfig>();
+                            Terraria.ModLoader.Config.ModConfig config = WeaponOutLite.ClientConfig;
                             System.IO.Directory.CreateDirectory(Terraria.ModLoader.Config.ConfigManager.ModConfigPath);
                             string filename = config.Mod.Name + "_" + config.Name + ".json";
                             string path = System.IO.Path.Combine(Terraria.ModLoader.Config.ConfigManager.ModConfigPath, filename);

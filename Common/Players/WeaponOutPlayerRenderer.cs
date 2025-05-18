@@ -1,11 +1,11 @@
 ﻿using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.Common.GlobalDrawItemPose;
+using WeaponOutLite.Compatibility;
 
 namespace WeaponOutLite.Common.Players
 {
@@ -25,6 +25,12 @@ namespace WeaponOutLite.Common.Players
 
 		public bool showHeldItemThisFrame = true;
 
+		/// <summary> 
+		/// Many custom draw mods are modifying the arm. 
+		/// If this value isn't the one we set, assume another mod is doing something here, and back off.
+		/// </summary>
+		internal float? expectedFrontArmThisFrame = null;
+
 		/// <summary>
 		/// Draw style of the currently held item. If null, the layer renderer won't run.
 		/// </summary>
@@ -43,13 +49,13 @@ namespace WeaponOutLite.Common.Players
 		public bool IsShowingHeldItem
 		{
 			get {
-				if (ModContent.GetInstance<WeaponOutServerConfig>().EnableForcedWeaponOutVisuals) {
+				if (WeaponOutLite.ServerConfig.EnableForcedWeaponOutVisuals) {
 					return true;
                 }
 				if (Player == Main.LocalPlayer) {
-					bool configShowHeldItem = ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem;
+					bool configShowHeldItem = WeaponOutLite.ClientConfig.ShowHeldItem;
 					if (isShowingHeldItem != configShowHeldItem) {
-						ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem = isShowingHeldItem;
+						WeaponOutLite.ClientConfig.ShowHeldItem = isShowingHeldItem;
 					}
 					return isShowingHeldItem;
 				}
@@ -58,7 +64,7 @@ namespace WeaponOutLite.Common.Players
             set {
 				isShowingHeldItem = value;
 				if (Player == Main.LocalPlayer) {
-					ModContent.GetInstance<WeaponOutClientConfig>().ShowHeldItem = isShowingHeldItem;
+					WeaponOutLite.ClientConfig.ShowHeldItem = isShowingHeldItem;
 					((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
 				}
 			}
@@ -70,14 +76,19 @@ namespace WeaponOutLite.Common.Players
         public bool DrawHeldItem
 		{
 			get {
-				return IsShowingHeldItem && showHeldItemThisFrame &&
+                return IsShowingHeldItem && showHeldItemThisFrame &&
+					(   // front arm hasn't been modified by another mod 
+						(!Player.compositeFrontArm.enabled && expectedFrontArmThisFrame == null) ||
+						(Player.compositeFrontArm.enabled && expectedFrontArmThisFrame == Player.compositeFrontArm.rotation)
+					) &&
 					!Main.gameMenu && // Not in game menu ie. select screen
 					Player.active && // active player slot
 					!Player.dead && // alive
 					!Player.stoned && // unpetrified
 					Player.itemAnimation <= 0; // not swinging
 			}
-		}
+
+        }
 
 		/// <summary>
 		/// Current body frame
@@ -106,27 +117,68 @@ namespace WeaponOutLite.Common.Players
 			}
         }
 
-        public override void ResetEffects() {
-			showHeldItemThisFrame = true;
+		public override void ResetEffects()
+        {
+			expectedFrontArmThisFrame = null;
+            showHeldItemThisFrame = true;
+
+            // Mod Integrations
+            ModCompatibleHideItem();
+        }
+
+		private void ModCompatibleHideItem()
+		{
+			var config = WeaponOutLite.ClientConfig;
+			var item = HeldItem;
 
 			// Terraria Overhaul Integration
-			if (WeaponOutLite.TerrariaOverhaulModLoaded && ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationTerrariaOverhaul) {
-				// Basic implementation of https://github.com/Mirsario/TerrariaOverhaul/blob/668f5ed01b7af8ba4530645b605e5ee11030ba56/Common/PlayerEffects/PlayerHoldOutAnimation.cs?ts=4#L99
-				// to prevent visual conflicts
-				var item = HeldItem;
+			if (TerrariaOverhaul.Found && config.ModIntegrationTerrariaOverhaul)
+			{
+				// Basic implementation of ShouldForceUseAnim to prevent visual conflicts
+				// https://github.com/Mirsario/TerrariaOverhaul/blob/dev/Common/EntityEffects/PlayerHoldOutAnimation.cs#L118
 
 				if (item.noUseGraphic ||
-					item.useStyle != ItemUseStyleID.Shoot) {
+					item.useStyle != ItemUseStyleID.Shoot)
+				{
 					// return
 				}
-				else { WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI); }
+				else
+				{
+					WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+					return;
+				}
 			}
+
+			if (InsurgencyWeapons.Found && config.ModIntegrationInsurgencyWeapons)
+			{
+				// Insurgency has its own render system for weapons - but this can be disabled in its own config.
+				if (InsurgencyWeapons.HasItem(item))
+				{
+					WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+					return;
+				}
+			}
+
+			if (CalamityMod.Found && CalamityMod.HasItem(item))
+			{
+                // Something weird is happening with the way the animation is set during the charge attack.
+				if (item.ModItem?.Name == "TheFinalDawn")
+                {
+                    bool attackFrames = BodyFrameNum >= 1 && BodyFrameNum <= 4;
+					if (attackFrames)
+                    {
+                        WeaponOutLite.GetMod().Call("HidePlayerHeldItem", Player.whoAmI);
+                        return;
+                    }
+                }
+            }
 		}
 
-        public override void PostUpdate()
+
+		public override void PostUpdate()
         {
             // This is for displaying items in-game
-            if (ModContent.GetInstance<WeaponOutServerConfig>().EnableWeaponOutVisuals) {
+            if (WeaponOutLite.ServerConfig.EnableWeaponOutVisuals) {
 
                 manageCombatTimer();
 
@@ -143,7 +195,7 @@ namespace WeaponOutLite.Common.Players
 
         public override void FrameEffects()
         {
-			if (Main.gameMenu && ModContent.GetInstance<WeaponOutClientConfig>().EnableMenuDisplay) {
+			if (Main.gameMenu && WeaponOutLite.ClientConfig.EnableMenuDisplay) {
 				// This is for displaying items in the menu. Pull this from the main menu once loaded
 				if (gameMenuItem == null) {
 					gameMenuItem = Player.HeldItem;
@@ -161,7 +213,7 @@ namespace WeaponOutLite.Common.Players
 
 		public override void OnHurt(Player.HurtInfo info)
 		{
-			if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceWhenHurt)
+			if (WeaponOutLite.ClientConfig.CombatStanceWhenHurt)
 			{
                 manageCombatTimer(combatPoseTriggered: true);
             }
@@ -173,7 +225,7 @@ namespace WeaponOutLite.Common.Players
 			// Send a message out to the server when a sync is required, such as a new player joining the server
 			MyStat = Main.rand.Next();
 			if (fromWho == -1) {
-				Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
+				if(WeaponOutLite.DEBUG_MULTIPLAYER) Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
 				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
 			}
 		}
@@ -192,8 +244,8 @@ namespace WeaponOutLite.Common.Players
 		private void manageCombatTimer(bool combatPoseTriggered = false) {
 			// Only process this line clientside, since every client can have different local configs
 			if (Player == Main.LocalPlayer) {
-				int combatDelayTimerMax = (int)(ModContent.GetInstance<WeaponOutClientConfig>().CombatDelayTimerMax * 60f);
-                if (ModContent.GetInstance<WeaponOutClientConfig>().CombatStanceAlwaysOn) {
+				int combatDelayTimerMax = (int)(WeaponOutLite.ClientConfig.CombatDelayTimerMax * 60f);
+                if (WeaponOutLite.ClientConfig.CombatStanceAlwaysOn) {
 					combatDelayTimerMax = int.MaxValue;
                 }
 
@@ -246,11 +298,12 @@ namespace WeaponOutLite.Common.Players
             }
         }
 
-        /// <summary>
-        /// Modify the player's body frame if there is an idle body frame set in the style.
-        /// Clients Only
-        /// </summary>
-        private void manageBodyFrame() {
+		/// <summary>
+		/// Modify the player's body frame if there is an idle body frame set in the style.
+		/// Clients Only
+		/// </summary>
+		private void manageBodyFrame()
+		{
 			//no item so nothing to show
 			if (HeldItem == null || HeldItem.type == ItemID.None || HeldItem.holdStyle != 0) return;
 
@@ -260,19 +313,31 @@ namespace WeaponOutLite.Common.Players
 			// But modifications to the modplayer in that method seem to be reverted by the time this method is called (all values reset to null)
 			// tested IsCloneable and overriding Clone doesn't solve this.
 			// 
-			if (CurrentDrawItemPose == null) {
+			if (CurrentDrawItemPose == null)
+			{
 				//throw new Exception("This situation happens for existing clients when a new player joins a server. How to deal with this?");
 				// Ignore this state. The next time a player changes their held item in MP, it will be re-synced anyway.
 				return;
-            }
+			}
 
 			// Only if in a rest post
 			// 0 = standing
 			// 5 = falling
 			// 6+ = running/flying
-			if (BodyFrameNum == 0 || BodyFrameNum >= 5) {
+
+			bool idleFrames = BodyFrameNum == 0 || BodyFrameNum >= 5;
+			bool idleCompositeArms = !Player.compositeFrontArm.enabled && !Player.compositeBackArm.enabled;
+
+            if (idleFrames && idleCompositeArms)
+			{
 				BodyFrameNum = CurrentDrawItemPose.UpdateIdleBodyFrame(Player, HeldItem, BodyFrameNum, CombatDelayTimer);
 			}
+
+			// Monitor external modifications to compositeFrontArm to detect other mod overrides
+			if (Player.compositeFrontArm.enabled)
+			{ expectedFrontArmThisFrame = Player.compositeFrontArm.rotation; }
+			else
+			{ expectedFrontArmThisFrame = null; }
 		}
     }
 }

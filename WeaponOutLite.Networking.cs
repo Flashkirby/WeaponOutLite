@@ -70,14 +70,14 @@ namespace WeaponOutLite
                 if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
             }
 
-            WeaponOutPlayerRenderer modPlayer = Main.player[playerWhoAmI].GetModPlayer<WeaponOutPlayerRenderer>();
+            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
             modPlayer.IsShowingHeldItem = isShowingItem;
 
             try {
-                modPlayer.CurrentDrawItemPose = DrawStyle[holdStyleID];
+                modPlayer.CurrentDrawItemPose = ItemPoses[holdStyleID];
             }
             catch {
-                modPlayer.CurrentDrawItemPose = DrawStyle[DrawItemPoseID.Unassigned];
+                modPlayer.CurrentDrawItemPose = ItemPoses[DrawItemPoseID.Unassigned];
             }
 
             // If we are the server, we just received this from the updating client.
@@ -104,7 +104,7 @@ namespace WeaponOutLite
             int playerWhoAmI = reader.ReadByte();
             var combatTimer = reader.ReadInt32();
 
-            WeaponOutPlayerRenderer modPlayer = Main.player[playerWhoAmI].GetModPlayer<WeaponOutPlayerRenderer>();
+            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
             modPlayer.CombatDelayTimer = combatTimer;
 
             // Forward server->clients

@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using WeaponOutLite.Compatibility;
 
 namespace WeaponOutLite
 {
@@ -17,6 +18,12 @@ namespace WeaponOutLite
     partial class WeaponOutLite : Mod
     {
         public override void PostSetupContent() {
+          
+            CalamityMod.PostSetupContent();
+            MetroidMod.PostSetupContent();
+            Redemption.PostSetupContent();
+            ThoriumMod.PostSetupContent();
+
             // Get the WeaponOutLite mod
             Mod weaponOutLite = ModLoader.GetMod("WeaponOutLite");
 
@@ -30,6 +37,7 @@ namespace WeaponOutLite
                 ItemID.JoustingLance,
                 ItemID.ShadowJoustingLance,
                 ItemID.HallowJoustingLance,
+                ItemID.MonkStaffT1, // Sleepy Octopod
                 ItemID.MonkStaffT3, // Sky Fury
             })) { throw new ArgumentException("RegisterSpear ModCall Failed"); }
 
@@ -54,11 +62,14 @@ namespace WeaponOutLite
                 ItemID.VenusMagnum,
             })) { throw new ArgumentException("RegisterPistol ModCall Failed"); }
 
+            // Manually register these items into specific groups
             if (!(bool)weaponOutLite.Call("RegisterGun", ItemID.CoinGun )) { throw new ArgumentException("RegisterGun ModCall Failed"); }
             if (!(bool)weaponOutLite.Call("RegisterWhips", ItemID.SolarEruption)) { throw new ArgumentException("RegisterWhips ModCall Failed"); }
 
-            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.NebulaBlaze, "None") || 
-                !(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.BouncingShield, "None")
+            // Register custom, specific item poses. These names are mapped to WeaponOutLite.DrawItemPoseID.DrawItemPose
+            if (!(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.NebulaBlaze, "None") ||
+                !(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.BouncingShield, "None") ||
+                !(bool)weaponOutLite.Call("RegisterItemHoldPose", ItemID.Anchor, "StancePoleShoulder")
             ) { throw new ArgumentException("RegisterItemHoldPose ModCall Failed"); }
 
             // Register these items to use Custom Holdstyles. The other functions will not call for an item unless it is specified here first.

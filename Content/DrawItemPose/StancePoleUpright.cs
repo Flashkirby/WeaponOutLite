@@ -19,7 +19,7 @@ namespace WeaponOutLite.Content.DrawItemPose
         private bool CanUseBasePose(Player p, int timer) => timer == 0 || p.grapCount > 0 || p.pulley;
 
         public override short DrawDepth(Player p, Item i, int timer) {
-            if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.5f) {
+            if (CanUseBasePose(p, timer) || DrawHelper.AnimLinearNormal(30, timer) > 0.75f) {
                 return base.DrawDepth(p, i, timer);
             }
             return DrawDepthID.Hand;
@@ -30,9 +30,18 @@ namespace WeaponOutLite.Content.DrawItemPose
                 return base.UpdateIdleBodyFrame(p, i, bodyFrame, timer);
             }
 
-            float t = DrawHelper.AnimLinearNormal(20, timer);
+            float t = DrawHelper.AnimLinearNormal(30, timer);
             if (t > 0) {
-                float sheatheRotation = DrawHelper.AnimArmRaiseLower(t, 1f) * -0.75f;
+                float sheatheRotation = 0f;
+
+                if (bodyFrame == 5) // jumping
+                {
+                    sheatheRotation = -1.25f + DrawHelper.AnimArmRaiseLower(t) * 1.25f;
+                }
+                else
+                {
+                    sheatheRotation = DrawHelper.AnimArmWaggle(t) * 0.3f;
+                }
 
                 Player.CompositeArmStretchAmount frontArm = Player.CompositeArmStretchAmount.Quarter;
                 if (t > 0.2 && t < 0.8) frontArm = Player.CompositeArmStretchAmount.Full;
@@ -40,7 +49,8 @@ namespace WeaponOutLite.Content.DrawItemPose
                 p.SetCompositeArmFront(enabled: true, frontArm, (float)Math.PI * sheatheRotation * p.direction);
                 return bodyFrame;
             }
-            if(bodyFrame== 0) {
+            if (bodyFrame == 0)
+            {
                 p.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, 0f);
                 bodyFrame = 6;
             }
@@ -62,7 +72,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     -2, 
                     17);
                 data = data.WithHandOffset(p);
-                data.rotation += (float)(Math.PI * -0.5f);
+                data.rotation -= (float)(Math.PI * 2.5f);
             }
             else if (bodyFrame == 5) {
                 // Jumping
@@ -70,43 +80,30 @@ namespace WeaponOutLite.Content.DrawItemPose
                     0,
                     -2);
                 data = data.WithHandOffset(p);
-                data.rotation += (float)(Math.PI * -0.75f);
+                data.rotation -= (float)(Math.PI * 2.75f);
             }
             else if (p.IsMountPoseActive()) { // Mount
                 data = data.SetOrigin(0.25f, 0.75f, p);
                 float speedRotation = 0.25f;
-                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                     float maxSpeed = 3f;
                     speedRotation = Math.Clamp(p.velocity.X * p.direction, 0f, maxSpeed);
                     speedRotation = speedRotation / maxSpeed * 0.25f;
                 }
                 // 0.25f to 0.00f
-                data.rotation -= (float)(Math.PI * (0.5f - speedRotation));
+                data.rotation -= (float)(Math.PI * (2.5f - speedRotation));
                 data.position += new Vector2(
                     (10f),
                     (6f));
             }
 
-            // Sheathing
+            // Sheathing OnBack
             float t = DrawHelper.AnimEaseInEaseOutNormal(30, timer);
-            if(t > 0) {
-                data.position += new Vector2(64, -32) * t;
-                // flip item at the halfway point
-                if (t > 1f / 2f) {
-                    data = data.ApplyFlip(p);
-                    // if it looks like a sword object, try to keep the correct visual rotation after flipping
-                    // double the offset values since the lerp will be halfway to the resting point
-                    if (width < height * 1.5f && height < width * 1.5f) {
-                        data.rotation -= MathHelper.PiOver2 * 2f;
-                    }
-                    else {
-                        data = data.SetOrigin(0.5f - 0.4f * (width / height), 0.5f - 0.4f * 2f, p);
-                    }
-                    data = DrawHelper.LerpData(data, idleData, t);
-                }
-                else {
-                    data = DrawHelper.LerpData(data, idleData, t);
-                }
+            if(t > 0)
+            {
+                data.position.X += 8f * (float)Math.Sin(t * Math.PI * 2f);
+                data.position.Y -= 8f * (float)Math.Sin(t * 0.5f * Math.PI);
+                data = DrawHelper.LerpData(data, idleData, t);
             }
 
             return data;

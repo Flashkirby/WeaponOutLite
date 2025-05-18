@@ -37,7 +37,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                 if (sheathingNormal > 0f) { backArm = Player.CompositeArmStretchAmount.ThreeQuarters; }
                 if (sheathingNormal > 0.2f) { backArm = Player.CompositeArmStretchAmount.Full; }
 
-                p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * (-0.375f + sheathingNormal * 0.25f) * p.direction);
+                p.SetCompositeArmBack(enabled: true, backArm, (float)Math.PI * (-0.38f + sheathingNormal * 0.25f) * p.direction);
             }
             if (bodyFrame > 5) {
 
@@ -64,7 +64,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             }
 
             // Face top right
-            data = data.SetOrigin(0.1f, 0.9f, p).RotateFaceForward(p, height, width);
+            data = data.SetOrigin(0.05f, 0.85f, p).RotateFaceForward(p, height, width);
             data.rotation -= MathHelper.PiOver4;
 
             if (bodyFrame == 0) {
@@ -72,14 +72,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(
                     (14),
                     (4));
-
-                data.rotation += (float)(Math.PI * 0.3f);
             }
             else if (bodyFrame > 5) {
                 // Running
                 data.position += new Vector2(
                     (12),
-                    (4));
+                    (3));
                 data = data.WithWaistOffset(p);
 
                 if (bodyFrame % 7 < 4) {
@@ -91,7 +89,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     }
                 }
 
-                data.rotation += (float)(Math.PI * 0.25f);
+                // data.rotation += (float)(Math.PI * 0.25f);
             }
             else if (bodyFrame == 5) {
                 // Jumping
@@ -99,7 +97,7 @@ namespace WeaponOutLite.Content.DrawItemPose
                     (7),
                     (-8));
 
-                data.rotation += (float)(Math.PI * 0.175f);
+                data.rotation += (float)(Math.PI * 0.15f);
             }
 
 

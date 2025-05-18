@@ -49,7 +49,7 @@ namespace WeaponOutLite.Content.DrawItemPose
 
                 // Motion determined by fall speed, or forward running speed
                 var armMotion = 0f;
-                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                     var motion = -p.velocity.Y * p.gravDir;
                     var motionR = -Math.Clamp(motion * 0.02f, -0.39f, 0.39f);
                     armMotion += motionR;
@@ -83,7 +83,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             }
 
             // Motion determined by fall speed, or forward running speed
-            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+            if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                 var motion = -p.velocity.Y * p.gravDir;
                 var motionR = -Math.Clamp(motion * 0.02f, -0.39f, 0.39f);
                 data.rotation -= motionR;

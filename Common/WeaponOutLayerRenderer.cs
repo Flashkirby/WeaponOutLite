@@ -14,6 +14,7 @@ using Terraria.ModLoader;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.Common.GlobalDrawItemPose;
 using WeaponOutLite.Common.Players;
+using WeaponOutLite.Compatibility;
 using WeaponOutLite.Content.DrawItemPose;
 using WeaponOutLite.ID;
 using static WeaponOutLite.ID.DrawItemPoseID;
@@ -37,12 +38,18 @@ namespace WeaponOutLite.Common
 		/// </summary>
 		public static List<Texture2D> ItemProjTextureCache { get; set; }
 
-		/// <summary>
-		/// Offset to place the item at a different Y centre, so that when *-2, the position will be consistent when the player is upside down.
-		/// While this technically means the weapon is not placed directly in the centre,
-		/// this means any further position changes from DrawItemStyle, when inverted, don't have any weird offsets when flipped.
-		/// </summary>
-		const int GravityOffset = -3;
+        /// <summary>
+        /// In some cases we need to reference a projectile property - but setting new projectile every frame can
+        /// have unintended effects on performance especially for modded projectiles.
+        /// </summary>
+        internal static Dictionary<int, Projectile> projectileCache;
+
+        /// <summary>
+        /// Offset to place the item at a different Y centre, so that when *-2, the position will be consistent when the player is upside down.
+        /// While this technically means the weapon is not placed directly in the centre,
+        /// this means any further position changes from DrawItemStyle, when inverted, don't have any weird offsets when flipped.
+        /// </summary>
+        const int GravityOffset = -3;
 
         /// <summary>
         /// Initialised in main mod file Load().
@@ -51,6 +58,7 @@ namespace WeaponOutLite.Common
 		{
             ItemLogOnceRecorder = new HashSet<int>();
             ItemProjTextureCache = new List<Texture2D>();
+            projectileCache = new Dictionary<int, Projectile>();
         }
 
         /// <summary>
@@ -60,6 +68,7 @@ namespace WeaponOutLite.Common
         {
 			ItemLogOnceRecorder = null;
             ItemProjTextureCache = null;
+            projectileCache = null;
         }
 
 		/// <summary>
@@ -71,9 +80,9 @@ namespace WeaponOutLite.Common
 			// Create basic draw data, centred on the player
 			if (tryCreateBaseDrawData(drawInfo, out DrawData itemData)) {
 
-                var modPlayer = drawInfo.drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
+                if (!drawInfo.drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
                 var heldItem = modPlayer.HeldItem;
-				var bowDrawAmmo = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
+				var bowDrawAmmo = WeaponOutLite.ClientConfig.BowDrawAmmo;
 
 				try {
 					AddItemToDrawInfoCache(ref drawInfo, itemData, heldItem, modPlayer, bowDrawAmmo);
@@ -104,7 +113,7 @@ namespace WeaponOutLite.Common
 					}
 				}
             }
-            var config = ModContent.GetInstance<WeaponOutClientConfig>();
+            var config = WeaponOutLite.ClientConfig;
 
             // Get the scaled height and width of the item to be drawn
             float height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.X;
@@ -139,6 +148,7 @@ namespace WeaponOutLite.Common
 			// Modify dimensions being passed by scale
 			height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.Y;
 			width = (itemData.sourceRect?.Width ?? 0) * itemData.scale.X;
+
 
 			// Apply draw data from item style.
 			var drawItemStyle = modPlayer.CurrentDrawItemPose;
@@ -198,7 +208,7 @@ namespace WeaponOutLite.Common
 				int projectileType = ApplyVanillaAmmoReplacement(heldItem.type, ammo?.shoot ?? 0);
                 if (ammo != null && projectileType > 0) {
 					// create the arrow
-					if (tryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
+					if (TryCreateArrowDrawData(drawInfo.drawPlayer, projectileType, itemData, out DrawData arrowData)) {
 						drawInfo.DrawDataCache.Add(arrowData);
 						// and any glow layer
 						if (tryCreateProjectileGlowLayerDrawData(drawInfo.drawPlayer, projectileType, arrowData, out DrawData arrowGlowData)) {
@@ -208,8 +218,25 @@ namespace WeaponOutLite.Common
 				}
 			}
 
-			// Draw weapon effects
-			if (config.EnableMeleeEffects) {
+            // When jumping, the arm is pointed upwards and Terraria will stop rendering the shoulders.
+            // However we can force it to display the shoulders - as long as the arm is below a certain angle threshold
+            if (bodyFrame == 5 && drawInfo.drawPlayer.compositeFrontArm.enabled)
+            {
+                // converting to integer so we can modulo it to within the bounds of 2 PI
+                int clampedRotation100 =
+                    (int)(drawInfo.compositeFrontArmRotation * 100 * drawInfo.drawPlayer.direction) % 314;
+                bool armIsFrontFacing = clampedRotation100 < 0 || clampedRotation100 > 235; // little bit of leeway past the top
+                bool armIsUnderHalfPI = Math.Abs(clampedRotation100) < 160;
+
+                if (armIsFrontFacing || armIsUnderHalfPI)
+                {
+                    drawInfo.hideCompositeShoulders = false;
+                    drawInfo.compShoulderOverFrontArm = true;
+                }
+            }
+
+            // Draw weapon effects
+            if (config.EnableMeleeEffects) {
 				try {
 					if (modPlayer != null && heldItem != null && modPlayer.Player != null && modPlayer.CombatDelayTimer > 0) {
 						const int MAX_STEPS = 4;
@@ -331,13 +358,18 @@ namespace WeaponOutLite.Common
 			out Item heldItem, 
 			out Texture2D itemTexture) {
 
-			drawPlayer = drawInfo.drawPlayer;
-			modPlayer = drawPlayer.GetModPlayer<WeaponOutPlayerRenderer>();
-			holdStyle = modPlayer.CurrentDrawItemPose;
-			heldItem = null;
-			itemTexture = null;
+            heldItem = null;
+            itemTexture = null;
 
-            var config = ModContent.GetInstance<WeaponOutClientConfig>();
+            drawPlayer = drawInfo.drawPlayer;
+			if (!drawPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out modPlayer))
+            {
+                holdStyle = null;
+                return false;
+			}
+			holdStyle = modPlayer.CurrentDrawItemPose;
+
+            var config = WeaponOutLite.ClientConfig;
 
             // Don't draw when player doesn't meet standard draw conditions
             if ((!modPlayer.DrawHeldItem && !(Main.gameMenu && config.EnableMenuDisplay)) || holdStyle == null) return false;
@@ -348,7 +380,7 @@ namespace WeaponOutLite.Common
 			if (heldItem == null || heldItem.type == ItemID.None || heldItem.holdStyle != 0) return false;
 
 			// Armament Display Lite, which handles weapons specifically
-			if (heldItem.damage > 0 && WeaponOutLite.ArmamentDisplayLiteModLoaded) {
+			if (heldItem.damage > 0 && WeaponDisplayLite.Found) {
 				return false;
 			}
 
@@ -415,7 +447,7 @@ namespace WeaponOutLite.Common
 
 				Rectangle sourceRect = calculateSourceRect(heldItem, itemTexture);
 
-                var config = ModContent.GetInstance<WeaponOutClientConfig>();
+                var config = WeaponOutLite.ClientConfig;
 
                 //get draw location of player
                 int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
@@ -492,7 +524,7 @@ namespace WeaponOutLite.Common
 						0);
 
                 // Item customiser integration (for whatever the 1.4 equivalent is)
-				// As of 25/07/2024 it doesn't look like a mod like this is on the workshop yet)
+				// As of 2025/04/12 it doesn't look like a mod like this is on the workshop yet)
                 // https://github.com/gamrguy/ItemCustomizer
                 //if (ItemCustomizerModLoaded) {
                 //	data.shader = ItemCustomizerGetShader(itemCustomizer, heldItem);
@@ -548,7 +580,7 @@ namespace WeaponOutLite.Common
 		/// <param name="drawPlayer">The drawPlayer from drawInfo</param>
 		internal static bool tryCreateGlowLayerDrawData(Player drawPlayer, Item item, DrawData data, out DrawData glowData) {
             // Technically glowmasks start at 0, but 0 is used for a projectile, and item.glowMask = -1 isn't set during the gameMenu
-            if (ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos && ItemProjTextureCache.Capacity > item.type && ItemProjTextureCache[item.type] != null) {
+            if (WeaponOutLite.ClientConfig.EnableProjYoyos && ItemProjTextureCache.Capacity > item.type && ItemProjTextureCache[item.type] != null) {
 				if (tryCreateProjectileGlowLayerDrawData(drawPlayer, item.shoot, data, out glowData)) {
 					return true;
 				}
@@ -574,12 +606,11 @@ namespace WeaponOutLite.Common
 		}
 
 		internal static bool tryCreateProjectileGlowLayerDrawData(Player drawPlayer, int projectileType, DrawData data, out DrawData glowData) {
-			// Get the glowmask from the projectile
+            // Get the glowmask from the projectile
 
-			Projectile p = new Projectile();
-			p.SetDefaults(projectileType);
+            var p = GetProjectile(projectileType);
 
-			if (p.glowMask != -1) {
+            if (p.glowMask != -1) {
 				Color glowLighting = new Color(250, 250, 250, p.alpha);
 				glowLighting = drawPlayer.GetImmuneAlpha(p.GetAlpha(glowLighting) * drawPlayer.stealth * data.color.A, 0);
 				glowData = new DrawData(
@@ -598,7 +629,27 @@ namespace WeaponOutLite.Common
 			return false;
 		}
 
-		internal static bool tryCreateArrowDrawData(Player drawPlayer, int projectileType, DrawData itemData, out DrawData arrowData) {
+        /// <summary>
+        /// Use this instead of SetDefaults anywhere a projectile's properties need to be read.
+        /// </summary>
+        /// <param name="projectileType"></param>
+        /// <returns></returns>
+        internal static Projectile GetProjectile(int projectileType)
+        {
+            if (projectileCache.TryGetValue(projectileType, out Projectile p))
+            {
+                return p;
+            }
+            else
+            {
+                p = new Projectile();
+                p.SetDefaults(projectileType);
+                projectileCache[projectileType] = p;
+                return p;
+            }
+        }
+
+        internal static bool TryCreateArrowDrawData(Player drawPlayer, int projectileType, DrawData itemData, out DrawData arrowData) {
 			arrowData = itemData;
 
 			//var asset = Main.Assets.Request<Texture2D>(TextureAssets.Projectile[ammo.shoot].Name);
@@ -654,9 +705,8 @@ namespace WeaponOutLite.Common
 
             arrowData.rotation += MathHelper.PiOver2 * directionGrav;
 
-			Projectile p = new Projectile();
-			p.SetDefaults(projectileType);
-			if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
+			var p = GetProjectile(projectileType);
+            if (p.alpha > 0) arrowData.color.A = (byte)p.alpha;
 
 			if (projectileType == ProjectileID.JestersArrow ||
 				projectileType == ProjectileID.HolyArrow ||
@@ -698,9 +748,9 @@ namespace WeaponOutLite.Common
             // Populate inbetween space with empty textures
             UpdateProjectileTextureCache(itemType);
 
+            // 
+            if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.playerInventory) { ItemProjTextureCache[itemType] = null; Main.NewText("reset spear"); }
             //
-            if (WeaponOutLite.DEBUG_EXPERIMENTAL && Main.inventorySortMouseOver) { ItemProjTextureCache[itemType] = null; }
-			//
 
 			if (ItemProjTextureCache[itemType] != null) {
 				return;
@@ -717,7 +767,7 @@ namespace WeaponOutLite.Common
 			}
 			Texture2D baseTexture = TextureAssets.Projectile[projectileType].Value;
 
-            // Flip projectile texture horizontally to match item rotation
+            // Check to see if we should flip projectile texture horizontally to match item rotation
             // This is because internally, spear projectiles go from bottom right to top left.
             // This operation is somewhat expensive, so we only want to run it once and then cache the result
             // It may also have odd interations if multiple frames are present	
@@ -731,29 +781,38 @@ namespace WeaponOutLite.Common
 				// Set the contents of data to the base texture
 				baseTexture.GetData(data);
 
-				// Get the first frame only by truncating pixel data
-				// This obviously only works for vertical animation frame
-				if (frames > 1) {
+                // Get the first frame only by truncating pixel data
+                // This obviously only works for vertical animation frame
+                if (frames > 1) {
 					Array.Resize(ref data, baseTexture.Width * baseTexture.Height / frames);
 					baseTexture = new Texture2D(Main.instance.GraphicsDevice, baseTexture.Width, baseTexture.Height / frames);
 					baseTexture.SetData(data);
 				}
 
-                // Check how much of the graphic the spear has in this axes
+                // Check to see if the texture has more pixels on the flipped diagonal than the original
+                // By doing an X shaped check of the texture
                 int totalLength = Math.Min(baseTexture.Width, baseTexture.Height);
-				int coverageAlongLength = 0;
+				int coverageAlongLength = 0; // bottom right to top left
+                int coverageAlongOriginal = 0; // bottom left to top right
 				for (int i = 0; i < totalLength; i++) {
-					coverageAlongLength += data[i * baseTexture.Width + i].A > 0 ? 1 : 0;
-				}
-
-                // If the spear has pixels along at least 75% of this diagonal, it's probably flippable.
-                // Flippable using Rotted Fork as a reference for a flipped spear
+					coverageAlongLength += data[i * baseTexture.Width + i].A > 127 ? 1 : 0;
+                    coverageAlongOriginal += data[i * baseTexture.Width + baseTexture.Width - 1 - i].A > 127 ? 1 : 0;
+                }
 
                 // Main.NewText($"WeaponOutLite Spear flipper ({itemType}): For {totalLength}px, coverage is {coverageAlongLength}px ({(int)(coverageAlongLength * 100 / totalLength)}%)");
                 ItemProjTextureCache[itemType] = baseTexture;
 
+                // If the spear has pixels along at least 50% of this diagonal, it's probably flippable.
+                // Flippable using Rotted Fork as a reference for a flipped spear
+				// CalamityMod Diseased Pike has a diagonal coverage of 51%
+                if (WeaponOutLite.DEBUG_EXPERIMENTAL)
+                {
+                    Main.NewText($"{itemType}:{projectileType} d-coverage {coverageAlongLength} = {(float)coverageAlongLength / totalLength * 100}%");
+                    Main.NewText($"Diagonal = {coverageAlongLength} vs perpendicular {coverageAlongOriginal}");
+                }
+
                 Color[] rotatedData = new Color[data.Length];
-                if (coverageAlongLength > totalLength * 0.75f) {
+                if (coverageAlongLength > coverageAlongOriginal) {
 					// Create a horizontally flipped texture
 					// set a pointer starting from the top right
 					var x = baseTexture.Width - 1;
@@ -777,7 +836,7 @@ namespace WeaponOutLite.Common
 			}
 			catch (Exception e) {
 				Main.NewText("WeaponOutLite: Experimental feature failure, proj spears temporarily disabled");
-				ModContent.GetInstance<WeaponOutClientConfig>().EnableProjSpears = false;
+				WeaponOutLite.ClientConfig.EnableProjSpears = false;
 				new Exception("Something happened when trying to rotate spear texture", e);
 			}
 		}
@@ -828,7 +887,7 @@ namespace WeaponOutLite.Common
             }
             catch (Exception e) {
                 Main.NewText("WeaponOutLite: Experimental feature failure, proj yoyos temporarily disabled");
-                ModContent.GetInstance<WeaponOutClientConfig>().EnableProjYoyos = false;
+                WeaponOutLite.ClientConfig.EnableProjYoyos = false;
                 new Exception("Something happened when trying to extract yoyo texture", e);
             }
             
