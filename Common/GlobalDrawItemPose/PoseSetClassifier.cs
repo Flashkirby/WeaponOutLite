@@ -141,7 +141,8 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// <param name="item">The item being classified</param>
         /// <param name="poseGroup">The pose group of the item, used to determined its DrawItemPose if DrawItemPoseID.Unassigned</param>
         /// <param name="drawItemPose">The specific DrawItemPose to use. If set, the poseGroup is skipped. </param>
-        public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
+        /// <param name="allowOverride">If set, allows overriding of base calculation. </param>
+        public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose, bool allowOverride = true)
         {
             WeaponOutLite mod = WeaponOutLite.GetMod();
 
@@ -149,18 +150,22 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             poseGroup = PoseGroup.Unassigned;
             drawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
 
-            // Set the item pose if its been set as a preferred, which skips pose group
-            if (mod.priorityItemHoldPose.TryGetValue(item.type, out DrawItemPose itemPose))
+            if (allowOverride)
             {
-                drawItemPose = mod.ItemPoses[(int)itemPose];
-            }
+                // Set the item pose if its been set as a preferred, which skips pose group
+                if (mod.priorityItemHoldPose.TryGetValue(item.type, out DrawItemPose itemPose))
+                {
+                    drawItemPose = mod.ItemPoses[(int)itemPose];
+                }
 
-            // Read custom config for forced pose override
-            ItemDrawOverrideData itemOverride = WeaponOutLite.ClientHoldOverride.FindStyleOverride(item.type);
-            if (itemOverride != null) {
-                // Found a forced pose in the config, so use this.
-                drawItemPose = mod.ItemPoses[(int)itemOverride.ForceDrawItemPose];
-                poseGroup = itemOverride.ForcePoseGroup;
+                // Read custom config for forced pose override
+                ItemDrawOverrideData itemOverride = WeaponOutLite.ClientHoldOverride.FindStyleOverride(item.type);
+                if (itemOverride != null)
+                {
+                    // Found a forced pose in the config, so use this.
+                    drawItemPose = mod.ItemPoses[(int)itemOverride.ForceDrawItemPose];
+                    poseGroup = itemOverride.ForcePoseGroup;
+                }
             }
 
             // If the pose wasn't overwritten, and the style is not set, then figure out which one to use
@@ -168,7 +173,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 && poseGroup == PoseGroup.Unassigned) {
 
                 // If the item has been modded to use a custom pose, use that
-                if (mod.customItemHoldStyles.Contains(item.type)) {
+                if (mod.customItemHoldStyles.Contains(item.type) && allowOverride) {
                     drawItemPose = mod.ItemPoses[DrawItemPoseID.Custom];
                 }
                 else {

@@ -18,6 +18,9 @@ using System.Collections.Specialized;
 using Terraria.UI;
 using Terraria.ModLoader.UI;
 using Terraria.Localization;
+using Terraria.ModLoader.Config;
+using static WeaponOutLite.ID.PoseStyleID;
+using static WeaponOutLite.ID.DrawItemPoseID;
 
 namespace WeaponOutLite.Common.Systems
 {
@@ -106,34 +109,85 @@ namespace WeaponOutLite.Common.Systems
                     // Play "Click" sound
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
-                if (Main.mouseRight && Main.mouseRightRelease) {
-                    /*
-                     * Function for changing the custom hold style for the currently held objects...
-                     * But until there is a method of saving pending config changes to file outside of internal ConfigManager.Save....
-                     * this function will remain unused.
-                     * TODO: see if this has changed in tmodloader for 1.4.4, or just implement a copy of the code thusly:
-                     
-                            Terraria.ModLoader.Config.ModConfig config = WeaponOutLite.ClientConfig;
-                            System.IO.Directory.CreateDirectory(Terraria.ModLoader.Config.ConfigManager.ModConfigPath);
-                            string filename = config.Mod.Name + "_" + config.Name + ".json";
-                            string path = System.IO.Path.Combine(Terraria.ModLoader.Config.ConfigManager.ModConfigPath, filename);
-                            string json = Newtonsoft.Json.JsonConvert.SerializeObject((object)config, Terraria.ModLoader.Config.ConfigManager.serializerSettings);
-                            System.IO.File.WriteAllText(path, json);
-                    */
-
-                    // To customise item hold styles: Settings -> Mod Configurations -> WeaponOut Lite: Personal Preferences
-                    Main.NewText(
-                        Language.GetTextValue("Mods.WeaponOutLite.Common.Instructions") +
-                        Language.GetTextValue("LegacyMenu.14") +
-                        " [g:5] " +
-                        Language.GetTextValue("tModLoader.ModConfiguration") +
-                        " [g:5] WeaponOut Lite: " + 
-                        Language.GetTextValue("Mods.WeaponOutLite.Configs.WeaponOutClientConfig.DisplayName")
-                        );
+                if (Main.mouseRight && Main.mouseRightRelease)
+                {
+                    UpdateWeaponOverride();
                 }
             }
 
             Main.spriteBatch.Draw(texture, position, null, Color.White);
+        }
+
+        private static void UpdateWeaponOverride()
+        {
+            /*
+             * Function for changing the custom hold style for the currently held objects...
+             * But until there is a method of saving pending config changes to file outside of internal ConfigManager.Save....
+             * this function will remain unused.
+             * TODO: see if this has changed in tmodloader for 1.4.4, or just implement a copy of the code thusly:
+
+                    Terraria.ModLoader.Config.ModConfig config = WeaponOutLite.ClientConfig;
+                    System.IO.Directory.CreateDirectory(Terraria.ModLoader.Config.ConfigManager.ModConfigPath);
+                    string filename = config.Mod.Name + "_" + config.Name + ".json";
+                    string path = System.IO.Path.Combine(Terraria.ModLoader.Config.ConfigManager.ModConfigPath, filename);
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject((object)config, Terraria.ModLoader.Config.ConfigManager.serializerSettings);
+                    System.IO.File.WriteAllText(path, json);
+            */
+
+            // To customise item hold styles: Settings -> Mod Configurations -> WeaponOut Lite: Personal Preferences
+
+            if (!WeaponOutLite.ClientHoldOverride.EnableWeaponQuickWeaponCategorisation)
+            {
+                Main.NewText(
+                    Language.GetTextValue("Mods.WeaponOutLite.Common.Instructions") +
+                    Language.GetTextValue("LegacyMenu.14") +
+                    " [g:5] " +
+                    Language.GetTextValue("tModLoader.ModConfiguration") +
+                    " [g:5] WeaponOut Lite: " +
+                    Language.GetTextValue("Mods.WeaponOutLite.Configs.WeaponOutClientHoldOverride.DisplayName")
+                    , Color.LightGray);
+            }
+            else
+            {
+                Item item = Main.LocalPlayer.HeldItem;
+                var itemDefinition = new ItemDefinition(item.type);
+
+                // Use the latest item definition, or create a new unassigned one
+                var match = WeaponOutLite.ClientHoldOverride.StyleOverrideList.FindLast(i => i.Item.Name == item.Name);
+                ItemDrawOverrideData overrideData = match;
+                if (overrideData == null)
+                {
+                    overrideData = new ItemDrawOverrideData()
+                    {
+                        Item = itemDefinition,
+                        ForcePoseGroup = PoseGroup.Unassigned,
+                        ForceDrawItemPose = DrawItemPose.Unassigned,
+                    };
+                }
+
+                // Fetch the next pose group from the current one, or loop back around to Unassigned
+                List<PoseGroup> poseGroupList = Enum.GetValues(typeof(PoseGroup)).Cast<PoseGroup>().ToList();
+                int indexOfPoseGroup = poseGroupList.IndexOf(overrideData.ForcePoseGroup);
+                int nextPoseGroup = indexOfPoseGroup + 1;
+                if (nextPoseGroup <= (int)PoseGroup.Unassigned || nextPoseGroup >= poseGroupList.Count)
+                {
+                    overrideData.ForcePoseGroup = PoseGroup.Unassigned;
+                }
+                else
+                {
+                    overrideData.ForcePoseGroup = poseGroupList[nextPoseGroup];
+                }
+
+                // Revert to "unassigned" if current pose group equals the calculated type
+                PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup originalPoseGroup, out _, allowOverride:false);
+                if(overrideData.ForcePoseGroup == originalPoseGroup) overrideData.ForcePoseGroup = PoseStyleID.PoseGroup.Unassigned;
+
+                Main.NewText($"Updating {item.Name} as {overrideData.Item.Mod}/{overrideData.Item.Name} -> {overrideData.ForcePoseGroup}");
+
+                // Add, and force refresh
+                WeaponOutLite.ClientHoldOverride.StyleOverrideList.Add(overrideData);
+                WeaponOutLite.ClientHoldOverride.StyleOverrideList = WeaponOutLite.ClientHoldOverride.StyleOverrideList;
+            }
         }
 
         private void SHOW_DEBUG_UI() {

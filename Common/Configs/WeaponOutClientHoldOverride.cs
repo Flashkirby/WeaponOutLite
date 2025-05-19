@@ -85,6 +85,9 @@ namespace WeaponOutLite.Common.Configs
             return styleOverrideItemCache[itemType] as ItemDrawOverrideData;
         }
 
+        [DefaultValue(true)]
+        public bool EnableWeaponQuickWeaponCategorisation { get; set; }
+
         public override void OnChanged()
         {
             if (styleOverrideList == null) { //restore defaults 
