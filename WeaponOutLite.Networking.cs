@@ -10,6 +10,12 @@ using WeaponOutLite.ID;
 
 namespace WeaponOutLite
 {
+    /// <summary>
+    /// Handle networking specific parts of the mod.
+    /// Note that this is a NoSync mod, so any networking code must first check that
+    /// the server has a copy of the mod first. We can do this with "mod.IsNetSynced"
+    /// Otherwise, GetPacket will throw an exception
+    /// </summary>
     partial class WeaponOutLite
     {
         internal enum MessageType : byte
@@ -24,6 +30,8 @@ namespace WeaponOutLite
         /// For the server, this will be a packet with the whoAmI of the player
         /// </summary>
         public override void HandlePacket(BinaryReader reader, int whoAmI) {
+            if (!IsNetSynced) return;
+
             MessageType code = (MessageType)reader.ReadByte();
 
             if (DEBUG_MULTIPLAYER) {
@@ -44,7 +52,7 @@ namespace WeaponOutLite
         /// </summary>
         /// <param name="modPlayer"></param>
         internal void SendUpdateWeaponVisual(WeaponOutPlayerRenderer modPlayer) {
-            if (Main.netMode == NetmodeID.SinglePlayer) return;
+            if (Main.netMode == NetmodeID.SinglePlayer || !IsNetSynced) return;
 
             ModPacket message = GetPacket();
             message.Write((byte)MessageType.UpdateWeaponVisual);
@@ -89,7 +97,7 @@ namespace WeaponOutLite
         }
 
         internal void SendUpdateCombatTimer(WeaponOutPlayerRenderer modPlayer) {
-            if (Main.netMode == NetmodeID.SinglePlayer) return;
+            if (Main.netMode == NetmodeID.SinglePlayer || !IsNetSynced) return;
 
             ModPacket message = GetPacket();
             message.Write((byte)MessageType.UpdateCombatTimer);

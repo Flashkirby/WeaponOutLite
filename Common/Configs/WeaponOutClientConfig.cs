@@ -17,9 +17,12 @@ namespace WeaponOutLite.Common.Configs
         public override void OnLoaded() => WeaponOutLite.ClientConfig = this;
 
 		[Header("PlayerHeader")]
-		#region ClientSidePlayerHeader
+        #region ClientSidePlayerHeader
 
-		[DefaultValue(true)]
+        [DefaultValue(true)]
+        public bool EnableWeaponOutVisuals { get; set; } // Enables the mod, adapted from WeaponOutServerConfig.
+
+        [DefaultValue(true)]
 		public bool ShowHeldItem { get; set; } // This is controlled by WeaponOutPlayerRenderer.cs, but the option is here for people who historically may have issues with that button for whatever reason. See OnChanged for link to class.
 
 		[Increment(0.5f)]

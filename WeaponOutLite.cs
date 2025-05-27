@@ -28,7 +28,6 @@ namespace WeaponOutLite
 
         internal static WeaponOutClientConfig ClientConfig;
         internal static WeaponOutClientHoldOverride ClientHoldOverride;
-        internal static WeaponOutServerConfig ServerConfig;
 
         // Mod Integrations ♥
         // Migrated to WeaponOutLite.Compatibility namespace
@@ -85,6 +84,7 @@ namespace WeaponOutLite
 
         public override void Load() {
             instance = this;
+
             ItemPoses = DrawItemPoseID.LoadPoses();
 
             customItemHoldStyles = new HashSet<int>();
@@ -103,7 +103,6 @@ namespace WeaponOutLite
             instance = null;
             ClientConfig = null;
             ClientHoldOverride = null;
-            ServerConfig = null;
 
             ItemPoses = null;
 
