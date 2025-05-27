@@ -22,10 +22,7 @@ Beta Testers: Karob, RunicPixels, W1K
 Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 
 ### Todo
-- finish StanceRapierHold (diagonal forward stance for rapier)
-- Make this mod no sync
 - projectile display (config)
-- item scaling = Player.GetAdjustedItemScale(item)
 
 ### Known Bugs
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix

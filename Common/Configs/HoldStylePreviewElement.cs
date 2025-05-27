@@ -59,6 +59,9 @@ namespace WeaponOutLite.Common.Configs
 			// Generate a basic DrawData for the preview item
 			Texture2D itemTexture = TextureAssets.Item[itemType].Value;
 
+            // Calculate scaling
+            float itemScale = dummyInfo.drawPlayer.GetAdjustedItemScale(dummyInfo.drawPlayer.HeldItem);
+
 			OverrideDrawItem(ref itemTexture, ref dummyInfo.drawPlayer.inventory[0]);
 
 			DrawData itemData = new DrawData(
@@ -68,7 +71,7 @@ namespace WeaponOutLite.Common.Configs
 				Color.White,
 				0f,
 				itemTexture.Bounds.Center(),
-				Vector2.One * dummyInfo.drawPlayer.HeldItem.scale * SetScale(),
+				Vector2.One * itemScale * SetScale(),
 				SpriteEffects.None,
 				0);
 

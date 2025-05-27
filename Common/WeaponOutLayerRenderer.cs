@@ -121,10 +121,14 @@ namespace WeaponOutLite.Common
 
 			var bodyFrame = drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height;
 
-			// Apply giant scaling where applicable
-			itemData.scale *= DrawHelper.GetGiantTextureScale(width * itemData.scale.X, height * itemData.scale.Y);
+            // Calculate titan glove scaling
+            float itemScale = drawInfo.drawPlayer.GetAdjustedItemScale(drawInfo.drawPlayer.HeldItem);
+            itemData.scale = new Vector2(itemScale, itemScale);
 
-			// If enabled, shrink yoyos if they are base item textures
+            // Apply giant scaling where applicable
+            itemData.scale *= DrawHelper.GetGiantTextureScale(width * itemData.scale.X, height * itemData.scale.Y);
+
+            // If enabled, shrink yoyos if they are base item textures
             if (config.YoyoHalfScale) {
                 PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
                 if (poseGroup == PoseGroup.Yoyo) {
@@ -145,13 +149,13 @@ namespace WeaponOutLite.Common
 			// Save player centre
 			var playerCentrePosition = itemData.position;
 
-			// Modify dimensions being passed by scale
-			height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.Y;
-			width = (itemData.sourceRect?.Width ?? 0) * itemData.scale.X;
+            // Modify dimensions being passed by scale
+            height = (itemData.sourceRect?.Height ?? 0) * itemData.scale.Y;
+            width = (itemData.sourceRect?.Width ?? 0) * itemData.scale.X;
 
 
-			// Apply draw data from item style.
-			var drawItemStyle = modPlayer.CurrentDrawItemPose;
+            // Apply draw data from item style.
+            var drawItemStyle = modPlayer.CurrentDrawItemPose;
 			itemData = drawItemStyle.CalculateDrawData(
 				itemData,
 				drawInfo.drawPlayer,
