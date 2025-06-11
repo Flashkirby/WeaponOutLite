@@ -5,7 +5,9 @@ using Terraria.ID;
 using Terraria.GameContent;
 using WeaponOutLite.Common.Configs;
 using WeaponOutLite.ID;
+using WeaponOutLite.Compatibility;
 using static WeaponOutLite.ID.PoseStyleID;
+using static WeaponOutLite.ID.DrawItemPoseID;
 
 namespace WeaponOutLite.Common.GlobalDrawItemPose
 {
@@ -23,7 +25,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose);
 
             WeaponOutLite mod = WeaponOutLite.GetMod();
-            var clientConfig = ModContent.GetInstance<WeaponOutClientConfig>();
+            var clientConfig = WeaponOutLite.ClientConfig;
 
             // Skip selection if an item pose is already active
             if (drawItemPose.GetID() != DrawItemPoseID.Unassigned) { return drawItemPose; }
@@ -31,91 +33,103 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // Select the pose based on the client configured pose styles
             switch (poseGroup) {
                 case PoseGroup.Item:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallItemPose];
+                    break;
+                case PoseGroup.Ignore:
+                    drawItemPose = mod.ItemPoses[(int)DrawItemPoseID.None];
                     break;
                 case PoseGroup.LargeItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeItemPose];
                     break;
                 case PoseGroup.VanityItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.VanityItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.VanityItemPose];
                     break;
                 case PoseGroup.Potion:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PotionPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PotionPose];
                     break;
                 case PoseGroup.PowerTool:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PowerToolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PowerToolPose];
                     break;
                 case PoseGroup.Yoyo:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.YoyoPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.YoyoPose];
                     break;
                 case PoseGroup.SmallMelee:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SmallMeleePose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallMeleePose];
+                    break;
+                case PoseGroup.SmallTool:
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SmallToolPose];
                     break;
                 case PoseGroup.LargeMelee:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LargeMeleePose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeMeleePose];
+                    break;
+                case PoseGroup.LargeTool:
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LargeToolPose];
                     break;
                 case PoseGroup.Thrown:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ThrownPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ThrownPose];
                     break;
                 case PoseGroup.ThrownThin:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ThrownThinPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ThrownThinPose];
                     break;
                 case PoseGroup.Spear:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.SpearPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.SpearPose];
                     break;
                 case PoseGroup.Rapier:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.RapierPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.RapierPose];
                     break;
                 case PoseGroup.Flail:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.FlailPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.FlailPose];
                     break;
                 case PoseGroup.Whips:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.WhipPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.WhipPose];
                     break;
                 case PoseGroup.Bow:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.BowPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.BowPose];
                     break;
                 case PoseGroup.Repeater:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.RepeaterPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.RepeaterPose];
                     break;
                 case PoseGroup.Pistol:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.PistolPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.PistolPose];
                     break;
                 case PoseGroup.Gun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GunPose];
                     break;
                 case PoseGroup.GunManual:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GunManualPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GunManualPose];
                     break;
                 case PoseGroup.Shotgun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.ShotgunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.ShotgunPose];
                     break;
                 case PoseGroup.Launcher:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.LauncherPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.LauncherPose];
                     break;
                 case PoseGroup.Staff:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.StaffPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.StaffPose];
                     break;
                 case PoseGroup.MagicBook:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.MagicBookPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.MagicBookPose];
                     break;
                 case PoseGroup.MagicItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.MagicItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.MagicItemPose];
                     break;
                 case PoseGroup.GiantItem:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantItemPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantItemPose];
                     break;
                 case PoseGroup.GiantWeapon:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantWeaponPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantWeaponPose];
                     break;
                 case PoseGroup.GiantBow:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantBowPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantBowPose];
                     break;
                 case PoseGroup.GiantGun:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantGunPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantGunPose];
                     break;
                 case PoseGroup.GiantMagic:
-                    drawItemPose = mod.DrawStyle[(int)clientConfig.GiantMagicPose];
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantMagicPose];
+                    break;
+                case PoseGroup.GiantDamaging:
+                    drawItemPose = mod.ItemPoses[(int)clientConfig.GiantDamagingPose];
                     break;
             }
             return drawItemPose;
@@ -124,26 +138,28 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// <summary>
         /// Fetch the posegroup to use for the item, taking into account any additional configuration options
         /// </summary>
-        /// <returns></returns>
+        /// <param name="item">The item being classified</param>
+        /// <param name="poseGroup">The pose group of the item, used to determined its DrawItemPose if DrawItemPoseID.Unassigned</param>
+        /// <param name="drawItemPose">The specific DrawItemPose to use. If set, the poseGroup is skipped. </param>
         public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose)
         {
             WeaponOutLite mod = WeaponOutLite.GetMod();
-            var clientOverride = ModContent.GetInstance<WeaponOutClientHoldOverride>();
 
             // Set initial pose style and item pose object
             poseGroup = PoseGroup.Unassigned;
-            drawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+            drawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
 
             // Set the item pose if its been set as a preferred, which skips pose group
-            if (mod.customItemHoldPose.Contains(item.type)) {
-                drawItemPose = mod.DrawStyle[(int)mod.customItemHoldPose[item.type]];
+            if (mod.priorityItemHoldPose.TryGetValue(item.type, out DrawItemPose itemPose))
+            {
+                drawItemPose = mod.ItemPoses[(int)itemPose];
             }
 
             // Read custom config for forced pose override
-            ItemDrawOverrideData itemOverride = clientOverride.FindStyleOverride(item.type);
+            ItemDrawOverrideData itemOverride = WeaponOutLite.ClientHoldOverride.FindStyleOverride(item.type);
             if (itemOverride != null) {
                 // Found a forced pose in the config, so use this.
-                drawItemPose = mod.DrawStyle[(int)itemOverride.ForceDrawItemPose];
+                drawItemPose = mod.ItemPoses[(int)itemOverride.ForceDrawItemPose];
                 poseGroup = itemOverride.ForcePoseGroup;
             }
 
@@ -153,16 +169,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
                 // If the item has been modded to use a custom pose, use that
                 if (mod.customItemHoldStyles.Contains(item.type)) {
-                    drawItemPose = mod.DrawStyle[DrawItemPoseID.Custom];
+                    drawItemPose = mod.ItemPoses[DrawItemPoseID.Custom];
                 }
                 else {
                     // Otherwise, figure out which one to use
-                    if (mod.customItemHoldGroups.Contains(item.type)) {
-                        poseGroup = (PoseGroup)mod.customItemHoldGroups[item.type];
-                    }
-                    else {
-                        poseGroup = CalculateDrawStyleType(item);
-                    }
+                    if (mod.priorityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
+                    else if (mod.compatibilityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
+                    else poseGroup = CalculateDrawStyleType(item);
+
                     //WeaponOutLite.TEXT_DEBUG += "\nclassifier " + item.useStyle + " = " + poseGroup;
                 }
             }
@@ -172,12 +186,24 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             // debugging override                                                 //
             //                                                                    //
             ////////////////////////////////////////////////////////////////////////
+
+            /*
+            if (ThoriumMod.Found && item.ModItem?.Mod?.Name == "ThoriumMod")
+            {
+                if (item.ModItem?.Name == "Purify")
+                {
+                    poseGroup = PoseGroup.MagicBook;
+                }
+            }
+            /**/
+
             /*
             if (Main.SmartCursorIsUsed) {
                 poseGroup = PoseGroup.Unassigned;
                 drawItemPose = mod.DrawStyle[DrawItemPoseID.HoldInHand];
             }
-            */
+            /**/
+
             //poseGroup = PoseGroup.Unassigned;
             //drawItemPose = mod.DrawStyle[DrawItemPoseID.BackFlail];
             ////////////////////////////////////////////////////////////////////////
@@ -191,7 +217,12 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// </summary>
         private static PoseGroup CalculateDrawStyleType(Item item) {
 
-            var itemTexture = TextureAssets.Item[item.type].Value;
+            var itemTexture = TextureAssets.Item[item.type]?.Value;
+            if(itemTexture == null)
+            {
+                return PoseGroup.Unassigned;
+            }
+
             var itemFrames = 1;
             if (Main.itemAnimations[item.type] != null) {
                 itemFrames = Main.itemAnimations[item.type].FrameCount;
@@ -199,8 +230,8 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
             float w = itemTexture.Width * item.scale;
             float h = itemTexture.Height * item.scale / itemFrames;
 
-            var giantItemThreshold = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemThreshold;
-            var giantItemScale = ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+            var giantItemThreshold = WeaponOutLite.ClientConfig.GiantItemThreshold;
+            var giantItemScale = WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
             if (giantItemThreshold < Math.Max(w, h)) {
                 w *= giantItemScale;
                 h *= giantItemScale;
@@ -220,10 +251,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 else if (item.DamageType.CountsAsClass(DamageClass.Magic) || item.DamageType.CountsAsClass(DamageClass.Summon)) {
                     return PoseGroup.GiantMagic;
                 }
+                else if (item.damage > 0)
+                {
+                    return PoseGroup.GiantDamaging;
+                }
                 return PoseGroup.GiantItem;
             }
 
-            // √⭕ Yoyo, if it's in the set
+            // √◉ Yoyo, if it's in the set
             if (ItemID.Sets.Yoyo[item.type]) {
                 return PoseGroup.Yoyo;
             }
@@ -238,6 +273,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 return PoseGroup.Staff;
             }
 
+            // ➰ Whips, if it's in a set
+            if (ProjectileID.Sets.IsAWhip[item.shoot]) {
+                return PoseGroup.Whips;
+            }
 
             if (item.damage > 0) {
                 // ✨ Weird (usually magical) weapons, such as medusa head, blood thorn, books
@@ -251,55 +290,112 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                 // Special endgame weapons such as celebration mk2 and phantasm use this method
                 // Throwing weapons also fall under this category
                 if (item.noUseGraphic) {
-                    // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas, but modded weapons may also use this.
-                    if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier) {
-                        // Skip attempt to classify here if the melee effects mod integration is active
-                        // Since it sets all melee swords to be this type, I would rather use normal poses
-                        if (item.useStyle == ItemUseStyleID.Rapier && 
-                            WeaponOutLite.MeleeEffectsPlusModLoaded && 
-                            ModContent.GetInstance<WeaponOutClientConfig>().ModIntegrationMeleeEffectsPlus) {
-                            // skip
+                    // 🤺 Shortswords and Rapiers. Thrust is only used by umbrellas
+                    // Modded weapons may also use this
+                    // Thorium's Charged Splasher uses this in a ranged weapon
+                    if (!item.CountsAsClass(DamageClass.Ranged)) {
+                        if (item.useStyle == ItemUseStyleID.Thrust || item.useStyle == ItemUseStyleID.Rapier)
+                        {
+                            // Applies a fix to attempt to help identify different types of swords. Default is On.
+                            // Skip attempt to classify here if the melee effects mod integration is active
+                            // Since it sets all melee swords to be this type, I would rather use normal poses
+                            if (item.useStyle == ItemUseStyleID.Rapier &&
+                                MeleeEffects.Found &&
+                                WeaponOutLite.ClientConfig.ModIntegrationMeleeEffectsPlus)
+                            {
+                                // skip
+                            }
+                            else
+                            {
+                                return PoseGroup.Rapier;
+                            }
                         }
-                        else {
-                            return PoseGroup.Rapier;
-                        }
+                    }
 
+                    // ➰ Whips are no graphic summon melee items
+                    if (item.CountsAsClass(DamageClass.SummonMeleeSpeed) 
+                        && item.noMelee)
+                    {
+                        return PoseGroup.Whips;
                     }
 
                     // Various shoot items can be categorised into melee weapons, unique (large) guns, and magic 
-                    if (item.useStyle == ItemUseStyleID.Shoot) {
-                        if (item.CountsAsClass(DamageClass.Melee)) {
+                    if (item.useStyle == ItemUseStyleID.Shoot)
+                    {
+                        if (item.CountsAsClass(DamageClass.Melee))
+                        {
                             // 🛠 Powertools are basically, very wide.
                             // The shortest drill is the Nebula Drill (54 x 30, 1.8:1)
                             // Short modded drills include Thorium.IllumiteDrill (50 x 30, 1.6:1),
-                            if (h <= w * 0.8f) {
+                            //
+                            // Need to make sure we don't accidently put spears and such here:
+                            // Most rectangular spears are actually taller (usually for halberds and glaives, eg. The Rotted Fork)
+                            // A rare example of a wide spear is the Calamity.BansheeHook (120 x 108, 1.11: 1) 
+                            if (h <= w * 0.8f)
+                            {
                                 return PoseGroup.PowerTool;
                             }
-                            else {
-                                if (item.channel) {
-                                    // ➰◉ Modded yoyos that are not marked as yoyos in the yoyo set
-                                    // They may still be yoyos if they feature all of the following attributes
-                                    if (w == 30 && h == 26 && item.scale == 1f 
-                                        && item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed) 
-                                        && item.channel && item.useAnimation == 25 && item.useTime == 25
-                                        && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f) {
-                                        return PoseGroup.Yoyo;
+                            else
+                            {
+                                // nomelee melee weapons have a lot of different behaviours,
+                                // it's quite the mess if ItemID.Sets aren't assigned properly.
+
+                                // ♣️ Sleepy Octopod
+                                // Modded weapons that act like it will often use the same sound
+                                if (item.UseSound.HasValue && item.UseSound.Value == SoundID.DD2_MonkStaffSwing)
+                                {
+                                    return PoseGroup.Spear;
+                                }
+
+                                // √◉ Modded yoyos that are not marked as yoyos in the yoyo set
+                                // They may still be yoyos if they feature all of the following attributes
+                                if (item.channel
+                                    && w == 30 && h == 26 && item.scale == 1f
+                                    && item.noMelee && item.DamageType.Equals(DamageClass.MeleeNoSpeed)
+                                    && item.channel && item.useAnimation == 25 && item.useTime == 25
+                                    && item.UseSound.Equals(SoundID.Item1) && item.shootSpeed == 16f)
+                                {
+                                    return PoseGroup.Yoyo;
+                                }
+
+                                // Properly implemented flails and spears have this set 
+                                var p = WeaponOutLayerRenderer.GetProjectile(item.shoot);
+                                if (ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[item.shoot])
+                                {
+                                    if (p.ownerHitCheck)
+                                    {
+                                        // 🔱 Spears use owner check
+                                        return PoseGroup.Spear;
                                     }
-                                    else {
-                                        // Flails and jousting lances... though really more likely flails
+                                    else
+                                    {
+                                        // 🔨 Flails do not use owner hit check
+                                        // Also uses netImportant but that's not as useful
                                         return PoseGroup.Flail;
                                     }
                                 }
-                                else {
-                                    // 🔱 Spears are diagonal sprites
-                                    // Most rectangular spears are actually taller (usually for halberds and glaives, eg. The Rotted Fork)
-                                    // A rare example of a wide spear is the Calamity.BansheeHook (120 x 108, 1.11: 1) 
-                                    return PoseGroup.Spear;
+
+                                if (p.extraUpdates >= 1)
+                                {
+                                    // ➰ Vanilla whips are set up with extra updates for calculation
+                                    // Modded whips that seek to emulate this probably have it set up
+                                    return PoseGroup.Whips;
+                                }
+
+                                // Now we're in the realm of modded melee weapons
+                                if (CalculateModdedWeaponDrawStyleType(item, p, w, h, out var poseGroup))
+                                {
+                                    return poseGroup;
+                                }
+                                else
+                                {
+                                // Still can't determine at this point, assume flail.
+                                return PoseGroup.Flail;
                                 }
                             }
                         }
                         // 🔫 Special graphic guns are wider than thrown weapons (eg. Celebration Mk2)
-                        if (w > h && w > ModContent.GetInstance<WeaponOutClientConfig>().SmallGunThreshold) {
+                        if (w > h && w > WeaponOutLite.ClientConfig.SmallGunThreshold) {
                             // quickfix for detecting shotguns, since they use this sound
                             if(item.UseSound == SoundID.Item36) {
                                 return PoseGroup.Shotgun;
@@ -311,14 +407,10 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                             return PoseGroup.MagicItem;
                         }
                     }
+                    
                     // 🔱 Big "throwing" weapons may as well be like spears, eg. Javelin.
                     if (w == h && w >= 40) {
                         return PoseGroup.Spear;
-                    }
-
-                    // ⛓ Whips are no graphic summon melee items
-                    if (item.CountsAsClass(DamageClass.SummonMeleeSpeed)) {
-                        return PoseGroup.Whips;
                     }
 
                     //WeaponOutLite.TEXT_DEBUG += $"\n{w / h} : ({w} {h})";  //todo remove
@@ -335,7 +427,8 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // such as boomerangs, knives, shurikens, and the shadow dagger
                     // include Grenades and Molotov Cocktails
                     // Thinner, upright weapons like knives fall under a separate adjustment category
-                    if (h >= w * 1.5f) {
+                    // Also includes flat weapons, eg. Twisting Thunder from calamity mod
+                    if (h >= w * 1.5f || w >= h * 1.5f) {
                         return PoseGroup.ThrownThin;
                     }
 
@@ -352,12 +445,19 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                         return PoseGroup.Staff;
                     }
 
+                    // ⛏️
+                    bool isTool = item.axe > 0 || item.pick > 0 || item.hammer > 0;
+
                     // 🔪 small swinging weapons
-                    if (h + w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallSwordThreshold * 2) {
+                    if (h + w <= WeaponOutLite.ClientConfig.SmallSwordThreshold * 2)
+                    {
+                        if (isTool) { return PoseGroup.SmallTool; }
                         return PoseGroup.SmallMelee;
                     }
                     // ⚔ big swinging weapons
-                    else {
+                    else
+                    {
+                        if (isTool) { return PoseGroup.LargeTool; }
                         return PoseGroup.LargeMelee;
 
                     }
@@ -370,7 +470,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // The "tallest" gun is the Pew-Matic Horn (28 x 26, 1.07:1)
                     if (w > h) {
                         // ⭕ small guns
-                        if (w <= ModContent.GetInstance<WeaponOutClientConfig>().SmallGunThreshold) {
+                        if (w <= WeaponOutLite.ClientConfig.SmallGunThreshold) {
                             return PoseGroup.Pistol;
                         }
 
@@ -427,6 +527,30 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
 
             // 💎 Small hand held items, like blocks, bombs
             return PoseGroup.Item;
+        }
+
+        private static bool CalculateModdedWeaponDrawStyleType(Item item, Projectile p, float w, float h, out PoseGroup poseGroup)
+        {
+            poseGroup = PoseGroup.Unassigned;
+            if (item.ModItem == null) return false;
+
+            bool defaultToMeleeWeapon = false;
+
+            // Redemption weapons are typically heavily modded melee weapons
+            if (Redemption.Found) defaultToMeleeWeapon = true;
+
+
+            if (defaultToMeleeWeapon)
+            {
+                // 🔪 small swinging weapons
+                if (h + w <= WeaponOutLite.ClientConfig.SmallSwordThreshold * 2)
+                { poseGroup = PoseGroup.SmallMelee; }
+                // ⚔ big swinging weapons
+                else
+                { poseGroup = PoseGroup.LargeMelee; }
+            }
+
+            return poseGroup != PoseGroup.Unassigned;
         }
     }
 }

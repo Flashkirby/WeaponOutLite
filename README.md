@@ -22,15 +22,14 @@ Beta Testers: Karob, RunicPixels, W1K
 Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 
 ### Todo
-- finish StanceRapierHold (diagonal forward stance for rapier)
-- Make this mod no sync
+- projectile display (config)
 
 ### Known Bugs
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix
 - melee effect experimental feature: phase blades and phase sabers have flickering lights
 - check if right click to modify config is possible (save without direct modification)
 
-#### Mod Compatibility
+## Mod Compatibility
 - Improved Movement Visuals, No Known Conflicts
 - Vibrant Reverie, Rifle default animations
 ---
@@ -42,3 +41,5 @@ Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 - ArmamentDisplay, weapon display switch conflict
 - CoolerItemVisualEffect, weapon display switch conflict
 - DawnMOD, weapon display switch conflict
+
+Check the Steam Workshop thread for a full list of compatibilities and fixes: https://steamcommunity.com/workshop/filedetails/discussion/3455924006/595145468747528229/

@@ -42,7 +42,7 @@ namespace WeaponOutLite.ID
             try {
                 dict.Add(style.GetID(), style);
             }
-            catch (ArgumentException e) {
+            catch (ArgumentException) {
                 var existing = dict[style.GetID()];
                 throw new Exception("Failed to load " + style.GetType().Name + " ()" + style.GetID() + ", already set by " + existing.GetType().Name);
             }
@@ -79,6 +79,7 @@ namespace WeaponOutLite.ID
             StanceTwoHandBerserk = DrawItemPoseID.StanceTwoHandBerserk,
             StanceTwoHandGuard = DrawItemPoseID.StanceTwoHandGuard,
             StanceRapierFootForward = DrawItemPoseID.StanceRapierFootForward,
+            StanceRapierHold= DrawItemPoseID.StanceRapierHold,
             PoleOffHand = DrawItemPoseID.PoleOffHand,
             StancePoleReady = DrawItemPoseID.StancePoleReady,
             StancePoleShoulder = DrawItemPoseID.StancePoleShoulder,
@@ -165,6 +166,7 @@ namespace WeaponOutLite.ID
             CombatRaised = DrawItemPoseID.StanceMeleeRaised,
             CombatTrail = DrawItemPoseID.StanceMeleeTrail,
             CombatRapier = DrawItemPoseID.StanceRapierFootForward,
+            CombatRapierHold = DrawItemPoseID.StanceRapierHold,
             CombatPoleUpright = DrawItemPoseID.StancePoleUpright,
             CombatPoleReady = DrawItemPoseID.StancePoleReady,
             CombatFlailReady = DrawItemPoseID.StanceFlailReady,
@@ -191,6 +193,8 @@ namespace WeaponOutLite.ID
             CombatTwoHandBoltAction = DrawItemPoseID.StanceRifleBoltAction,
             CombatTwoHandPumpAction = DrawItemPoseID.StanceRiflePumpAction,
         }
+
+        #region NetIDs
 
         // Default values
         public const int Custom             = -1;
@@ -239,6 +243,7 @@ namespace WeaponOutLite.ID
         public const int StanceMeleeRaised          = 50070;
         public const int StanceMeleeTrail           = 50080;
         public const int StanceRapierFootForward    = 50100;
+        public const int StanceRapierHold           = 50110;  
         public const int StancePoleReady            = 50200;
         public const int StancePoleUpright          = 50210;
         public const int StanceFlailReady           = 50220;
@@ -265,5 +270,6 @@ namespace WeaponOutLite.ID
         public const int StanceRifleBoltAction      = 70440;
         public const int StanceRiflePumpAction      = 70450;
 
+        #endregion
     }
 }

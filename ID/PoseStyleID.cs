@@ -12,6 +12,7 @@ namespace WeaponOutLite.ID
         public enum PoseGroup
         {
             Unassigned = 0,
+            Ignore = 1,
             Item = 10,
             Potion = 20,
             LargeItem = 50,
@@ -21,7 +22,9 @@ namespace WeaponOutLite.ID
             ThrownThin = 95,
             Whips = 100,
             SmallMelee = 120,
+            SmallTool = 125,
             LargeMelee = 140,
+            LargeTool = 145,
             Spear = 150,
             Flail = 155,
             Rapier = 160,
@@ -41,6 +44,7 @@ namespace WeaponOutLite.ID
             GiantBow = 940,
             GiantGun = 950,
             GiantMagic = 960,
+            GiantDamaging = 970,
         }
 
         public static string MapPoseGroupToString(PoseGroup poseGroup)

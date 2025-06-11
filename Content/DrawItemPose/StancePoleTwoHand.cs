@@ -79,7 +79,7 @@ namespace WeaponOutLite.Content.DrawItemPose
             }
             else if (p.IsMountPoseActive()) {
                 float speedRotation = 0.125f;
-                if (ModContent.GetInstance<WeaponOutClientConfig>().EnableWeaponPhysics) {
+                if (WeaponOutLite.ClientConfig.EnableWeaponPhysics) {
                     float maxSpeed = 3f;
                     speedRotation = Math.Clamp(p.velocity.X * p.direction, 0f, maxSpeed);
                     speedRotation = speedRotation / maxSpeed * 0.125f;
@@ -89,18 +89,12 @@ namespace WeaponOutLite.Content.DrawItemPose
                 data.position += new Vector2(14, 4);
             }
 
-            // Sheathing
+            // Sheathing OnBack
             float t = DrawHelper.AnimOverEaseOutNormal(30, timer);
-            data.position.X += 16f * (float)Math.Sin(t * Math.PI);
-            data.position.Y -= height / 2 * (float)Math.Sin(t * Math.PI);
-            if (t > 1f / 2f) {
-                // flip item at the halfway point
-                data = data.ApplyFlip(p);
-                data.rotation -= MathHelper.PiOver2;
-                data = DrawHelper.LerpData(data, idleData, t);
-            }
-            else {
-                idleData.rotation += MathHelper.PiOver2;
+            if (t > 0)
+            {
+                data.position.X += 16f * (float)Math.Sin(t * Math.PI);
+                data.position.Y -= height / 2 * (float)Math.Sin(t * Math.PI);
                 data = DrawHelper.LerpData(data, idleData, t);
             }
 

@@ -32,7 +32,7 @@ namespace WeaponOutLite.Common.Configs
 			Point drawCentre = hitbox.Center;
 			int? holdStyleID = (MemberInfo.GetValue(Item) as int?);
 			int itemType = PreviewItemType();
-			bool drawArrow = ModContent.GetInstance<WeaponOutClientConfig>().BowDrawAmmo;
+			bool drawArrow = WeaponOutLite.ClientConfig.BowDrawAmmo;
 
 			// Create a new dummy player
 			PlayerDrawSet dummyInfo = new PlayerDrawSet();
@@ -59,6 +59,9 @@ namespace WeaponOutLite.Common.Configs
 			// Generate a basic DrawData for the preview item
 			Texture2D itemTexture = TextureAssets.Item[itemType].Value;
 
+            // Calculate scaling
+            float itemScale = dummyInfo.drawPlayer.GetAdjustedItemScale(dummyInfo.drawPlayer.HeldItem);
+
 			OverrideDrawItem(ref itemTexture, ref dummyInfo.drawPlayer.inventory[0]);
 
 			DrawData itemData = new DrawData(
@@ -68,7 +71,7 @@ namespace WeaponOutLite.Common.Configs
 				Color.White,
 				0f,
 				itemTexture.Bounds.Center(),
-				Vector2.One * dummyInfo.drawPlayer.HeldItem.scale * SetScale(),
+				Vector2.One * itemScale * SetScale(),
 				SpriteEffects.None,
 				0);
 
@@ -76,10 +79,10 @@ namespace WeaponOutLite.Common.Configs
 			WeaponOutLite mod = WeaponOutLite.GetMod();
 			WeaponOutPlayerRenderer modPlayer = new WeaponOutPlayerRenderer();
 			try {
-				modPlayer.CurrentDrawItemPose = mod.DrawStyle[(int)holdStyleID];
+				modPlayer.CurrentDrawItemPose = mod.ItemPoses[(int)holdStyleID];
 			}
 			catch {
-				modPlayer.CurrentDrawItemPose = mod.DrawStyle[DrawItemPoseID.Unassigned];
+				modPlayer.CurrentDrawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
 			}
 			modPlayer.CombatDelayTimer = int.MaxValue;
 
@@ -230,7 +233,9 @@ namespace WeaponOutLite.Common.Configs
 	{ public override int PreviewItemType() => ItemID.BottledWater; }
 	public class PreviewSmallMelee : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.CopperBroadsword; }
-	public class PreviewRapier : HoldStylePreviewElement
+    public class PreviewSmallTool : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.IronPickaxe; }
+    public class PreviewRapier : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.CopperShortsword; }
 	public class PreviewSpear : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Spear; }
@@ -240,9 +245,11 @@ namespace WeaponOutLite.Common.Configs
 	{ public override int PreviewItemType() => ItemID.WoodYoyo; }
 	public class PreviewPowerTool : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Drax; }
-	public class PreviewLargeMelee : HoldStylePreviewElement
-	{ public override int PreviewItemType() => ItemID.BladeofGrass; }
-	public class PreviewThrown : HoldStylePreviewElement
+    public class PreviewLargeMelee : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.BladeofGrass; }
+    public class PreviewLargeTool : HoldStylePreviewElement
+    { public override int PreviewItemType() => ItemID.ReaverShark; }
+    public class PreviewThrown : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.Shuriken; }
 	public class PreviewThrownThin : HoldStylePreviewElement
 	{ public override int PreviewItemType() => ItemID.ThrowingKnife; }
@@ -272,7 +279,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.AngelStatue;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantItem", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -281,7 +288,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.WoodenSword;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMelee", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -290,7 +297,7 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.WoodenBow;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantBow", AssetRequestMode.ImmediateLoad).Value;
 		}
@@ -299,21 +306,32 @@ namespace WeaponOutLite.Common.Configs
 	{
 		public override float MinHeightPx => 128f;
 		public override int PreviewItemType() => ItemID.FlintlockPistol;
-		public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
+		public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
 		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
 			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantGun", AssetRequestMode.ImmediateLoad).Value;
 		}
-	}
-	public class PreviewGiantMagic : HoldStylePreviewElement
-	{
-		public override float MinHeightPx => 128f;
-		public override int PreviewItemType() => ItemID.WandofSparking;
-        public override float SetScale() => ModContent.GetInstance<WeaponOutClientConfig>().GiantItemScalePercent / 100f;
-		public override void OverrideDrawItem(ref Texture2D texture, ref Item item) {
-			texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMagic", AssetRequestMode.ImmediateLoad).Value;
-		}
-	}
-	public class PreviewHeldItem : HoldStylePreviewElement
+    }
+    public class PreviewGiantMagic : HoldStylePreviewElement
+    {
+        public override float MinHeightPx => 128f;
+        public override int PreviewItemType() => ItemID.WandofSparking;
+        public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
+        public override void OverrideDrawItem(ref Texture2D texture, ref Item item)
+        {
+            texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantMagic", AssetRequestMode.ImmediateLoad).Value;
+        }
+    }
+    public class PreviewGiantDamaging : HoldStylePreviewElement
+    {
+        public override float MinHeightPx => 128f;
+        public override int PreviewItemType() => ItemID.Dynamite;
+        public override float SetScale() => WeaponOutLite.ClientConfig.GiantItemScalePercent / 100f;
+        public override void OverrideDrawItem(ref Texture2D texture, ref Item item)
+        {
+            texture = ModContent.Request<Texture2D>("WeaponOutLite/Assets/Textures/UI/GiantItem", AssetRequestMode.ImmediateLoad).Value;
+        }
+    }
+    public class PreviewHeldItem : HoldStylePreviewElement
 	{
 		public override int PreviewItemType()
 		{
