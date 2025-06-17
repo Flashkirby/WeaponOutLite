@@ -18,6 +18,12 @@ namespace WeaponOutLite.Content.DrawItemPose
         public virtual int UpdateIdleBodyFrame(Player p, Item i, int bodyFrame, int timer) => bodyFrame;
 
         public DrawData CalculateDrawData(DrawData data, Player p, float height, float width, int bodyFrame, int timer) {
+            // This shouldn't happen in normal gameplay - but is a known bug in MP (nosync)
+            // For now replicate None
+            data.color = Color.Transparent;
+            return data;
+
+
             // Should never see this in normal conditions - useful for debugging though
             float x = (Main.mouseX - Main.screenWidth / 2);
             float y = (Main.mouseY - Main.screenHeight / 2);
