@@ -49,8 +49,8 @@ namespace WeaponOutLite.Common.Players
 		public bool IsShowingHeldItem
 		{
 			get {
-				if (WeaponOutLite.ServerConfig.EnableForcedWeaponOutVisuals) {
-					return true;
+				if (!WeaponOutLite.ClientConfig.EnableWeaponOutVisuals) {
+					return false;
                 }
 				if (Player == Main.LocalPlayer) {
 					bool configShowHeldItem = WeaponOutLite.ClientConfig.ShowHeldItem;
@@ -175,23 +175,25 @@ namespace WeaponOutLite.Common.Players
 		}
 
 
-		public override void PostUpdate()
+        public override void PostUpdate()
         {
             // This is for displaying items in-game
-            if (WeaponOutLite.ServerConfig.EnableWeaponOutVisuals) {
+            if (!WeaponOutLite.ClientConfig.EnableWeaponOutVisuals) return;
 
-                manageCombatTimer();
+            manageCombatTimer();
 
-                if (DrawHeldItem && !Main.dedServ) {
+            if (DrawHeldItem && !Main.dedServ)
+            {
 
-                    if (Player == Main.LocalPlayer) {
-                        manageHoldStyle();
-                    }
-
-                    manageBodyFrame();
+                if (Player == Main.LocalPlayer)
+                {
+                    manageHoldStyle();
                 }
+
+                manageBodyFrame();
             }
         }
+
 
         public override void FrameEffects()
         {

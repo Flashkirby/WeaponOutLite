@@ -81,6 +81,11 @@ Mods: {
 					ModIntegrationHeader: Mod Integrations & Compatibility
 				}
 
+				EnableWeaponOutVisuals: {
+					Label: Enable WeaponOut Visuals
+					Tooltip: Enables showing held weapons, tools, items etc. Turning this off this effectively disables this mod.
+				}
+
 				ShowHeldItem: {
 					Label: Show Held Item
 					Tooltip: Shows the item you are holding. Other players can see this. Default is On.

@@ -60,48 +60,44 @@ namespace WeaponOutLite.Common.Systems
         /// <param name="position"></param>
         private void UpdateEyeButton(Vector2 position) {
             // It would be really cool to add this as an option to BuilderAccTogglesUI like block swap, as opposed to just sitting on its own next to the inventory
+            if (!WeaponOutLite.ClientConfig.EnableWeaponOutVisuals) { return; }
 
             // Default locked state (off)
             var texture = TextureAssets.InventoryTickOff.Value;
             var hoverText = "WeaponOut: " + Lang.inter[73]; // "Off" see en_US.Legacy
+
             if (!Main.LocalPlayer.TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
 
-            bool forcedVisuals = WeaponOutLite.ServerConfig.EnableForcedWeaponOutVisuals;
+            // Enabled but turned off (hidden)
+            hoverText = "WeaponOut: " + Lang.inter[60]; // "Hidden"
 
-            if (WeaponOutLite.ServerConfig.EnableWeaponOutVisuals || forcedVisuals) {
+            if (modPlayer.isShowingHeldItem)
+            {
 
-                // Enabled but turned off (hidden)
-                hoverText = "WeaponOut: " + Lang.inter[60]; // "Hidden"
+                // Enabled and turned on
+                texture = TextureAssets.InventoryTickOn.Value;
+                hoverText = "WeaponOut: " + Lang.inter[59]; // "Visible"
 
-                if (modPlayer.isShowingHeldItem || forcedVisuals) {
-
-                    // Enabled and turned on
-                    texture = TextureAssets.InventoryTickOn.Value;
-                    hoverText = "WeaponOut: " + Lang.inter[59]; // "Visible"
-
-                    // Except its being forced on, so locked anyway
-                    if (forcedVisuals) {
-                        hoverText = "WeaponOut: " + Lang.inter[72]; // "On"
-                    }
-
-                    if(modPlayer.HeldItem != null) {
-                        // Get the group to display
-                        PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
-                        hoverText += " (";
-                        hoverText += PoseStyleID.MapPoseGroupToString(currentPoseGroup);
-                        hoverText += ")";
-                    }
+                if (modPlayer.HeldItem != null)
+                {
+                    // Get the group to display
+                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
+                    hoverText += " (";
+                    hoverText += PoseStyleID.MapPoseGroupToString(currentPoseGroup);
+                    hoverText += ")";
                 }
             }
 
             // Get bounding box of texture.
             var textureRect = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            if (textureRect.Contains(Main.mouseX, Main.mouseY)) {
+            if (textureRect.Contains(Main.mouseX, Main.mouseY))
+            {
                 Main.hoverItemName = hoverText;
                 Main.blockMouse = true;
 
                 // On click
-                if (Main.mouseLeft && Main.mouseLeftRelease) {
+                if (Main.mouseLeft && Main.mouseLeftRelease)
+                {
 
                     // Toggle
                     modPlayer.IsShowingHeldItem = !modPlayer.IsShowingHeldItem;
