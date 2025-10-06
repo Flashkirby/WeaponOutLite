@@ -493,7 +493,7 @@ Mods: {
 
 				ModIntegrationTerrariaOverhaul: {
 					Label: "[i:509] Toggle: Terraria Overhaul"
-					Tooltip: Hide item drawing when aimable weapons are selected. See also: Terraria Overhaul > AlwaysShowAimableWeapons. Default is On.
+					Tooltip: "Hide item drawing when aimable weapons are selected. \nIf you want to use WeaponOut's version, turn off this toggle, and also turn off \n'Always Show Aimable Weapons' in Terraria Overhaul under Visuals."
 				}
 
 				ModIntegrationMeleeEffectsPlus: {
