@@ -22,7 +22,7 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         public static IDrawItemPose SelectItemPose(Player p, Item item) {
 
             // Get group data for item pose
-            GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose);
+            GetItemPoseGroupData(item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose, out _);
 
             WeaponOutLite mod = WeaponOutLite.GetMod();
             var clientConfig = WeaponOutLite.ClientConfig;
@@ -142,13 +142,14 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
         /// <param name="poseGroup">The pose group of the item, used to determined its DrawItemPose if DrawItemPoseID.Unassigned</param>
         /// <param name="drawItemPose">The specific DrawItemPose to use. If set, the poseGroup is skipped. </param>
         /// <param name="allowOverride">If set, allows overriding of base calculation. </param>
-        public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose, bool allowOverride = true)
+        public static void GetItemPoseGroupData(Item item, out PoseGroup poseGroup, out IDrawItemPose drawItemPose, out bool poseIsDefault, bool allowOverride = true)
         {
             WeaponOutLite mod = WeaponOutLite.GetMod();
 
             // Set initial pose style and item pose object
             poseGroup = PoseGroup.Unassigned;
             drawItemPose = mod.ItemPoses[DrawItemPoseID.Unassigned];
+            poseIsDefault = false;
 
             if (allowOverride)
             {
@@ -180,7 +181,11 @@ namespace WeaponOutLite.Common.GlobalDrawItemPose
                     // Otherwise, figure out which one to use
                     if (mod.priorityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
                     else if (mod.compatibilityItemHoldGroups.TryGetValue(item.type, out poseGroup)) return;
-                    else poseGroup = CalculateDrawStyleType(item);
+                    else
+                    {
+                        poseGroup = CalculateDrawStyleType(item);
+                        poseIsDefault = true;
+                    }
 
                     //WeaponOutLite.TEXT_DEBUG += "\nclassifier " + item.useStyle + " = " + poseGroup;
                 }

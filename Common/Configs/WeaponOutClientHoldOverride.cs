@@ -31,7 +31,7 @@ namespace WeaponOutLite.Common.Configs
             get {
                 if (Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null) {
                     // Get pose group for display
-                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
+                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _, out _);
                     return currentPoseGroup;
                 }
                 return PoseStyleID.PoseGroup.Unassigned;
@@ -61,6 +61,8 @@ namespace WeaponOutLite.Common.Configs
         private List<ItemDrawOverrideData> styleOverrideList;
 
         /// <summary>
+        /// DO NOT MODIFY DIRECTLY, see StyleOverrideListUpsert
+        /// 
         /// Note: This could have been done with a Dictionary(item,style),
         /// but I want to specify the behaviour of not allowing nulls and
         /// allowing duplicates, but only to accept the latest one.
@@ -108,8 +110,14 @@ namespace WeaponOutLite.Common.Configs
                 if (data == null || data.Item == null) { continue; }
 
                 try {
-                    cleanDataList.Add(data);
-                    styleOverrideItemCache.Add(data.Item?.Type, data);
+                    // Add to the final list (if there are any overrides assigned)
+                    bool hasOverride = data.ForcePoseGroup != PoseStyleID.PoseGroup.Unassigned ||
+                        data.ForceDrawItemPose != DrawItemPoseID.DrawItemPose.Unassigned;
+                    if (hasOverride)
+                    {
+                        cleanDataList.Add(data);
+                        styleOverrideItemCache.Add(data.Item?.Type, data);
+                    }
                 }
                 catch (ArgumentNullException e) { // key is null
                     cleanDataList.Remove(data);
@@ -128,6 +136,27 @@ namespace WeaponOutLite.Common.Configs
             }
 
             return cleanDataList;
+        }
+
+        /// <summary>
+        /// For adding/updating an item in the list.
+        /// </summary>
+        /// <param name="data"></param>
+        public void StyleOverrideListUpsert(ItemDrawOverrideData data)
+        {
+            bool found = false;
+            foreach (var styleOverride in styleOverrideList)
+            {
+                if(styleOverride.Item.Type == data.Item.Type)
+                {
+                    styleOverride.CopyFrom(data);
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                styleOverrideList.Add(data);
+            }
         }
 
         public WeaponOutClientHoldOverride()
@@ -184,6 +213,13 @@ namespace WeaponOutLite.Common.Configs
             if(Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null && Item == null) {
                 Item = new ItemDefinition(Main.LocalPlayer.HeldItem.type);
             }
+        }
+
+        public void CopyFrom(ItemDrawOverrideData newData)
+        {
+            this.Item = newData.Item;
+            this.ForcePoseGroup = newData.ForcePoseGroup;
+            this.ForceDrawItemPose = newData.ForceDrawItemPose;
         }
 
         public override string ToString() {

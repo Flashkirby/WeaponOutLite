@@ -138,7 +138,7 @@ namespace WeaponOutLite.Common
 
             // If enabled, shrink yoyos if they are base item textures
             if (config.YoyoHalfScale) {
-                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
+                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _, out _);
                 if (poseGroup == PoseGroup.Yoyo) {
 
 					// Apply reduced size if the yoyo is using the item texture, ignore if the proj is loaded
@@ -400,7 +400,7 @@ namespace WeaponOutLite.Common
 
 			// Fetch pose group if required
             if (heldItem.shoot != 0 && (config.EnableProjSpears || config.EnableProjYoyos)) {
-                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _);
+                PoseSetClassifier.GetItemPoseGroupData(heldItem, out PoseStyleID.PoseGroup poseGroup, out _, out _);
 
                 // Experimental projectile spear code
                 if (config.EnableProjSpears) {
