@@ -43,6 +43,35 @@ Mods: {
 		}
 
 		Configs: {
+			WeaponOutClientHoldOverride: {
+				DisplayName: Item Manual Override
+
+				StyleOverrideList: {
+					Label: Style Override List
+					Tooltip: ""
+				}
+
+				CurrentPoseGroup: {
+					Label: Held Item Pose Group
+					Tooltip: The pose group the currently held item belongs to.
+				}
+
+				CurrentDrawItemPose: {
+					Label: Held Item Pose
+					Tooltip: The pose the currently held item is using.
+				}
+
+				CurrentItemPosePV: {
+					Label: "{$Mods.WeaponOutLite.Common.Preview}"
+					Tooltip: ""
+				}
+
+				EnableWeaponQuickWeaponCategorisation: {
+					Label: Enable Weapon Quick Weapon Categorisation
+					Tooltip: ""
+				}
+			}
+
 			WeaponOutClientConfig: {
 				DisplayName: Personal Preferences
 
@@ -464,7 +493,7 @@ Mods: {
 
 				ModIntegrationTerrariaOverhaul: {
 					Label: "[i:509] Toggle: Terraria Overhaul"
-					Tooltip: Hide item drawing when aimable weapons are selected. See also: Terraria Overhaul > AlwaysShowAimableWeapons. Default is On.
+					Tooltip: "Hide item drawing when aimable weapons are selected. \nIf you want to use WeaponOut's version, turn off this toggle, and also turn off \n'Always Show Aimable Weapons' in Terraria Overhaul under Visuals."
 				}
 
 				ModIntegrationMeleeEffectsPlus: {
@@ -520,30 +549,6 @@ Mods: {
 				ModIntegrationRedemption: {
 					Label: "[i:1344] Automatic: Mod of Redemption"
 					Tooltip: Adds default classifications to Redemption weapons.
-				}
-			}
-
-			WeaponOutClientHoldOverride: {
-				DisplayName: Item Manual Override
-
-				StyleOverrideList: {
-					Label: Style Override List
-					Tooltip: ""
-				}
-
-				CurrentPoseGroup: {
-					Label: Held Item Pose Group
-					Tooltip: The pose group the currently held item belongs to.
-				}
-
-				CurrentDrawItemPose: {
-					Label: Held Item Pose
-					Tooltip: The pose the currently held item is using.
-				}
-
-				CurrentItemPosePV: {
-					Label: "{$Mods.WeaponOutLite.Common.Preview}"
-					Tooltip: ""
 				}
 			}
 

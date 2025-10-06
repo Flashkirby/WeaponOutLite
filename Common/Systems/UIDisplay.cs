@@ -4,7 +4,6 @@ using Terraria;
 using Terraria.ModLoader;
 using WeaponOutLite.ID;
 using WeaponOutLite.Common.GlobalDrawItemPose;
-using WeaponOutLite.Content.DrawItemPose;
 using Microsoft.Xna.Framework;
 using WeaponOutLite.Common.Players;
 using Terraria.ID;
@@ -13,11 +12,11 @@ using Terraria.GameContent;
 using ReLogic.Graphics;
 using WeaponOutLite.Common.Configs;
 using System;
-using Terraria.DataStructures;
-using System.Collections.Specialized;
 using Terraria.UI;
-using Terraria.ModLoader.UI;
 using Terraria.Localization;
+using Terraria.ModLoader.Config;
+using static WeaponOutLite.ID.PoseStyleID;
+using static WeaponOutLite.ID.DrawItemPoseID;
 
 namespace WeaponOutLite.Common.Systems
 {
@@ -28,7 +27,7 @@ namespace WeaponOutLite.Common.Systems
             int inventoryIndex = layers.FindIndex(layer => layer.Name == "Vanilla: Inventory");
             if (inventoryIndex >= 0) {
                 if (Main.playerInventory) {
-                    var layer = new GameInterfaceLayer("yo", InterfaceScaleType.UI);
+                    var layer = new GameInterfaceLayer("WeaponOutLiteEye", InterfaceScaleType.UI);
                     layers.Insert(inventoryIndex, WeaponOutLiteDisplayItemInterface.CreateDefault());
                 }
             }
@@ -78,10 +77,11 @@ namespace WeaponOutLite.Common.Systems
                 if (modPlayer.HeldItem != null)
                 {
                     // Get the group to display
-                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _);
-                    hoverText += " (";
-                    hoverText += PoseStyleID.MapPoseGroupToString(currentPoseGroup);
-                    hoverText += ")";
+                    PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup currentPoseGroup, out _, out bool poseIsDefault);
+                    if (!poseIsDefault)
+                    {
+                        hoverText += $" [{PoseStyleID.MapPoseGroupToString(currentPoseGroup)}]";
+                    }
                 }
             }
 
@@ -95,7 +95,6 @@ namespace WeaponOutLite.Common.Systems
                 // On click
                 if (Main.mouseLeft && Main.mouseLeftRelease)
                 {
-
                     // Toggle
                     modPlayer.IsShowingHeldItem = !modPlayer.IsShowingHeldItem;
 
@@ -104,33 +103,95 @@ namespace WeaponOutLite.Common.Systems
                 }
                 if (Main.mouseRight && Main.mouseRightRelease)
                 {
-                    /*
-                     * Function for changing the custom hold style for the currently held objects...
-                     * But until there is a method of saving pending config changes to file outside of internal ConfigManager.Save....
-                     * this function will remain unused.
-                     * TODO: see if this has changed in tmodloader for 1.4.4, or just implement a copy of the code thusly:
-
-                            Terraria.ModLoader.Config.ModConfig config = WeaponOutLite.ClientConfig;
-                            System.IO.Directory.CreateDirectory(Terraria.ModLoader.Config.ConfigManager.ModConfigPath);
-                            string filename = config.Mod.Name + "_" + config.Name + ".json";
-                            string path = System.IO.Path.Combine(Terraria.ModLoader.Config.ConfigManager.ModConfigPath, filename);
-                            string json = Newtonsoft.Json.JsonConvert.SerializeObject((object)config, Terraria.ModLoader.Config.ConfigManager.serializerSettings);
-                            System.IO.File.WriteAllText(path, json);
-                    */
-
-                    // To customise item hold styles: Settings -> Mod Configurations -> WeaponOut Lite: Personal Preferences
-                    Main.NewText(
-                        Language.GetTextValue("Mods.WeaponOutLite.Common.Instructions") +
-                        Language.GetTextValue("LegacyMenu.14") +
-                        " [g:5] " +
-                        Language.GetTextValue("tModLoader.ModConfiguration") +
-                        " [g:5] WeaponOut Lite: " +
-                        Language.GetTextValue("Mods.WeaponOutLite.Configs.WeaponOutClientConfig.DisplayName")
-                        );
+                    // Cycle to Next
+                    if(UpdateWeaponOverride())
+                    {
+                        // Play "Click" sound for next item
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                    }
+                    else
+                    {
+                        // Play "Click" sound for resetting
+                        SoundEngine.PlaySound(SoundID.Unlock);
+                    }
                 }
             }
 
             Main.spriteBatch.Draw(texture, position, null, Color.White);
+        }
+
+        /// <summary>
+        /// Applies the next pose group to the currently held item.
+        /// </summary>
+        /// <returns>true if an override is applied, and false if the override has been cleared. </returns>
+        private static bool UpdateWeaponOverride()
+        {
+            bool isOverride = true;
+            /*
+             * Function for changing the custom hold style for the currently held objects...
+             * WeaponOutLite.ClientHoldOverride.Save();
+            */
+
+            // To customise item hold styles: Settings -> Mod Configurations -> WeaponOut Lite: Personal Preferences
+            if (!WeaponOutLite.ClientHoldOverride.EnableWeaponQuickWeaponCategorisation)
+            {
+                Main.NewText(
+                    Language.GetTextValue("Mods.WeaponOutLite.Common.Instructions") +
+                    Language.GetTextValue("LegacyMenu.14") +
+                    " [g:5] " +
+                    Language.GetTextValue("tModLoader.ModConfiguration") +
+                    " [g:5] WeaponOut Lite: " +
+                    Language.GetTextValue("Mods.WeaponOutLite.Configs.WeaponOutClientHoldOverride.DisplayName")
+                    , Color.LightGray);
+            }
+            else
+            {
+                Item item = Main.LocalPlayer.HeldItem;
+                var itemDefinition = new ItemDefinition(item.type);
+
+                // Fetch the default posegroup of the item
+                PoseSetClassifier.GetItemPoseGroupData(Main.LocalPlayer.HeldItem, out PoseStyleID.PoseGroup originalPoseGroup, out _, out _, allowOverride: false);
+
+                // Use the latest item definition, or create a new unassigned one
+                var match = WeaponOutLite.ClientHoldOverride.StyleOverrideList.FindLast(i => i.Item.Type == item.type);
+                ItemDrawOverrideData overrideData = match;
+                if (overrideData == null)
+                {
+                    overrideData = new ItemDrawOverrideData()
+                    {
+                        Item = itemDefinition,
+                        ForcePoseGroup = originalPoseGroup,
+                        ForceDrawItemPose = DrawItemPose.Unassigned,
+                    };
+                }
+
+                // Fetch the next pose group from the current one, or loop back around to Unassigned
+                List<PoseGroup> poseGroupList = Enum.GetValues(typeof(PoseGroup)).Cast<PoseGroup>().ToList();
+                int indexOfPoseGroup = poseGroupList.IndexOf(overrideData.ForcePoseGroup);
+                int nextPoseGroup = indexOfPoseGroup + 1;
+                if (nextPoseGroup <= (int)PoseGroup.Unassigned || nextPoseGroup >= poseGroupList.Count)
+                {
+                    // Loop back to the start (but skip 0 which is unassigned)
+                    overrideData.ForcePoseGroup = poseGroupList[1];
+                }
+                else
+                {
+                    overrideData.ForcePoseGroup = poseGroupList[nextPoseGroup];
+                }
+
+                // Revert to "unassigned" if current pose group equals the calculated type
+                if (overrideData.ForcePoseGroup == originalPoseGroup)
+                {
+                    overrideData.ForcePoseGroup = PoseStyleID.PoseGroup.Unassigned;
+                    isOverride = false;
+                }
+
+                // Update the style override, and save changes
+                // this may need optimisation if it turns out to be expensive
+                WeaponOutLite.ClientHoldOverride.StyleOverrideListUpsert(overrideData);
+                WeaponOutLite.ClientHoldOverride.SaveChanges(broadcast: false);
+            }
+            return isOverride;
         }
 
         private void SHOW_DEBUG_UI() {

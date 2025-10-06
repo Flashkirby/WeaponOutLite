@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader.Config;
 using WeaponOutLite.Common.Players;
@@ -486,7 +487,6 @@ namespace WeaponOutLite.Common.Configs
                 return;
             }
 		}
-
-	}
+    }
 
 }
