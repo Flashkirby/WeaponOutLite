@@ -493,7 +493,12 @@ Mods: {
 
 				ModIntegrationTerrariaOverhaul: {
 					Label: "[i:509] Toggle: Terraria Overhaul"
-					Tooltip: "Hide item drawing when aimable weapons are selected. \nIf you want to use WeaponOut's version, turn off this toggle, and also turn off \n'Always Show Aimable Weapons' in Terraria Overhaul under Visuals."
+					Tooltip:
+						'''
+						Hide item drawing when aimable weapons are selected. 
+						If you want to use WeaponOut's version, turn off this toggle, and also turn off 
+						'Always Show Aimable Weapons' in Terraria Overhaul under Visuals.
+						'''
 				}
 
 				ModIntegrationMeleeEffectsPlus: {
@@ -588,166 +593,774 @@ Mods: {
 
 			PoseGroup: {
 				Tooltip: ""
-				Unassigned.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Unassigned}"
-				Item.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Item}"
-				LargeItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeItem}"
-				VanityItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.VanityItem}"
-				Potion.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Potion}"
-				SmallMelee.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallMelee}"
-				SmallTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallTool}"
-				LargeMelee.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeMelee}"
-				LargeTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeTool}"
-				Rapier.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Rapier}"
-				Spear.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Spear}"
-				Yoyo.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Yoyo}"
-				Flail.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Flail}"
-				Whips.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Whips}"
-				Thrown.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Thrown}"
-				ThrownThin.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.ThrownThin}"
-				PowerTool.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.PowerTool}"
-				Bow.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Bow}"
-				Repeater.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Repeater}"
-				Pistol.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Pistol}"
-				Gun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Gun}"
-				GunManual.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GunManual}"
-				Shotgun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Shotgun}"
-				Launcher.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Launcher}"
-				Staff.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Staff}"
-				MagicBook.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicBook}"
-				MagicItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicItem}"
-				GiantItem.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantItem}"
-				GiantWeapon.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantWeapon}"
-				GiantBow.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantBow}"
-				GiantGun.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantGun}"
-				GiantMagic.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantMagic}"
-				GiantDamaging.Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantDamaging}"
-				Ignore.Label: Ignore
+
+				Unassigned: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Unassigned}"
+					Tooltip: ""
+				}
+
+				Item: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Item}"
+					Tooltip: ""
+				}
+
+				LargeItem: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeItem}"
+					Tooltip: ""
+				}
+
+				VanityItem: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.VanityItem}"
+					Tooltip: ""
+				}
+
+				Potion: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Potion}"
+					Tooltip: ""
+				}
+
+				SmallMelee: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallMelee}"
+					Tooltip: ""
+				}
+
+				SmallTool: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.SmallTool}"
+					Tooltip: ""
+				}
+
+				LargeMelee: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeMelee}"
+					Tooltip: ""
+				}
+
+				LargeTool: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.LargeTool}"
+					Tooltip: ""
+				}
+
+				Rapier: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Rapier}"
+					Tooltip: ""
+				}
+
+				Spear: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Spear}"
+					Tooltip: ""
+				}
+
+				Yoyo: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Yoyo}"
+					Tooltip: ""
+				}
+
+				Flail: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Flail}"
+					Tooltip: ""
+				}
+
+				Whips: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Whips}"
+					Tooltip: ""
+				}
+
+				Thrown: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Thrown}"
+					Tooltip: ""
+				}
+
+				ThrownThin: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.ThrownThin}"
+					Tooltip: ""
+				}
+
+				PowerTool: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.PowerTool}"
+					Tooltip: ""
+				}
+
+				Bow: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Bow}"
+					Tooltip: ""
+				}
+
+				Repeater: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Repeater}"
+					Tooltip: ""
+				}
+
+				Pistol: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Pistol}"
+					Tooltip: ""
+				}
+
+				Gun: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Gun}"
+					Tooltip: ""
+				}
+
+				GunManual: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GunManual}"
+					Tooltip: ""
+				}
+
+				Shotgun: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Shotgun}"
+					Tooltip: ""
+				}
+
+				Launcher: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Launcher}"
+					Tooltip: ""
+				}
+
+				Staff: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.Staff}"
+					Tooltip: ""
+				}
+
+				MagicBook: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicBook}"
+					Tooltip: ""
+				}
+
+				MagicItem: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.MagicItem}"
+					Tooltip: ""
+				}
+
+				GiantItem: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantItem}"
+					Tooltip: ""
+				}
+
+				GiantWeapon: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantWeapon}"
+					Tooltip: ""
+				}
+
+				GiantBow: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantBow}"
+					Tooltip: ""
+				}
+
+				GiantGun: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantGun}"
+					Tooltip: ""
+				}
+
+				GiantMagic: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantMagic}"
+					Tooltip: ""
+				}
+
+				GiantDamaging: {
+					Label: "{$Mods.WeaponOutLite.Common.PoseGroup.GiantDamaging}"
+					Tooltip: ""
+				}
+
+				Ignore: {
+					Label: Ignore
+					Tooltip: ""
+				}
 			}
 
 			LabelledItemPose: {
 				Tooltip: ""
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				BackDownward.Label: Back Downward
-				BackBow.Label: Back Bow
-				Waist.Label: Waist
-				WaistHolster.Label: Waist Holster
-				Hold.Label: Hold
-				HoldForward.Label: Hold Forward
-				HoldReverse.Label: Hold Reverse
-				HoldTome.Label: Hold Tome
-				OffHand.Label: Off Hand
-				OffHandFlailShoulder.Label: Off Hand Flail Shoulder
-				OffHandPole.Label: Off Hand Pole
-				OffHandShoulder.Label: Off Hand Shoulder
-				OffHandUpright.Label: Off Hand Upright
-				TwoHandCarry.Label: Two Hand Carry
-				TwoHandJoustingLance.Label: Two Hand Jousting Lance
-				FloatingBack.Label: Floating Back
-				FloatingBackUpright.Label: Floating Back Upright
-				FloatingBackAimed.Label: Floating Back Aimed
-				FloatingFront.Label: Floating Front
-				FloatingOffHand.Label: Floating Off Hand
-				FloatingAimed.Label: Floating Aimed
-				OrbitClockwiseFast.Label: Orbit Clockwise Fast
-				OrbitAntiClockFast.Label: Orbit Anti Clock Fast
-				OrbitClockwiseSlow.Label: Orbit Clockwise Slow
-				OrbitAntiClockSlow.Label: Orbit Anti Clock Slow
-				CombatHold.Label: Combat Hold
-				CombatReady.Label: Combat Ready
-				CombatUpright.Label: Combat Upright
-				CombatRaised.Label: Combat Raised
-				CombatTrail.Label: Combat Trail
-				CombatRapier.Label: Combat Rapier
-				CombatRapierHold.Label: Combat Rapier Hold
-				CombatPoleUpright.Label: Combat Pole Upright
-				CombatPoleReady.Label: Combat Pole Ready
-				CombatFlailReady.Label: Combat Flail Ready
-				CombatBowHold.Label: Combat Bow Hold
-				CombatPistol.Label: Combat Pistol
-				CombatOffHandPoleShoulder.Label: Combat Off Hand Pole Shoulder
-				CombatOffHandPistol.Label: Combat Off Hand Pistol
-				CombatOffHandShoulder.Label: Combat Off Hand Shoulder
-				CombatTwoHand.Label: Combat Two Hand
-				CombatTwoHandBrave.Label: Combat Two Hand Brave
-				CombatTwoHandTail.Label: Combat Two Hand Tail
-				CombatTwoHandHighlander.Label: Combat Two Hand Highlander
-				CombatTwoHandBerserk.Label: Combat Two Hand Berserk
-				CombatTwoHandGuard.Label: Combat Two Hand Guard
-				CombatTwoHandPoleTwoHand.Label: Combat Two Hand Pole Two Hand
-				CombatTwoHandPowerTool.Label: Combat Two Hand Power Tool
-				CombatTwoHandBow.Label: Combat Two Hand Bow
-				CombatTwoHandRifleHip.Label: Combat Two Hand Rifle Hip
-				CombatTwoHandRifleUp.Label: Combat Two Hand Rifle Up
-				CombatTwoHandRifleDown.Label: Combat Two Hand Rifle Down
-				CombatTwoHandRifleDown2.Label: Combat Two Hand Rifle Down2
-				CombatTwoHandBoltAction.Label: Combat Two Hand Bolt Action
-				CombatTwoHandPumpAction.Label: Combat Two Hand Pump Action
+
+				None: {
+					Label: None
+					Tooltip: ""
+				}
+
+				Back: {
+					Label: Back
+					Tooltip: ""
+				}
+
+				BackUpright: {
+					Label: Back Upright
+					Tooltip: ""
+				}
+
+				BackDownward: {
+					Label: Back Downward
+					Tooltip: ""
+				}
+
+				BackBow: {
+					Label: Back Bow
+					Tooltip: ""
+				}
+
+				Waist: {
+					Label: Waist
+					Tooltip: ""
+				}
+
+				WaistHolster: {
+					Label: Waist Holster
+					Tooltip: ""
+				}
+
+				Hold: {
+					Label: Hold
+					Tooltip: ""
+				}
+
+				HoldForward: {
+					Label: Hold Forward
+					Tooltip: ""
+				}
+
+				HoldReverse: {
+					Label: Hold Reverse
+					Tooltip: ""
+				}
+
+				HoldTome: {
+					Label: Hold Tome
+					Tooltip: ""
+				}
+
+				OffHand: {
+					Label: Off Hand
+					Tooltip: ""
+				}
+
+				OffHandFlailShoulder: {
+					Label: Off Hand Flail Shoulder
+					Tooltip: ""
+				}
+
+				OffHandPole: {
+					Label: Off Hand Pole
+					Tooltip: ""
+				}
+
+				OffHandShoulder: {
+					Label: Off Hand Shoulder
+					Tooltip: ""
+				}
+
+				OffHandUpright: {
+					Label: Off Hand Upright
+					Tooltip: ""
+				}
+
+				TwoHandCarry: {
+					Label: Two Hand Carry
+					Tooltip: ""
+				}
+
+				TwoHandJoustingLance: {
+					Label: Two Hand Jousting Lance
+					Tooltip: ""
+				}
+
+				FloatingBack: {
+					Label: Floating Back
+					Tooltip: ""
+				}
+
+				FloatingBackUpright: {
+					Label: Floating Back Upright
+					Tooltip: ""
+				}
+
+				FloatingBackAimed: {
+					Label: Floating Back Aimed
+					Tooltip: ""
+				}
+
+				FloatingFront: {
+					Label: Floating Front
+					Tooltip: ""
+				}
+
+				FloatingOffHand: {
+					Label: Floating Off Hand
+					Tooltip: ""
+				}
+
+				FloatingAimed: {
+					Label: Floating Aimed
+					Tooltip: ""
+				}
+
+				OrbitClockwiseFast: {
+					Label: Orbit Clockwise Fast
+					Tooltip: ""
+				}
+
+				OrbitAntiClockFast: {
+					Label: Orbit Anti Clock Fast
+					Tooltip: ""
+				}
+
+				OrbitClockwiseSlow: {
+					Label: Orbit Clockwise Slow
+					Tooltip: ""
+				}
+
+				OrbitAntiClockSlow: {
+					Label: Orbit Anti Clock Slow
+					Tooltip: ""
+				}
+
+				CombatHold: {
+					Label: Combat Hold
+					Tooltip: ""
+				}
+
+				CombatReady: {
+					Label: Combat Ready
+					Tooltip: ""
+				}
+
+				CombatUpright: {
+					Label: Combat Upright
+					Tooltip: ""
+				}
+
+				CombatRaised: {
+					Label: Combat Raised
+					Tooltip: ""
+				}
+
+				CombatTrail: {
+					Label: Combat Trail
+					Tooltip: ""
+				}
+
+				CombatRapier: {
+					Label: Combat Rapier
+					Tooltip: ""
+				}
+
+				CombatRapierHold: {
+					Label: Combat Rapier Hold
+					Tooltip: ""
+				}
+
+				CombatPoleUpright: {
+					Label: Combat Pole Upright
+					Tooltip: ""
+				}
+
+				CombatPoleReady: {
+					Label: Combat Pole Ready
+					Tooltip: ""
+				}
+
+				CombatFlailReady: {
+					Label: Combat Flail Ready
+					Tooltip: ""
+				}
+
+				CombatBowHold: {
+					Label: Combat Bow Hold
+					Tooltip: ""
+				}
+
+				CombatPistol: {
+					Label: Combat Pistol
+					Tooltip: ""
+				}
+
+				CombatOffHandPoleShoulder: {
+					Label: Combat Off Hand Pole Shoulder
+					Tooltip: ""
+				}
+
+				CombatOffHandPistol: {
+					Label: Combat Off Hand Pistol
+					Tooltip: ""
+				}
+
+				CombatOffHandShoulder: {
+					Label: Combat Off Hand Shoulder
+					Tooltip: ""
+				}
+
+				CombatTwoHand: {
+					Label: Combat Two Hand
+					Tooltip: ""
+				}
+
+				CombatTwoHandBrave: {
+					Label: Combat Two Hand Brave
+					Tooltip: ""
+				}
+
+				CombatTwoHandTail: {
+					Label: Combat Two Hand Tail
+					Tooltip: ""
+				}
+
+				CombatTwoHandHighlander: {
+					Label: Combat Two Hand Highlander
+					Tooltip: ""
+				}
+
+				CombatTwoHandBerserk: {
+					Label: Combat Two Hand Berserk
+					Tooltip: ""
+				}
+
+				CombatTwoHandGuard: {
+					Label: Combat Two Hand Guard
+					Tooltip: ""
+				}
+
+				CombatTwoHandPoleTwoHand: {
+					Label: Combat Two Hand Pole Two Hand
+					Tooltip: ""
+				}
+
+				CombatTwoHandPowerTool: {
+					Label: Combat Two Hand Power Tool
+					Tooltip: ""
+				}
+
+				CombatTwoHandBow: {
+					Label: Combat Two Hand Bow
+					Tooltip: ""
+				}
+
+				CombatTwoHandRifleHip: {
+					Label: Combat Two Hand Rifle Hip
+					Tooltip: ""
+				}
+
+				CombatTwoHandRifleUp: {
+					Label: Combat Two Hand Rifle Up
+					Tooltip: ""
+				}
+
+				CombatTwoHandRifleDown: {
+					Label: Combat Two Hand Rifle Down
+					Tooltip: ""
+				}
+
+				CombatTwoHandRifleDown2: {
+					Label: Combat Two Hand Rifle Down2
+					Tooltip: ""
+				}
+
+				CombatTwoHandBoltAction: {
+					Label: Combat Two Hand Bolt Action
+					Tooltip: ""
+				}
+
+				CombatTwoHandPumpAction: {
+					Label: Combat Two Hand Pump Action
+					Tooltip: ""
+				}
 			}
 
 			DrawItemPose: {
 				Tooltip: ""
-				Unassigned.Label: Unassigned
-				None.Label: None
-				Back.Label: Back
-				BackUpright.Label: Back Upright
-				WaistSheathe.Label: Waist Sheathe
-				WaistHolster.Label: Waist Holster
-				HoldInHand.Label: Hold In Hand
-				StanceInHand.Label: Stance In Hand
-				HoldReversedInHand.Label: Hold Reversed In Hand
-				HoldInHandFront.Label: Hold In Hand Front
-				HoldSpellTome.Label: Hold Spell Tome
-				HoldInOffHand.Label: Hold In Off Hand
-				CarryInBothHands.Label: Carry In Both Hands
-				StanceMachineTool.Label: Stance Machine Tool
-				StanceMeleeReady.Label: Stance Melee Ready
-				StanceMeleeTrail.Label: Stance Melee Trail
-				StanceMeleeRaised.Label: Stance Melee Raised
-				StanceMeleeUpright.Label: Stance Melee Upright
-				StanceTwoHand.Label: Stance Two Hand
-				StanceTwoHandBrave.Label: Stance Two Hand Brave
-				StanceTwoHandTail.Label: Stance Two Hand Tail
-				StanceTwoHandHighlander.Label: Stance Two Hand Highlander
-				StanceTwoHandBerserk.Label: Stance Two Hand Berserk
-				StanceTwoHandGuard.Label: Stance Two Hand Guard
-				StanceRapierFootForward.Label: Stance Rapier Foot Forward
-				StanceRapierHold.Label: Stance Rapier Hold
-				PoleOffHand.Label: Pole Off Hand
-				StancePoleReady.Label: Stance Pole Ready
-				StancePoleShoulder.Label: Stance Pole Shoulder
-				StancePoleUpright.Label: Stance Pole Upright
-				StancePoleTwoHand.Label: Stance Pole Two Hand
-				JoustingLance.Label: Jousting Lance
-				BackFlail.Label: Back Flail
-				BackFlailShoulder.Label: Back Flail Shoulder
-				StanceFlailReady.Label: Stance Flail Ready
-				BackBow.Label: Back Bow
-				StanceBowInHand.Label: Stance Bow In Hand
-				StanceBowHunt.Label: Stance Bow Hunt
-				StancePistolHoldUp.Label: Stance Pistol Hold Up
-				StancePistolCowboy.Label: Stance Pistol Cowboy
-				BackDownward.Label: Back Downward
-				HoldRifleOffHandUpright.Label: Hold Rifle Off Hand Upright
-				StanceRifleHipReady.Label: Stance Rifle Hip Ready
-				StanceRiflePointDown.Label: Stance Rifle Point Down
-				StanceRiflePointDown2.Label: Stance Rifle Point Down2
-				StanceRifleHoldUp.Label: Stance Rifle Hold Up
-				StanceRifleBoltAction.Label: Stance Rifle Bolt Action
-				StanceRiflePumpAction.Label: Stance Rifle Pump Action
-				BackGunShoulder.Label: Back Gun Shoulder
-				StanceLauncherShoulder.Label: Stance Launcher Shoulder
-				FloatingBack.Label: Floating Back
-				FloatingBackUpright.Label: Floating Back Upright
-				FloatingBackAimed.Label: Floating Back Aimed
-				FloatingInFront.Label: Floating In Front
-				FloatingOffHandAimed.Label: Floating Off Hand Aimed
-				FloatingOffHand.Label: Floating Off Hand
-				FloatingOrbitAntiClockwiseSlow.Label: Floating Orbit Anti Clockwise Slow
-				FloatingOrbitClockwiseSlow.Label: Floating Orbit Clockwise Slow
-				FloatingOrbitAntiClockwiseFast.Label: Floating Orbit Anti Clockwise Fast
-				FloatingOrbitClockwiseFast.Label: Floating Orbit Clockwise Fast
+
+				Unassigned: {
+					Label: Unassigned
+					Tooltip: ""
+				}
+
+				None: {
+					Label: None
+					Tooltip: ""
+				}
+
+				Back: {
+					Label: Back
+					Tooltip: ""
+				}
+
+				BackUpright: {
+					Label: Back Upright
+					Tooltip: ""
+				}
+
+				WaistSheathe: {
+					Label: Waist Sheathe
+					Tooltip: ""
+				}
+
+				WaistHolster: {
+					Label: Waist Holster
+					Tooltip: ""
+				}
+
+				HoldInHand: {
+					Label: Hold In Hand
+					Tooltip: ""
+				}
+
+				StanceInHand: {
+					Label: Stance In Hand
+					Tooltip: ""
+				}
+
+				HoldReversedInHand: {
+					Label: Hold Reversed In Hand
+					Tooltip: ""
+				}
+
+				HoldInHandFront: {
+					Label: Hold In Hand Front
+					Tooltip: ""
+				}
+
+				HoldSpellTome: {
+					Label: Hold Spell Tome
+					Tooltip: ""
+				}
+
+				HoldInOffHand: {
+					Label: Hold In Off Hand
+					Tooltip: ""
+				}
+
+				CarryInBothHands: {
+					Label: Carry In Both Hands
+					Tooltip: ""
+				}
+
+				StanceMachineTool: {
+					Label: Stance Machine Tool
+					Tooltip: ""
+				}
+
+				StanceMeleeReady: {
+					Label: Stance Melee Ready
+					Tooltip: ""
+				}
+
+				StanceMeleeTrail: {
+					Label: Stance Melee Trail
+					Tooltip: ""
+				}
+
+				StanceMeleeRaised: {
+					Label: Stance Melee Raised
+					Tooltip: ""
+				}
+
+				StanceMeleeUpright: {
+					Label: Stance Melee Upright
+					Tooltip: ""
+				}
+
+				StanceTwoHand: {
+					Label: Stance Two Hand
+					Tooltip: ""
+				}
+
+				StanceTwoHandBrave: {
+					Label: Stance Two Hand Brave
+					Tooltip: ""
+				}
+
+				StanceTwoHandTail: {
+					Label: Stance Two Hand Tail
+					Tooltip: ""
+				}
+
+				StanceTwoHandHighlander: {
+					Label: Stance Two Hand Highlander
+					Tooltip: ""
+				}
+
+				StanceTwoHandBerserk: {
+					Label: Stance Two Hand Berserk
+					Tooltip: ""
+				}
+
+				StanceTwoHandGuard: {
+					Label: Stance Two Hand Guard
+					Tooltip: ""
+				}
+
+				StanceRapierFootForward: {
+					Label: Stance Rapier Foot Forward
+					Tooltip: ""
+				}
+
+				StanceRapierHold: {
+					Label: Stance Rapier Hold
+					Tooltip: ""
+				}
+
+				PoleOffHand: {
+					Label: Pole Off Hand
+					Tooltip: ""
+				}
+
+				StancePoleReady: {
+					Label: Stance Pole Ready
+					Tooltip: ""
+				}
+
+				StancePoleShoulder: {
+					Label: Stance Pole Shoulder
+					Tooltip: ""
+				}
+
+				StancePoleUpright: {
+					Label: Stance Pole Upright
+					Tooltip: ""
+				}
+
+				StancePoleTwoHand: {
+					Label: Stance Pole Two Hand
+					Tooltip: ""
+				}
+
+				JoustingLance: {
+					Label: Jousting Lance
+					Tooltip: ""
+				}
+
+				BackFlail: {
+					Label: Back Flail
+					Tooltip: ""
+				}
+
+				BackFlailShoulder: {
+					Label: Back Flail Shoulder
+					Tooltip: ""
+				}
+
+				StanceFlailReady: {
+					Label: Stance Flail Ready
+					Tooltip: ""
+				}
+
+				BackBow: {
+					Label: Back Bow
+					Tooltip: ""
+				}
+
+				StanceBowInHand: {
+					Label: Stance Bow In Hand
+					Tooltip: ""
+				}
+
+				StanceBowHunt: {
+					Label: Stance Bow Hunt
+					Tooltip: ""
+				}
+
+				StancePistolHoldUp: {
+					Label: Stance Pistol Hold Up
+					Tooltip: ""
+				}
+
+				StancePistolCowboy: {
+					Label: Stance Pistol Cowboy
+					Tooltip: ""
+				}
+
+				BackDownward: {
+					Label: Back Downward
+					Tooltip: ""
+				}
+
+				HoldRifleOffHandUpright: {
+					Label: Hold Rifle Off Hand Upright
+					Tooltip: ""
+				}
+
+				StanceRifleHipReady: {
+					Label: Stance Rifle Hip Ready
+					Tooltip: ""
+				}
+
+				StanceRiflePointDown: {
+					Label: Stance Rifle Point Down
+					Tooltip: ""
+				}
+
+				StanceRiflePointDown2: {
+					Label: Stance Rifle Point Down2
+					Tooltip: ""
+				}
+
+				StanceRifleHoldUp: {
+					Label: Stance Rifle Hold Up
+					Tooltip: ""
+				}
+
+				StanceRifleBoltAction: {
+					Label: Stance Rifle Bolt Action
+					Tooltip: ""
+				}
+
+				StanceRiflePumpAction: {
+					Label: Stance Rifle Pump Action
+					Tooltip: ""
+				}
+
+				BackGunShoulder: {
+					Label: Back Gun Shoulder
+					Tooltip: ""
+				}
+
+				StanceLauncherShoulder: {
+					Label: Stance Launcher Shoulder
+					Tooltip: ""
+				}
+
+				FloatingBack: {
+					Label: Floating Back
+					Tooltip: ""
+				}
+
+				FloatingBackUpright: {
+					Label: Floating Back Upright
+					Tooltip: ""
+				}
+
+				FloatingBackAimed: {
+					Label: Floating Back Aimed
+					Tooltip: ""
+				}
+
+				FloatingInFront: {
+					Label: Floating In Front
+					Tooltip: ""
+				}
+
+				FloatingOffHandAimed: {
+					Label: Floating Off Hand Aimed
+					Tooltip: ""
+				}
+
+				FloatingOffHand: {
+					Label: Floating Off Hand
+					Tooltip: ""
+				}
+
+				FloatingOrbitAntiClockwiseSlow: {
+					Label: Floating Orbit Anti Clockwise Slow
+					Tooltip: ""
+				}
+
+				FloatingOrbitClockwiseSlow: {
+					Label: Floating Orbit Clockwise Slow
+					Tooltip: ""
+				}
+
+				FloatingOrbitAntiClockwiseFast: {
+					Label: Floating Orbit Anti Clockwise Fast
+					Tooltip: ""
+				}
+
+				FloatingOrbitClockwiseFast: {
+					Label: Floating Orbit Clockwise Fast
+					Tooltip: ""
+				}
 			}
 		}
 	}

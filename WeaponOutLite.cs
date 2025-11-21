@@ -1,13 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader;
-using WeaponOutLite.ID;
-using WeaponOutLite.Common.GlobalDrawItemPose;
-using System;
 using Terraria.DataStructures;
-using static WeaponOutLite.ID.PoseStyleID;
-using static WeaponOutLite.ID.DrawItemPoseID;
+using Terraria.ModLoader;
 using WeaponOutLite.Common.Configs;
+using WeaponOutLite.Common.GlobalDrawItemPose;
+using WeaponOutLite.ID;
+using static WeaponOutLite.ID.DrawItemPoseID;
+using static WeaponOutLite.ID.PoseStyleID;
 
 namespace WeaponOutLite
 {
