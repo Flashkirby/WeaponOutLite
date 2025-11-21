@@ -38,6 +38,7 @@ namespace WeaponOutLite.Common.Configs
         [DefaultValue(true)]
         public bool CombatStanceWhenHurt { get; set; }
 
+        [Slider]
         [DrawTicks]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose SmallItemPose { get; set; }
@@ -46,8 +47,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewSmallItem))]
 		public int SmallItemPosePV => (int)SmallItemPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.TwoHandCarry)]
 		public DrawItemPoseID.LabelledItemPose LargeItemPose { get; set; }
 		[JsonIgnore][ShowDespiteJsonIgnore]
@@ -55,7 +56,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLargeItem))]
 		public int LargeItemPosePV => (int)LargeItemPose;
 
-
+        [Slider]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.OffHand)]
         public DrawItemPoseID.LabelledItemPose VanityItemPose { get; set; }
@@ -65,8 +66,8 @@ namespace WeaponOutLite.Common.Configs
         [CustomModConfigItem(typeof(PreviewVanityItem))]
         public int VanityItemPosePV => (int)VanityItemPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.HoldForward)]
 		public DrawItemPoseID.LabelledItemPose PotionPose { get; set; }
 		[JsonIgnore][ShowDespiteJsonIgnore]
@@ -74,7 +75,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewPotionItem))]
 		public int PotionPosePV => (int)PotionPose;
 
-
+        [Slider]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.CombatReady)]
         public DrawItemPoseID.LabelledItemPose SmallToolPose { get; set; }
@@ -84,7 +85,7 @@ namespace WeaponOutLite.Common.Configs
         [CustomModConfigItem(typeof(PreviewSmallTool))]
         public int SmallToolPV => (int)SmallToolPose;
 
-
+        [Slider]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBerserk)]
         public DrawItemPoseID.LabelledItemPose LargeToolPose { get; set; }
@@ -94,7 +95,7 @@ namespace WeaponOutLite.Common.Configs
         [CustomModConfigItem(typeof(PreviewLargeTool))]
         public int LargeToolPV => (int)LargeToolPose;
 
-
+        [Slider]
         [DrawTicks]
         [SliderColor(254, 159, 30)]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.CombatReady)]
@@ -105,7 +106,7 @@ namespace WeaponOutLite.Common.Configs
         [CustomModConfigItem(typeof(PreviewSmallMelee))]
         public int SmallMeleePV => (int)SmallMeleePose;
 
-
+        [Slider]
         [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHand)]
@@ -115,7 +116,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLargeMelee))]
 		public int LargeMeleePV => (int)LargeMeleePose;
 
-
+        [Slider]
         [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatHold)]
@@ -125,8 +126,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewRapier))]
 		public int RapierPV => (int)RapierPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatPoleReady)]
 		public DrawItemPoseID.LabelledItemPose SpearPose { get; set; }
@@ -135,8 +136,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewSpear))]
 		public int SpearPV => (int)SpearPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose YoyoPose { get; set; }
@@ -148,8 +149,8 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool YoyoHalfScale { get; set; }
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatFlailReady)]
 		public DrawItemPoseID.LabelledItemPose FlailPose { get; set; }
@@ -158,8 +159,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewFlail))]
 		public int FlailPV => (int)FlailPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(104, 214, 255)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose WhipPose { get; set; }
@@ -168,8 +169,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewWhip))]
 		public int WhipPV => (int)WhipPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatUpright)]
         public DrawItemPoseID.LabelledItemPose ThrownPose { get; set; }
@@ -178,8 +179,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewThrown))]
 		public int ThrownPV => (int)ThrownPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose ThrownThinPose { get; set; }
@@ -188,8 +189,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewThrownThin))]
 		public int ThrownThinPV => (int)ThrownThinPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 159, 30)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandPowerTool)]
 		public DrawItemPoseID.LabelledItemPose PowerToolPose { get; set; }
@@ -198,8 +199,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewPowerTool))]
 		public int PowerToolPV => (int)PowerToolPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBow)]
         public DrawItemPoseID.LabelledItemPose BowPose { get; set; }
@@ -208,8 +209,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewBow))]
 		public int BowPV => (int)BowPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleDown)]
         public DrawItemPoseID.LabelledItemPose RepeaterPose { get; set; }
@@ -221,8 +222,8 @@ namespace WeaponOutLite.Common.Configs
 		[DefaultValue(true)]
 		public bool BowDrawAmmo { get; set; }
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.Hold)]
 		public DrawItemPoseID.LabelledItemPose PistolPose { get; set; }
@@ -231,8 +232,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewPistol))]
 		public int PistolPV => (int)PistolPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleHip)]
         public DrawItemPoseID.LabelledItemPose GunPose { get; set; }
@@ -241,8 +242,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGun))]
 		public int GunPV => (int)GunPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBoltAction)]
 		public DrawItemPoseID.LabelledItemPose GunManualPose { get; set; }
@@ -251,8 +252,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGunManual))]
 		public int GunManualPV => (int)GunManualPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandPumpAction)]
 		public DrawItemPoseID.LabelledItemPose ShotgunPose { get; set; }
@@ -261,8 +262,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewShotgun))]
 		public int ShotgunPosePV => (int)ShotgunPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandShoulder)]
         public DrawItemPoseID.LabelledItemPose LauncherPose { get; set; }
@@ -271,8 +272,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewLauncher))]
 		public int LauncherPV => (int)LauncherPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandPole)]
         public DrawItemPoseID.LabelledItemPose StaffPose { get; set; }
@@ -281,8 +282,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewStaff))]
 		public int StaffPV => (int)StaffPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.HoldTome)]
 		public DrawItemPoseID.LabelledItemPose MagicBookPose { get; set; }
@@ -291,8 +292,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewMagicBook))]
 		public int MagicBookPV => (int)MagicBookPose;
 
-
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 127, 230)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingOffHand)]
 		public DrawItemPoseID.LabelledItemPose MagicItemPose { get; set; }
@@ -342,7 +343,8 @@ namespace WeaponOutLite.Common.Configs
 		[Slider]
 		public float GiantItemScalePercent { get; set; } // If still over the threshold, use the GIANT pose sets
 
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.TwoHandCarry)]
 		public DrawItemPoseID.LabelledItemPose GiantItemPose { get; set; }
 
@@ -350,7 +352,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantItem))]
 		public int GiantItemPV => (int)GiantItemPose;
 
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(254, 159, 30)] // and summon weapons!
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBerserk)]
 		public DrawItemPoseID.LabelledItemPose GiantWeaponPose { get; set; }
@@ -360,7 +363,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantMelee))]
 		public int GiantMeleePV => (int)GiantWeaponPose;
 
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandBow)]
 		public DrawItemPoseID.LabelledItemPose GiantBowPose { get; set; }
@@ -370,7 +374,8 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantBow))]
 		public int GiantBowPV => (int)GiantBowPose;
 
-		[DrawTicks]
+        [Slider]
+        [DrawTicks]
 		[SliderColor(0, 242, 171)]
 		[DefaultValue(DrawItemPoseID.LabelledItemPose.CombatTwoHandRifleUp)]
 		public DrawItemPoseID.LabelledItemPose GiantGunPose { get; set; }
@@ -380,6 +385,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantGun))]
 		public int GiantGunPV => (int)GiantGunPose;
 
+        [Slider]
         [DrawTicks]
         [SliderColor(254, 127, 230)]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.FloatingAimed)]
@@ -390,6 +396,7 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantMagic))]
 		public int GiantMagicPV => (int)GiantMagicPose;
 
+        [Slider]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.LabelledItemPose.OffHandPole)]
         public DrawItemPoseID.LabelledItemPose GiantDamagingPose { get; set; } // for things like calamity throwing weapons

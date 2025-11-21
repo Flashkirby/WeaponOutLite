@@ -199,10 +199,11 @@ namespace WeaponOutLite.Common.Configs
         public ItemDefinition Item;
 
 
-        [DrawTicks]
+        [Dropdown]
         [DefaultValue(PoseStyleID.PoseGroup.Unassigned)]
         public PoseStyleID.PoseGroup ForcePoseGroup;
 
+        [Slider]
         [DrawTicks]
         [DefaultValue(DrawItemPoseID.DrawItemPose.Unassigned)]
         public DrawItemPoseID.DrawItemPose ForceDrawItemPose;
