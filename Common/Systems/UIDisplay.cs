@@ -1,22 +1,23 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
-using Terraria.ModLoader;
-using WeaponOutLite.ID;
-using WeaponOutLite.Common.GlobalDrawItemPose;
 using Microsoft.Xna.Framework;
-using WeaponOutLite.Common.Players;
-using Terraria.ID;
+using ReLogic.Graphics;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
-using ReLogic.Graphics;
-using WeaponOutLite.Common.Configs;
-using System;
-using Terraria.UI;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
-using static WeaponOutLite.ID.PoseStyleID;
+using Terraria.UI;
+using WeaponOutLite.Common.Configs;
+using WeaponOutLite.Common.GlobalDrawItemPose;
+using WeaponOutLite.Common.Players;
+using WeaponOutLite.ID;
 using static WeaponOutLite.ID.DrawItemPoseID;
+using static WeaponOutLite.ID.PoseStyleID;
 
 namespace WeaponOutLite.Common.Systems
 {
@@ -101,10 +102,15 @@ namespace WeaponOutLite.Common.Systems
                     // Play "Click" sound
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
-                if (Main.mouseRight && Main.mouseRightRelease)
+
+                var onRightClick = Main.mouseRight && Main.mouseRightRelease;
+                var scrollDirection = PlayerInput.ScrollWheelValue - PlayerInput.ScrollWheelValueOld;
+                if (onRightClick || scrollDirection != 0)
                 {
+                    var cycleDirection = onRightClick ? 1 : Math.Sign(scrollDirection);
+
                     // Cycle to Next
-                    if(UpdateWeaponOverride())
+                    if (UpdateWeaponOverride(cycleDirection))
                     {
                         // Play "Click" sound for next item
                         SoundEngine.PlaySound(SoundID.MenuTick);
@@ -124,7 +130,7 @@ namespace WeaponOutLite.Common.Systems
         /// Applies the next pose group to the currently held item.
         /// </summary>
         /// <returns>true if an override is applied, and false if the override has been cleared. </returns>
-        private static bool UpdateWeaponOverride()
+        private static bool UpdateWeaponOverride(int direction)
         {
             bool isOverride = true;
             /*
@@ -168,10 +174,10 @@ namespace WeaponOutLite.Common.Systems
                 // Fetch the next pose group from the current one, or loop back around to Unassigned
                 List<PoseGroup> poseGroupList = Enum.GetValues(typeof(PoseGroup)).Cast<PoseGroup>().ToList();
                 int indexOfPoseGroup = poseGroupList.IndexOf(overrideData.ForcePoseGroup);
-                int nextPoseGroup = indexOfPoseGroup + 1;
+                int nextPoseGroup = indexOfPoseGroup + direction;
                 if (nextPoseGroup <= (int)PoseGroup.Unassigned || nextPoseGroup >= poseGroupList.Count)
                 {
-                    // Loop back to the start (but skip 0 which is unassigned)
+                    // If the index reaches the end, loop back to the start (but skip 0 which is unassigned)
                     overrideData.ForcePoseGroup = poseGroupList[1];
                 }
                 else
