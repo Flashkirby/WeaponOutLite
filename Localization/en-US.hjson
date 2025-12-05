@@ -471,6 +471,11 @@ Mods: {
 					Tooltip: ""
 				}
 
+				EnableDisplayUnsyncedPlayers: {
+					Label: Enable Showing Other Players
+					Tooltip: "Show others player's held items, even if they don't have the mod installed. (Local Only)"
+				}
+
 				EnableMenuDisplay: {
 					Label: Enable Menu Display (Experimental)
 					Tooltip: Enable showing player preview with first item in the Player Select screen. Default is On. (Local Only)

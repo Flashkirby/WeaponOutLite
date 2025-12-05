@@ -11,13 +11,6 @@ namespace WeaponOutLite.Common.Players
 {
     public class WeaponOutPlayerRenderer : ModPlayer
 	{
-		public int id;
-		public int MyStat;
-		public WeaponOutPlayerRenderer()
-        {
-			id = GetHashCode();
-        }
-
         /// <summary>
         /// Value for player showing an item held
         /// </summary>
@@ -31,22 +24,25 @@ namespace WeaponOutLite.Common.Players
 		/// </summary>
 		internal float? expectedFrontArmThisFrame = null;
 
-		/// <summary>
-		/// Draw style of the currently held item. If null, the layer renderer won't run.
-		/// </summary>
-		public IDrawItemPose CurrentDrawItemPose;
+        /// <summary>
+        /// Draw style of the currently held item. If null, the layer renderer won't run.
+        /// <br/> This variable is network synced with MessageType.UpdateWeaponVisual
+        /// </summary>
+        public IDrawItemPose CurrentDrawItemPose;
 
-		/// <summary>
-		/// How many ticks before returning to relaxed pose.
-		/// </summary>
-		public int CombatDelayTimer;
+        /// <summary>
+        /// How many ticks before returning to relaxed pose.
+        /// <br/> This variable is network synced with MessageType.UpdateCombatTimer 
+        /// </summary>
+        public int CombatDelayTimer;
 
-		/// <summary>
-		/// Does the player have showing items toggled on?
-		/// If force show is enabled, this will always return true, but won't affect the internal value.
-		/// get and set logic will fetch/assign based on config for local player, and send net updates if it changed
-		/// </summary>
-		public bool IsShowingHeldItem
+        /// <summary>
+        /// Does the player have showing items toggled on?
+        /// If force show is enabled, this will always return true, but won't affect the internal value.
+        /// get and set logic will fetch/assign based on config for local player, and send net updates if it changed.
+        /// <br/> This variable is network synced with MessageType.UpdateWeaponVisual
+        /// </summary>
+        public bool IsShowingHeldItem
 		{
 			get {
 				if (!WeaponOutLite.ClientConfig.EnableWeaponOutVisuals) {
@@ -108,6 +104,12 @@ namespace WeaponOutLite.Common.Players
 		/// Item is not fully loaded during game menu draw. We wait for this to be loaded before we register it as a Held Item
 		/// </summary>
 		internal Item gameMenuItem;
+
+        /// <summary>
+        /// If true, the player has weapon out lite online (both client and server) - see Networking
+        /// <br/> If false, this player is not using weapon out lite, or the mod is offline (serverside mod not installed)
+        /// </summary>
+        internal bool isNetSynced = false;
 
         public override void OnEnterWorld()
         {
@@ -182,10 +184,10 @@ namespace WeaponOutLite.Common.Players
 
             manageCombatTimer();
 
-            if (DrawHeldItem && !Main.dedServ)
+            if ((DrawHeldItem || !isNetSynced) && !Main.dedServ)
             {
-
-                if (Player == Main.LocalPlayer)
+                // Only calculate the hold style if the local player, or player doesn't have the mod installed
+                if (Player == Main.LocalPlayer || !isNetSynced)
                 {
                     manageHoldStyle();
                 }
@@ -223,14 +225,15 @@ namespace WeaponOutLite.Common.Players
 
         // Called on entering a server,with toWho=-1, fromWho=-1, newPlayer=true
         // Server receives toWho=-1, fromWho=0 (player id 0)
-        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
-			// Send a message out to the server when a sync is required, such as a new player joining the server
-			MyStat = Main.rand.Next();
-			if (fromWho == -1) {
-				if(WeaponOutLite.DEBUG_MULTIPLAYER) Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
-				((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
-			}
-		}
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
+        {
+            // Sends a message from the joining client to the server
+            if (fromWho == -1)
+            {
+                if (WeaponOutLite.DEBUG_MULTIPLAYER) Main.NewText($"Send update {Player.whoAmI} | to {toWho} | from {fromWho} | new {newPlayer}");
+                ((WeaponOutLite)Mod).SendUpdateWeaponVisual(this);
+            }
+        }
 
 		public override void SaveData(TagCompound tag) {
 			tag.Add("isShowingHeldItem", isShowingHeldItem);

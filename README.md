@@ -21,6 +21,7 @@ Beta Testers: Karob, RunicPixels, W1K
 ## Notes
 Where's the sauce? https://github.com/Flashkirby/WeaponOutLite
 Todo list: https://github.com/Flashkirby/WeaponOutLite/issues
+TODO: Also, finish implementing the multiplayer show items features with isNetSynced
 
 ### Known Bugs
 - hold style modifications via the config menu will not update until weapon switch -> minor, wontfix

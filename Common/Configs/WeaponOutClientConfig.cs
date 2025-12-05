@@ -406,6 +406,9 @@ namespace WeaponOutLite.Common.Configs
 		[CustomModConfigItem(typeof(PreviewGiantDamaging))]
 		public int GiantDamagingPosePV => (int)GiantDamagingPose;
 
+        [DefaultValue(true)]
+        public bool EnableDisplayUnsyncedPlayers { get; set; }
+
         #endregion
 
         /*

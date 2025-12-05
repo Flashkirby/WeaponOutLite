@@ -47,6 +47,12 @@ namespace WeaponOutLite
             }
         }
 
+        private bool TryGetWeaponOutPlayerRenderer(int playerWhoAmI, out WeaponOutPlayerRenderer modPlayer)
+        {
+            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out modPlayer)) return false;
+            return true;
+        }
+
         /// <summary>
         /// Send a net message to update the current item holding state.
         /// </summary>
@@ -78,7 +84,8 @@ namespace WeaponOutLite
                 if (Main.dedServ) { System.Console.WriteLine(text); } else { Main.NewText(text); }
             }
 
-            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
+            if (!TryGetWeaponOutPlayerRenderer(playerWhoAmI, out var modPlayer)) return; 
+            modPlayer.isNetSynced = true;
             modPlayer.IsShowingHeldItem = isShowingItem;
 
             try {
@@ -111,8 +118,9 @@ namespace WeaponOutLite
 
             int playerWhoAmI = reader.ReadByte();
             var combatTimer = reader.ReadInt32();
-
-            if (!Main.player[playerWhoAmI].TryGetModPlayer<WeaponOutPlayerRenderer>(out var modPlayer)) { return; }
+            
+            if (!TryGetWeaponOutPlayerRenderer(playerWhoAmI, out var modPlayer)) return;
+            modPlayer.isNetSynced = true;
             modPlayer.CombatDelayTimer = combatTimer;
 
             // Forward server->clients
